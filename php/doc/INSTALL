@@ -1,0 +1,33 @@
+#INSTALL currently should go something like this on your own serve box...
+mysql -u root -p 
+Enter password: <type your root password>
+
+mysql> create database gusphp;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> create user 'gus_std'@'localhost' identified by 'SHI/hel7';
+Query OK, 0 rows affected (0.55 sec)
+
+mysql> grant select on *.* to 'gus_std'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> use gusphp;
+Database changed
+mysql> create table page (
+    -> id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> name VARCHAR(100),
+    -> content TEXT
+    -> )
+    -> ;
+Query OK, 0 rows affected (0.26 sec)
+
+mysql> insert into page (name,content) VALUES ('home','Welcome to the GUS home page!');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select * from page;
++----+------+-------------------------------+
+| id | name | content                       |
++----+------+-------------------------------+
+|  1 | home | Welcome to the GUS home page! |
++----+------+-------------------------------+
+1 row in set (0.03 sec)
