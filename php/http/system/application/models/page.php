@@ -74,6 +74,18 @@ class Page extends Model {
 </body>
 </html>");
 	}
+
+	//return bool on whether session data exists. Needs to be expanded to
+	// check credentials against system
+	function authed() {
+		return(isset($this->session));
+	}
+
+	function login($un,$pw) {
+		$result = $this->db->query("SELECT un FROM user WHERE un='$un', pw='$pw'")->result();
+		echo $result;
+		return(false);
+	}
 }
 
 ?>

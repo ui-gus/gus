@@ -38,9 +38,9 @@ $active_group = "default";
 $active_record = TRUE;
 
 $db['default']['hostname'] = "localhost";
-$db['default']['username'] = "gus_mvc_std";
-$db['default']['password'] = "meenardkeenan";
-$db['default']['database'] = "gus_mvc";
+$db['default']['username'] = "gus_std";
+$db['default']['password'] = "SHI/hel7";
+$db['default']['database'] = "gusphp";
 $db['default']['dbdriver'] = "mysql";
 $db['default']['dbprefix'] = "";
 $db['default']['pconnect'] = TRUE;
