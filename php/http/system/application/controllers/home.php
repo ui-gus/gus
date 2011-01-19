@@ -6,7 +6,6 @@ class Home extends Controller {
 	function Home()
 	{
 		parent::Controller();	
-		$this->load->library('session');
 		$this->load->model('Page');
 		//set page content
 		$this->pdata['footer'] = $this->Page->get_footer();
@@ -14,6 +13,7 @@ class Home extends Controller {
 	
 	function index()
 	{
+		print_r($this->session);
 		//set page name
 		$page_name = "home";
 		if(func_num_args() > 0) {$page_name = func_get_arg(0);}
