@@ -1,0 +1,601 @@
+INSERT INTO gus.ggroup VALUES ('','wtregre@pon.com','WTregre','4','wtregre@pon.com','3651');
+ \
+INSERT INTO gus.ggroup VALUES ('','reilerman@resiingarn.org','REilerman','8','reilerman@resiingarn.org','1124');
+ \
+INSERT INTO gus.ggroup VALUES ('','dmerrick@xearmbri.com','DMerrick','10','dmerrick@xearmbri.com','2401');
+ \
+INSERT INTO gus.ggroup VALUES ('','mmcgahan@arnsikon.com','MMcgahan','8','mmcgahan@arnsikon.com','5864');
+ \
+INSERT INTO gus.ggroup VALUES ('','salbritton@tesgle.com','SAlbritton','0','salbritton@tesgle.com','2514');
+ \
+INSERT INTO gus.ggroup VALUES ('','htipps@kyare.gov','HTipps','10','htipps@kyare.gov','5377');
+ \
+INSERT INTO gus.ggroup VALUES ('','khudkins@ingepo.info','KHudkins','4','khudkins@ingepo.info','3773');
+ \
+INSERT INTO gus.ggroup VALUES ('','mbadillo@lacingfieu.edu','MBadillo','7','mbadillo@lacingfieu.edu','1756');
+ \
+INSERT INTO gus.ggroup VALUES ('','kfoltz@wes.com','KFoltz','1','kfoltz@wes.com','5995');
+ \
+INSERT INTO gus.ggroup VALUES ('','rschirmer@ateingdr.edu','RSchirmer','5','rschirmer@ateingdr.edu','6624');
+ \
+INSERT INTO gus.ggroup VALUES ('','ithaler@refesacu.biz','IThaler','4','ithaler@refesacu.biz','5974');
+ \
+INSERT INTO gus.ggroup VALUES ('','cbeebe@ficu.com','CBeebe','3','cbeebe@ficu.com','5877');
+ \
+INSERT INTO gus.ggroup VALUES ('','gmayers@curcenarndre.com','GMayers','8','gmayers@curcenarndre.com','3098');
+ \
+INSERT INTO gus.ggroup VALUES ('','ghatchell@arnurnjun.biz','GHatchell','5','ghatchell@arnurnjun.biz','3282');
+ \
+INSERT INTO gus.ggroup VALUES ('','lmorfin@teakeurn.com','LMorfin','3','lmorfin@teakeurn.com','3912');
+ \
+INSERT INTO gus.ggroup VALUES ('','druppe@croxedre.org','DRuppe','7','druppe@croxedre.org','2193');
+ \
+INSERT INTO gus.ggroup VALUES ('','swillits@gemeabcri.com','SWillits','0','swillits@gemeabcri.com','212');
+ \
+INSERT INTO gus.ggroup VALUES ('','tdesjardins@bricen.com','TDesjardins','8','tdesjardins@bricen.com','1795');
+ \
+INSERT INTO gus.ggroup VALUES ('','told@siarmroon.com','TOld','1','told@siarmroon.com','6766');
+ \
+INSERT INTO gus.ggroup VALUES ('','ehuckabee@xeaecuake.com','EHuckabee','5','ehuckabee@xeaecuake.com','6921');
+ \
+INSERT INTO gus.ggroup VALUES ('','cmchaney@injun.net','CMchaney','4','cmchaney@injun.net','4718');
+ \
+INSERT INTO gus.ggroup VALUES ('','gbales@kimsafi.org','GBales','5','gbales@kimsafi.org','4427');
+ \
+INSERT INTO gus.ggroup VALUES ('','jpiggott@atearm.com','JPiggott','7','jpiggott@atearm.com','4616');
+ \
+INSERT INTO gus.ggroup VALUES ('','dbostic@in.com','DBostic','9','dbostic@in.com','570');
+ \
+INSERT INTO gus.ggroup VALUES ('','twhitehill@cenre.com','TWhitehill','6','twhitehill@cenre.com','390');
+ \
+INSERT INTO gus.ggroup VALUES ('','cfentress@ingtelac.info','CFentress','0','cfentress@ingtelac.info','5132');
+ \
+INSERT INTO gus.ggroup VALUES ('','bangel@ponikeli.gov','BAngel','0','bangel@ponikeli.gov','4062');
+ \
+INSERT INTO gus.ggroup VALUES ('','aclimer@orwefecro.org','AClimer','9','aclimer@orwefecro.org','2289');
+ \
+INSERT INTO gus.ggroup VALUES ('','cmaples@pondri.com','CMaples','1','cmaples@pondri.com','1270');
+ \
+INSERT INTO gus.ggroup VALUES ('','jstoll@orcrocriwes.com','JStoll','5','jstoll@orcrocriwes.com','837');
+ \
+INSERT INTO gus.ggroup VALUES ('','kpender@kybriarnwe.biz','KPender','7','kpender@kybriarnwe.biz','738');
+ \
+INSERT INTO gus.ggroup VALUES ('','morvis@jun.com','MOrvis','6','morvis@jun.com','4994');
+ \
+INSERT INTO gus.ggroup VALUES ('','benright@ingcri.biz','BEnright','0','benright@ingcri.biz','6753');
+ \
+INSERT INTO gus.ggroup VALUES ('','mschild@dr.com','MSchild','2','mschild@dr.com','1090');
+ \
+INSERT INTO gus.ggroup VALUES ('','rahmad@poitesa.com','RAhmad','0','rahmad@poitesa.com','2660');
+ \
+INSERT INTO gus.ggroup VALUES ('','athomsen@wetes.com','AThomsen','3','athomsen@wetes.com','4930');
+ \
+INSERT INTO gus.ggroup VALUES ('','rkelleher@bridrurn.info','RKelleher','8','rkelleher@bridrurn.info','4356');
+ \
+INSERT INTO gus.ggroup VALUES ('','awalburn@roarm.com','AWalburn','2','awalburn@roarm.com','5980');
+ \
+INSERT INTO gus.ggroup VALUES ('','lbachman@xe.net','LBachman','4','lbachman@xe.net','4007');
+ \
+INSERT INTO gus.ggroup VALUES ('','dmessina@or.com','DMessina','5','dmessina@or.com','5073');
+ \
+INSERT INTO gus.ggroup VALUES ('','jauclair@xe.com','JAuclair','9','jauclair@xe.com','1739');
+ \
+INSERT INTO gus.ggroup VALUES ('','drosenbaum@insicri.edu','DRosenbaum','1','drosenbaum@insicri.edu','3102');
+ \
+INSERT INTO gus.ggroup VALUES ('','jgregson@urnponarm.com','JGregson','9','jgregson@urnponarm.com','1853');
+ \
+INSERT INTO gus.ggroup VALUES ('','jschreiner@armgleliake.com','JSchreiner','6','jschreiner@armgleliake.com','4536');
+ \
+INSERT INTO gus.ggroup VALUES ('','lhargis@cenbridrili.edu','LHargis','4','lhargis@cenbridrili.edu','5751');
+ \
+INSERT INTO gus.ggroup VALUES ('','hdew@drre.net','HDew','4','hdew@drre.net','1436');
+ \
+INSERT INTO gus.ggroup VALUES ('','ckitterman@urndr.gov','CKitterman','5','ckitterman@urndr.gov','2765');
+ \
+INSERT INTO gus.ggroup VALUES ('','bbueno@cusakonate.info','BBueno','5','bbueno@cusakonate.info','1788');
+ \
+INSERT INTO gus.ggroup VALUES ('','tantonio@fejatesurn.com','TAntonio','3','tantonio@fejatesurn.com','463');
+ \
+INSERT INTO gus.ggroup VALUES ('','jboatwright@gedre.com','JBoatwright','8','jboatwright@gedre.com','5684');
+ \
+INSERT INTO gus.ggroup VALUES ('','tmccloskey@itetesige.com','TMccloskey','2','tmccloskey@itetesige.com','3497');
+ \
+INSERT INTO gus.ggroup VALUES ('','kpicard@herkycri.com','KPicard','5','kpicard@herkycri.com','2813');
+ \
+INSERT INTO gus.ggroup VALUES ('','alever@crife.com','ALever','2','alever@crife.com','6340');
+ \
+INSERT INTO gus.ggroup VALUES ('','bpinion@incenurn.com','BPinion','2','bpinion@incenurn.com','3801');
+ \
+INSERT INTO gus.ggroup VALUES ('','egrigsby@kim.com','EGrigsby','10','egrigsby@kim.com','2959');
+ \
+INSERT INTO gus.ggroup VALUES ('','ppusey@euja.com','PPusey','9','ppusey@euja.com','2651');
+ \
+INSERT INTO gus.ggroup VALUES ('','bherzog@urnherike.gov','BHerzog','4','bherzog@urnherike.gov','4612');
+ \
+INSERT INTO gus.ggroup VALUES ('','tphilips@blponake.com','TPhilips','10','tphilips@blponake.com','3795');
+ \
+INSERT INTO gus.ggroup VALUES ('','bdominquez@mecrijagle.com','BDominquez','5','bdominquez@mecrijagle.com','1414');
+ \
+INSERT INTO gus.ggroup VALUES ('','dhoy@gle.info','DHoy','8','dhoy@gle.info','2005');
+ \
+INSERT INTO gus.ggroup VALUES ('','gdowd@arneucriing.com','GDowd','6','gdowd@arneucriing.com','1440');
+ \
+INSERT INTO gus.ggroup VALUES ('','bzubia@crijun.biz','BZubia','1','bzubia@crijun.biz','3585');
+ \
+INSERT INTO gus.ggroup VALUES ('','ssecrest@urnli.org','SSecrest','6','ssecrest@urnli.org','789');
+ \
+INSERT INTO gus.ggroup VALUES ('','ehardison@ropon.com','EHardison','10','ehardison@ropon.com','4717');
+ \
+INSERT INTO gus.ggroup VALUES ('','acottle@jaatesiab.gov','ACottle','8','acottle@jaatesiab.gov','3917');
+ \
+INSERT INTO gus.ggroup VALUES ('','lginn@sugecudr.com','LGinn','4','lginn@sugecudr.com','5280');
+ \
+INSERT INTO gus.ggroup VALUES ('','jsantoro@cu.com','JSantoro','1','jsantoro@cu.com','6475');
+ \
+INSERT INTO gus.ggroup VALUES ('','mbaity@cri.com','MBaity','9','mbaity@cri.com','1613');
+ \
+INSERT INTO gus.ggroup VALUES ('','wbruss@crodr.com','WBruss','3','wbruss@crodr.com','4680');
+ \
+INSERT INTO gus.ggroup VALUES ('','atowns@ingateherare.com','ATowns','7','atowns@ingateherare.com','2431');
+ \
+INSERT INTO gus.ggroup VALUES ('','gstorrs@lacakedri.com','GStorrs','6','gstorrs@lacakedri.com','5908');
+ \
+INSERT INTO gus.ggroup VALUES ('','jdisalvo@ikeponakearn.com','JDisalvo','10','jdisalvo@ikeponakearn.com','6792');
+ \
+INSERT INTO gus.ggroup VALUES ('','jbarone@jun.org','JBarone','7','jbarone@jun.org','2004');
+ \
+INSERT INTO gus.ggroup VALUES ('','hnovotny@ordrcridri.com','HNovotny','2','hnovotny@ordrcridri.com','4838');
+ \
+INSERT INTO gus.ggroup VALUES ('','sguo@dripo.com','SGuo','10','sguo@dripo.com','2874');
+ \
+INSERT INTO gus.ggroup VALUES ('','apoplin@akege.org','APoplin','2','apoplin@akege.org','574');
+ \
+INSERT INTO gus.ggroup VALUES ('','aslattery@saabdr.com','ASlattery','6','aslattery@saabdr.com','6998');
+ \
+INSERT INTO gus.ggroup VALUES ('','rgodbout@bri.com','RGodbout','5','rgodbout@bri.com','4256');
+ \
+INSERT INTO gus.ggroup VALUES ('','gstull@fecureu.com','GStull','7','gstull@fecureu.com','6173');
+ \
+INSERT INTO gus.ggroup VALUES ('','lspinney@becu.com','LSpinney','2','lspinney@becu.com','6582');
+ \
+INSERT INTO gus.ggroup VALUES ('','llint@atecurfocri.com','LLint','0','llint@atecurfocri.com','1755');
+ \
+INSERT INTO gus.ggroup VALUES ('','tbanach@silacro.com','TBanach','4','tbanach@silacro.com','6787');
+ \
+INSERT INTO gus.ggroup VALUES ('','hstamm@pon.gov','HStamm','5','hstamm@pon.gov','6249');
+ \
+INSERT INTO gus.ggroup VALUES ('','schurchill@cenfo.info','SChurchill','8','schurchill@cenfo.info','6213');
+ \
+INSERT INTO gus.ggroup VALUES ('','bharbin@te.gov','BHarbin','3','bharbin@te.gov','5277');
+ \
+INSERT INTO gus.ggroup VALUES ('','vsouther@ponliteslac.com','VSouther','1','vsouther@ponliteslac.com','38');
+ \
+INSERT INTO gus.ggroup VALUES ('','jmarinez@abkimge.com','JMarinez','4','jmarinez@abkimge.com','5269');
+ \
+INSERT INTO gus.ggroup VALUES ('','cnevarez@be.com','CNevarez','3','cnevarez@be.com','5713');
+ \
+INSERT INTO gus.ggroup VALUES ('','hedelen@arniningarm.com','HEdelen','6','hedelen@arniningarm.com','2833');
+ \
+INSERT INTO gus.ggroup VALUES ('','broca@sibe.com','BRoca','8','broca@sibe.com','5267');
+ \
+INSERT INTO gus.ggroup VALUES ('','wmontalvo@ikecro.com','WMontalvo','9','wmontalvo@ikecro.com','2790');
+ \
+INSERT INTO gus.ggroup VALUES ('','tmoya@jundreponsa.edu','TMoya','9','tmoya@jundreponsa.edu','5943');
+ \
+INSERT INTO gus.ggroup VALUES ('','pchester@croab.com','PChester','4','pchester@croab.com','4095');
+ \
+INSERT INTO gus.ggroup VALUES ('','tjeffrey@ky.com','TJeffrey','0','tjeffrey@ky.com','3228');
+ \
+INSERT INTO gus.ggroup VALUES ('','lblanks@kim.com','LBlanks','0','lblanks@kim.com','4281');
+ \
+INSERT INTO gus.ggroup VALUES ('','jhazel@eufiro.com','JHazel','3','jhazel@eufiro.com','506');
+ \
+INSERT INTO gus.ggroup VALUES ('','bmccreary@kytes.com','BMccreary','9','bmccreary@kytes.com','5166');
+ \
+INSERT INTO gus.ggroup VALUES ('','cwilmore@armlac.biz','CWilmore','4','cwilmore@armlac.biz','6000');
+ \
+INSERT INTO gus.ggroup VALUES ('','sturnbull@briare.edu','STurnbull','3','sturnbull@briare.edu','553');
+ \
+INSERT INTO gus.ggroup VALUES ('','childebrand@ponlacaketes.com','CHildebrand','10','childebrand@ponlacaketes.com','366');
+ \
+INSERT INTO gus.ggroup VALUES ('','sphillip@siingbrite.com','SPhillip','2','sphillip@siingbrite.com','1533');
+ \
+INSERT INTO gus.ggroup VALUES ('','khodo@iteme.com','KHodo','3','khodo@iteme.com','265');
+ \
+INSERT INTO gus.ggroup VALUES ('','jcleary@bexe.com','JCleary','10','jcleary@bexe.com','5842');
+ \
+INSERT INTO gus.ggroup VALUES ('','hjett@eufiatexe.com','HJett','3','hjett@eufiatexe.com','5846');
+ \
+INSERT INTO gus.ggroup VALUES ('','jbanda@saiteare.com','JBanda','0','jbanda@saiteare.com','1152');
+ \
+INSERT INTO gus.ggroup VALUES ('','ccorea@wesponorfi.com','CCorea','3','ccorea@wesponorfi.com','1804');
+ \
+INSERT INTO gus.ggroup VALUES ('','ckeefer@urnsi.net','CKeefer','1','ckeefer@urnsi.net','3513');
+ \
+INSERT INTO gus.ggroup VALUES ('','rector@urnblmeate.gov','REctor','2','rector@urnblmeate.gov','4166');
+ \
+INSERT INTO gus.ggroup VALUES ('','lcrooms@urnortes.com','LCrooms','7','lcrooms@urnortes.com','3457');
+ \
+INSERT INTO gus.ggroup VALUES ('','vbussey@xeponor.com','VBussey','6','vbussey@xeponor.com','164');
+ \
+INSERT INTO gus.ggroup VALUES ('','bcaruso@telaconcu.info','BCaruso','10','bcaruso@telaconcu.info','3362');
+ \
+INSERT INTO gus.ggroup VALUES ('','mhollenbeck@crosu.com','MHollenbeck','4','mhollenbeck@crosu.com','4482');
+ \
+INSERT INTO gus.ggroup VALUES ('','acasale@cenfoficri.com','ACasale','3','acasale@cenfoficri.com','5482');
+ \
+INSERT INTO gus.ggroup VALUES ('','aquillen@armurnake.info','AQuillen','2','aquillen@armurnake.info','2468');
+ \
+INSERT INTO gus.ggroup VALUES ('','ybrogan@itelac.com','YBrogan','1','ybrogan@itelac.com','68');
+ \
+INSERT INTO gus.ggroup VALUES ('','kpounds@glefi.biz','KPounds','4','kpounds@glefi.biz','5930');
+ \
+INSERT INTO gus.ggroup VALUES ('','rlahti@inxelac.com','RLahti','1','rlahti@inxelac.com','4126');
+ \
+INSERT INTO gus.ggroup VALUES ('','scondon@ateike.com','SCondon','8','scondon@ateike.com','4328');
+ \
+INSERT INTO gus.ggroup VALUES ('','sdorsch@ficro.com','SDorsch','3','sdorsch@ficro.com','2783');
+ \
+INSERT INTO gus.ggroup VALUES ('','rbegley@siinjunare.com','RBegley','3','rbegley@siinjunare.com','1398');
+ \
+INSERT INTO gus.ggroup VALUES ('','seriksen@mereja.biz','SEriksen','4','seriksen@mereja.biz','323');
+ \
+INSERT INTO gus.ggroup VALUES ('','saltman@brionarn.com','SAltman','3','saltman@brionarn.com','5558');
+ \
+INSERT INTO gus.ggroup VALUES ('','sswearingen@gle.edu','SSwearingen','1','sswearingen@gle.edu','1706');
+ \
+INSERT INTO gus.ggroup VALUES ('','cnevarez@cri.gov','CNevarez','9','cnevarez@cri.gov','1604');
+ \
+INSERT INTO gus.ggroup VALUES ('','jwynkoop@re.net','JWynkoop','2','jwynkoop@re.net','1257');
+ \
+INSERT INTO gus.ggroup VALUES ('','jsisson@bewesiarm.com','JSisson','6','jsisson@bewesiarm.com','2688');
+ \
+INSERT INTO gus.ggroup VALUES ('','kdarlington@jarepobe.com','KDarlington','4','kdarlington@jarepobe.com','2352');
+ \
+INSERT INTO gus.ggroup VALUES ('','bhajek@arm.com','BHajek','4','bhajek@arm.com','4697');
+ \
+INSERT INTO gus.ggroup VALUES ('','ntarleton@gletes.com','NTarleton','5','ntarleton@gletes.com','3951');
+ \
+INSERT INTO gus.ggroup VALUES ('','dengles@ite.com','DEngles','3','dengles@ite.com','4284');
+ \
+INSERT INTO gus.ggroup VALUES ('','bdion@armae.org','BDion','4','bdion@armae.org','536');
+ \
+INSERT INTO gus.ggroup VALUES ('','ttalbott@drcengeing.com','TTalbott','9','ttalbott@drcengeing.com','5814');
+ \
+INSERT INTO gus.ggroup VALUES ('','abays@cro.biz','ABays','4','abays@cro.biz','5864');
+ \
+INSERT INTO gus.ggroup VALUES ('','elandon@me.com','ELandon','9','elandon@me.com','190');
+ \
+INSERT INTO gus.ggroup VALUES ('','lng@me.com','LNg','8','lng@me.com','2343');
+ \
+INSERT INTO gus.ggroup VALUES ('','reisner@ponxefedr.gov','REisner','7','reisner@ponxefedr.gov','4769');
+ \
+INSERT INTO gus.ggroup VALUES ('','bcoder@inginsu.gov','BCoder','10','bcoder@inginsu.gov','3547');
+ \
+INSERT INTO gus.ggroup VALUES ('','earmenta@saareake.com','EArmenta','2','earmenta@saareake.com','5419');
+ \
+INSERT INTO gus.ggroup VALUES ('','wtibbitts@mecenkimae.com','WTibbitts','3','wtibbitts@mecenkimae.com','4771');
+ \
+INSERT INTO gus.ggroup VALUES ('','alamar@tesaeab.com','ALamar','7','alamar@tesaeab.com','3796');
+ \
+INSERT INTO gus.ggroup VALUES ('','vpickering@abateweher.com','VPickering','9','vpickering@abateweher.com','1589');
+ \
+INSERT INTO gus.ggroup VALUES ('','rspeight@cenbedr.com','RSpeight','1','rspeight@cenbedr.com','5958');
+ \
+INSERT INTO gus.ggroup VALUES ('','tdelorme@rodri.edu','TDelorme','0','tdelorme@rodri.edu','1990');
+ \
+INSERT INTO gus.ggroup VALUES ('','achilton@siikewelac.com','AChilton','4','achilton@siikewelac.com','6858');
+ \
+INSERT INTO gus.ggroup VALUES ('','aremick@gemearein.biz','ARemick','4','aremick@gemearein.biz','4524');
+ \
+INSERT INTO gus.ggroup VALUES ('','erobicheaux@xefe.info','ERobicheaux','7','erobicheaux@xefe.info','5552');
+ \
+INSERT INTO gus.ggroup VALUES ('','cclawson@glemeon.com','CClawson','6','cclawson@glemeon.com','1142');
+ \
+INSERT INTO gus.ggroup VALUES ('','akilpatrick@ateab.com','AKilpatrick','4','akilpatrick@ateab.com','1516');
+ \
+INSERT INTO gus.ggroup VALUES ('','ashank@itejage.com','AShank','8','ashank@itejage.com','6165');
+ \
+INSERT INTO gus.ggroup VALUES ('','ekrajewski@arnxeeuwes.com','EKrajewski','5','ekrajewski@arnxeeuwes.com','4877');
+ \
+INSERT INTO gus.ggroup VALUES ('','mblanche@fe.net','MBlanche','8','mblanche@fe.net','1883');
+ \
+INSERT INTO gus.ggroup VALUES ('','jtebo@ate.org','JTebo','4','jtebo@ate.org','6397');
+ \
+INSERT INTO gus.ggroup VALUES ('','tnaylor@pogeblsi.com','TNaylor','1','tnaylor@pogeblsi.com','5020');
+ \
+INSERT INTO gus.ggroup VALUES ('','dharbin@fearefiwe.com','DHarbin','4','dharbin@fearefiwe.com','230');
+ \
+INSERT INTO gus.ggroup VALUES ('','jbroughton@folilacme.com','JBroughton','4','jbroughton@folilacme.com','139');
+ \
+INSERT INTO gus.ggroup VALUES ('','bshadle@sa.info','BShadle','9','bshadle@sa.info','927');
+ \
+INSERT INTO gus.ggroup VALUES ('','nkeaton@juning.net','NKeaton','10','nkeaton@juning.net','3558');
+ \
+INSERT INTO gus.ggroup VALUES ('','hbehan@arearnate.com','HBehan','4','hbehan@arearnate.com','2551');
+ \
+INSERT INTO gus.ggroup VALUES ('','bha@kimcuonbri.net','BHa','9','bha@kimcuonbri.net','6338');
+ \
+INSERT INTO gus.ggroup VALUES ('','malber@arnateiteor.com','MAlber','5','malber@arnateiteor.com','1312');
+ \
+INSERT INTO gus.ggroup VALUES ('','jtamayo@sacurlacbri.com','JTamayo','1','jtamayo@sacurlacbri.com','2727');
+ \
+INSERT INTO gus.ggroup VALUES ('','svickery@cen.com','SVickery','2','svickery@cen.com','217');
+ \
+INSERT INTO gus.ggroup VALUES ('','adomingues@fire.gov','ADomingues','2','adomingues@fire.gov','6989');
+ \
+INSERT INTO gus.ggroup VALUES ('','ccrooks@redringab.com','CCrooks','0','ccrooks@redringab.com','5480');
+ \
+INSERT INTO gus.ggroup VALUES ('','fmalloy@reorcro.com','FMalloy','10','fmalloy@reorcro.com','3659');
+ \
+INSERT INTO gus.ggroup VALUES ('','ssales@on.com','SSales','6','ssales@on.com','4230');
+ \
+INSERT INTO gus.ggroup VALUES ('','lratley@libl.com','LRatley','3','lratley@libl.com','4956');
+ \
+INSERT INTO gus.ggroup VALUES ('','tantonio@kybl.com','TAntonio','10','tantonio@kybl.com','73');
+ \
+INSERT INTO gus.ggroup VALUES ('','hvannest@ro.net','HVannest','0','hvannest@ro.net','2733');
+ \
+INSERT INTO gus.ggroup VALUES ('','dtondreau@wes.com','DTondreau','4','dtondreau@wes.com','4341');
+ \
+INSERT INTO gus.ggroup VALUES ('','rriel@armdrbri.biz','RRiel','8','rriel@armdrbri.biz','1758');
+ \
+INSERT INTO gus.ggroup VALUES ('','sdurden@aecen.com','SDurden','8','sdurden@aecen.com','5082');
+ \
+INSERT INTO gus.ggroup VALUES ('','tmoten@jaateeuike.com','TMoten','8','tmoten@jaateeuike.com','1709');
+ \
+INSERT INTO gus.ggroup VALUES ('','tboudreau@aburn.info','TBoudreau','1','tboudreau@aburn.info','384');
+ \
+INSERT INTO gus.ggroup VALUES ('','astoneman@laccenxeab.info','AStoneman','6','astoneman@laccenxeab.info','136');
+ \
+INSERT INTO gus.ggroup VALUES ('','shone@konabbl.com','SHone','4','shone@konabbl.com','373');
+ \
+INSERT INTO gus.ggroup VALUES ('','sslack@ake.gov','SSlack','9','sslack@ake.gov','751');
+ \
+INSERT INTO gus.ggroup VALUES ('','tcarper@re.com','TCarper','0','tcarper@re.com','419');
+ \
+INSERT INTO gus.ggroup VALUES ('','afrailey@ake.edu','AFrailey','3','afrailey@ake.edu','5118');
+ \
+INSERT INTO gus.ggroup VALUES ('','acruse@crofocri.com','ACruse','9','acruse@crofocri.com','5723');
+ \
+INSERT INTO gus.ggroup VALUES ('','lyou@reher.info','LYou','5','lyou@reher.info','5401');
+ \
+INSERT INTO gus.ggroup VALUES ('','fklem@te.com','FKlem','7','fklem@te.com','5655');
+ \
+INSERT INTO gus.ggroup VALUES ('','gdeane@abakeon.com','GDeane','1','gdeane@abakeon.com','2913');
+ \
+INSERT INTO gus.ggroup VALUES ('','fhatton@fo.com','FHatton','6','fhatton@fo.com','5970');
+ \
+INSERT INTO gus.ggroup VALUES ('','gdancy@onblrewe.org','GDancy','2','gdancy@onblrewe.org','1318');
+ \
+INSERT INTO gus.ggroup VALUES ('','wgrantham@resaatepo.edu','WGrantham','1','wgrantham@resaatepo.edu','3021');
+ \
+INSERT INTO gus.ggroup VALUES ('','jbourget@arnordr.com','JBourget','4','jbourget@arnordr.com','1894');
+ \
+INSERT INTO gus.ggroup VALUES ('','bvenable@koniteky.edu','BVenable','4','bvenable@koniteky.edu','5204');
+ \
+INSERT INTO gus.ggroup VALUES ('','mcastile@jun.biz','MCastile','3','mcastile@jun.biz','4698');
+ \
+INSERT INTO gus.ggroup VALUES ('','glavender@aresadriurn.com','GLavender','6','glavender@aresadriurn.com','3264');
+ \
+INSERT INTO gus.ggroup VALUES ('','rvallejo@fe.com','RVallejo','4','rvallejo@fe.com','1933');
+ \
+INSERT INTO gus.ggroup VALUES ('','chendon@rodre.info','CHendon','10','chendon@rodre.info','4188');
+ \
+INSERT INTO gus.ggroup VALUES ('','pdimick@akeabkimarm.com','PDimick','3','pdimick@akeabkimarm.com','4984');
+ \
+INSERT INTO gus.ggroup VALUES ('','nviviano@lacinkonurn.com','NViviano','1','nviviano@lacinkonurn.com','4200');
+ \
+INSERT INTO gus.ggroup VALUES ('','aburdick@pon.biz','ABurdick','3','aburdick@pon.biz','4800');
+ \
+INSERT INTO gus.ggroup VALUES ('','ppender@konabre.gov','PPender','10','ppender@konabre.gov','3803');
+ \
+INSERT INTO gus.ggroup VALUES ('','nwillson@lacsiwesin.gov','NWillson','5','nwillson@lacsiwesin.gov','5260');
+ \
+INSERT INTO gus.ggroup VALUES ('','csteffan@akesire.com','CSteffan','6','csteffan@akesire.com','1866');
+ \
+INSERT INTO gus.ggroup VALUES ('','itousignant@crofi.com','ITousignant','6','itousignant@crofi.com','5870');
+ \
+INSERT INTO gus.ggroup VALUES ('','ryoon@fo.net','RYoon','9','ryoon@fo.net','6492');
+ \
+INSERT INTO gus.ggroup VALUES ('','svansant@curcubl.com','SVansant','0','svansant@curcubl.com','6149');
+ \
+INSERT INTO gus.ggroup VALUES ('','jcorpus@atesaurnare.biz','JCorpus','9','jcorpus@atesaurnare.biz','3383');
+ \
+INSERT INTO gus.ggroup VALUES ('','pbehrendt@kypon.com','PBehrendt','2','pbehrendt@kypon.com','5372');
+ \
+INSERT INTO gus.ggroup VALUES ('','jatlas@lackon.com','JAtlas','8','jatlas@lackon.com','3984');
+ \
+INSERT INTO gus.ggroup VALUES ('','bdrury@poncur.com','BDrury','3','bdrury@poncur.com','2036');
+ \
+INSERT INTO gus.ggroup VALUES ('','pperales@focu.com','PPerales','7','pperales@focu.com','1340');
+ \
+INSERT INTO gus.ggroup VALUES ('','jvines@oncendriake.com','JVines','7','jvines@oncendriake.com','2943');
+ \
+INSERT INTO gus.ggroup VALUES ('','ksharon@dri.gov','KSharon','0','ksharon@dri.gov','4633');
+ \
+INSERT INTO gus.ggroup VALUES ('','ktiggs@ae.biz','KTiggs','10','ktiggs@ae.biz','764');
+ \
+INSERT INTO gus.ggroup VALUES ('','mhollman@sa.edu','MHollman','1','mhollman@sa.edu','156');
+ \
+INSERT INTO gus.ggroup VALUES ('','zmanson@armurnbriro.com','ZManson','10','zmanson@armurnbriro.com','2448');
+ \
+INSERT INTO gus.ggroup VALUES ('','tardis@sidreordri.com','TArdis','5','tardis@sidreordri.com','5343');
+ \
+INSERT INTO gus.ggroup VALUES ('','dcoppola@ponwescen.com','DCoppola','5','dcoppola@ponwescen.com','1573');
+ \
+INSERT INTO gus.ggroup VALUES ('','bgallardo@dri.org','BGallardo','4','bgallardo@dri.org','3905');
+ \
+INSERT INTO gus.ggroup VALUES ('','lbreen@on.com','LBreen','6','lbreen@on.com','557');
+ \
+INSERT INTO gus.ggroup VALUES ('','rshell@salac.biz','RShell','2','rshell@salac.biz','4570');
+ \
+INSERT INTO gus.ggroup VALUES ('','dmacleod@geakeike.net','DMacleod','9','dmacleod@geakeike.net','1203');
+ \
+INSERT INTO gus.ggroup VALUES ('','nlawhorn@konorwes.com','NLawhorn','8','nlawhorn@konorwes.com','5997');
+ \
+INSERT INTO gus.ggroup VALUES ('','ggreenfield@atearn.com','GGreenfield','1','ggreenfield@atearn.com','1221');
+ \
+INSERT INTO gus.ggroup VALUES ('','ikernan@crikimdrxe.info','IKernan','1','ikernan@crikimdrxe.info','1792');
+ \
+INSERT INTO gus.ggroup VALUES ('','mkoury@rekonky.com','MKoury','10','mkoury@rekonky.com','5453');
+ \
+INSERT INTO gus.ggroup VALUES ('','erinehart@her.gov','ERinehart','9','erinehart@her.gov','5541');
+ \
+INSERT INTO gus.ggroup VALUES ('','kredondo@po.com','KRedondo','0','kredondo@po.com','2721');
+ \
+INSERT INTO gus.ggroup VALUES ('','msalerno@telacky.com','MSalerno','3','msalerno@telacky.com','6201');
+ \
+INSERT INTO gus.ggroup VALUES ('','cpurdy@kyfiakearn.com','CPurdy','3','cpurdy@kyfiakearn.com','1475');
+ \
+INSERT INTO gus.ggroup VALUES ('','cwallick@driabonro.com','CWallick','5','cwallick@driabonro.com','2101');
+ \
+INSERT INTO gus.ggroup VALUES ('','gcupp@curbri.info','GCupp','8','gcupp@curbri.info','1723');
+ \
+INSERT INTO gus.ggroup VALUES ('','wreardon@or.com','WReardon','8','wreardon@or.com','5104');
+ \
+INSERT INTO gus.ggroup VALUES ('','lolivarez@mearearndri.biz','LOlivarez','3','lolivarez@mearearndri.biz','3594');
+ \
+INSERT INTO gus.ggroup VALUES ('','mjosephs@fearn.com','MJosephs','5','mjosephs@fearn.com','2179');
+ \
+INSERT INTO gus.ggroup VALUES ('','rgannon@teponcroor.org','RGannon','7','rgannon@teponcroor.org','87');
+ \
+INSERT INTO gus.ggroup VALUES ('','bmancini@sitebriab.net','BMancini','10','bmancini@sitebriab.net','2606');
+ \
+INSERT INTO gus.ggroup VALUES ('','mcade@aearnon.com','MCade','5','mcade@aearnon.com','4082');
+ \
+INSERT INTO gus.ggroup VALUES ('','dbethea@dr.com','DBethea','1','dbethea@dr.com','6706');
+ \
+INSERT INTO gus.ggroup VALUES ('','docasio@ate.org','DOcasio','10','docasio@ate.org','2660');
+ \
+INSERT INTO gus.ggroup VALUES ('','eponder@cro.org','EPonder','3','eponder@cro.org','2718');
+ \
+INSERT INTO gus.ggroup VALUES ('','cferrari@wecrosi.com','CFerrari','7','cferrari@wecrosi.com','480');
+ \
+INSERT INTO gus.ggroup VALUES ('','sbarba@curcrocrija.com','SBarba','2','sbarba@curcrocrija.com','2145');
+ \
+INSERT INTO gus.ggroup VALUES ('','rhalsey@onjuninpo.biz','RHalsey','7','rhalsey@onjuninpo.biz','6415');
+ \
+INSERT INTO gus.ggroup VALUES ('','lparkhill@dri.net','LParkhill','9','lparkhill@dri.net','418');
+ \
+INSERT INTO gus.ggroup VALUES ('','slafferty@arnurn.com','SLafferty','9','slafferty@arnurn.com','5863');
+ \
+INSERT INTO gus.ggroup VALUES ('','etibbs@ja.com','ETibbs','4','etibbs@ja.com','1444');
+ \
+INSERT INTO gus.ggroup VALUES ('','cpressnell@pocur.com','CPressnell','4','cpressnell@pocur.com','3562');
+ \
+INSERT INTO gus.ggroup VALUES ('','melizondo@kondrpon.com','MElizondo','1','melizondo@kondrpon.com','3554');
+ \
+INSERT INTO gus.ggroup VALUES ('','koram@likimsuare.biz','KOram','6','koram@likimsuare.biz','4741');
+ \
+INSERT INTO gus.ggroup VALUES ('','agreenfield@fedre.org','AGreenfield','10','agreenfield@fedre.org','1947');
+ \
+INSERT INTO gus.ggroup VALUES ('','ksaffold@bliteabake.com','KSaffold','5','ksaffold@bliteabake.com','4182');
+ \
+INSERT INTO gus.ggroup VALUES ('','jkemmer@kydrdre.com','JKemmer','0','jkemmer@kydrdre.com','6886');
+ \
+INSERT INTO gus.ggroup VALUES ('','jthurston@heronarmbe.com','JThurston','9','jthurston@heronarmbe.com','4323');
+ \
+INSERT INTO gus.ggroup VALUES ('','tlavoie@aedrsa.com','TLavoie','10','tlavoie@aedrsa.com','6960');
+ \
+INSERT INTO gus.ggroup VALUES ('','tleeson@ae.com','TLeeson','0','tleeson@ae.com','5416');
+ \
+INSERT INTO gus.ggroup VALUES ('','jcheney@in.com','JCheney','4','jcheney@in.com','4963');
+ \
+INSERT INTO gus.ggroup VALUES ('','leastin@aearmsaxe.com','LEastin','7','leastin@aearmsaxe.com','3568');
+ \
+INSERT INTO gus.ggroup VALUES ('','egochenour@beatecen.com','EGochenour','6','egochenour@beatecen.com','3519');
+ \
+INSERT INTO gus.ggroup VALUES ('','teppinger@cri.com','TEppinger','5','teppinger@cri.com','1026');
+ \
+INSERT INTO gus.ggroup VALUES ('','bvolkert@geikeondre.com','BVolkert','9','bvolkert@geikeondre.com','6342');
+ \
+INSERT INTO gus.ggroup VALUES ('','agoodspeed@polacing.edu','AGoodspeed','6','agoodspeed@polacing.edu','3266');
+ \
+INSERT INTO gus.ggroup VALUES ('','trohr@saorkyte.com','TRohr','4','trohr@saorkyte.com','6907');
+ \
+INSERT INTO gus.ggroup VALUES ('','acerda@arngeon.com','ACerda','7','acerda@arngeon.com','1406');
+ \
+INSERT INTO gus.ggroup VALUES ('','lborgen@cu.com','LBorgen','5','lborgen@cu.com','5638');
+ \
+INSERT INTO gus.ggroup VALUES ('','jlaster@arepoja.edu','JLaster','3','jlaster@arepoja.edu','6419');
+ \
+INSERT INTO gus.ggroup VALUES ('','myoungquist@ikeponing.com','MYoungquist','6','myoungquist@ikeponing.com','811');
+ \
+INSERT INTO gus.ggroup VALUES ('','ischoenberger@cuxelikon.com','ISchoenberger','3','ischoenberger@cuxelikon.com','5071');
+ \
+INSERT INTO gus.ggroup VALUES ('','rcadiz@li.biz','RCadiz','2','rcadiz@li.biz','889');
+ \
+INSERT INTO gus.ggroup VALUES ('','smcgrew@jagein.com','SMcgrew','2','smcgrew@jagein.com','3201');
+ \
+INSERT INTO gus.ggroup VALUES ('','dstonge@kyortes.com','DStonge','7','dstonge@kyortes.com','6911');
+ \
+INSERT INTO gus.ggroup VALUES ('','wblasko@urnfo.com','WBlasko','1','wblasko@urnfo.com','2945');
+ \
+INSERT INTO gus.ggroup VALUES ('','jbreaux@li.edu','JBreaux','1','jbreaux@li.edu','1957');
+ \
+INSERT INTO gus.ggroup VALUES ('','kmatchett@armmebri.com','KMatchett','8','kmatchett@armmebri.com','2342');
+ \
+INSERT INTO gus.ggroup VALUES ('','fchristianson@atesajacri.biz','FChristianson','2','fchristianson@atesajacri.biz','6218');
+ \
+INSERT INTO gus.ggroup VALUES ('','nfryer@dreeudri.com','NFryer','7','nfryer@dreeudri.com','6702');
+ \
+INSERT INTO gus.ggroup VALUES ('','dhutcherson@poare.com','DHutcherson','0','dhutcherson@poare.com','39');
+ \
+INSERT INTO gus.ggroup VALUES ('','escales@xeor.com','EScales','4','escales@xeor.com','1868');
+ \
+INSERT INTO gus.ggroup VALUES ('','mback@ky.com','MBack','5','mback@ky.com','6330');
+ \
+INSERT INTO gus.ggroup VALUES ('','llavoie@teikejun.com','LLavoie','6','llavoie@teikejun.com','2095');
+ \
+INSERT INTO gus.ggroup VALUES ('','lcuthbert@gejaxe.com','LCuthbert','7','lcuthbert@gejaxe.com','6163');
+ \
+INSERT INTO gus.ggroup VALUES ('','fmartucci@were.com','FMartucci','10','fmartucci@were.com','5826');
+ \
+INSERT INTO gus.ggroup VALUES ('','ndamm@konaewes.biz','NDamm','3','ndamm@konaewes.biz','6673');
+ \
+INSERT INTO gus.ggroup VALUES ('','rgerace@weskimre.com','RGerace','4','rgerace@weskimre.com','6883');
+ \
+INSERT INTO gus.ggroup VALUES ('','hemanuel@ingcenae.info','HEmanuel','1','hemanuel@ingcenae.info','701');
+ \
+INSERT INTO gus.ggroup VALUES ('','alanham@eugle.com','ALanham','1','alanham@eugle.com','4721');
+ \
+INSERT INTO gus.ggroup VALUES ('','nyounger@ate.net','NYounger','4','nyounger@ate.net','1788');
+ \
+INSERT INTO gus.ggroup VALUES ('','tlary@her.com','TLary','7','tlary@her.com','814');
+ \
+INSERT INTO gus.ggroup VALUES ('','ialonso@drelac.com','IAlonso','0','ialonso@drelac.com','2754');
+ \
+INSERT INTO gus.ggroup VALUES ('','adamm@criurnrocro.com','ADamm','4','adamm@criurnrocro.com','3117');
+ \
+INSERT INTO gus.ggroup VALUES ('','btolliver@bri.com','BTolliver','7','btolliver@bri.com','1328');
+ \
+INSERT INTO gus.ggroup VALUES ('','broussel@xe.gov','BRoussel','5','broussel@xe.gov','1788');
+ \
+INSERT INTO gus.ggroup VALUES ('','sremaley@wesaebri.com','SRemaley','1','sremaley@wesaebri.com','4504');
+ \
+INSERT INTO gus.ggroup VALUES ('','kcrossen@kykon.com','KCrossen','10','kcrossen@kykon.com','5633');
+ \
+INSERT INTO gus.ggroup VALUES ('','nblodgett@sawesin.com','NBlodgett','8','nblodgett@sawesin.com','6345');
+ \
+INSERT INTO gus.ggroup VALUES ('','bclausen@fi.com','BClausen','5','bclausen@fi.com','3716');
+ \
+INSERT INTO gus.ggroup VALUES ('','jbracken@junarm.info','JBracken','0','jbracken@junarm.info','2956');
+ \
+INSERT INTO gus.ggroup VALUES ('','lstilson@sume.com','LStilson','9','lstilson@sume.com','336');
+ \
+INSERT INTO gus.ggroup VALUES ('','rbolger@lion.com','RBolger','9','rbolger@lion.com','1417');
+ \
+INSERT INTO gus.ggroup VALUES ('','uwayne@dre.com','UWayne','2','uwayne@dre.com','3857');
+ \
+INSERT INTO gus.ggroup VALUES ('','jchambliss@dreakewesky.net','JChambliss','3','jchambliss@dreakewesky.net','2896');
+ \
+INSERT INTO gus.ggroup VALUES ('','qmayor@bljunabor.com','QMayor','7','qmayor@bljunabor.com','1799');
+ \
+INSERT INTO gus.ggroup VALUES ('','etrower@be.gov','ETrower','0','etrower@be.gov','1295');
+ \
+INSERT INTO gus.ggroup VALUES ('','emessersmith@infoherpo.com','EMessersmith','9','emessersmith@infoherpo.com','944');
+ \
+INSERT INTO gus.ggroup VALUES ('','dzwilling@drior.info','DZwilling','10','dzwilling@drior.info','1880');
+ \
+

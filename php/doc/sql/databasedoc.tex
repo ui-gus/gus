@@ -1,0 +1,123 @@
+%\documentclass[12pt, twoside, letterpaper]{proc}
+\documentclass[12pt, twoside, letterpaper]{report}
+\usepackage{ifpdf}
+\usepackage[colorlinks,bookmarksopen]{hyperref}
+\usepackage{graphicx}
+\usepackage{fullpage}
+\usepackage{picinpar}
+\usepackage{wrapfig}
+\begin{document}
+\section{Database}
+
+\subsection{The Users Class}
+The users table represents the users, who form groups, own
+pages, make posts, and attend events.
+\begin{wrapfigure}[7]{r}{2.5in}
+\begin{center}
+\caption{UML class description}
+\includegraphics{tex/tbl_user_describe.png}
+\end{center}
+\end{wrapfigure}
+\begin{itemize}
+\item[u\_id] This uniquely identifies the user
+\item[f\_name] The user's first name, to display on
+     membership rosters
+\item[l\_name] The user's last name, to display on
+     membership rosters
+\item[user\_name] This uniquely identifies the user, to
+     display on pages and posts
+\item[phone] The user's phone number, to send text-messages,
+     and display on membership rosters
+\end{itemize}
+
+\begin{itemize}
+\item[email] The email to which notifications and
+     invitations are sent
+\item[pass\_word] A 20 character array to hold the user's
+     hashed pass word
+\item[hash\_str] A 20 character array for the hash used to
+     encrypt the user's password
+\end{itemize}
+\begin{figure}[h]
+\begin{center}
+\caption{Sample contents of the users table}
+\includegraphics[width=6.5in]{tex/tbl_user_sample.png}
+\end{center}
+\end{figure}
+\pagebreak
+\subsection{The Groups Class}
+The groups table represents the groups, that have
+    membership rosters, own pages, host forums, and host
+    events.\\
+\begin{wrapfigure}[8]{r}{2.5in}
+\begin{center}
+\caption{UML class description}
+\includegraphics{tex/tbl_group_describe.png}
+\end{center}
+\end{wrapfigure}
+
+\begin{itemize}
+\item[g\_id] This uniquely identifies the group
+\item[g\_name] The name of the group
+\item[acronym] The group's acronym
+\item[category] The group's category: academic, honorary,
+     community\_service, civic\_action, cultural, ethnic,
+     graduate, professional, greek\_life, career,
+     recreational, sport, special\_interest, spiritual, or
+     religious
+\item[email] The email users outside the group use to get
+     in contact with the group
+\end{itemize}
+\begin{figure}[h]
+\begin{center}
+\caption{Sample contents of the groups table}
+\includegraphics[width=6.5in]{tex/tbl_group_sample.png}
+\end{center}
+\end{figure}
+\pagebreak
+\subsection{The Membership Associative Table}
+Each row in the membership table represents a member, a
+group they are in, and the status of the member.\\
+\begin{wrapfigure}[6]{r}{2.5in}
+\begin{center}
+\caption{UML class description}
+\includegraphics{tex/tbl_membership_describe.png}
+\end{center}
+\end{wrapfigure}
+\begin{itemize}
+\item[u\_id] The ID of the user
+\item[g\_id] The ID of the group
+\item[status] The status of the user within the group,
+     limited to common statuses such as, member, officer,
+     and sponsor.  The database-wide roles (ASUI, ITS) will
+     be implemented through GRANT statements.
+\end{itemize}
+
+\begin{wrapfigure}[9]{r}{2.5in}
+\begin{center}
+\caption{Sample contents of the membership table}
+\includegraphics[width=2in]{tex/tbl_membership_sample.png}
+\end{center}
+\end{wrapfigure}
+The ID numbers where used to speed the query transactions,
+but through the use of the appropriate query, it's possible
+to get more human-readable results.\\
+A straight transliteration of the membership table might
+include the user-name, the group name, and the membership
+status. I would need to use information from three tables:
+the user table, the group table, and the membership table.
+Then I would make sure I only got the entries where the
+u\_ids matched, and the g\_ids matched.
+SELECT u.user\_name, g.g\_name, m.status\\
+FROM gus.tbl\_membership m\\
+    INNER JOIN gus.tbl\_group g\\
+    INNER JOIN gus.tbl\_user u\\
+      ON g.g\_id=m.g\_id AND u.u\_id=m.u\_id;\\
+
+\begin{figure}[h]
+\begin{center}
+\caption{Human-readable version of the membership table}
+\includegraphics[width=6.5in]{tex/qry_membership_sample.png}
+\end{center}
+\end{figure}
+\end{document}
