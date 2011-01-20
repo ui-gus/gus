@@ -31,3 +31,23 @@ mysql> select * from page;
 |  1 | home | Welcome to the GUS home page! |
 +----+------+-------------------------------+
 1 row in set (0.03 sec)
+
+mysql> create table user (
+    -> id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> un VARCHAR(100),
+    -> pw VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.34 sec)
+
+mysql> insert into user (un,pw) values('cblair','SHI/hel7');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into user (un,pw) values('cblair','SHI/hel7');Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from user;
++----+--------+----------+
+| id | un     | pw       |
++----+--------+----------+
+|  1 | cblair | SHI/hel7 |
++----+--------+----------+
+1 row in set (0.01 sec)

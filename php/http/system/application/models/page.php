@@ -7,7 +7,7 @@ class Page extends Model {
 		parent::Model();
 	
 		$this->load->database();
-
+		
 		$this->css = '
 		<style type="text/css">
 
@@ -57,7 +57,7 @@ class Page extends Model {
 		return("
 <html>
         <head>
-         <title>Porthole - $page_name</title>
+         <title>Gus - $page_name</title>
 " . $this->css . "
         </head>
 <body>
@@ -75,16 +75,10 @@ class Page extends Model {
 </html>");
 	}
 
-	//return bool on whether session data exists. Needs to be expanded to
-	// check credentials against system
-	function authed() {
-		return(isset($this->session));
-	}
-
 	function login($un,$pw) {
-		$result = $this->db->query("SELECT un FROM user WHERE un='$un', pw='$pw'")->result();
-		echo $result;
-		return(false);
+		$result = $this->db->query("SELECT un FROM user WHERE un='$un' AND pw='$pw'")->result();
+		if(empty($result)) return(false);
+		return(true);
 	}
 }
 
