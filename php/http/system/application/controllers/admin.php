@@ -29,6 +29,7 @@ class Admin extends Controller {
 		//footer already set
 		$this->pdata['content'] = $this->Page->get_content($page_name);
 		if(!$this->session->userdata('un')) {
+			$this->pdata['content'] .= "\n<br />Please Login.";
 			$attributes = array('class' => 'email', 'id' => 'myform');
 			$this->pdata['content'] .= "\n" . form_open('admin',$attributes);
 			$this->pdata['content'] .= "\n" . form_input(array(

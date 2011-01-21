@@ -61,6 +61,12 @@ class Page extends Model {
 " . $this->css . "
         </head>
 <body>
+<div id=\"nav\">
+	<ul>
+	 <li><a href=\"home\">Home</a></li>
+	 <li><a href=\"admin\">Admin</a></li>
+	</ul>
+</div>
 ");
 	}
 
