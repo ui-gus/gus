@@ -8,7 +8,7 @@ class Docs extends Controller {
 	
 	function index() {
 
-		echo 'List of group's files:';
+		echo 'List of group\'s files:';
 		echo 'Feature not yet implemented.';
 	/*
 	This function is called when a user visits the group's shared documents/files page.
