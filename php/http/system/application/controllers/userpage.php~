@@ -1,0 +1,13 @@
+<?php
+
+class Userpage extends Controller {
+
+	function Template(){
+		parent::Controller();
+	}
+	
+	function index() {
+		echo "Oh herro.";
+	}
+
+}
