@@ -63,9 +63,9 @@ class Page extends Model {
 <body>
 <div id=\"nav\">
 	<ul>
-	 <li><a href=\"home\">Home</a></li>
-	 <li><a href=\"admin\">Admin</a></li>
-	 <li><a href=\"auth/logout\">Logout</a></li>
+	 <li><a href=\"/gus/index.php/home\">Home</a></li>
+	 <li><a href=\"/gus/index.php/admin\">Admin</a></li>
+	 <li><a href=\"/gus/index.php/auth/logout\">Logout</a></li>
 	</ul>
 </div>
 ");
