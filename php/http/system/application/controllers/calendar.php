@@ -1,13 +1,17 @@
 <?php
 
-class Template extends Controller {
+/***** written by Zeke Long *****/
 
-	function Template(){
+class Calendar extends Controller 
+{
+	function Calendar()            //constructor
+     {
 		parent::Controller();
 	}
 	
-	function index() {
-	
+	function index() 
+     {
+		$this->load->view('CalendarView');
 	}
-
 }
+?>
