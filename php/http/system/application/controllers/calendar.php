@@ -1,10 +1,9 @@
 <?php
-
 /***** written by Zeke Long *****/
 
 class Calendar extends Controller 
 {
-	function Calendar()            //constructor
+	function Calendar()           //constructor
      {
 		parent::Controller();
 	}
