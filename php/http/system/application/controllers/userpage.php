@@ -11,9 +11,9 @@ class Userpage extends Controller {
 	function index() {
 		$data['title'] = "User Page";
 		$data['heading'] = "Something here";
-		$data['query'] = $this->db->get( 'gusphp' );
+		$data['query'] = $this->db->get( 'user' );
 
-		$this->load->view( 'userpage_view', $data );
+		$this->load->view( 'userpage_view.php', $data );
 	}
 
 }
