@@ -3,11 +3,11 @@
 <!--- written by Zeke Long --->
 
 <!--- display the calendar in month view --->
-<!--- STILL NEED TO IMPLEMENT WEEK VIEW --->
+<!--- STILL NEED TO IMPLEMENT WEEK VIEW, MONTH SCROLLING AND CLICKING ON SPECIFIC DAY TO VIEW SCHEDULED EVENTS--->
 <?php
 
 //Get today's date
-$date =time(); 
+$date = time(); 
 
 //Put the day, month, and year in seperate variables 
 $day = date('d', $date); 
@@ -38,39 +38,33 @@ switch($day_of_week)
 //Determine how many days are in the current month 
 $days_in_month = cal_days_in_month(0, $month, $year);
 
-//Start building the table headers
+//Display title and days of week in first two rows
+echo "<table border=10 width=294>";
+echo "<tr><th colspan=7> <big>$title $year</big> </th></tr>";
+echo "<tr><td width=150><b>Sun</b></td><td width=150><b>Mon</b></td><td width=150><b>Tue</b></td><td width=150><b>Wed</b></td><td width=150><b>Thu</b></td><td width=150><b>Fri</b></td><td width=150><b>Sat</b></td></tr>";
 
- echo "<table border=1 width=294>";
- echo "<tr><th colspan=7> $title $year </th></tr>";
- echo "<tr><td width=42>Sun</td><td width=42>Mon</td><td
- width=42>Tue</td><td width=42>Wed</td><td width=42>Thu</td><td
- width=42>Fri</td><td width=42>Sat</td></tr>";
-
- $day_count = 1;      //goes up to 7
- echo "<tr>";
-
- //take care of blank days
- while ( $blank > 0 )
- {
- 	echo "<td></td>";
- 	$blank = $blank - 1;
+$day_count = 1;            //initalize day of week to start at 1
+$day_num = 1;              //initialize day to start at 1
+echo "<tr>";
+while($blank > 0) 	      //cover blank days if the 1st of the
+{				      //month isn't on Sunday
+	echo "<td></td>";
+	$blank = $blank - 1;
 	$day_count++;
- } 
-$day_num = 1;            //set first day of month to 1 
-//display all days in the month 
-while ($day_num <= $days_in_month) 
+}  
+while($day_num <= $days_in_month)   //for each day of month
 {
-	echo "<td> $day_num </td>"; 
+	echo "<td> $day_num </td>";   //add table cell for day
 	$day_num++; $day_count++; 
-	if ($day_count > 7)              //Start a new row every week 
+	if ($day_count > 7)           //Start a new row every week 
 	{ 
 		echo "</tr><tr>"; 
 		$day_count = 1; 
 	} 
 }
 
-//Finish the table with blank details if needed 
-while ( $day_count >1 && $day_count <=7 ) 
+//Finish the table with blank cells if needed 
+while($day_count > 1 && $day_count <= 7) 
 {
 	echo "<td> </td>"; 
 	$day_count++; 
@@ -81,7 +75,7 @@ echo "</tr></table>";
 
 <!--- form to add an event to calendar --->
 <form action="calendar.php" method="add_event">
-	Event Description: <input type="text" name="event"/> <br>
+	New Event Description: <input type="text" name="event"/> <br>
 
 	Date: <select name="month">          //month dropdown
 		<option value="January">January</option>
@@ -215,7 +209,8 @@ echo "</tr></table>";
 		<option value="am">am</option>
 		<option value="pm">pm</option>
 	</select> <br>
-	<input type="submit" value="Add Event"/>
+	<input type="submit" value="Add New Event"/>
+	<input type="reset" value="Reset New Event"/>
 </form>
 
 
