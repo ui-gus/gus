@@ -1,17 +1,19 @@
 <?php
 
-class Admin extends Controller {
+class Auth extends Controller {
 	var $pdata; //page data
 
-	function Admin(){
+	function Auth(){
 		parent::Controller();	
 		$this->load->model('Page');
+		$this->load->helper('form'); 
 		$this->load->library('session');
 
 		//set page footer
 		$this->pdata['footer'] = $this->Page->get_footer();
 	}
-	
+
+	//direct forms' POST here to login	
 	function index() {
 		$un = $pw = "";
 		//handle POST data
@@ -22,8 +24,7 @@ class Admin extends Controller {
 			}
 		}
 		//set page name
-		$page_name = "admin";
-		if(func_num_args() > 0) {$page_name = func_get_arg(0);}
+		$page_name = "auth";
 		$this->pdata['header'] = $this->Page->get_header($page_name);
 		//footer already set
 		$this->pdata['content'] = $this->Page->get_content($page_name);
@@ -31,22 +32,18 @@ class Admin extends Controller {
 			$this->load->view('login',$this->pdata);
 		}
 		else {
-			$this->pdata['content'] .= "<br /><br />
-				<a href=\"groups\">Groups</a>\n<br />
-				<a href=\"users\">Users</a>\n<br />
-				<a href=\"pages\">Server Pages</a>\n<br />";
+			$this->pdata['content'] .= "<br />
+				<p>You are already logged in.<br />\n";
 			$this->load->view('home',$this->pdata);
 		}
 	}
 
-	function groupview() {
-		//set page name
-		$page_name = "home";
-		if(func_num_args() > 0) {$page_name = func_get_arg(0);}
+	function logout() {
+		$this->session->sess_destroy();
+		$page_name = "auth";
 		$this->pdata['header'] = $this->Page->get_header($page_name);
-		$this->pdata['content'] = $this->Page->get_content($page_name);
 		//footer already set
-		$this->load->view('main',$this->pdata);
+		$this->pdata['content'] = $this->Page->get_content($page_name) . "Logged out.<br />\n";
+		$this->load->view('home',$this->pdata);
 	}
-
 }

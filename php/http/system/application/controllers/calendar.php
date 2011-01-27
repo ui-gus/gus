@@ -1,13 +1,20 @@
 <?php
+/***** written by Zeke Long *****/
 
-class Template extends Controller {
-
-	function Template(){
+class Calendar extends Controller 
+{
+	function Calendar()           //constructor
+     {
 		parent::Controller();
 	}
 	
-	function index() {
-	
+	function index() 
+     {
+		$this->load->view('CalendarView');
 	}
 
+	function viewCalendar()
+	{
+	}
 }
+?>
