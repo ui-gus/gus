@@ -38,7 +38,7 @@ switch($day_of_week)
 //Determine how many days are in the current month 
 $days_in_month = cal_days_in_month(0, $month, $year);
 
-//Start building the table heads
+//Start building the table headers
 
  echo "<table border=1 width=294>";
  echo "<tr><th colspan=7> $title $year </th></tr>";
