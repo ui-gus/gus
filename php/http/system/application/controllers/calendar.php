@@ -12,5 +12,9 @@ class Calendar extends Controller
      {
 		$this->load->view('CalendarView');
 	}
+
+	function viewCalendar()
+	{
+	}
 }
 ?>

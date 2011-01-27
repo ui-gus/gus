@@ -2,10 +2,86 @@
 <body>
 <!--- written by Zeke Long --->
 
-<!---form to add an event to calendar --->
+<!--- display the calendar in month view --->
+<?php
+//Get today's date
+$date =time(); 
+//Put the day, month, and year in seperate variables 
+$day = date('d', $date); 
+$month = date('n', $date); 
+$year = date('Y', $date); 
+
+//Get the first day of the month 
+$first_day = mktime(0,0,0,$month,1,$year);
+
+//Get the month name 
+$title = date("F", $first_day); 
+
+//Get the actual weekday that the first of the month is on 
+$day_of_week = date("l", $first_day) ; 
+
+/*Once we know what day of the week it falls on, we know how 
+  many blank days occure before it. If the first day of the week 
+  is a Sunday then it would be zero 
+*/
+switch($day_of_week)
+{ 
+	case "Sunday": $blank = 0; break; 
+	case "Monday": $blank = 1; break; 
+	case "Tuesday": $blank = 2; break; 
+	case "Wednesday": $blank = 3; break; 
+	case "Thursday": $blank = 4; break; 
+	case "Friday": $blank = 5; break; 
+	case "Saturday": $blank = 6; break; 
+} 
+//Determine how many days are in the current month 
+$days_in_month = cal_days_in_month(0, $month, $year) ;
+
+//Start building the table heads
+ echo "<table border=1 width=294>";
+ echo "<tr><th colspan=7> $title $year </th></tr>";
+ echo "<tr><td width=42>S</td><td width=42>M</td><td
+ width=42>T</td><td width=42>W</td><td width=42>T</td><td
+ width=42>F</td><td width=42>S</td></tr>";
+
+ //This counts the days in the week, up to 7
+ $day_count = 1;
+ echo "<tr>";
+
+ //Take care of the blank days
+ while($blank > 0)
+ {
+ 	echo "<td></td>";
+ 	$blank = $blank-1;
+	$day_count++;
+ } 
+$day_num = 1;                //set the first day of the month to 1 
+//count up the days, until we've done all of them in the month 
+while($day_num <= $days_in_month) 
+{
+	echo "<td> $day_num </td>"; 
+	$day_num++; $day_count++; 
+	if ($day_count > 7)              //Start a new row every week 
+	{ 
+		echo "</tr><tr>"; 
+		$day_count = 1; 
+	} 
+}
+
+//Finaly we finish out the table with some blank details if needed 
+while($day_count > 1 && $day_count <= 7) 
+{
+	echo "<td> </td>"; 
+	$day_count++; 
+} 
+echo "</tr></table>";
+?>
+
+
+<!--- form to add an event to calendar --->
 <form action="calendar.php" method="add_event">
-Event Description: <input type="text" name="event"/> <br>
-Date:<select name="month">
+	Event Description: <input type="text" name="event"/> <br>
+	Date:<select name="month">
 		<option value="January">January</option>
 		<option value="February">February</option>
 		<option value="March">March</option>
@@ -52,7 +128,7 @@ Date:<select name="month">
 		<option value="30">30</option>
 		<option value="31">31</option>
 	</select> <br>
-Time: <select name="hour">
+	Time: <select name="hour">
 		<option value="12">12</option>
 		<option value="1">1</option>
 		<option value="2">2</option>
@@ -132,8 +208,9 @@ Time: <select name="hour">
 		<option value="am">am</option>
 		<option value="pm">pm</option>
 	</select> <br>
-<input type="submit" value="Add Event"/>
+	<input type="submit" value="Add Event"/>
 </form>
+
 
 </body>
 </html>
