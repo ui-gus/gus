@@ -47,6 +47,7 @@
 	echo "\n<br />" . form_submit('group-add', 'group-add');
 ?>
 
+
 <p>Page rendered in {elapsed_time} seconds</p>
 
 <?php echo $this->pdata['footer'] ?>
