@@ -10,7 +10,7 @@ class Userpage extends Controller {
 	
 	function index() {
 		$data['title'] = "User Page";
-		$data['heading'] = "Something here";
+		$data['heading'] = "User Page";
 		$data['query'] = $this->db->get( 'user' );
 
 		$this->load->view( 'userpage_view.php', $data );
