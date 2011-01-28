@@ -6,7 +6,7 @@
 
 <h1> <?=$heading?> </h1>
 
-<?php echo "EEEEEHHHHHHH" ?>
+<?php echo "Printing from database" ?>
 
 <?php foreach($query->result() as $row): ?>
 
