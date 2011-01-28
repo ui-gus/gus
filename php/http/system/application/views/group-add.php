@@ -29,11 +29,10 @@
 			);
         echo "\n<br />" . form_input(array(
                         'name'        => 'leader',
-                        'id'          => 'un',
+                        'id'          => 'leader',
                         'value'       => $un,
                         'maxlength'   => '20',
                         'size'        => '20',
-                        'type'        => 'password'
                         )
 			);
         echo "\n<br />" . form_textarea(array(
