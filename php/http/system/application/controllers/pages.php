@@ -41,4 +41,18 @@ class Pages extends Controller {
 	function edit() {
 	
 	}
+	
+	function save() {
+		$this->load->database('admin');
+		//this of course needs way more handling
+		$data = array('name' => $_POST['name'], 'content' => $_POST['content']);
+		$this->db->insert('page',$data);
+		//set page name
+		$page_name = "pages";
+		if(func_num_args() > 0) {$page_name = func_get_arg(0);}
+		$this->pdata['header'] = $this->Page->get_header($page_name);
+		//footer already set
+		$this->pdata['content'] = $this->Page->get_content($page_name);
+		$this->load->view('page-save',$this->pdata);
+	}
 }

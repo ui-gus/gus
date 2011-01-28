@@ -6,7 +6,7 @@
 	echo $this->pdata['content'];
 	//form
 	$this->load->helper('form');
-	echo "\n<br />" . form_open('save',array('class' => 'page-add', 'id' => 'page-add'));
+	echo "\n<br />" . form_open('pages/save',array('class' => 'page-add', 'id' => 'page-add'));
         echo "\n<br />" . form_input(array(
                         'name'        => 'name',
                         'id'          => 'name',
