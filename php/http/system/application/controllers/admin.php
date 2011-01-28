@@ -6,7 +6,6 @@ class Admin extends Controller {
 	function Admin(){
 		parent::Controller();	
 		$this->load->model('Page');
-		$this->load->helper('form'); 
 		$this->load->library('session');
 
 		//set page footer
@@ -29,30 +28,13 @@ class Admin extends Controller {
 		//footer already set
 		$this->pdata['content'] = $this->Page->get_content($page_name);
 		if(!$this->session->userdata('un')) {
-			$this->pdata['content'] .= "\n<br />Please Login.";
-			$attributes = array('class' => 'email', 'id' => 'myform');
-			$this->pdata['content'] .= "\n" . form_open('admin',$attributes);
-			$this->pdata['content'] .= "\n" . form_input(array(
-              		'name'        => 'un',
-	              	'id'          => 'un',
-              		'value'       => $un,
-              		'maxlength'   => '20',
-              		'size'        => '20',
-			)
-			);
-			$this->pdata['content'] .= "\n<br />" . form_input(array(
-              		'name'        => 'pw',
-	              	'id'          => 'pw',
-              		'value'       => '',
-              		'maxlength'   => '20',
-              		'size'        => '20',
-			'type'	      => 'password'
-			)
-			);
-			$this->pdata['content'] .= "\n<br />" . form_submit('login', 'Login');
 			$this->load->view('login',$this->pdata);
 		}
 		else {
+			$this->pdata['content'] .= "<br /><br />
+				<a href=\"groups\">Groups</a>\n<br />
+				<a href=\"users\">Users</a>\n<br />
+				<a href=\"pages\">Server Pages</a>\n<br />";
 			$this->load->view('home',$this->pdata);
 		}
 	}
