@@ -4,12 +4,15 @@ class Docs extends Controller {
 
 	function Docs(){
 		parent::Controller();
+		$this->load->model('Page');
+		//set page content
+                $this->pdata['footer'] = $this->Page->get_footer();
 	}
 	
 	function index() {
-
-		echo 'List of group\'s files:';
-		echo 'Feature not yet implemented.';
+                $this->pdata['header'] = $this->Page->get_header('forum');
+                $this->pdata['content'] = $this->Page->get_content('forum');
+		$this->load->view('forum', $this->pdata);
 	/*
 	This function is called when a user visits the group's shared documents/files page.
 	Steps
@@ -19,10 +22,8 @@ class Docs extends Controller {
 	*/
 	}
 
-	function uploadFile() {
 
-		echo 'Upload a file.';
-		echo 'Feature not yet implemented.';
+	function uploadFile() {
 	/*
 	This function is called when a user wants to upload a file to the group.
 	Codeigniter has a built in "File Uploading Class" that may be useful for this.
@@ -44,9 +45,6 @@ class Docs extends Controller {
 	}
 
 	function downloadFile() {
-
-		echo 'Download a file.';
-		echo 'Feature not yet implemented.';
 	/*
 	This function is called when a user chooses to download a file.
 	Steps
@@ -58,9 +56,6 @@ class Docs extends Controller {
 	}
 
 	function deleteFile() {
-
-		echo 'Delete a file.';
-		echo 'Feature not yet implemented.';
 	/*
 	This function is called when a user chooses to delete a file that has been uploaded.
 	Steps
@@ -71,9 +66,6 @@ class Docs extends Controller {
 	}
 
 	function organizeFiles() {
-
-		echo 'Organize files.';
-		echo 'Feature not yet implemented.';
 	/*
 	This function brings up a new menu that allows a user to organize, rename, and control access to files
 	Steps
