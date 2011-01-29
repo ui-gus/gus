@@ -7,14 +7,15 @@ class Page extends Model {
 		parent::Model();
 	
 		$this->load->database();
-		
+		$this->load->helper('url');
 		
 		//hilariously enough, using linking to the css in the html file doesn't work properly,
 		//this here opens a file, reads all of it into the $css variable, then calls it good.
-		$cssFile = "templates/template.css";
-		$filehandler = fopen($cssFile, 'r');
-		$this->css = fread($filehandler, filesize($cssFile));
-		fclose($filehandler);
+		//$cssFile =  base_url() . "templates/template.css";
+		//$filehandler = fopen($cssFile, 'r');
+		//$this->css = fread($filehandler, filesize($cssFile));
+		$this->css  = '<link href="' . base_url() . 'templates/template.css" type="text/css" rel="stylesheet" />';
+		//fclose($filehandler);
 	}
 
 	function get_id($page_name) {
@@ -38,12 +39,17 @@ class Page extends Model {
 		
 			<!-- Username that links to profile + new mail icon -->
 			<div id=\"links_left\">
-			Greetings <u>Scott</u>, <img src=\"templates/mail.png\">	
+			Greetings <u>Scott</u>, <img src=\"" . base_url() . "templates/mail.png\">	
 			</div>
 			
 			<!-- At some point these need to be finalized -->
 			<div id=\"links_right\">
-			Messages | Forums | Edit Groups | Home | Logout
+			<a href=\"" . site_url() . "/home\">Home</a> 
+			| <a href=\"" . site_url() . "/messages\">Messages</a>
+			| <a href=\"" . site_url() . "/forums\">Forums</a> 
+			| <a href=\"" . site_url() . "/group\">Groups</a> 
+			| <a href=\"" . site_url() . "/admin\">Admin</a> 
+			| <a href=\"" . site_url() . "/auth/logout\">Logout</a> 
 			</div>
 		</div>
 	</div>
@@ -68,7 +74,7 @@ class Page extends Model {
 				<li>A longer name!!</li>		
 			</ul>
 			<div id=\"group_controls\">
-				<img src=\"add_group2.png\"><img src=\"remove_group2.png\">
+				<img src=\"" . base_url() . "add_group2.png\"><img src=\"" . base_url() . "remove_group2.png\">
 			</div> 
 			-->
 		</div>

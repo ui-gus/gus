@@ -1,20 +1,18 @@
 <?php
 
-class Home extends Controller {
+class Test extends Controller {
 	var $pdata; //page data
 
-	function Home()
-	{
+	function Test() {
 		parent::Controller();	
 		$this->load->model('Page');
 		//set page content
 		$this->pdata['footer'] = $this->Page->get_footer();
 	}
 	
-	function index()
-	{
+	function index() {
 		//set page name
-		$page_name = "home";
+		$page_name = "test";
 		if(func_num_args() > 0) {$page_name = func_get_arg(0);}
 		$this->pdata['header'] = $this->Page->get_header($page_name);
 		$this->pdata['content'] = $this->Page->get_content($page_name);
@@ -22,8 +20,4 @@ class Home extends Controller {
 		$this->load->view('home',$this->pdata);
 	}
 
-	function test() {
-		$this->load->library('unit_test');
-		echo $this->unit->run('test',$this->Page->get_content('test'), 'Home test');
-	}
 }
