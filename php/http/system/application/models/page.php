@@ -8,6 +8,7 @@ class Page extends Model {
 	
 		$this->load->database();
 		$this->load->helper('url');
+		$this->load->library('session');
 		
 		//hilariously enough, using linking to the css in the html file doesn't work properly,
 		//this here opens a file, reads all of it into the $css variable, then calls it good.
@@ -25,6 +26,11 @@ class Page extends Model {
 	
 	
 	function get_header($page_name) {
+		if($this->authed()) {
+		 $auth = '<a href="' . site_url() . '/auth/logout">Logout</a>';
+		} else {
+		 $auth = '<a href="' . site_url() . '/auth">Login</a>';
+		}
 		return("
 <html>
 		 <head>
@@ -49,7 +55,7 @@ class Page extends Model {
 			| <a href=\"" . site_url() . "/forums\">Forums</a> 
 			| <a href=\"" . site_url() . "/group\">Groups</a> 
 			| <a href=\"" . site_url() . "/admin\">Admin</a> 
-			| <a href=\"" . site_url() . "/auth/logout\">Logout</a> 
+			| $auth 
 			</div>
 		</div>
 	</div>
@@ -105,7 +111,17 @@ class Page extends Model {
 	function login($un,$pw) {
 		$result = $this->db->query("SELECT un FROM user WHERE un='$un' AND pw='$pw'")->result();
 		if(empty($result)) return(false);
+		//else
+		$this->session->set_userdata('un', $un);
 		return(true);
+	}
+
+	function logout() {
+		 return($this->session->sess_destroy());
+	}
+
+	function authed() {
+		return($this->session->userdata('un'));
 	}
 }
 

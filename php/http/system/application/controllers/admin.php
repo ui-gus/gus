@@ -6,28 +6,19 @@ class Admin extends Controller {
 	function Admin(){
 		parent::Controller();	
 		$this->load->model('Page');
-		$this->load->library('session');
 
 		//set page footer
 		$this->pdata['footer'] = $this->Page->get_footer();
 	}
 	
 	function index() {
-		$un = $pw = "";
-		//handle POST data
-		if(!empty($_POST)) {
-			$un = $_POST['un']; 
-			if($this->Page->login($un,$_POST['pw'])) {
-				$this->session->set_userdata('un', $un);
-			}
-		}
 		//set page name
 		$page_name = "admin";
 		if(func_num_args() > 0) {$page_name = func_get_arg(0);}
 		$this->pdata['header'] = $this->Page->get_header($page_name);
 		//footer already set
 		$this->pdata['content'] = $this->Page->get_content($page_name);
-		if(!$this->session->userdata('un')) {
+		if(!$this->Page->authed()) {
 			$this->load->view('login',$this->pdata);
 		}
 		else {

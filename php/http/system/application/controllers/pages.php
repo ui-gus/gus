@@ -7,14 +7,8 @@ class Pages extends Controller {
 		parent::Controller();	
 		$this->load->model('Page');
 		$this->load->helper('form'); 
-		$this->load->library('session');
 		//set page footer
-		$this->pdata['footer'] = $this->Page->get_footer();
-		
-		if(!$this->session->userdata('un')) {
-			$this->load->view('login',$this->pdata);
-		}
-
+		$this->pdata['footer'] = $this->Page->get_footer();	
 	}
 	
 	function index() {
@@ -24,8 +18,11 @@ class Pages extends Controller {
 		$this->pdata['header'] = $this->Page->get_header($page_name);
 		//footer already set
 		$this->pdata['content'] = $this->Page->get_content($page_name);
-		$this->pdata['content'] .= "\n<br />\n<br /><a href=\"pages/add\">Add Page</a>\n<br />";
-		$this->load->view('home',$this->pdata);
+		if(!$this->Page->authed()) $this->load->view('login',$this->pdata);
+		else {
+			$this->load->view('home',$this->pdata);
+			$this->pdata['content'] .= "\n<br />\n<br /><a href=\"pages/add\">Add Page</a>\n<br />";
+		}
 	}
 
 	function add() {

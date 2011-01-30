@@ -19,5 +19,4 @@ class Test extends Controller {
 		//footer already set
 		$this->load->view('home',$this->pdata);
 	}
-
 }
