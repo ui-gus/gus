@@ -25,7 +25,8 @@ class Pages extends Controller {
 	function index() {
 		$this->pdata['content'] .= "\n<br />\n<br />" . 
 		 "<a href=\"pages/add\">Add</a>\n<br />\n" . 
-		 "<a href=\"pages/edit\">Edit</a>\n<br />";
+		 "<a href=\"pages/edit\">Edit</a>\n<br />" .
+		 "<a href=\"pages/delete\">Delete</a>\n<br />";
 		$this->load->view('home',$this->pdata);
 	}
 
@@ -44,6 +45,22 @@ class Pages extends Controller {
 		$this->pdata['pagelist'] = $this->Page->get_pagelist(); 
 		$this->load->view('pages/edit',$this->pdata);
 	}
+
+	function delete() {
+                if(!empty($_POST)) { //delete mode
+                 $this->load->database('admin');
+                 if($this->db->delete('page',array('name' => $_POST['name']))) {
+                        $this->pdata['content'] .= "<br />\nPage deleted."
+                                . "<br />\n";
+                 } else {
+                        show_error('Page could not be delete');
+                 }
+                 $this->load->view('home',$this->pdata);
+                } else { //list users to delete... mode...
+                        $this->pdata['pagelist'] = $this->Page->get_pagelist();
+                        $this->load->view('pages/delete',$this->pdata);
+                }
+        }
 	
 	function save() {
 		$data = array('name' => $_POST['name'], 'content' => $_POST['content']);

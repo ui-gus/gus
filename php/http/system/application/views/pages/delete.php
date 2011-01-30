@@ -3,10 +3,10 @@
 <?php 
 	$this->load->helper('form');
 	echo $this->pdata['content'];
-        echo "\n<br />" . form_open('users/delete',array('class' => 'users/delete', 'id' => 'users/delete'));
-	foreach($this->pdata['userlist'] as $val) {
-	 echo form_checkbox(array('name' => 'un',
-				'id' => 'users',
+        echo "\n<br />" . form_open('pages/delete',array('class' => 'pages/delete', 'id' => 'pages/delete'));
+	foreach($this->pdata['pagelist'] as $val) {
+	 echo form_checkbox(array('name' => 'name',
+				'id' => 'pages',
 				'value' => $val,
 				'checked' => FALSE
 				)
