@@ -26,8 +26,10 @@ class Page extends Model {
 	
 	
 	function get_header($page_name) {
+		$greeting = "";
 		if($this->authed()) {
 		 $auth = '<a href="' . site_url() . '/auth/logout">Logout</a>';
+		 $greeting = "Greetings <u>" . $this->session->userdata('un')  . "</u> <img src=\"" . base_url() . "templates/mail.png\">";
 		} else {
 		 $auth = '<a href="' . site_url() . '/auth">Login</a>';
 		}
@@ -45,15 +47,15 @@ class Page extends Model {
 		
 			<!-- Username that links to profile + new mail icon -->
 			<div id=\"links_left\">
-			Greetings <u>Scott</u>, <img src=\"" . base_url() . "templates/mail.png\">	
+			 $greeting
 			</div>
 			
 			<!-- At some point these need to be finalized -->
 			<div id=\"links_right\">
 			<a href=\"" . site_url() . "/home\">Home</a> 
-			| <a href=\"" . site_url() . "/messages\">Messages</a>
-			| <a href=\"" . site_url() . "/forums\">Forums</a> 
-			| <a href=\"" . site_url() . "/group\">Groups</a> 
+			| <a href=\"" . site_url() . "/mail\">Messages</a>
+			| <a href=\"" . site_url() . "/forum\">Forum</a> 
+			| <a href=\"" . site_url() . "/grouppages\">Groups</a> 
 			| <a href=\"" . site_url() . "/admin\">Admin</a> 
 			| $auth 
 			</div>
@@ -108,6 +110,15 @@ class Page extends Model {
 </html>");
 	}
 
+	function get_pagelist() {
+		$this->db->select('name');
+		$data = array();
+		for($this->db->get('page')->result() as $key => $val) {
+			$data['name'] = $val['name'];
+		}
+		return($data);
+	}
+
 	function login($un,$pw) {
 		$result = $this->db->query("SELECT un FROM user WHERE un='$un' AND pw='$pw'")->result();
 		if(empty($result)) return(false);
@@ -122,6 +133,14 @@ class Page extends Model {
 
 	function authed() {
 		return($this->session->userdata('un'));
+	}
+
+	function save($data) {
+		if($this->db->get_where('page',array('name' => $data['name']))->num_rows < 1) {
+			return($this->db->insert('page',$data));
+		}
+		$this->db->where('name',$data['name']);
+		return($this->db->update('page',$data));
 	}
 }
 
