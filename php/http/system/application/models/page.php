@@ -113,8 +113,8 @@ class Page extends Model {
 	function get_pagelist() {
 		$this->db->select('name');
 		$data = array();
-		for($this->db->get('page')->result() as $key => $val) {
-			$data['name'] = $val['name'];
+		foreach($this->db->get('page')->result() as $key) {
+			array_push($data,$key->name);
 		}
 		return($data);
 	}

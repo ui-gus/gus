@@ -39,7 +39,8 @@ class Auth extends Controller {
 		$page_name = "auth";
 		$this->pdata['header'] = $this->Page->get_header($page_name);
 		//footer already set
-		$this->pdata['content'] = $this->Page->get_content($page_name) . "Logged out.<br />\n";
+		$this->pdata['content'] = $this->Page->get_content($page_name) 
+		 . "<br />\nLogged out.<br />\n";
 		$this->load->view('home',$this->pdata);
 	}
 }
