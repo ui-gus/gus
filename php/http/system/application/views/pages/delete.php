@@ -5,8 +5,8 @@
 	echo $this->pdata['content'];
         echo "\n<br />" . form_open('pages/delete',array('class' => 'pages/delete', 'id' => 'pages/delete'));
 	foreach($this->pdata['pagelist'] as $val) {
-	 echo form_checkbox(array('name' => 'name',
-				'id' => 'pages',
+	 echo form_checkbox(array('name' => "delete_$val",
+				'id' => $val,
 				'value' => $val,
 				'checked' => FALSE
 				)

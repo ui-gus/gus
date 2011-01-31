@@ -49,12 +49,15 @@ class Pages extends Controller {
 	function delete() {
                 if(!empty($_POST)) { //delete mode
                  $this->load->database('admin');
-                 if($this->db->delete('page',array('name' => $_POST['name']))) {
-                        $this->pdata['content'] .= "<br />\nPage deleted."
+		 unset($_POST['delete']); //dont need the delete button val
+		 foreach($_POST as $name) {
+                  if($this->db->delete('page',array('name' => $name))) {
+                        $this->pdata['content'] .= "<br />\nPage $name deleted."
                                 . "<br />\n";
-                 } else {
-                        show_error('Page could not be delete');
-                 }
+                  } else {
+                        show_error("Page '$name' could not be delete");
+                  }
+		 }
                  $this->load->view('home',$this->pdata);
                 } else { //list users to delete... mode...
                         $this->pdata['pagelist'] = $this->Page->get_pagelist();

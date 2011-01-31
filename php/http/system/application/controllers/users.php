@@ -48,11 +48,14 @@ class Users extends Controller {
 	function delete() {
 		if(!empty($_POST)) { //delete mode
 		 $this->load->database('admin');
-		 if($this->db->delete('user',array('un' => $_POST['un']))) {
-		 	$this->pdata['content'] .= "<br />\nUser deleted."
+		 unset($_POST['delete']); //dont need the delete button val
+		 foreach($_POST as $un) {
+		  if($this->db->delete('user',array('un' => $un))) {
+		 	$this->pdata['content'] .= "<br />\nUser $un deleted."
 				. "<br />\n";
-		 } else {
-			show_error('User could not be delete');
+		  } else {
+			show_error("User '$un' could not be delete");
+		  }
 		 }
 		 $this->load->view('home',$this->pdata);
 		} else { //list users to delete... mode...
