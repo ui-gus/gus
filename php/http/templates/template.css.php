@@ -1,6 +1,8 @@
 <?php
 header( 'Content-type: text/css' ); 
-?>html {
+?>
+
+html {
 	/*Fall Back Option*/
 	background: white;
 	background-image: url('../templates/html_background.png');
@@ -55,8 +57,12 @@ div#links{
 	background-attachment: fixed;
 }
 
-#links a:link {
-	color: black;
+div#links a:link {
+		color: #ffecc0;
+}
+
+div#links a:visited{
+	color: #c7c3c3; 
 }
 
 div#links_left{
@@ -69,7 +75,7 @@ div#links_left{
 
 div#links_right{
 	color: white;
-	font-family: "calibri";
+	font-family: "Lucida Sans Unicode";
 	text-align: right;
 	font-size: 12px;
 	float: right;

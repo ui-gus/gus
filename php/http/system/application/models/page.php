@@ -15,7 +15,7 @@ class Page extends Model {
 		//$cssFile =  base_url() . "templates/template.css";
 		//$filehandler = fopen($cssFile, 'r');
 		//$this->css = fread($filehandler, filesize($cssFile));
-		$this->css  = '<link href="' . base_url() . 'templates/template.css" type="text/css" rel="stylesheet" />';
+		$this->css  = '<link href="' . base_url() . 'templates/template.css.php" type="text/css" rel="stylesheet" />';
 		//fclose($filehandler);
 	}
 
@@ -46,9 +46,9 @@ class Page extends Model {
 		<div id=\"links\">
 		
 			<!-- Username that links to profile + new mail icon -->
-			<div id=\"links_left\">
-			 $greeting
-			</div>
+			<div id=\"links_left\">" 
+			 . $auth .
+			"</div>
 			
 			<!-- At some point these need to be finalized -->
 			<div id=\"links_right\">

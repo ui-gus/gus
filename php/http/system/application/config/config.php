@@ -14,7 +14,7 @@
 #$config['base_url']	= $_SERVER['HTTP_HOST'] . "/gus/";
 #had to change to this to work on my server that uses on an ip address.
 # hopefully the rest of you can't see this!
-$config['base_url']	= "http://" . $_SERVER['HTTP_HOST'] . "/gus/";
+$config['base_url']	= "http://" . $_SERVER['HTTP_HOST'] . "/gus/php/http/";
 
 /*
 |--------------------------------------------------------------------------
