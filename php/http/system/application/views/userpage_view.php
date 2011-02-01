@@ -6,7 +6,7 @@
 
 <h1> <?=$heading?> </h1>
 
-<?php echo "Printing from database" ?>
+Displaying user information for: <?php echo "Test." ?> 
 
 <?php foreach($query->result() as $row): ?>
 
