@@ -17,15 +17,16 @@ class Page extends Model {
 		//$this->css = fread($filehandler, filesize($cssFile));
 		$this->css  = '<link href="' . base_url() . 'templates/template.css.php" type="text/css" rel="stylesheet" />';
 		//fclose($filehandler);
+		
 	}
-
+	
 	function get_id($page_name) {
 		$result = $this->db->query("SELECT id FROM page WHERE name='$page_name'")->result();
 		return($result[0]->id);
 	}
 	
-	
 	function get_header($page_name) {
+		//left links
 		$greeting = "";
 		if($this->authed()) {
 		 $auth = '<a href="' . site_url() . '/auth/logout">Logout</a>';
@@ -33,6 +34,21 @@ class Page extends Model {
 		} else {
 		 $auth = '<a href="' . site_url() . '/auth">Login</a>';
 		}
+		
+		//right links
+		
+		
+		$privilege = "admin"; //this is just set for the moment to test the function.	
+		//at some point I need to retrieve this info about the user from the DB 
+	
+		if($privilege == "admin"){
+			$content = "<a href=\"" . site_url() . "/admin\">Admin</a> | ";
+		}
+		$content = $content . "<a href=\"" . site_url() . "/mail\">Messages</a>" . 
+										"| <a href=\"" . site_url() . "/forum\">Forum</a>" .
+										"| <a href=\"" . site_url() . "/home\">Home</a>" .
+										"| <a href=\"" . site_url() . "/grouppages\">Groups</a> ";
+				
 		return("
 <html>
 		 <head>
@@ -51,14 +67,18 @@ class Page extends Model {
 			"</div>
 			
 			<!-- At some point these need to be finalized -->
-			<div id=\"links_right\">
+			<div id=\"links_right\">"
+				. $content .
+			"</div>
+		
+			<!--
 			<a href=\"" . site_url() . "/home\">Home</a> 
 			| <a href=\"" . site_url() . "/mail\">Messages</a>
 			| <a href=\"" . site_url() . "/forum\">Forum</a> 
 			| <a href=\"" . site_url() . "/grouppages\">Groups</a> 
-			| <a href=\"" . site_url() . "/admin\">Admin</a> 
-			| $auth 
-			</div>
+			| <a href=\"" . site_url() . "/admin\">Admin</a> 	
+			-->
+		
 		</div>
 	</div>
 

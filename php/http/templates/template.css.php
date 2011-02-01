@@ -55,10 +55,12 @@ div#links{
 	background-position: left top;
 	background-repeat: repeat-x;
 	background-attachment: fixed;
+		color: white;
 }
 
 div#links a:link {
-		color: #ffecc0;
+		color: ffecc0;
+		text-decoration: none;
 }
 
 div#links a:visited{
@@ -66,7 +68,7 @@ div#links a:visited{
 }
 
 div#links_left{
-	color: white;
+
 	font-family: "calibri";
 	text-align: left;
 	font-size: 12px;
@@ -74,7 +76,6 @@ div#links_left{
 }
 
 div#links_right{
-	color: white;
 	font-family: "Lucida Sans Unicode";
 	text-align: right;
 	font-size: 12px;
