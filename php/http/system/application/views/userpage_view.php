@@ -1,18 +1,13 @@
-<html>
-<head>
-<title> <?=$title?></title>
-</head>
-<body>
+<?php echo $header ?>
 
-<h1> <?=$heading?> </h1>
 
-Displaying user information for: <?php echo "Test." ?> 
 
-<?php foreach($query->result() as $row): ?>
+<?php $query = $this->db->query("SELECT * FROM user WHERE id = 4")->result(); 
 
-<p><?php echo $row->id ." ". $row->un ." ". $row->pw?></p>
+echo "Displaying user information for userid: " . $query[0]->id;
+echo "\n";
+echo $query[0]->un ." ". $query[0]->pw ." ". $query[0]->email;
 
-<?php endforeach; ?>
+?>
 
-</body>
-</html>
+<?php echo $footer ?>
