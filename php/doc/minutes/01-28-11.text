@@ -1,0 +1,96 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\title{GusPHP}
+\date{January 28th, 2011}
+\begin{document}
+\maketitle
+\begin{center}\textbf{Minutes of the meeting of GusPHP, University of Idaho CS-384 Spring 2011} \end{center} \\ 
+\\
+Colby Blair - Group Leader\\ 
+\\
+\textbf{McClure 209 (in class), UI Campus, Moscow ID 83843} \\ 
+\\
+\textbf{Present}\\ 
+Brett\\
+Abhay\\
+Zeke\\
+Alex\\
+Cindy\\
+Chaylo\\
+Colby\\
+Scott\\
+Tim\\
+\\
+\textbf{In Attendance}\\
+None \\
+\\
+\section{Actions for consideration} \\
+None \\
+\\
+\section{Any Other Business}
+None \\
+\\
+\section{New Business}
+Scrums are 1 week increments. Code and Test this Scrum.\\
+What will be completed in the next Scrum:\\
+Everyone will finish documentation and testing for current code
+\begin{itemize}
+\item Cindy:
+\begin{enumerate}
+ \item Complete admin user controllers
+\end{enumerate}
+\item Chaylo:
+\begin{enumerate}
+ \item add admin functionality to forum, plan integration to admin controllers 
+\end{enumerate}
+\item Zeke:
+\begin{enumerate}
+ \item finish calendar controller
+ \item month scroll view for calendar
+ \item make each day a link to events
+ \item add week view
+ \item plan more calendar details
+\end{enumerate}
+\item Abhay:
+\begin{enumerate}
+ \item complete message controller 
+\end{enumerate}
+\item Alex:
+\begin{enumerate}
+ \item finish doc controller
+\end{enumerate}
+\item Scott:
+\begin{enumerate}
+ \item complete nav system
+ \item work on color palette
+\end{enumerate}
+\item Brett:
+\begin{enumerate}
+ \item finish user/group page controllers
+\end{enumerate}
+\item Leah:
+\begin{enumerate}
+ \item finish admin group controller
+\end{enumerate}
+\item Tim:
+\begin{enumerate}
+ \item finish admin controller
+\end{enumerate}
+\item Colby:
+\begin{enumerate}
+ \item finish admin controller: see Tim
+ \item put session in Page model
+ \item standardize admin controllers with database
+ \item start and finish group member handling
+\end{enumerate}
+\end{itemize}
+\\  
+\section{Any Other Business}
+The next meeting is on Febuary 1st @ 7:00pm via Skype. \\
+\textbf{Scrum ends February 4th, 2011.}
+\\
+\section{Adjourned}
+\textbf{Meeting closed at 14:20} \\
+Closed by: Colby Blair \\
+\end{document}
