@@ -67,7 +67,7 @@ class Users extends Controller {
 	function save() {
 		$this->load->database('admin');
 		$data = array('un' => $_POST['un'], 'pw' => $_POST['pw']);
-		if($this->db->insert('user',$data)) {
+		if($this->User->save($data)) {
 		 $this->pdata['content'] .= "User saved successfully.<br />\n";
 		} else {
 		 show_error('User could not be saved');

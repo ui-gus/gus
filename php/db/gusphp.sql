@@ -16,6 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `ggroup`
+--
+
+DROP TABLE IF EXISTS `ggroup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ggroup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `description` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ggroup`
+--
+
+LOCK TABLES `ggroup` WRITE;
+/*!40000 ALTER TABLE `ggroup` DISABLE KEYS */;
+INSERT INTO `ggroup` VALUES (1,'test','test2');
+/*!40000 ALTER TABLE `ggroup` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `page`
 --
 
@@ -27,7 +52,7 @@ CREATE TABLE `page` (
   `name` varchar(100) DEFAULT NULL,
   `content` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +61,7 @@ CREATE TABLE `page` (
 
 LOCK TABLES `page` WRITE;
 /*!40000 ALTER TABLE `page` DISABLE KEYS */;
-INSERT INTO `page` VALUES (1,'home','This is the new Gus homepage.'),(2,'admin','Gus Admin Page.'),(3,'forum','This is the forum.'),(4,'pages','Gus Pages'),(5,'auth','Authentication Page.'),(11,'user','Gus User Page.'),(13,'users','Gus User Page.');
+INSERT INTO `page` VALUES (1,'home','This is the new Gus homepage.'),(2,'admin','Gus Admin Page.'),(3,'forum','This is the forum.'),(4,'pages','Gus Pages'),(5,'auth','Authentication Page.'),(11,'user','Gus User Page.'),(14,'groups','Gus Groups.'),(13,'users','Gus User Page.');
 /*!40000 ALTER TABLE `page` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,7 +77,7 @@ CREATE TABLE `user` (
   `un` varchar(100) DEFAULT NULL,
   `pw` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +86,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'cblair','SHI/hel7');
+INSERT INTO `user` VALUES (1,'cblair','SHI/hel7'),(10,'test','test3');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -74,4 +99,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-01-30 16:21:42
+-- Dump completed on 2011-02-02 18:52:21

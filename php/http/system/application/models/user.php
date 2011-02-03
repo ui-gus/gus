@@ -18,11 +18,11 @@ class User extends Model {
 
 
 	function save($data) {
-		if($this->db->get_where('page',array('name' => $data['name']))->num_rows < 1) {
-			return($this->db->insert('page',$data));
+		if($this->db->get_where('user',array('un' => $data['un']))->num_rows < 1) {
+			return($this->db->insert('user',$data));
 		}
-		$this->db->where('name',$data['name']);
-		return($this->db->update('page',$data));
+		$this->db->where('un',$data['un']);
+		return($this->db->update('user',$data));
 	}
 }
 
