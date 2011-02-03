@@ -118,6 +118,7 @@ class Page extends Model {
 
 	function get_content($page_name) {
 		$result = $this->db->query("SELECT content FROM page WHERE name='$page_name'")->result();
+		if(!$result) return("");
 		return($result[0]->content);
 	}
 
