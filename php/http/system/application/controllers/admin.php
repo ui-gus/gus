@@ -2,10 +2,13 @@
 
 class Admin extends Controller {
 	var $pdata; //page data
+	var $testmode; //disables views on testing
 
 	function Admin(){
 		parent::Controller();	
 		$this->load->model('Page');
+		
+		$this->testmode = false;
 
 		//set page footer
 		$this->pdata['footer'] = $this->Page->get_footer();
@@ -19,15 +22,12 @@ class Admin extends Controller {
 		//footer already set
 		$this->pdata['content'] = $this->Page->get_content($page_name);
 		if(!$this->Page->authed()) {
-			$this->load->view('login',$this->pdata);
+			$this->load->view('login',$this->pdata,$this->testmode);
 		}
 		else {
-			$this->pdata['content'] .= "<br /><br />
-				<a href=\"groups\">Groups</a>\n<br />
-				<a href=\"users\">Users</a>\n<br />
-				<a href=\"pages\">Server Pages</a>\n<br />";
-			$this->load->view('home',$this->pdata);
+			$this->load->view('admin',$this->pdata,$this->testmode);
 		}
+		return(true);
 	}
 	function groupsearch() {
 		//set page name
@@ -73,5 +73,15 @@ class Admin extends Controller {
 		$this->pdata['content'] = $this->Page->get_content($page_name);
 		//footer already set
 		$this->load->view('main',$this->pdata);
+	}
+
+	function test() {
+		$page_name = 'admin';
+		$this->load->library('unit_test');
+		$this->testmode = true;
+		echo $this->unit->run(true,$this->index(), 'index 01');
+		echo $this->unit->run($this->pdata['content'], 
+			$this->Page->get_content($page_name),
+			'index 02');
 	}
 }
