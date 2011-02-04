@@ -18,6 +18,7 @@ class Test extends Controller {
 	function Test() {
 		parent::Controller();	
 		$this->load->model('Page');
+		$this->load->library('unit_test');
 		$page_name = "test";
 		$this->pdata['header'] = $this->Page->get_header($page_name);
 		$this->pdata['content'] = $this->Page->get_content($page_name);
@@ -25,13 +26,14 @@ class Test extends Controller {
 	}
 	
 	function index() {
-		//set page name
-		$this->load->library('unit_test');
                 //echo $this->unit->run('test',$this->Page->get_content('test'), 'Home test');
 		$this->load->view('test', $this->pdata);
 	}
 
 	function page() { //test page model
-	
+		
+		//get_header
+		//todo: add admin tests
+		 echo $this->unit->run(true,$this->index(), 'index 01');
 	}
 }
