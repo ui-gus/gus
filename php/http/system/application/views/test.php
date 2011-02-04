@@ -30,7 +30,7 @@
  </tr>
  <tr>
   <td><a href="' . site_url() . '/admin/test">admin</a></td>
-  <td>Colby Blair</td>
+  <td>Colby Blair<br />Tim Bianchetti</td>
  </tr>
  <tr>
   <td><a href="' . site_url() . '/auth/test">auth</a></td>
