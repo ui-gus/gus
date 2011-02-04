@@ -79,9 +79,13 @@ class Admin extends Controller {
 		$page_name = 'admin';
 		$this->load->library('unit_test');
 		$this->testmode = true;
+
+		//index
 		echo $this->unit->run(true,$this->index(), 'index 01');
 		echo $this->unit->run($this->pdata['content'], 
 			$this->Page->get_content($page_name),
 			'index 02');
+
+		//needs more! who wrote all these other functions??
 	}
 }

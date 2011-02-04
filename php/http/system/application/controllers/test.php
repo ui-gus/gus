@@ -1,5 +1,8 @@
 <?php
 
+//functions here should be for testing models only (or everything except 
+// controllers). 
+
 class Test extends Controller {
 	var $pdata; //page data
 
@@ -15,6 +18,9 @@ class Test extends Controller {
 	function index() {
 		//set page name
 		$this->load->library('unit_test');
-                echo $this->unit->run('test',$this->Page->get_content('test'), 'Home test');
+                //echo $this->unit->run('test',$this->Page->get_content('test'), 'Home test');
+		$this->load->view('test', $this->pdata);
 	}
+
+	function page() { //test page model
 }
