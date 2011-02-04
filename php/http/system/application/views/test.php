@@ -4,6 +4,9 @@
 	echo $this->pdata['content'];
 	$this->load->helper('url');
 	echo '
+<h2>Tests and docs</h2>
+<a href="http://75.87.248.55/P5/var/git/gus/php/doc/gus_mvc.png">Overview</a>
+
 <p>Tests for models:</p>
 <table border=1>
   <td><b>Model Name</b></td>
@@ -13,7 +16,7 @@
   <td><b>Comments</b></td>
  </tr>
  <tr>
-  <td><a href="' . site_url() . '/home/css">Page</a></td>
+  <td><a href="' . site_url() . '/test/page">Page</a></td>
   <td>Colby Blair, Scott Beddall</td>
  </tr>
  <tr>
