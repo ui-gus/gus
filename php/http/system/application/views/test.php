@@ -41,10 +41,6 @@
   <td>Zeke Long</td>
  </tr>
  <tr>
-  <td><a href="' . site_url() . '/docs/test">docs</a></td>
-  <td></td>
- </tr>
- <tr>
   <td><a href="' . site_url() . '/forum/test">forum</a></td>
   <td></td>
  </tr>
@@ -78,7 +74,7 @@
  </tr>
  <tr>
   <td><a href="' . site_url() . '/upload/test">upload</a></td>
-  <td></td>
+  <td>Alex Nilson</td>
  </tr>
  <tr>
   <td><a href="' . site_url() . '/userpage/test">userpage</a></td>
