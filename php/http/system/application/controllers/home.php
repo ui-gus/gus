@@ -32,13 +32,10 @@ class Home extends Controller {
 
 	function test() {
 		//really not much to test here that shouldn't already be tested in the page
-		// model test
 		$this->load->library('unit_test');
-		echo $this->unit->run('test',$this->Page->get_content('test'), 'index.1');
+		echo $this->unit->run(true,0 < substr_count($this->Page->css,
+						'templates/template.css.php" type="text/css" rel="stylesheet" />'),
+				'css.1 - Check that CSS is loading correctly');
+
 	}
-	
-	function css(){
-		$this->load->library('unit_test');
-		echo $this->unit->run('<link href="http://localhost/gus/php/http/templates/template.css.php" type="text/css" rel="stylesheet" />',$this->Page->css,'Check that CSS is loading correctly');
-	}
-}
+}	
