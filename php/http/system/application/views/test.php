@@ -10,7 +10,7 @@
   <td><b>Author</b></td>
  </tr>
  <tr>
-  <td><a href="' . site_url() . '/test/page">Page</a></td>
+  <td><a href="' . site_url() . '/home/css">Page</a></td>
   <td>Colby Blair, Scott Beddall</td>
  </tr>
  <tr>
@@ -25,7 +25,7 @@
 
 <p>Tests for controllers:</p>
 <table border=1>
-  <td><b>Model Name</b></td>
+  <td><b>Controller Name</b></td>
   <td><b>Author</b></td>
  </tr>
  <tr>
@@ -50,7 +50,7 @@
  </tr>
  <tr>
   <td><a href="' . site_url() . '/grouppage/test">grouppage</a></td>
-  <td></td>
+  <td>Brett Hitchcock</td>
  </tr>
  <tr>
   <td><a href="' . site_url() . '/groups/test">groups</a></td>
@@ -69,8 +69,12 @@
   <td>Colby Blair</td>
  </tr>
  <tr>
-  <td><a href="' . site_url() . '/search/test">search</a></td>
-  <td></td>
+  <td><a href="' . site_url() . '/search/testDBBoundaries">search</a></td>
+  <td>Scott Beddall</td>
+ </tr>
+ <tr>
+  <td><a href="' . site_url() . '/search/testDB">search</a></td>
+  <td>Scott Beddall</td>
  </tr>
  <tr>
   <td><a href="' . site_url() . '/upload/test">upload</a></td>
@@ -78,7 +82,7 @@
  </tr>
  <tr>
   <td><a href="' . site_url() . '/userpage/test">userpage</a></td>
-  <td></td>
+  <td>Brett Hitchcock</td>
  </tr>
  <tr>
   <td><a href="' . site_url() . '/users/test">users</a></td>

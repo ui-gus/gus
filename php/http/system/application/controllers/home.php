@@ -36,4 +36,9 @@ class Home extends Controller {
 		$this->load->library('unit_test');
 		echo $this->unit->run('test',$this->Page->get_content('test'), 'index.1');
 	}
+	
+	function css(){
+		$this->load->library('unit_test');
+		echo $this->unit->run('<link href="http://localhost/gus/php/http/templates/template.css.php" type="text/css" rel="stylesheet" />',$this->Page->css,'Check that CSS is loading correctly');
+	}
 }

@@ -61,7 +61,7 @@ CREATE TABLE `page` (
 
 LOCK TABLES `page` WRITE;
 /*!40000 ALTER TABLE `page` DISABLE KEYS */;
-INSERT INTO `page` VALUES (1,'home','This is the new Gus homepage.'),(2,'admin','Gus Admin Page.'),(3,'forum','This is the forum.'),(4,'pages','Gus Pages'),(5,'auth','Authentication Page.'),(11,'user','Gus User Page.'),(14,'groups','Gus Groups.'),(13,'users','Gus User Page.');
+INSERT INTO `page` VALUES (1,'home','This is the new Gus homepage.'),(2,'admin','Gus Admin Page.'),(3,'forum','This is the forum.'),(4,'pages','Gus Pages'),(5,'auth','Authentication Page.'),(11,'user','Gus User Page.'),(14,'groups','Gus Groups.'),(1(15,'search','Find Users') 3,'users','Gus User Page.');
 /*!40000 ALTER TABLE `page` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -19,11 +19,14 @@ class Userpage extends Controller {
 						
 		$this->load->view( 'userpage_view.php', $data );
 
+		
+	}
+
+	function test() {
 		//set page name
 		$this->load->library('unit_test');
                 echo $this->unit->run('Gus User Page.',$this->Page->get_content('user'), 'Userpage test');
 		//$this->load->view('test', $this->pdata);	
-	}
-
+	}	
 	
 }

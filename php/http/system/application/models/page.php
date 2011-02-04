@@ -14,19 +14,10 @@ class Page extends Model {
 	
 	function Page() {
 		parent::Model();
-	
 		$this->load->database();
 		$this->load->helper('url');
 		$this->load->library('session');
-		
-		//hilariously enough, using linking to the css in the html file doesn't work properly,
-		//this here opens a file, reads all of it into the $css variable, then calls it good.
-		//$cssFile =  base_url() . "templates/template.css";
-		//$filehandler = fopen($cssFile, 'r');
-		//$this->css = fread($filehandler, filesize($cssFile));
 		$this->css  = '<link href="' . base_url() . 'templates/template.css.php" type="text/css" rel="stylesheet" />';
-		//fclose($filehandler);
-		
 	}
 	
 	function get_header($page_name) {
@@ -39,9 +30,6 @@ class Page extends Model {
 		 $auth = '<a href="' . site_url() . '/auth">Login</a>';
 		}
 		
-		//right links
-		
-		
 		$privilege = "admin"; //this is just set for the moment to test the function.	
 		//at some point I need to retrieve this info about the user from the DB 
 	
@@ -49,9 +37,10 @@ class Page extends Model {
 			$content = "<a href=\"" . site_url() . "/admin\">Admin</a> | ";
 		}
 		$content = $content . "<a href=\"" . site_url() . "/mail\">Messages</a>" . 
-										"| <a href=\"" . site_url() . "/forum\">Forum</a>" .
-										"| <a href=\"" . site_url() . "/home\">Home</a>" .
-										"| <a href=\"" . site_url() . "/grouppages\">Groups</a> ";
+										" | <a href=\"" . site_url() . "/search\">Search</a>" . 
+										" | <a href=\"" . site_url() . "/forum\">Forum</a>" .
+										" | <a href=\"" . site_url() . "/home\">Home</a>" .
+										" | <a href=\"" . site_url() . "/grouppages\">Groups</a> ";
 				
 		return("
 <html>
