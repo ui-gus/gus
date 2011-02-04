@@ -29,11 +29,6 @@ class Page extends Model {
 		
 	}
 	
-	function get_id($page_name) {
-		$result = $this->db->query("SELECT id FROM page WHERE name='$page_name'")->result();
-		return($result[0]->id);
-	}
-	
 	function get_header($page_name) {
 		//left links
 		$greeting = "";

@@ -26,14 +26,71 @@ class Test extends Controller {
 	}
 	
 	function index() {
-                //echo $this->unit->run('test',$this->Page->get_content('test'), 'Home test');
 		$this->load->view('test', $this->pdata);
 	}
 
 	function page() { //test page model
-		
+		echo "This test logs you out.<br />";
+		$this->Page->logout();
+
 		//get_header
 		//todo: add admin tests
-		 echo $this->unit->run(true,$this->index(), 'index 01');
+
+		//login
+		echo $this->unit->run(false,$this->Page->login("test","password"), 'login.1');
+		echo $this->unit->run(true,$this->Page->login("test","ALT!hel6"), 'login.2');
+	
+		//authed
+		echo $this->unit->run(true,$this->Page->authed(), 'authed.1');
+	
+		//save
+		echo $this->unit->run(true,$this->Page->save(array("name" => "test",
+								"content" => "Test content"
+								)
+							), 
+					'save.1');	
+
+		//get_content
+		echo $this->unit->run("Test content",$this->Page->get_content("test"),"get_content.1");
+		echo $this->unit->run("",$this->Page->get_content("testasfasfafafasdfafafa"),"get_content.2");
+
+		//get_pagelist
+		echo $this->unit->run(true,$this->Page->get_pagelist(), 'pagelist.1');
+
+		//logout
+		echo $this->unit->run(true,$this->Page->logout(), 'logout.1');
+		
+		
+	}
+
+	function group() {
+		$this->load->model('Group');
+
+		//get_grouplist
+		echo $this->unit->run(true,$this->Group->get_grouplist(), 'get_grouplist.1');
+
+		//save
+		echo $this->unit->run("test_desc",$this->Group->save(
+					array("name" => "test_group",
+						"description" => "test_desc"
+					)
+				), 'save.1');
+
+		//get_description
+		echo $this->unit->run("test_desc",$this->Group->get_description("test_group"), 'get_description.1');
+	}
+
+	function user() {
+		$this->load->model('User');
+
+		//get_userlist
+		echo $this->unit->run(true,$this->User->get_userlist(), 'get_userlist.1');
+
+		//save
+		echo $this->unit->run("test_desc",$this->User->save(
+					array("un" => "test_user",
+						"pw" => "ALT!shf6"
+					)
+				), 'save.1');
 	}
 }
