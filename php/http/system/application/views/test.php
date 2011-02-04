@@ -34,7 +34,7 @@
  </tr>
  <tr>
   <td><a href="' . site_url() . '/auth/test">auth</a></td>
-  <td></td>
+  <td>Colby Blair</td>
  </tr>
  <tr>
   <td><a href="' . site_url() . '/calendar/test">calendar</a></td>
