@@ -8,6 +8,9 @@
 <table border=1>
   <td><b>Model Name</b></td>
   <td><b>Author</b></td>
+  <td><b>doc link</b></td>
+  <td><b>Last Greenlight (date)</b></td>
+  <td><b>Comments</b></td>
  </tr>
  <tr>
   <td><a href="' . site_url() . '/home/css">Page</a></td>
@@ -27,6 +30,9 @@
 <table border=1>
   <td><b>Controller Name</b></td>
   <td><b>Author</b></td>
+  <td><b>doc link</b></td>
+  <td><b>Last Greenlight (date)</b></td>
+  <td><b>Comments</b></td>
  </tr>
  <tr>
   <td><a href="' . site_url() . '/admin/test">admin</a></td>
@@ -35,6 +41,7 @@
  <tr>
   <td><a href="' . site_url() . '/auth/test">auth</a></td>
   <td>Colby Blair</td>
+  <td><a href="http://75.87.248.55/P5/var/git/gus/php/doc/controllers/auth.png">assoc</a></td>
  </tr>
  <tr>
   <td><a href="' . site_url() . '/calendar/test">calendar</a></td>
