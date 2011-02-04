@@ -1,43 +1,69 @@
 <?php
 
+/******************************************************************************
+*Gus - Groups in a University Setting
+ University of Idaho CS 384 - Spring 2011
+ GusPHP Subteam
+ File Authors:
+		Alex Nilson
+******************************************************************************/
+
 class Upload extends Controller {
+
 
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->helper(array('form', 'url'));
+		$this->testmode = false;
 	}
+
 
 	function index()
 	{
 		$this->load->view('upload_form', array('error' => ' ' ));
+		return(true);
 	}
 
 	function do_upload()
 	{
-		$config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'gif|jpg|png|txt|png|bmp|doc|pdf';
-		$config['max_size']	= '0';
-		$config['max_width']  = '0';
-		$config['max_height']  = '0';
-		$config['overwrite']  = 'TRUE';
-		$config['remove_spaces']  = 'TRUE';
+		/*File upload settings are in config/upload.php*/
+		$this->load->library('upload');
 
-
-		$this->load->library('upload', $config);
-
-		if ( ! $this->upload->do_upload())
 		{
-			$error = array('error' => $this->upload->display_errors());
+			if ( ! $this->upload->do_upload())
+			{
+				$error = array('error' => $this->upload->display_errors());
+				$this->load->view('upload_form', $error);
+				return($this->upload->display_errors());
+			}
+			else
+			{
+				//file pointer? $_POST["userfile"];
+				$data = array('upload_data' => $this->upload->data());
 
-			$this->load->view('upload_form', $error);
+				$this->load->view('upload_success', $data);
+				return('success');
+			}
 		}
-		else
-		{
-			$data = array('upload_data' => $this->upload->data());
+	}
 
-			$this->load->view('upload_success', $data);
-		}
+	function test()
+	{
+		$page_name = 'upload';
+		$this->load->library('unit_test');
+		$this->testmode = true;
+
+		//index
+		echo $this->unit->run($this->index(), true, 'index');
+
+		//do_upload
+		echo $this->unit->run($this->do_upload(), '<p>You did not select a file to upload.</p>', 'do_upload - no file');
+/*Last three tests don't work because I can't automate the uploading process.  The uploader does throw errors, though.
+		echo $this->unit->run($this->do_upload(), '<p>The uploaded file exceeds the maximum allowed size in your PHP configuration file.</p>', 'do_upload - file too large');
+		echo $this->unit->run($this->do_upload(), '<p>The filetype you are attempting to upload is not allowed.</p>', 'do_upload - bad file type');
+		echo $this->unit->run($this->do_upload(), 'success', 'do_upload - success');
+*/
 	}
 }
 ?>
