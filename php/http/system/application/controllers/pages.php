@@ -32,9 +32,9 @@ class Pages extends Controller {
 	
 	function index() {
 		$this->pdata['content'] .= "\n<br />\n<br />" . 
-		 "<a href=\"pages/add\">Add</a>\n<br />\n" . 
-		 "<a href=\"pages/edit\">Edit</a>\n<br />" .
-		 "<a href=\"pages/delete\">Delete</a>\n<br />";
+		 "<a href=\"".site_url()."/pages/add\">Add</a>\n<br />\n" . 
+		 "<a href=\"".site_url()."/pages/edit\">Edit</a>\n<br />" .
+		 "<a href=\"".site_url()."/pages/delete\">Delete</a>\n<br />";
 		$this->load->view('home',$this->pdata);
 	}
 
