@@ -87,7 +87,7 @@ class CalendarModel extends Model
 	
 	function add_event($date = null, $event)   	//function to add an event to the calendar
 	{
-		if($this->db->select('date')->from('calendar')->where('date', $date)->count_all_results())
+/***		if($this->db->select('date')->from('calendar')->where('date', $date)->count_all_results())
 		{
 			$this->db->where('date', $date)->update('calendar', array('date' => $date, 'data' => $data));
 		}
@@ -97,6 +97,8 @@ class CalendarModel extends Model
 		}
 		
 		return 1;
+***/
+		return 'not yet implemented';
 	}
 	
 	function remove_event($date = null, $event_ID)
