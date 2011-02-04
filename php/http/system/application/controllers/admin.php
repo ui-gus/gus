@@ -1,5 +1,14 @@
 <?php
 
+/******************************************************************************
+*Gus - Groups in a University Setting
+ University of Idaho CS 384 - Spring 2011
+ GusPHP Subteam
+ File Authors:
+		Colby Blair
+		others!
+******************************************************************************/
+
 class Admin extends Controller {
 	var $pdata; //page data
 	var $testmode; //disables views on testing

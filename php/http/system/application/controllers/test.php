@@ -3,6 +3,15 @@
 //functions here should be for testing models only (or everything except 
 // controllers). 
 
+/******************************************************************************
+*Gus - Groups in a University Setting
+ University of Idaho CS 384 - Spring 2011
+ GusPHP Subteam
+ File Authors:
+                Colby Blair
+		others!
+******************************************************************************/
+
 class Test extends Controller {
 	var $pdata; //page data
 
@@ -23,4 +32,6 @@ class Test extends Controller {
 	}
 
 	function page() { //test page model
+	
+	}
 }

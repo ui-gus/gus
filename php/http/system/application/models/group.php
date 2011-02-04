@@ -1,5 +1,13 @@
 <?php
 
+/******************************************************************************
+*Gus - Groups in a University Setting
+ University of Idaho CS 384 - Spring 2011
+ GusPHP Subteam
+ File Authors:
+                Colby Blair
+******************************************************************************/
+
 class Group extends Model {
 	
 	function Group() {
