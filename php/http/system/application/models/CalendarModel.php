@@ -83,6 +83,19 @@ class CalendarModel extends Model
 		
 		return $cal_data;
 	}
+	
+	function add_event($year, $month, $day, $event)
+	{
+		return 'not yet implemented';
+		//will return a 1 for success and a 0 for failure
+	}
+	
+	function remove_event($year, $month, $day, $event_ID)
+	{
+		//event_ID 0 is reserved for testing purposes
+		return 'not yet implemented';
+		//will return a 1 or a 0
+	}
 }
 ?>
 
