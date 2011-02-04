@@ -4,17 +4,24 @@
 class Calendar extends Controller 
 {
 	function Calendar()           //constructor
-     {
+	{
 		parent::Controller();
 	}
 	
-	function index() 
-     {
-		$this->load->view('CalendarView');
+	function index($year = null, $month = null)      
+        {	//load CalendarModel
+		$this->load->model('CalendarModel');
+		//call CalendarModel's generate() function
+		$data['calendar'] = $this->CalendarModel->generate($year, $month);
+		//pass $data to CalendarView
+		$this->load->view('CalendarView', $data);
 	}
-
-	function viewCalendar()
+	
+	function test()			//tests calendar stuff
 	{
 	}
+	
+	
+
 }
 ?>
