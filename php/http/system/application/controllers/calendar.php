@@ -19,8 +19,9 @@ class Calendar extends Controller
 		$this->load->view('CalendarView', $data);
 	}
 	
-	function test($year = null, $month = null, $day = null)    //tests calendar stuff
-	{
+	//tests all of the calendar functions in CalendarModel.php	
+	function test($date = null, $year = null, $month = null)    
+	{	
 		$this->load->library('unit_test');
 		
 		//test get_cal_data() function
@@ -36,18 +37,23 @@ class Calendar extends Controller
 		$this->unit->run($test, $expected_result, $test_name);
 
 		//test add_event() function
-		$test = $this->CalendarModel->add_event($year, $month, $day, 'something');
+		$test = $this->CalendarModel->add_event($date, 'something');
 		$expected_result = 'is_true';
 		$test_name = 'test to see if event is added to calendar table in database';
 		$this->unit->run($test, $expected_result, $test_name);
 
 		//test remove_event() function
-		$test = $this->CalendarModel->remove_event($year, $month, $day, 0);
+		$test = $this->CalendarModel->remove_event($date, 0);
 		$expected_result = 'is_true';
 		$test_name = 'test to see if event is removed from calendar table in database';
 		$this->unit->run($test, $expected_result, $test_name);
 		
-		echo $this->unit->report();     //run full report of tests
+		//test calendar display
+		$data['calendar'] = $this->CalendarModel->generate($year, $month);
+		$this->load->view('CalendarView', $data);
+		
+		//run full report of tests
+		echo $this->unit->report();     
 	}
 }
 ?>

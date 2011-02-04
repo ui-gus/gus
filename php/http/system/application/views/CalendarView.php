@@ -6,10 +6,11 @@
 	<style type="text/css">
 		.calendar .days td
 		{
-			width: 100px; height: 80px; padding: 4px;
+			width: 150px; height: 80px; padding: 4px;
 			border: 1px solid #999;
 			vertical-align: top;
-			background-color: #CCFF99;
+			background-color: #E8E8E8;
+			border: 2px groove #1E90FF;
 		}
 		.calendar .days td:hover       
 		{
@@ -19,7 +20,7 @@
 		{
 			font-size: 18px;
 			font-weight: bold;
-			background-color: #4C8033;
+			background-color: #1E90FF;
 		}
 		table.calendar			
 		{
