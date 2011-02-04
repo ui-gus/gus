@@ -31,8 +31,10 @@ class Home extends Controller {
 	}
 
 	function test() {
+		//really not much to test here that shouldn't already be tested in the page
+		// model test
 		$this->load->library('unit_test');
-		echo $this->unit->run('test',$this->Page->get_content('test'), 'Home test');
+		echo $this->unit->run('test',$this->Page->get_content('test'), 'index.1');
 	}
 	
 	function css(){

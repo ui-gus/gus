@@ -18,11 +18,15 @@ class Grouppage extends Controller {
 			
 		$this->load->view( 'grouppage_view.php', $data );
 
+		
+				
+	}
+
+	function test(){
 		//set page name
 		$this->load->library('unit_test');
                 echo $this->unit->run('Gus Groups.',$this->Page->get_content('groups'), 'Userpage test');
 		//$this->load->view('test', $this->pdata);	
-				
-	}
+	}	
 
 }

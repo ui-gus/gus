@@ -82,4 +82,8 @@ class Pages extends Controller {
 		}
 		$this->load->view('pages/save',$this->pdata);
 	}
+	
+	function test() {
+
+	}
 }
