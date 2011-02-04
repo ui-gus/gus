@@ -1,7 +1,6 @@
 <?php
 
 class Userpage extends Controller {
-
 	function Userpage(){
 		parent::Controller();
 		$this->load->model('Page');
@@ -14,11 +13,17 @@ class Userpage extends Controller {
 		//$data['query'] = $this->db->where( 'user.id', 4 );
 		//$data['query'] = $this->db->get( 'user' );	
 			
-		$data['header'] = $this->Page->get_header('userpage');
-		$data['content'] = $this->Page->get_content('userpage');
+		$data['header'] = $this->Page->get_header('user');
+		$data['content'] = $this->Page->get_content('user');
 		$data['footer'] = $this->Page->get_footer();				
 						
 		$this->load->view( 'userpage_view.php', $data );
+
+		//set page name
+		$this->load->library('unit_test');
+                echo $this->unit->run('Gus User Page.',$this->Page->get_content('user'), 'Userpage test');
+		//$this->load->view('test', $this->pdata);	
 	}
 
+	
 }
