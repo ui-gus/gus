@@ -4,6 +4,7 @@
 	echo $this->pdata['content'];
 	$this->load->helper('url');
 	echo '
+	<div class=\"update\">
 <p>Test for models:</p>
  <ul>
   <li><a href="' . site_url() . '/test/page">Page</a>
@@ -26,7 +27,10 @@
   <li><a href="' . site_url() . '/upload/test">upload</a>
   <li><a href="' . site_url() . '/userpage/test">userpage</a>
   <li><a href="' . site_url() . '/users/test">users</a>
+  <li><a href="' . site_url() . '/home/css">CSS Load</a>
+  <li><a href="' . site_url() . '/search/testQuery">Search Users</a>
  </ul>
+ </div>
 ';
 ?>
 
