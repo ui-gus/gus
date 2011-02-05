@@ -120,13 +120,13 @@ div#content{
 }
 
 div#content table{
-	border: 1px solid #a65746;
 	font-size: 10pt;
 	padding: 0px;
 	margin: 0px;
+	width: 100%;
 }
 
-div#content tr:hover {
+div#content tr:hover,td:hover {
 	backround-color: #a69d815;
 }
 
@@ -134,10 +134,8 @@ div#content td{
 	padding-left: 10px;
 	padding-right: 10px;
 	padding: 5px;
-}
-
-div#content td:hover{
-	background-color: #a69d815;
+	border-left: 1px solid #f2ebd5;
+	border-top: 1px solid #f2ebd5;
 }
 
 div#content a:link {
