@@ -55,31 +55,37 @@ class CalendarModel extends Model
 		';
 	}
 	
-	function generate($year, $month)
+	function myGenerate($userID = null, $year, $month)
 	{	
 		//load calendar library with specified preferences
 		$this->load->library('calendar', $this->pref);
 		
 		//get data for the month
-		$cal_data = $this->get_cal_data($year, $month);
+		$cal_data = $this->get_cal_data($userID, $year, $month);
 		
 		//return generated calendar to controller
 		return $this->calendar->generate($year, $month, $cal_data);
 	}
 	
-	function get_cal_data($year, $month)
+	function get_cal_data($userID = null, $year, $month)
 	{
-		//SELECT the entire month's data from the calendar table in the database
-		$query = $this->db->select('date, data')->from('calendar')
-			->like('date', '$year-month', 'after')->get();
-		
-		$cal_data = array();
-		
-		//assign calendar data to appropriate days
-		foreach($query->result() as $row)   
+		if($userID)
 		{
-			//substr($row->date, 8, 2) is the day part of the date
-			$cal_data[substr($row->date, 8, 2)] = $row->data;
+			//SELECT the entire month's data from the calendar table in the database
+			$query = $this->db->select('date, data')->from('calendar')->where('user', $userID)->get();
+//echo $query->result();
+			$cal_data = array();
+		
+			//assign calendar data to appropriate days
+			foreach($query->result() as $row)   
+			{
+				//substr($row->date, 8, 2) is the day part of the date
+				$cal_data[substr($row->date, 8, 2)] = $row->data;
+			}
+		}
+		else
+		{
+			$cal_data[0] = null;
 		}
 		
 		return $cal_data;

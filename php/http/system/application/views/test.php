@@ -4,14 +4,20 @@
 	echo $this->pdata['content'];
 	$this->load->helper('url');
 	echo '
+<h2>Tests and docs</h2>
+<a href="http://75.87.248.55/P5/var/git/gus/php/doc/gus_mvc.png">Overview</a>
+
 <p>Tests for models:</p>
 <table>
 <tr>
   <td><b>Model Name</b></td>
   <td><b>Author</b></td>
+  <td><b>doc link</b></td>
+  <td><b>Last Greenlight (date)</b></td>
+  <td><b>Comments</b></td>
  </tr>
  <tr>
-  <td><a href="' . site_url() . '/home/css">Page</a></td>
+  <td><a href="' . site_url() . '/test/page">Page</a></td>
   <td>Colby Blair, Scott Beddall</td>
  </tr>
  <tr>
@@ -29,22 +35,22 @@
 <tr>
   <td><b>Controller Name</b></td>
   <td><b>Author</b></td>
+  <td><b>doc link</b></td>
+  <td><b>Last Greenlight (date)</b></td>
+  <td><b>Comments</b></td>
  </tr>
  <tr>
   <td><a href="' . site_url() . '/admin/test">admin</a></td>
-  <td>Colby Blair</td>
+  <td>Colby Blair<br />Tim Bianchetti</td>
  </tr>
  <tr>
   <td><a href="' . site_url() . '/auth/test">auth</a></td>
-  <td></td>
+  <td>Colby Blair</td>
+  <td><a href="http://75.87.248.55/P5/var/git/gus/php/doc/controllers/auth.png">assoc</a></td>
  </tr>
  <tr>
   <td><a href="' . site_url() . '/calendar/test">calendar</a></td>
   <td>Zeke Long</td>
- </tr>
- <tr>
-  <td><a href="' . site_url() . '/docs/test">docs</a></td>
-  <td></td>
  </tr>
  <tr>
   <td><a href="' . site_url() . '/forum/test">forum</a></td>
@@ -80,7 +86,7 @@
  </tr>
  <tr>
   <td><a href="' . site_url() . '/upload/test">upload</a></td>
-  <td></td>
+  <td>Alex Nilson</td>
  </tr>
  <tr>
   <td><a href="' . site_url() . '/userpage/test">userpage</a></td>
