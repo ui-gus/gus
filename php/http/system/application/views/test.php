@@ -5,7 +5,8 @@
 	$this->load->helper('url');
 	echo '
 <p>Tests for models:</p>
-<table border=1>
+<table>
+<tr>
   <td><b>Model Name</b></td>
   <td><b>Author</b></td>
  </tr>
@@ -14,17 +15,18 @@
   <td>Colby Blair, Scott Beddall</td>
  </tr>
  <tr>
-  <td><a href="' . site_url() . '/test/user">User</a>
+  <td><a href="' . site_url() . '/test/user">User</a></td>
   <td>Colby Blair</td>
  </tr>
  <tr>
-  <td><a href="' . site_url() . '/test/group">Group</a>
+  <td><a href="' . site_url() . '/test/group">Group</a></td>
   <td>Colby Blair</td>
  </tr>
 </table>
 
 <p>Tests for controllers:</p>
-<table border=1>
+<table>
+<tr>
   <td><b>Controller Name</b></td>
   <td><b>Author</b></td>
  </tr>
@@ -54,7 +56,7 @@
  </tr>
  <tr>
   <td><a href="' . site_url() . '/groups/test">groups</a></td>
-  <td>Colby Blair</td>
+  <td>Colby Blair</td> 
  </tr>
  <tr>
   <td><a href="' . site_url() . '/home/test">home</a></td>

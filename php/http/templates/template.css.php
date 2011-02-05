@@ -15,7 +15,7 @@ body{
 	margin: auto;
 	width: 1024px;
 	height: 100%;
-	background-image: url('../templates/body_background_labeled.png');
+	background-image: url('../templates/body_background.png');
 	background-position: left top;
 	background-repeat: no-repeat;
 }
@@ -89,8 +89,8 @@ div#container{
 	background-image: url('../templates/content_background_slice.png');
 	background-position: left top;
 	background-repeat: repeat-y;
-	font-family: "Arial";
-	font-size: 11pt;
+	font-family: "Lucida Sans Unicode";
+	font-size: 10pt;
 	height: 100%;
 	clear: both;
 }
@@ -109,7 +109,6 @@ div#footer{
 	float: center;
 }
 
-
 div#content{	
  	margin-left: 250px;
 	width:	730px;  
@@ -118,6 +117,40 @@ div#content{
 	background-image: url('../templates/update_holder.png');
 	background-position: top left;
 	background-repeat: no-repeat;
+}
+
+div#content table{
+	border: 1px solid #a65746;
+	font-size: 10pt;
+	padding: 0px;
+	margin: 0px;
+}
+
+div#content tr:hover {
+	backround-color: #a69d815;
+}
+
+div#content td{
+	padding-left: 10px;
+	padding-right: 10px;
+	padding: 5px;
+}
+
+div#content td:hover{
+	background-color: #a69d815;
+}
+
+div#content a:link {
+		color: #a69d81;
+		text-decoration: none;
+}
+
+div#content a:visited{
+	color: #c7c3c3; 
+}
+
+div#content a:hover{
+	text-decoration: underline;
 }
 
 div.update{
