@@ -7,45 +7,36 @@ class Calendar extends Controller
 	{
 		parent::Controller();
 		
-		//load CalendarModel
 		$this->load->model('CalendarModel');
+		$this->load->model('Page');
+		$this->pdata['footer'] = $this->Page->get_footer();	
 	}
 	
-	//displays blank calendar by default when calendar is addressed
+	//displays the user's calendar
 	function index($year = null, $month = null)      
 	{
-		//call CalendarModel's myGenerate() function
-		$data['calendar'] = $this->CalendarModel->myGenerate('', $year, $month);
+//	        $this->pdata['header'] = $this->Page->get_header('calendar');	
+//              $this->pdata['content'] = $this->Page->get_content('calendar');
+	
+		//call CalendarModel's generate() function
+		$data['calendar'] = $this->CalendarModel->myGenerate($year, $month);
 		//pass $data to CalendarView
 		$this->load->view('CalendarView', $data);
-	}
-	
-	//displays calendar of specified user, populated with events
-	function display($userID = null, $year = null, $month = null)      
-	{
-		if($userID)
-		{
-			//call CalendarModel's generate() function
-			$data['calendar'] = $this->CalendarModel->myGenerate($userID, $year, $month);
-			//pass $data to CalendarView
-			$this->load->view('CalendarView', $data);
-		}
 	}
 	
 	//tests all of the calendar functions in CalendarModel.php	
 	function test($date = null, $year = null, $month = null)    
 	{	
-		$userID = null;
 		$this->load->library('unit_test');
 		
 		//test get_cal_data() function
-		$test = $this->CalendarModel->get_cal_data($userID, $year, $month);
+		$test = $this->CalendarModel->get_cal_data($year, $month);
 		$expected_result = 'is_array';
 		$test_name = 'test to see if month data array is retrieved from database';
 		$this->unit->run($test, $expected_result, $test_name);
 		
 		//test generate() function
-		$test = $this->CalendarModel->myGenerate('', $year, $month);
+		$test = $this->CalendarModel->generate($year, $month);
 		$expected_result = 'is_string';
 		$test_name = 'test to see if calendar is properly generated';
 		$this->unit->run($test, $expected_result, $test_name);
@@ -63,7 +54,7 @@ class Calendar extends Controller
 		$this->unit->run($test, $expected_result, $test_name);
 		
 		//test calendar display
-		$data['calendar'] = $this->CalendarModel->myGenerate($userID, $year, $month);
+		$data['calendar'] = $this->CalendarModel->generate($year, $month);
 		$this->load->view('CalendarView', $data);
 		
 		//run full report of tests

@@ -6,7 +6,8 @@ class CalendarModel extends Model
 	function CalendarModel()		//constructor
 	{
 		parent::Model();
-		
+	
+		$this->load->library('session');  //need this to get username to select calendar info
 		$this->load->helper('url');  	//need for base_url() function
 		
 		//preference variable for when the calendar library is loaded
@@ -55,39 +56,34 @@ class CalendarModel extends Model
 		';
 	}
 	
-	function myGenerate($userID = null, $year, $month)
+	function myGenerate($year, $month)
 	{	
-		//load calendar library with specified preferences
+		//load calendar library with preferences that were specified in the constructor
 		$this->load->library('calendar', $this->pref);
 		
 		//get data for the month
-		$cal_data = $this->get_cal_data($userID, $year, $month);
+		$cal_data = $this->get_cal_data($year, $month);
 		
 		//return generated calendar to controller
+		//codeigniter's generate() function in the calendar class
 		return $this->calendar->generate($year, $month, $cal_data);
 	}
 	
-	function get_cal_data($userID = null, $year, $month)
+	function get_cal_data($year, $month)
 	{
-		if($userID)
-		{
-			//SELECT the entire month's data from the calendar table in the database
-			$query = $this->db->select('date, data')->from('calendar')->where('user', $userID)->get();
-//echo $query->result();
-			$cal_data = array();
+		//SELECT the entire month's data from the calendar table in the database
+		$query = $this->db->select('date, data')->from('calendar')
+			->like('date', "$year-$month", 'after')->get();
+echo $this->session->userdata('un');
+
+		$cal_data = array();
 		
-			//assign calendar data to appropriate days
-			foreach($query->result() as $row)   
-			{
-				//substr($row->date, 8, 2) is the day part of the date
-				$cal_data[substr($row->date, 8, 2)] = $row->data;
-			}
-		}
-		else
+		//assign calendar data to appropriate days
+		foreach($query->result() as $row)   
 		{
-			$cal_data[0] = null;
+			//substr($row->date, 8, 2) is the day part of the date
+			$cal_data[substr($row->date, 8, 2)] = $row->data;
 		}
-		
 		return $cal_data;
 	}
 	
@@ -107,7 +103,7 @@ class CalendarModel extends Model
 		return 'not yet implemented';
 	}
 	
-	function remove_event($date = null, $event_ID)
+	function remove_event($date = null, $eventID)
 	{
 		//event_ID 0 is reserved for testing purposes
 		return 'not yet implemented';
