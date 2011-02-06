@@ -91,12 +91,14 @@ class CalendarModel extends Model
 	function add_event($date, $event)   	//function to add an event to the calendar
 	{
 //still need to make it for a specific user
+		//if the event already occurs on this date
 		if($this->db->select('date')->from('calendar')->where('date', $date)->count_all_results())
 		{
 			$this->db->where('date', $date)->update('calendar', array('date' => $date, 'data' => $data));
 		}
-		else
+		else		//if this is a new event
 		{
+
 			$this->db->insert('calendar', array('date' => $date, 'data' => $event));
 		}
 		

@@ -47,7 +47,8 @@ class Find extends Model {
 		$content = $content . "<a href=\"" . site_url() . "/mail\">Messages</a>" . 
 										" | <a href=\"" . site_url() . "/forum\">Forum</a>" .
 										" | <a href=\"" . site_url() . "/home\">Home</a>" .
-										" | <a href=\"" . site_url() . "/grouppages\">Groups</a> ";
+										" | <a href=\"" . site_url() . "/grouppages\">Groups</a> " .
+										" | <a href=\"" . site_url() . "/Calendar\">Calendar</a>";
 				
 		return("
 <html>
@@ -76,6 +77,7 @@ class Find extends Model {
 			| <a href=\"" . site_url() . "/mail\">Messages</a>
 			| <a href=\"" . site_url() . "/forum\">Forum</a> 
 			| <a href=\"" . site_url() . "/grouppages\">Groups</a> 
+			| <a href=\"" . site_url() . "/Calendar\">Calendar</a>
 			| <a href=\"" . site_url() . "/admin\">Admin</a> 	
 			-->
 		
