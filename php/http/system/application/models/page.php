@@ -40,7 +40,9 @@ class Page extends Model {
 										" | <a href=\"" . site_url() . "/search\">Search</a>" . 
 										" | <a href=\"" . site_url() . "/forum\">Forum</a>" .
 										" | <a href=\"" . site_url() . "/home\">Home</a>" .
-										" | <a href=\"" . site_url() . "/grouppages\">Groups</a> ";
+										" | <a href=\"" . site_url() . "/grouppages\">Groups</a> " .
+										" | <a href=\"" . site_url() . "/calendar\">Calendar</a> ";
+										
 				
 		return("
 <html>
@@ -69,7 +71,8 @@ class Page extends Model {
 			| <a href=\"" . site_url() . "/mail\">Messages</a>
 			| <a href=\"" . site_url() . "/forum\">Forum</a> 
 			| <a href=\"" . site_url() . "/grouppages\">Groups</a> 
-			| <a href=\"" . site_url() . "/admin\">Admin</a> 	
+			| <a href=\"" . site_url() . "/calendar\">Calendar</a> 
+			| <a href=\"" . site_url() . "/admin\">Admin</a> 			
 			-->
 		
 		</div>
