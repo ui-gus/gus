@@ -12,17 +12,43 @@ class Calendar extends Controller
 		//load models so their methods can be used in index function
 		$this->load->model('CalendarModel');
 		$this->load->model('Page');	
+		$this->load->helper('url');
 	}
 	
 	function index($year = null, $month = null)      
 	{
+		//set year and month if they weren't passed 
+		if($year == null)
+		{
+			$year = date('Y');
+		}
+		if($month == null)
+		{
+			$month = date('m');
+		}
+		//check if a new calendar event was added
+		if($day = $this->input->post('day'))
+		{
+			$this->CalendarModel->add_event('$year-$month-$day', $this->input->post('data'));
+		}
+	
 		//get header
-		$this->pdata['header'] = $this->Page->get_header('calendar');	
-		//generate calendar content
-		$this->pdata['content'] = $this->CalendarModel->myGenerate($year, $month);
+		$this->pdata['header'] = $this->Page->get_header('calendar');		
+//echo $this->session->userdata('un');
+		//get calendar content if user is logged in
+//		if($this->Page->authed())
+//		{		
+			//generate calendar content
+			$this->pdata['content'] = $this->CalendarModel->myGenerate($year, $month);
+//		}
+//		else
+//		{
+//			$this->pdata['content'] = 'NOT LOGGED IN
+//				<p><a href="' . site_url() . '/auth">LOGIN</a> to view your calendar';
+//		}
 		//get footer
 		$this->pdata['footer'] = $this->Page->get_footer();
-
+		
 		//pass data to CalendarView to display it
 		$this->load->view('CalendarView', $this->pdata);
 	}

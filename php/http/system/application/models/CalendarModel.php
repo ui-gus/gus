@@ -32,7 +32,7 @@ class CalendarModel extends Model
 		   {week_row_end}</tr>{/week_row_end}
 
 		   {cal_row_start}<tr class="days">{/cal_row_start}
-		   {cal_cell_start}<td>{/cal_cell_start}
+		   {cal_cell_start}<td class="day">{/cal_cell_start}
 
 		   {cal_cell_content}
 			<div class="days">{day}</div>
@@ -44,7 +44,7 @@ class CalendarModel extends Model
 			<div class="content">{content}</div>
 		   {/cal_cell_content_today}
 
-		   {cal_cell_no_content}<div class="days">{day}</div>{/cal_cell_no_content}
+		   {cal_cell_no_content}<div class="day_num">{day}</div>{/cal_cell_no_content}
 		   {cal_cell_no_content_today}<div class="day_num highlight">{day}</div>{/cal_cell_no_content_today}
 
 		   {cal_cell_blank}&nbsp;{/cal_cell_blank}
@@ -71,16 +71,16 @@ class CalendarModel extends Model
 	
 	function get_cal_data($year, $month)
 	{
-		//SELECT the entire month's data from the calendar table in the database
-		$query = $this->db->select('date, data')->from('calendar')
-			->like('date', "$year-$month", 'after')->get();
-
-//echo $this->session->userdata('un');
+		//SELECT the entire month's data from the calendar table 
+//echo $this->session->userdata('un');       //just a test to make sure this is set
+//need to use the following line instead of the one used for now
+//$result = $this->db->query("SELECT date, data FROM calendar WHERE un = '$this->session->userdata('un')' AND date LIKE '$year-$month%'")->result();
+		$result = $this->db->query("SELECT date, data FROM calendar WHERE date LIKE '$year-$month%'")->result();
 
 		$cal_data = array();
 		
 		//assign calendar data to appropriate days
-		foreach($query->result() as $row)   
+		foreach($result as $row)   
 		{
 			//substr($row->date, 8, 2) is the day part of the date
 			$cal_data[substr($row->date, 8, 2)] = $row->data;
@@ -88,20 +88,19 @@ class CalendarModel extends Model
 		return $cal_data;
 	}
 	
-	function add_event($date = null, $event)   	//function to add an event to the calendar
+	function add_event($date, $event)   	//function to add an event to the calendar
 	{
-/***		if($this->db->select('date')->from('calendar')->where('date', $date)->count_all_results())
+//still need to make it for a specific user
+		if($this->db->select('date')->from('calendar')->where('date', $date)->count_all_results())
 		{
 			$this->db->where('date', $date)->update('calendar', array('date' => $date, 'data' => $data));
 		}
 		else
 		{
-			$this->db->insert('calendar', array('date' => $date, 'data' => $data));
+			$this->db->insert('calendar', array('date' => $date, 'data' => $event));
 		}
 		
 		return 1;
-***/
-		return 'not yet implemented';
 	}
 	
 	function remove_event($date = null, $eventID)

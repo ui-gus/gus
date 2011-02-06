@@ -4,7 +4,7 @@
 <head>
 	<title>GUS Calendar</title>
 	
-	<!-- styling inside calendar -->
+	<!-- css styling inside calendar -->
 	<style type="text/css">
 		.calendar .month
 		{
@@ -42,12 +42,48 @@
 			
 		}
 	</style>
+	<!-- make src point to jquery library from google so jquery and ajax can be used in the body -->
+	<script type="text/javascript"
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js">
+	</script>
 </head>
 <body>
 	<?php 	
 		echo $this->pdata['header']; 
-		echo $this->pdata['content']; 
-		echo $this->pdata['footer']; 
+		echo $this->pdata['content'];
+		echo '<p>Page rendered in {elapsed_time} seconds</p>';		
+		echo $this->pdata['footer'];  
 	?>
+	
+	<!-- jquery script to assist in adding events to the calendar -->
+	<script type="text/javascript">
+	$(document).ready(function()
+	{
+		<!-- make each calendar cell clickable (uses same class as css)-->
+		$('.calendar .day').click(function()
+		{
+			day_num = $(this).find('.day_num').html();
+			event_data = prompt('Enter event');
+			if(event_data != null)
+			{
+				<!-- use ajax to send event to calendar controller -->
+				$.ajax(
+				{
+					url: window.location,
+					type: "POST",
+					data:
+					{
+						day: day_num,
+						data: event_data
+					},
+					success: function(msg)
+					{
+						location.reload();
+					}
+				});
+			}		
+		});
+	});
+	</script>
 </body>
 </html>
