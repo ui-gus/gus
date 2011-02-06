@@ -3,28 +3,31 @@
 
 class Calendar extends Controller 
 {
+	var $pdata;
+	
 	function Calendar()           //constructor
 	{
 		parent::Controller();
 		
+		//load models so their methods can be used in index function
 		$this->load->model('CalendarModel');
-		$this->load->model('Page');
-		$this->pdata['footer'] = $this->Page->get_footer();	
+		$this->load->model('Page');	
 	}
 	
-	//displays the user's calendar
 	function index($year = null, $month = null)      
 	{
-//	        $this->pdata['header'] = $this->Page->get_header('calendar');	
-//              $this->pdata['content'] = $this->Page->get_content('calendar');
-	
-		//call CalendarModel's generate() function
-		$data['calendar'] = $this->CalendarModel->myGenerate($year, $month);
-		//pass $data to CalendarView
-		$this->load->view('CalendarView', $data);
+		//get header
+		$this->pdata['header'] = $this->Page->get_header('calendar');	
+		//generate calendar content
+		$this->pdata['content'] = $this->CalendarModel->myGenerate($year, $month);
+		//get footer
+		$this->pdata['footer'] = $this->Page->get_footer();
+
+		//pass data to CalendarView to display it
+		$this->load->view('CalendarView', $this->pdata);
 	}
 	
-	//tests all of the calendar functions in CalendarModel.php	
+	//tests all of the calendar functions
 	function test($date = null, $year = null, $month = null)    
 	{	
 		$this->load->library('unit_test');

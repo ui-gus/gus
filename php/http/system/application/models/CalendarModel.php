@@ -12,16 +12,16 @@ class CalendarModel extends Model
 		
 		//preference variable for when the calendar library is loaded
 		$this->pref = array(
-			'day_type' => 'long',
+			'day_type' => 'short',
 			'show_next_prev' => true,
-			'next_prev_url' => base_url() . 'index.php/calendar/index'	
+			'next_prev_url' => site_url() . '/calendar/index'	
 		);
 
 		//template from CI's calendar class
 		$this->pref['template'] = '
 		   {table_open}<table border="0" cellpadding="4" cellspacing="0" class="calendar">{/table_open}
 
-		   {heading_row_start}<tr>{/heading_row_start}
+		   {heading_row_start}<tr class="month">{/heading_row_start}
 		   {heading_previous_cell}<th><a href="{previous_url}">&lt;&lt;prev</a></th>{/heading_previous_cell}
 		   {heading_title_cell}<th colspan="{colspan}"><h2>{heading}</h2></th>{/heading_title_cell}
 		   {heading_next_cell}<th><a href="{next_url}">next&gt;&gt;</a></th>{/heading_next_cell}
@@ -74,7 +74,8 @@ class CalendarModel extends Model
 		//SELECT the entire month's data from the calendar table in the database
 		$query = $this->db->select('date, data')->from('calendar')
 			->like('date', "$year-$month", 'after')->get();
-echo $this->session->userdata('un');
+
+//echo $this->session->userdata('un');
 
 		$cal_data = array();
 		

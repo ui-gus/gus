@@ -3,14 +3,19 @@
 <html lang="en-US">
 <head>
 	<title>GUS Calendar</title>
+	
+	<!-- styling inside calendar -->
 	<style type="text/css">
+		.calendar .month
+		{
+			font-family: textile, cursive; 
+		}
 		.calendar .days td
 		{
 			width: 150px; height: 80px; padding: 4px;
 			border: 1px solid #999;
 			vertical-align: top;
 			background-color: #E8E8E8;
-			border: 2px groove #1E90FF;
 		}
 		.calendar .days td:hover       
 		{
@@ -18,13 +23,17 @@
 		}
 		.calendar .weeks td
 		{
-			font-size: 18px;
-			font-weight: bold;
+			font-size: 16px;
+			font-famil: textile, cursive;
+			font-weight: normal;
 			background-color: #1E90FF;
 		}
 		table.calendar			
 		{
-			margin: auto;
+			margin-top: 0px;
+			margin-bottom: 0px;
+			margin-left 0px;
+			margin-right 0px;
 		}
 		.calendar .highlight
 		{
@@ -35,6 +44,10 @@
 	</style>
 </head>
 <body>
-	<?php echo $calendar; ?>
+	<?php 	
+		echo $this->pdata['header']; 
+		echo $this->pdata['content']; 
+		echo $this->pdata['footer']; 
+	?>
 </body>
 </html>
