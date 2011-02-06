@@ -29,6 +29,7 @@ class Calendar extends Controller
 		//check if a new calendar event was added
 		if($day = $this->input->post('day'))
 		{
+echo 'made it';
 			$this->CalendarModel->add_event('$year-$month-$day', $this->input->post('data'));
 		}
 	

@@ -26,7 +26,8 @@
 			font-size: 16px;
 			font-famil: textile, cursive;
 			font-weight: normal;
-			background-color: #1E90FF;
+			background-color: #909090;
+			#background-color: #1E90FF;
 		}
 		table.calendar			
 		{
