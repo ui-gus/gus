@@ -13,46 +13,51 @@ class Calendar extends Controller
 		$this->load->model('CalendarModel');
 		$this->load->model('Page');	
 		$this->load->helper('url');
+		$this->load->helper('form');
 	}
 	
 	function index($year = null, $month = null)      
 	{
 		//set year and month if they weren't passed 
-		if($year == null)
+		if(!$year){ $year = date('Y'); }
+		if(!$month){ $month = date('m'); }
+		
+		//check to see if there is a new calendar post
+		if($event_day = $this->input->post('day_num'))
 		{
-			$year = date('Y');
-		}
-		if($month == null)
-		{
-			$month = date('m');
-		}
-		//check if a new calendar event was added
-		if($day = $this->input->post('day'))
-		{
-echo 'made it';
-			$this->CalendarModel->add_event('$year-$month-$day', $this->input->post('data'));
+			$event_year = $this->input->post('year');
+			$event_month = $this->input->post('month');
+			$event_data = $this->input->post('event_data');
+//for testing purposes
+//echo  $event_year . " " . $event_month . " " . $event_day;      
+//echo "<br>" . $event_data;
+			$this->CalendarModel->add_event('$event_year-$event_month-$event_day', $event_data);
 		}
 	
 		//get header
 		$this->pdata['header'] = $this->Page->get_header('calendar');		
-//echo $this->session->userdata('un');
-		//get calendar content if user is logged in
-//		if($this->Page->authed())
-//		{		
+
+		//get calendar content if user is logged in, otherwise display error message
+		if($this->Page->authed())
+		{		
 			//generate calendar content
 			$this->pdata['content'] = $this->CalendarModel->myGenerate($year, $month);
-//		}
-//		else
-//		{
-//			$this->pdata['content'] = 'NOT LOGGED IN
-//				<p><a href="' . site_url() . '/auth">LOGIN</a> to view your calendar';
-//		}
+			$this->pdata['year'] = $year;
+			$this->pdata['month'] = $month;
+		}
+		else
+		{
+			$this->pdata['content'] = 'NOT LOGGED IN
+				<p><a href="' . site_url() . '/auth">LOGIN</a> to view your calendar';
+		}
+		
 		//get footer
 		$this->pdata['footer'] = $this->Page->get_footer();
 		
 		//pass data to CalendarView to display it
 		$this->load->view('CalendarView', $this->pdata);
 	}
+	
 	
 	//tests all of the calendar functions
 	function test($date = null, $year = null, $month = null)    

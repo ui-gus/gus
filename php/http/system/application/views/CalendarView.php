@@ -15,7 +15,7 @@
 			width: 150px; height: 80px; padding: 4px;
 			border: 1px solid #999;
 			vertical-align: top;
-			background-color: #E8E8E8;
+			background-color: #F0F0F0;
 		}
 		.calendar .days td:hover       
 		{
@@ -43,6 +43,7 @@
 			
 		}
 	</style>
+	
 	<!-- make src point to jquery library from google so jquery and ajax can be used in the body -->
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js">
@@ -50,11 +51,31 @@
 </head>
 <body>
 	<?php 	
+		//display the calendar page
 		echo $this->pdata['header']; 
-		echo $this->pdata['content'];
-		echo '<p>Page rendered in {elapsed_time} seconds</p>';		
+		echo $this->pdata['content'];	
+		
+		//if user is logged in, display a form to add an event
+		if($this->Page->authed())
+		{
+	?>
+			<p><i>To add an event, either click on the calendar day or use the menu below</i></p>
+			<!-- form to add an event to the calendar -->
+			<!-- the dropdowns change dynamically depending on what date you are currently viewing -->
+			<!-- events can be planned a maximum of ten years in advance from the current date -->
+			<form action= "calendar" method="post">
+				Event Description: <input type="text" name="event_data" /><br>
+				Month: <?php echo form_dropdown('month', range(1, 12), $this->pdata['month']-1); ?>
+				Day: <?php echo form_dropdown('day_num', range(1, cal_days_in_month(CAL_GREGORIAN, 
+							$this->pdata['month'], $this->pdata['year'])), date('j')-1); ?>
+				Year: <?php echo form_dropdown('year', range($this->pdata['year'], date('Y')+10)); ?>
+				<br><input type="submit" value="Add Event" />
+			</form>
+	<?php	}
+		echo '<p>Page rendered in {elapsed_time} seconds</p>';
 		echo $this->pdata['footer'];  
 	?>
+	
 	
 	<!-- jquery script to assist in adding events to the calendar -->
 	<script type="text/javascript">
@@ -64,27 +85,29 @@
 		$('.calendar .day').click(function()
 		{
 			day_num = $(this).find('.day_num').html();
-			event_data = prompt('Enter event');
+			event_data = prompt('Event Description:', $(this).find('.content').html());
 			if(event_data != null)
 			{
-				<!-- use ajax to send event to calendar controller -->
+				<!-- use ajax to send post to calendar controller -->
 				$.ajax(
 				{
 					url: window.location,
 					type: "POST",
-					data:
+					data: 
 					{
 						day: day_num,
-						data: event_data
+						event: event_data
 					},
 					success: function(msg)
 					{
 						location.reload();
+						alert('calendar updated');
 					}
 				});
 			}		
 		});
 	});
 	</script>
+	
 </body>
 </html>

@@ -7,6 +7,7 @@ class CalendarModel extends Model
 	{
 		parent::Model();
 	
+		$this->load->database();
 		$this->load->library('session');  //need this to get username to select calendar info
 		$this->load->helper('url');  	//need for base_url() function
 		
@@ -65,14 +66,13 @@ class CalendarModel extends Model
 		$cal_data = $this->get_cal_data($year, $month);
 		
 		//return generated calendar to controller
-		//codeigniter's generate() function in the calendar class
+		//(codeigniter's generate() function from the calendar class, different than myGenerate())
 		return $this->calendar->generate($year, $month, $cal_data);
 	}
 	
 	function get_cal_data($year, $month)
 	{
 		//SELECT the entire month's data from the calendar table 
-//echo $this->session->userdata('un');       //just a test to make sure this is set
 //need to use the following line instead of the one used for now
 //$result = $this->db->query("SELECT date, data FROM calendar WHERE un = '$this->session->userdata('un')' AND date LIKE '$year-$month%'")->result();
 		$result = $this->db->query("SELECT date, data FROM calendar WHERE date LIKE '$year-$month%'")->result();
@@ -94,11 +94,12 @@ class CalendarModel extends Model
 		//if the event already occurs on this date
 		if($this->db->select('date')->from('calendar')->where('date', $date)->count_all_results())
 		{
+//$this->db->where('date', $date)->and('un', $this->session->userdata('un')->update('calendar', array('date' => $date, 'data' => $data));
 			$this->db->where('date', $date)->update('calendar', array('date' => $date, 'data' => $data));
 		}
 		else		//if this is a new event
 		{
-
+//$this->db->insert('calendar', array('date' => $date, 'data' => $event))->where('un', $this->session->userdata('un'));
 			$this->db->insert('calendar', array('date' => $date, 'data' => $event));
 		}
 		
