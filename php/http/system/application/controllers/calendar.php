@@ -3,23 +3,76 @@
 
 class Calendar extends Controller 
 {
+	var $pdata;
+	
 	function Calendar()           //constructor
 	{
 		parent::Controller();
 		
-		//load CalendarModel
+		//load models so their methods can be used in index function
 		$this->load->model('CalendarModel');
+		$this->load->model('Page');	
+		$this->load->helper('url');
+		$this->load->helper('form');
 	}
 	
-	function index($year = null, $month = null)      //displays calendar
+	function index($year = null, $month = null)      
 	{
-		//call CalendarModel's generate() function
-		$data['calendar'] = $this->CalendarModel->generate($year, $month);
-		//pass $data to CalendarView
-		$this->load->view('CalendarView', $data);
+		//set year and month if they weren't passed 
+		if(!$year){ $year = date('Y'); }
+		if(!$month){ $month = date('m'); }
+		
+		//check to see if there is a new calendar post
+		if($event_day = $this->input->post('day_num'))
+		{
+			$event_day += 1;
+			//if it's the html form post (as opposed to the ajax one, which doesn't pass year or month)
+			if($this->input->post('month'))
+			{
+//for debugging purposes
+$event_year = 2011;
+//				$event_year = $this->input->post('year');
+				$event_month = $this->input->post('month') + 1;     				
+			}
+			else  	//if it's the ajax post
+			{	
+				//the month and year will be from the current calendar shown
+				$event_year = $year;
+				$event_month = $month;
+			}
+			$event_data = $this->input->post('event_data');
+//for debugging purposes
+//echo  $event_year . " " . $event_month . " " . $event_day;      
+			$this->CalendarModel->add_event($event_year."-".$event_month."-".$event_day, $event_data);
+		}
+	
+		//get header
+		$this->pdata['header'] = $this->Page->get_header('calendar');		
+
+		//get calendar content if user is logged in, otherwise display error message
+		if($this->Page->authed())
+		{		
+			//generate calendar content to pass to the view
+			$this->pdata['content'] = $this->CalendarModel->myGenerate($year, $month);
+			//save year and month to pass to the view
+			$this->pdata['year'] = $year;
+			$this->pdata['month'] = $month;
+		}
+		else
+		{
+			$this->pdata['content'] = 'NOT LOGGED IN
+				<p><a href="' . site_url() . '/auth">LOGIN</a> to view your calendar';
+		}
+		
+		//get footer
+		$this->pdata['footer'] = $this->Page->get_footer();
+		
+		//pass data to CalendarView to display it
+		$this->load->view('CalendarView', $this->pdata);
 	}
 	
-	//tests all of the calendar functions in CalendarModel.php	
+	
+	//tests all of the calendar functions
 	function test($date = null, $year = null, $month = null)    
 	{	
 		$this->load->library('unit_test');

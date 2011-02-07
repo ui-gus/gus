@@ -8,7 +8,8 @@
 <a href="http://75.87.248.55/P5/var/git/gus/php/doc/gus_mvc.png">Overview</a>
 
 <p>Tests for models:</p>
-<table border=1>
+<table>
+<tr>
   <td><b>Model Name</b></td>
   <td><b>Author</b></td>
   <td><b>doc link</b></td>
@@ -20,17 +21,18 @@
   <td>Colby Blair, Scott Beddall</td>
  </tr>
  <tr>
-  <td><a href="' . site_url() . '/test/user">User</a>
+  <td><a href="' . site_url() . '/test/user">User</a></td>
   <td>Colby Blair</td>
  </tr>
  <tr>
-  <td><a href="' . site_url() . '/test/group">Group</a>
+  <td><a href="' . site_url() . '/test/group">Group</a></td>
   <td>Colby Blair</td>
  </tr>
 </table>
 
 <p>Tests for controllers:</p>
-<table border=1>
+<table>
+<tr>
   <td><b>Controller Name</b></td>
   <td><b>Author</b></td>
   <td><b>doc link</b></td>
@@ -60,7 +62,7 @@
  </tr>
  <tr>
   <td><a href="' . site_url() . '/groups/test">groups</a></td>
-  <td>Colby Blair</td>
+  <td>Colby Blair</td> 
  </tr>
  <tr>
   <td><a href="' . site_url() . '/home/test">home</a></td>
