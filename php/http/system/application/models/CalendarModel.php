@@ -7,8 +7,6 @@ class CalendarModel extends Model
 	{
 		parent::Model();
 	
-		$this->load->database();
-		$this->load->library('session');  //need this to get username to select calendar info
 		$this->load->helper('url');  	//need for base_url() function
 		
 		//preference variable for when the calendar library is loaded
@@ -56,6 +54,32 @@ class CalendarModel extends Model
 		   {table_close}</table>{/table_close}
 		';
 	}
+
+	
+	function add_event($date, $event)   	//function to add an event to the calendar
+	{
+		//if the event already occurs on this date for this user
+		if($this->db->select('date')->from('calendar')->where('date', $date)->where('user', $this->session->userdata('un'))->count_all_results())
+		{
+			//update the event for the user in the calendar table
+			$this->db->where('date', $date)->where('user', $this->session->userdata('un'))
+						->update('calendar', array('date' => $date, 'data' => $event));
+		}
+		else		//if this is a new event
+		{	//add the event for the user in the calendar table 
+			$this->db->insert('calendar', array('date' => $date, 'data' => $event, 'user' => $this->session->userdata('un')));
+		}
+		return 1;
+	}
+
+//still need to implement
+	function remove_event($date = null, $eventID)
+	{
+		//event_ID 0 is reserved for testing purposes
+		return 'not yet implemented';
+		//will return a 1 or a 0
+	}
+
 	
 	function myGenerate($year, $month)
 	{	
@@ -69,13 +93,13 @@ class CalendarModel extends Model
 		//(codeigniter's generate() function from the calendar class, different than myGenerate())
 		return $this->calendar->generate($year, $month, $cal_data);
 	}
+
 	
 	function get_cal_data($year, $month)
 	{
-		//SELECT the entire month's data from the calendar table 
-//need to use the following line instead of the one used for now
-//$result = $this->db->query("SELECT date, data FROM calendar WHERE un = '$this->session->userdata('un')' AND date LIKE '$year-$month%'")->result();
-		$result = $this->db->query("SELECT date, data FROM calendar WHERE date LIKE '$year-$month%'")->result();
+		$userName = $this->session->userdata('un');
+		//SELECT the entire month's data for the logged in user from the calendar table 
+		$result = $this->db->query("SELECT date, data FROM calendar WHERE date LIKE '$year-$month%' AND user='$userName'")->result();
 
 		$cal_data = array();
 		
@@ -86,31 +110,6 @@ class CalendarModel extends Model
 			$cal_data[substr($row->date, 8, 2)] = $row->data;
 		}
 		return $cal_data;
-	}
-	
-	function add_event($date, $event)   	//function to add an event to the calendar
-	{
-//still need to make it for a specific user
-		//if the event already occurs on this date
-		if($this->db->select('date')->from('calendar')->where('date', $date)->count_all_results())
-		{
-//$this->db->where('date', $date)->and('un', $this->session->userdata('un')->update('calendar', array('date' => $date, 'data' => $data));
-			$this->db->where('date', $date)->update('calendar', array('date' => $date, 'data' => $data));
-		}
-		else		//if this is a new event
-		{
-//$this->db->insert('calendar', array('date' => $date, 'data' => $event))->where('un', $this->session->userdata('un'));
-			$this->db->insert('calendar', array('date' => $date, 'data' => $event));
-		}
-		
-		return 1;
-	}
-	
-	function remove_event($date = null, $eventID)
-	{
-		//event_ID 0 is reserved for testing purposes
-		return 'not yet implemented';
-		//will return a 1 or a 0
 	}
 }
 ?>

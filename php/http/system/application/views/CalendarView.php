@@ -65,10 +65,10 @@
 			<!-- events can be planned a maximum of ten years in advance from the current date -->
 			<form action= "calendar" method="post">
 				Event Description: <input type="text" name="event_data" /><br>
-				Month: <?php echo form_dropdown('month', range(1, 12), $this->pdata['month']-1); ?>
-				Day: <?php echo form_dropdown('day_num', range(1, cal_days_in_month(CAL_GREGORIAN, 
+				Month: <?php echo form_dropdown("month", range(1, 12), $this->pdata['month']-1); ?>
+				Day: <?php echo form_dropdown("day_num", range(1, cal_days_in_month(CAL_GREGORIAN, 
 							$this->pdata['month'], $this->pdata['year'])), date('j')-1); ?>
-				Year: <?php echo form_dropdown('year', range($this->pdata['year'], date('Y')+10)); ?>
+				Year: <?php echo form_dropdown("year", range($this->pdata['year'], date('Y')+10)); ?>
 				<br><input type="submit" value="Add Event" />
 			</form>
 	<?php	}

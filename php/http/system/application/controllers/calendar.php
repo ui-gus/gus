@@ -25,13 +25,25 @@ class Calendar extends Controller
 		//check to see if there is a new calendar post
 		if($event_day = $this->input->post('day_num'))
 		{
-			$event_year = $this->input->post('year');
-			$event_month = $this->input->post('month');
+			$event_day += 1;
+			//if it's the html form post (as opposed to the ajax one, which doesn't pass year or month)
+			if($this->input->post('month'))
+			{
+//for debugging purposes
+$event_year = 2011;
+//				$event_year = $this->input->post('year');
+				$event_month = $this->input->post('month') + 1;     				
+			}
+			else  	//if it's the ajax post
+			{	
+				//the month and year will be from the current calendar shown
+				$event_year = $year;
+				$event_month = $month;
+			}
 			$event_data = $this->input->post('event_data');
-//for testing purposes
+//for debugging purposes
 //echo  $event_year . " " . $event_month . " " . $event_day;      
-//echo "<br>" . $event_data;
-			$this->CalendarModel->add_event('$event_year-$event_month-$event_day', $event_data);
+			$this->CalendarModel->add_event($event_year."-".$event_month."-".$event_day, $event_data);
 		}
 	
 		//get header
@@ -40,8 +52,9 @@ class Calendar extends Controller
 		//get calendar content if user is logged in, otherwise display error message
 		if($this->Page->authed())
 		{		
-			//generate calendar content
+			//generate calendar content to pass to the view
 			$this->pdata['content'] = $this->CalendarModel->myGenerate($year, $month);
+			//save year and month to pass to the view
 			$this->pdata['year'] = $year;
 			$this->pdata['month'] = $month;
 		}
