@@ -21,18 +21,23 @@ class Calendar extends Controller
 		//set year and month if they weren't passed 
 		if(!$year){ $year = date('Y'); }
 		if(!$month){ $month = date('m'); }
-		
+	
+		//get header
+		$this->pdata['header'] = $this->Page->get_header('calendar');		
+
 		//check to see if there is a new calendar post
-		if($event_day = $this->input->post('day_num'))
+		if($event_day = $this->input->post('event_day'))
 		{
-			$event_day += 1;
-			//if it's the html form post (as opposed to the ajax one, which doesn't pass year or month)
-			if($this->input->post('month'))
+			//if it's the html form post (as opposed to the ajax one, which 
+			//doesn't pass year or month)
+			if($this->input->post('event_month'))
 			{
-//for debugging purposes
-$event_year = 2011;
-//				$event_year = $this->input->post('year');
-				$event_month = $this->input->post('month') + 1;     				
+//to make it work for now
+$event_year = $year;
+//				$event_year = $this->input->post('event_year');
+				//adjust day and month since they are both off by 1 for some reason
+				$event_month = $this->input->post('event_month') + 1;
+				$event_day = $this->input->post('event_day') + 1;
 			}
 			else  	//if it's the ajax post
 			{	
@@ -45,10 +50,7 @@ $event_year = 2011;
 //echo  $event_year . " " . $event_month . " " . $event_day;      
 			$this->CalendarModel->add_event($event_year."-".$event_month."-".$event_day, $event_data);
 		}
-	
-		//get header
-		$this->pdata['header'] = $this->Page->get_header('calendar');		
-
+		
 		//get calendar content if user is logged in, otherwise display error message
 		if($this->Page->authed())
 		{		
@@ -67,8 +69,8 @@ $event_year = 2011;
 		//get footer
 		$this->pdata['footer'] = $this->Page->get_footer();
 		
-		//pass data to CalendarView to display it
-		$this->load->view('CalendarView', $this->pdata);
+		//pass data to view to display it
+		$this->load->view('calendar', $this->pdata);
 	}
 	
 	
@@ -103,7 +105,7 @@ $event_year = 2011;
 		
 		//test calendar display
 		$data['calendar'] = $this->CalendarModel->generate($year, $month);
-		$this->load->view('CalendarView', $data);
+		$this->load->view('calendar', $data);
 		
 		//run full report of tests
 		echo $this->unit->report();     

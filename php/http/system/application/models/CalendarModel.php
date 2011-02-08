@@ -7,7 +7,7 @@ class CalendarModel extends Model
 	{
 		parent::Model();
 	
-		$this->load->helper('url');  	//need for base_url() function
+		$this->load->helper('url');  	//need for site_url() function
 		
 		//preference variable for when the calendar library is loaded
 		$this->pref = array(
@@ -16,14 +16,18 @@ class CalendarModel extends Model
 			'next_prev_url' => site_url() . '/calendar/index'	
 		);
 
-		//template from CI's calendar class
+		//template from CI's calendar class (css formatting is in calendar view file)
 		$this->pref['template'] = '
-		   {table_open}<table border="0" cellpadding="4" cellspacing="0" class="calendar">{/table_open}
+		   {table_open}<table border="0" cellpadding="4" cellspacing="0" class="calendar">
+		   {/table_open}
 
 		   {heading_row_start}<tr class="month">{/heading_row_start}
-		   {heading_previous_cell}<th><a href="{previous_url}">&lt;&lt;prev</a></th>{/heading_previous_cell}
-		   {heading_title_cell}<th colspan="{colspan}"><h2>{heading}</h2></th>{/heading_title_cell}
-		   {heading_next_cell}<th><a href="{next_url}">next&gt;&gt;</a></th>{/heading_next_cell}
+		   {heading_previous_cell}<th><a href="{previous_url}">&lt;&lt;prev</a></th>
+		   {/heading_previous_cell}
+		   {heading_title_cell}<th colspan="{colspan}"><h2>{heading}</h2></th>
+		   {/heading_title_cell}
+		   {heading_next_cell}<th><a href="{next_url}">next&gt;&gt;</a></th>
+		   {/heading_next_cell}
 		   {heading_row_end}</tr>{/heading_row_end}
 
 		   {week_row_start}<tr class="weeks">{/week_row_start}
@@ -44,7 +48,8 @@ class CalendarModel extends Model
 		   {/cal_cell_content_today}
 
 		   {cal_cell_no_content}<div class="day_num">{day}</div>{/cal_cell_no_content}
-		   {cal_cell_no_content_today}<div class="day_num highlight">{day}</div>{/cal_cell_no_content_today}
+		   {cal_cell_no_content_today}<div class="day_num highlight">{day}</div>
+		   {/cal_cell_no_content_today}
 
 		   {cal_cell_blank}&nbsp;{/cal_cell_blank}
 
@@ -59,7 +64,8 @@ class CalendarModel extends Model
 	function add_event($date, $event)   	//function to add an event to the calendar
 	{
 		//if the event already occurs on this date for this user
-		if($this->db->select('date')->from('calendar')->where('date', $date)->where('user', $this->session->userdata('un'))->count_all_results())
+		if($this->db->select('date')->from('calendar')->where('date', $date)
+					->where('user', $this->session->userdata('un'))->count_all_results())
 		{
 			//update the event for the user in the calendar table
 			$this->db->where('date', $date)->where('user', $this->session->userdata('un'))
@@ -67,7 +73,8 @@ class CalendarModel extends Model
 		}
 		else		//if this is a new event
 		{	//add the event for the user in the calendar table 
-			$this->db->insert('calendar', array('date' => $date, 'data' => $event, 'user' => $this->session->userdata('un')));
+			$this->db->insert('calendar', array('date' => $date, 'data' => $event, 
+												'user' => $this->session->userdata('un')));
 		}
 		return 1;
 	}
@@ -75,6 +82,7 @@ class CalendarModel extends Model
 //still need to implement
 	function remove_event($date = null, $eventID)
 	{
+//needs to remove a specific event among an array for the day
 		//event_ID 0 is reserved for testing purposes
 		return 'not yet implemented';
 		//will return a 1 or a 0
@@ -90,7 +98,7 @@ class CalendarModel extends Model
 		$cal_data = $this->get_cal_data($year, $month);
 		
 		//return generated calendar to controller
-		//(codeigniter's generate() function from the calendar class, different than myGenerate())
+		//(codeigniter's generate(), different than myGenerate())
 		return $this->calendar->generate($year, $month, $cal_data);
 	}
 
@@ -99,7 +107,8 @@ class CalendarModel extends Model
 	{
 		$userName = $this->session->userdata('un');
 		//SELECT the entire month's data for the logged in user from the calendar table 
-		$result = $this->db->query("SELECT date, data FROM calendar WHERE date LIKE '$year-$month%' AND user='$userName'")->result();
+		$result = $this->db->query("SELECT date, data FROM calendar WHERE date LIKE 
+										'$year-$month%' AND user='$userName'")->result();
 
 		$cal_data = array();
 		
