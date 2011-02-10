@@ -67,6 +67,10 @@ div#links a:visited{
 	color: #c7c3c3; 
 }
 
+div#links a:hover{
+	text-decoration: underline;
+}
+
 div#links_left{
 
 	font-family: "calibri";
