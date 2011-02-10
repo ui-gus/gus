@@ -16,7 +16,7 @@ class CalendarModel extends Model
 			'next_prev_url' => site_url() . '/calendar/index'	
 		);
 
-		//template from CI's calendar class (css formatting is in calendar view file)
+		//template from CI's calendar class (css formatting for the classes is in CalendarView.php)
 		$this->pref['template'] = '
 		   {table_open}<table border="0" cellpadding="4" cellspacing="0" class="calendar">
 		   {/table_open}
@@ -24,10 +24,8 @@ class CalendarModel extends Model
 		   {heading_row_start}<tr class="month">{/heading_row_start}
 		   {heading_previous_cell}<th><a href="{previous_url}">&lt;&lt;prev</a></th>
 		   {/heading_previous_cell}
-		   {heading_title_cell}<th colspan="{colspan}"><h2>{heading}</h2></th>
-		   {/heading_title_cell}
-		   {heading_next_cell}<th><a href="{next_url}">next&gt;&gt;</a></th>
-		   {/heading_next_cell}
+		   {heading_title_cell}<th colspan="{colspan}"><h2>{heading}</h2></th>{/heading_title_cell}
+		   {heading_next_cell}<th><a href="{next_url}">next&gt;&gt;</a></th>{/heading_next_cell}
 		   {heading_row_end}</tr>{/heading_row_end}
 
 		   {week_row_start}<tr class="weeks">{/week_row_start}
@@ -42,7 +40,6 @@ class CalendarModel extends Model
 			<div class="content">{content}</div>
 			{/cal_cell_content}
 		   {cal_cell_content_today}
-			//day_num and highlight are two separate classes
 			<div class="day_num highlight">{day}</div>
 			<div class="content">{content}</div>
 		   {/cal_cell_content_today}
@@ -63,22 +60,22 @@ class CalendarModel extends Model
 	
 	function add_event($date, $event)   	//function to add an event to the calendar
 	{
+		$userName = $this->session->userdata('un');
 		//if the event already occurs on this date for this user
-		if($this->db->select('date')->from('calendar')->where('date', $date)
-					->where('user', $this->session->userdata('un'))->count_all_results())
+		if($this->db->query("SELECT date FROM calendar WHERE date='$date' and user='$userName'")->result())
 		{
 			//update the event for the user in the calendar table
-			$this->db->where('date', $date)->where('user', $this->session->userdata('un'))
-						->update('calendar', array('date' => $date, 'data' => $event));
+			$this->db->query("UPDATE calendar SET data='$event' WHERE date='$date' AND user='$userName'");
 		}
 		else		//if this is a new event
 		{	//add the event for the user in the calendar table 
-			$this->db->insert('calendar', array('date' => $date, 'data' => $event, 
-												'user' => $this->session->userdata('un')));
+			$this->db->query("INSERT INTO calendar (user, date, data) 
+								VALUES('$userName', '$date', '$event')");
 		}
 		return 1;
 	}
-
+	
+	
 //still need to implement
 	function remove_event($date = null, $eventID)
 	{
@@ -98,7 +95,7 @@ class CalendarModel extends Model
 		$cal_data = $this->get_cal_data($year, $month);
 		
 		//return generated calendar to controller
-		//(codeigniter's generate(), different than myGenerate())
+		//(codeigniter's generate() function from the calendar class, different than myGenerate())
 		return $this->calendar->generate($year, $month, $cal_data);
 	}
 
@@ -107,8 +104,8 @@ class CalendarModel extends Model
 	{
 		$userName = $this->session->userdata('un');
 		//SELECT the entire month's data for the logged in user from the calendar table 
-		$result = $this->db->query("SELECT date, data FROM calendar WHERE date LIKE 
-										'$year-$month%' AND user='$userName'")->result();
+		$result = $this->db->query("SELECT date, data FROM calendar WHERE 
+					date LIKE '$year-$month%' AND user='$userName'")->result();
 
 		$cal_data = array();
 		
