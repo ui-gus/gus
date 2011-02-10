@@ -49,6 +49,7 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js">
 	</script>
 </head>
+
 <body>
 	<?php 	
 		//display the calendar page
@@ -58,20 +59,23 @@
 		//if user is logged in, display a form to add an event
 		if($this->Page->authed())
 		{
+			//set the path that the following form is going to route to (this covers for overlooked variations)
+			$form_path = site_url() . "/calendar/index/" . $this->pdata['year'] . "/" . $this->pdata['month'];
 	?>
 			<p><i>To add an event, either click on the calendar day or use the menu below</i></p>
 			<!-- form to add an event to the calendar -->
 			<!-- the dropdowns change dynamically depending on what date you are currently viewing -->
 			<!-- events can be planned a maximum of ten years in advance from the current date -->
-			<form action= "calendar" method="post">
+			<form action="<?php echo $form_path; ?>"  method="post">
 				Event Description: <input type="text" name="event_data" /><br>
-				Month: <?php echo form_dropdown("month", range(1, 12), $this->pdata['month']-1); ?>
-				Day: <?php echo form_dropdown("day_num", range(1, cal_days_in_month(CAL_GREGORIAN, 
+				Month: <?php echo form_dropdown("event_month", range(1, 12), $this->pdata['month']-1); ?>
+				Day: <?php echo form_dropdown("event_day", range(1, cal_days_in_month(CAL_GREGORIAN, 
 							$this->pdata['month'], $this->pdata['year'])), date('j')-1); ?>
-				Year: <?php echo form_dropdown("year", range($this->pdata['year'], date('Y')+10)); ?>
-				<br><input type="submit" value="Add Event" />
+				Year: <?php echo form_dropdown("event_year", range($this->pdata['year'], date('Y')+10)); ?><br>
+				<input type="submit" value="Add Event" />
 			</form>
-	<?php	}
+	<?php	
+		}
 		echo '<p>Page rendered in {elapsed_time} seconds</p>';
 		echo $this->pdata['footer'];  
 	?>
@@ -84,7 +88,7 @@
 		<!-- make each calendar cell clickable (uses same class as css)-->
 		$('.calendar .day').click(function()
 		{
-			day_num = $(this).find('.day_num').html();
+			event_day = $(this).find('.day_num').html();
 			event_data = prompt('Event Description:', $(this).find('.content').html());
 			if(event_data != null)
 			{
@@ -95,13 +99,12 @@
 					type: "POST",
 					data: 
 					{
-						day: day_num,
-						event: event_data
+						event_day: event_day,
+						event_data: event_data
 					},
 					success: function(msg)
 					{
 						location.reload();
-						alert('calendar updated');
 					}
 				});
 			}		
