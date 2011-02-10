@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 08, 2011 at 02:30 PM
+-- Generation Time: Feb 10, 2011 at 03:45 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -35,64 +35,5 @@ INSERT INTO `calendar` (`user`, `date`, `data`) VALUES
 ('name', '2011-02-26', 'an event on the 26th'),
 ('name', '2011-07-07', 'an event in july'),
 ('name', '2011-02-18', 'another event'),
-('long3841', '2011-02-18', 'an event');
+('admin', '2011-02-17', 'an event');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `ggroup`
---
-
-CREATE TABLE IF NOT EXISTS `ggroup` (
-  `name` varchar(50) NOT NULL,
-  `description` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ggroup`
---
-
-INSERT INTO `ggroup` (`name`, `description`) VALUES
-('group1', 'this is a GUS group');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `page`
---
-
-CREATE TABLE IF NOT EXISTS `page` (
-  `header` text NOT NULL,
-  `content` text NOT NULL,
-  `footer` text NOT NULL,
-  `name` varchar(50) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `page`
---
-
-INSERT INTO `page` (`header`, `content`, `footer`, `name`) VALUES
-('', '', '', 'home');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-
-CREATE TABLE IF NOT EXISTS `user` (
-  `un` varchar(50) NOT NULL,
-  `pw` varchar(32) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`un`, `pw`) VALUES
-('admin', 'admin'),
-('long3841', 'long3841'),
-('user', '*D5D9F81F5542DE067FFF5FF7A4CA4BD'),
-('name', 'name'),
-('user1', 'user1');
