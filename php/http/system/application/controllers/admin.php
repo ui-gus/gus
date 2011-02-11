@@ -1,13 +1,18 @@
 <?php
 
 /******************************************************************************
-*Gus - Groups in a University Setting
- University of Idaho CS 384 - Spring 2011
- GusPHP Subteam
- File Authors:
-		Colby Blair
-		others!
-******************************************************************************/
+ * Gus - Groups in a University Setting
+ * University of Idaho CS 384 - Spring 2011
+ * GusPHP Subteam
+ * File Authors:
+ *		Colby Blair
+ * Documentation:
+ *		Cynthia Rempel
+ * Models used: Page
+ * Views used: login, admin, groups/main, home
+ * Libraries used: unit_test
+ * @package GusPackage
+ */
 
 class Admin extends Controller {
 	var $pdata; //page data
