@@ -8,7 +8,7 @@
 		if ($handle == false)
 			return(false);
                 echo "<ul>";
-                while (false !== ($filename = readdir($handle))) {
+		while (false !== ($filename = readdir($handle))) {
 			if ( $filename == "." || $filename == "..")
 				continue;
 			echo "<li>$filename<br>";
@@ -28,7 +28,12 @@
                 closedir($handle);
 ?>
 
-<p><a href="./upload">Upload</a> a new file.</p>
+<?php $link = "<a href=\"" . site_url() . "/upload\">Upload</a>";
+echo "<p>";
+echo $link;
+echo " a new file.</p>"; ?>
+
+
 
 <p>Page rendered in {elapsed_time} seconds</p>
 
