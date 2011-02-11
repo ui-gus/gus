@@ -10,7 +10,7 @@
  * Models Used: Page, Group
  * Views Used: Login, groups/main, groups/add, groups/edit, home
  * groups/delete, groups/save
- *
+ * @package GusPackage
  */
 
 class Groups extends Controller {
