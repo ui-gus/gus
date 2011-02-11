@@ -2,7 +2,7 @@
 
 
 
-<?php $query = $this->db->query("SELECT * FROM user WHERE id = 1")->result(); 
+<?php $query = $this->db->query("SELECT * FROM user WHERE id = 0")->result(); 
 
 echo $content;
 

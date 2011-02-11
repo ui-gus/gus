@@ -9,6 +9,7 @@ class Calendar extends Controller
 	{
 		parent::Controller();
 		
+		$this->load->database();
 		//load models so their methods can be used in index function
 		$this->load->model('CalendarModel');
 		$this->load->model('Page');	
@@ -28,7 +29,7 @@ class Calendar extends Controller
 		//check to see if there is a new calendar post
 		if($event_day = $this->input->post('event_day'))
 		{
-			//if it's the html form post (as opposed to the ajax one, which 
+			//if it's the php form post (as opposed to the ajax one, which 
 			//doesn't pass year or month)
 			if($this->input->post('event_month'))
 			{
@@ -85,8 +86,8 @@ $event_year = $year;
 		$test_name = 'test to see if month data array is retrieved from database';
 		$this->unit->run($test, $expected_result, $test_name);
 		
-		//test generate() function
-		$test = $this->CalendarModel->generate($year, $month);
+		//test myGenerate() function
+		$test = $this->CalendarModel->myGenerate($year, $month);
 		$expected_result = 'is_string';
 		$test_name = 'test to see if calendar is properly generated';
 		$this->unit->run($test, $expected_result, $test_name);
@@ -104,7 +105,7 @@ $event_year = $year;
 		$this->unit->run($test, $expected_result, $test_name);
 		
 		//test calendar display
-		$data['calendar'] = $this->CalendarModel->generate($year, $month);
+		$data['calendar'] = $this->CalendarModel->myGenerate($year, $month);
 		$this->load->view('calendar', $data);
 		
 		//run full report of tests

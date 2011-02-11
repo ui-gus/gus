@@ -1,8 +1,6 @@
-<html>
-<head>
-<title>Upload Form</title>
-</head>
-<body>
+<?php echo $this->pdata['header'] ?>
+
+<?php 	echo $this->pdata['content'] ?>
 
 <?php echo $error;?>
 
@@ -16,5 +14,8 @@
 
 </form>
 
-</body>
-</html>
+<p><a href="./docs">Return to docs.</a></p>
+
+<p>Page rendered in {elapsed_time} seconds</p>
+
+<?php echo $this->pdata['footer'] ?>

@@ -1,0 +1,17 @@
+CREATE TABLE `messages` (
+`userid` int(11) NOT NULL auto_increment,
+`title` varchar(255) default NULL,
+`message` text NOT NULL,
+`from` int(11) NOT NULL,
+`to` int(11) NOT NULL,
+`from_viewed` tinyint(1) NOT NULL default '0',
+`to_viewed` tinyint(1) NOT NULL default '0',
+`from_deleted` tinyint(1) NOT NULL default '0',
+`to_deleted` tinyint(1) NOT NULL default '0',
+`from_vdate` datetime default NULL,
+`to_vdate` datetime default NULL,
+`from_ddate` datetime default NULL,
+`to_ddate` datetime default NULL,
+`created` datetime NOT NULL,
+PRIMARY KEY (`userid`)
+) ;

@@ -1,18 +1,28 @@
 <?php
-
+/******************************************************************************
+*Gus - Groups in a University Setting
+ University of Idaho CS 384 - Spring 2011
+ GusPHP Subteam
+ File Authors:
+		Alex Nilson
+******************************************************************************/
 class Docs extends Controller {
 
 	function Docs(){
 		parent::Controller();
 		$this->load->model('Page');
+		$this->load->helper('form');
 		//set page content
                 $this->pdata['footer'] = $this->Page->get_footer();
+		$this->testmode = 'false';
 	}
 	
 	function index() {
-                $this->pdata['header'] = $this->Page->get_header('forum');
-                $this->pdata['content'] = $this->Page->get_content('forum');
-		$this->load->view('forum', $this->pdata);
+		if ($this->testmode == 'false') {
+                $this->pdata['header'] = $this->Page->get_header('Docs');
+                $this->pdata['content'] = $this->Page->get_content('docs');
+		$this->load->view('docs', $this->pdata); }
+		return('true');
 	/*
 	This function is called when a user visits the group's shared documents/files page.
 	Steps
@@ -25,6 +35,7 @@ class Docs extends Controller {
 
 	function uploadFile() {
 	/*
+	Outsourced to upload.php
 	This function is called when a user wants to upload a file to the group.
 	Codeigniter has a built in "File Uploading Class" that may be useful for this.
 	Steps
@@ -44,7 +55,19 @@ class Docs extends Controller {
 	*/
 	}
 
+
 	function downloadFile() {
+
+	$this->load->helper('download');
+
+	//$_POST['file']; The location of the filename
+	$location = "uploads/" . $_POST['file'];
+	//echo $location;
+
+	$data = file_get_contents($location); // Read the file's contents
+	$name = $_POST['file'];  //Name file will be downloaded as
+
+	force_download($name, $data);
 	/*
 	This function is called when a user chooses to download a file.
 	Steps
@@ -56,6 +79,12 @@ class Docs extends Controller {
 	}
 
 	function deleteFile() {
+
+	$file = "uploads/" . $_POST['file'];
+	unlink($file);
+	header( 'Location: docs' );
+
+
 	/*
 	This function is called when a user chooses to delete a file that has been uploaded.
 	Steps
@@ -74,5 +103,20 @@ class Docs extends Controller {
 	3. User organizes files.
 	4. User finishes organizing files.
 	*/
+	}
+
+	function test() {
+		$page_name = 'docs';
+		$this->load->library('unit_test');
+		$this->testmode = 'true';
+		//begin tests
+		//index
+		echo $this->unit->run($this->index(), true, 'index');
+		//upload
+		//Not needed atm
+		//Download
+		//Can't be tested afaik
+		//Delete
+		//Can't be tested afaik
 	}
 }

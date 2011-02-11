@@ -15,13 +15,19 @@ class Upload extends Controller {
 	{
 		parent::__construct();
 		$this->load->helper(array('form', 'url'));
-		$this->testmode = false;
+		$this->testmode = 'false';
+		$this->load->model('Page');
+		//set page content
+                $this->pdata['footer'] = $this->Page->get_footer();
 	}
 
 
 	function index()
 	{
-		$this->load->view('upload_form', array('error' => ' ' ));
+		if($this->testmode == 'false') {
+                $this->pdata['header'] = $this->Page->get_header('Upload');
+                $this->pdata['content'] = $this->Page->get_content('upload');
+		$this->load->view('upload_form', array('error' => ' ' )); }
 		return(true);
 	}
 
@@ -34,15 +40,20 @@ class Upload extends Controller {
 			if ( ! $this->upload->do_upload())
 			{
 				$error = array('error' => $this->upload->display_errors());
-				$this->load->view('upload_form', $error);
+				if($this->testmode == 'false') {
+				  $this->pdata['header'] = $this->Page->get_header('Upload');
+				  $this->pdata['content'] = $this->Page->get_content('upload');
+				  $this->load->view('upload_form', $error); }
 				return($this->upload->display_errors());
 			}
 			else
 			{
 				//file pointer? $_POST["userfile"];
 				$data = array('upload_data' => $this->upload->data());
-
-				$this->load->view('upload_success', $data);
+				if($this->testmode == 'false') {
+				  $this->pdata['header'] = $this->Page->get_header('Upload');
+				  $this->pdata['content'] = $this->Page->get_content('upload');
+				  $this->load->view('upload_success', $data); }
 				return('success');
 			}
 		}
@@ -52,7 +63,7 @@ class Upload extends Controller {
 	{
 		$page_name = 'upload';
 		$this->load->library('unit_test');
-		$this->testmode = true;
+		$this->testmode = 'true';
 
 		//index
 		echo $this->unit->run($this->index(), true, 'index');

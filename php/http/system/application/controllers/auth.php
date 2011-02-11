@@ -1,13 +1,19 @@
 <?php
 
-/******************************************************************************
-*Gus - Groups in a University Setting
- University of Idaho CS 384 - Spring 2011
- GusPHP Subteam
- File Authors:
-                Colby Blair
-******************************************************************************/
-
+/*
+ * Gus - Groups in a University Setting
+ * University of Idaho CS 384 - Spring 2011
+ * GusPHP Subteam
+ * File Authors:
+ *               Colby Blair
+ * Documented By:
+ *               Cynthia Rempel
+ * Models Used: Page
+ * Helpers Used: Form
+ * Views Used: Login, Home
+ * Libraries Used: Unit_test
+ * @package GusPackage
+ */
 class Auth extends Controller {
 	var $pdata; //page data
 	var $testmode;
