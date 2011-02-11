@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * PHPdoc comments by Cynthia Rempel
+ * Uses Models: Page
+ * Uses Helpers: url
+ * Uses Views: grouppage_view
+ * Uses Libraries: unit_test
+ * @package GusPackage
+ */
 class Grouppage extends Controller {
 
 	function Grouppage(){
