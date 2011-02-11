@@ -1,11 +1,16 @@
 <?php
-/******************************************************************************
-*Gus - Groups in a University Setting
- University of Idaho CS 384 - Spring 2011
- GusPHP Subteam
- File Authors:
-		Alex Nilson
-******************************************************************************/
+/**
+ * Gus - Groups in a University Setting
+ * University of Idaho CS 384 - Spring 2011
+ * GusPHP Subteam
+ * File Authors:
+ *		Alex Nilson
+ *              Cynthia Rempel
+ * Models Used: Page
+ * Helpers Used: Form, download
+ * Views Used: Docs
+ * @package GusPackage
+ */
 class Docs extends Controller {
 
 	function Docs(){
