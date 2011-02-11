@@ -1,6 +1,6 @@
 <?php
 
-/******************************************************************************
+/*
  * Gus - Groups in a University Setting
  * University of Idaho CS 384 - Spring 2011
  * GusPHP Subteam
