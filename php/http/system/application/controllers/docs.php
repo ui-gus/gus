@@ -1,16 +1,11 @@
 <?php
-/**
- * Gus - Groups in a University Setting
- * University of Idaho CS 384 - Spring 2011
- * GusPHP Subteam
- * File Authors:
- *		Alex Nilson
- *              Cynthia Rempel
- * Models Used: Page
- * Helpers Used: Form, download
- * Views Used: Docs
- * @package GusPackage
- */
+/******************************************************************************
+*Gus - Groups in a University Setting
+ University of Idaho CS 384 - Spring 2011
+ GusPHP Subteam
+ File Authors:
+		Alex Nilson
+******************************************************************************/
 class Docs extends Controller {
 
 	function Docs(){
@@ -19,12 +14,15 @@ class Docs extends Controller {
 		$this->load->helper('form');
 		//set page content
                 $this->pdata['footer'] = $this->Page->get_footer();
+		$this->testmode = 'false';
 	}
 	
 	function index() {
+		if ($this->testmode == 'false') {
                 $this->pdata['header'] = $this->Page->get_header('Docs');
                 $this->pdata['content'] = $this->Page->get_content('docs');
-		$this->load->view('docs', $this->pdata);
+		$this->load->view('docs', $this->pdata); }
+		return('true');
 	/*
 	This function is called when a user visits the group's shared documents/files page.
 	Steps
@@ -70,7 +68,6 @@ class Docs extends Controller {
 	$name = $_POST['file'];  //Name file will be downloaded as
 
 	force_download($name, $data);
-
 	/*
 	This function is called when a user chooses to download a file.
 	Steps
@@ -106,5 +103,20 @@ class Docs extends Controller {
 	3. User organizes files.
 	4. User finishes organizing files.
 	*/
+	}
+
+	function test() {
+		$page_name = 'docs';
+		$this->load->library('unit_test');
+		$this->testmode = 'true';
+		//begin tests
+		//index
+		echo $this->unit->run($this->index(), true, 'index');
+		//upload
+		//Not needed atm
+		//Download
+		//Can't be tested afaik
+		//Delete
+		//Can't be tested afaik
 	}
 }
