@@ -33,13 +33,16 @@ class Page extends Model {
 		$privilege = "admin"; //this is just set for the moment to test the function.	
 		//at some point I need to retrieve this info about the user from the DB 
 	
+	
+		$content = " <a href=\"" . site_url() . "/home\">Home</a>" ;
+		
 		if($privilege == "admin"){
-			$content = "<a href=\"" . site_url() . "/admin\">Admin</a> | ";
+			$content = $content . " | <a href=\"" . site_url() . "/admin\">Admin</a> | ";
 		}
+		
 		$content = $content . "<a href=\"" . site_url() . "/mail\">Messages</a>" . 
 										" | <a href=\"" . site_url() . "/search\">Search</a>" . 
 										" | <a href=\"" . site_url() . "/forum\">Forum</a>" .
-										" | <a href=\"" . site_url() . "/home\">Home</a>" .
 										" | <a href=\"" . site_url() . "/grouppages\">Groups</a> " .
 										" | <a href=\"" . site_url() . "/calendar\">Calendar</a> ";
 										
