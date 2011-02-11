@@ -1,8 +1,6 @@
-<html>
-<head>
-<title>Upload Form</title>
-</head>
-<body>
+<?php echo $this->pdata['header'] ?>
+
+<?php 	echo $this->pdata['content'] ?>
 
 <h3>Your file was successfully uploaded!</h3>
 
@@ -14,5 +12,8 @@
 
 <p><?php echo anchor('upload', 'Upload Another File!'); ?></p>
 
-</body>
-</html>
+<p><a href="../docs">Return to docs.</a></p>
+
+<p>Page rendered in {elapsed_time} seconds</p>
+
+<?php echo $this->pdata['footer'] ?>
