@@ -6,7 +6,7 @@
 		$path = './uploads';
 		$handle = opendir($path);
 		if ($handle == false)
-		  return(false);
+			return(false);
                 echo "<ul>";
                 while (false !== ($filename = readdir($handle))) {
 			if ( $filename == "." || $filename == "..")
@@ -28,7 +28,7 @@
                 closedir($handle);
 ?>
 
-<p><a href="../upload">Upload</a> a new file.</p>
+<p><a href="./upload">Upload</a> a new file.</p>
 
 <p>Page rendered in {elapsed_time} seconds</p>
 
