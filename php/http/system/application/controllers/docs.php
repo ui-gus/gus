@@ -1,18 +1,30 @@
 <?php
-
+/**
+ * Gus - Groups in a University Setting
+ * University of Idaho CS 384 - Spring 2011
+ * GusPHP Subteam
+ * File Authors:
+ *		Alex Nilson
+ *              Cynthia Rempel
+ * Models Used: Page
+ * Helpers Used: Form, download
+ * Views Used: Docs
+ * @package GusPackage
+ */
 class Docs extends Controller {
 
 	function Docs(){
 		parent::Controller();
 		$this->load->model('Page');
+		$this->load->helper('form');
 		//set page content
                 $this->pdata['footer'] = $this->Page->get_footer();
 	}
 	
 	function index() {
-                $this->pdata['header'] = $this->Page->get_header('forum');
-                $this->pdata['content'] = $this->Page->get_content('forum');
-		$this->load->view('forum', $this->pdata);
+                $this->pdata['header'] = $this->Page->get_header('Docs');
+                $this->pdata['content'] = $this->Page->get_content('docs');
+		$this->load->view('docs', $this->pdata);
 	/*
 	This function is called when a user visits the group's shared documents/files page.
 	Steps
@@ -25,6 +37,7 @@ class Docs extends Controller {
 
 	function uploadFile() {
 	/*
+	Outsourced to upload.php
 	This function is called when a user wants to upload a file to the group.
 	Codeigniter has a built in "File Uploading Class" that may be useful for this.
 	Steps
@@ -44,7 +57,20 @@ class Docs extends Controller {
 	*/
 	}
 
+
 	function downloadFile() {
+
+	$this->load->helper('download');
+
+	//$_POST['file']; The location of the filename
+	$location = "uploads/" . $_POST['file'];
+	//echo $location;
+
+	$data = file_get_contents($location); // Read the file's contents
+	$name = $_POST['file'];  //Name file will be downloaded as
+
+	force_download($name, $data);
+
 	/*
 	This function is called when a user chooses to download a file.
 	Steps
@@ -56,6 +82,12 @@ class Docs extends Controller {
 	}
 
 	function deleteFile() {
+
+	$file = "uploads/" . $_POST['file'];
+	unlink($file);
+	header( 'Location: docs' );
+
+
 	/*
 	This function is called when a user chooses to delete a file that has been uploaded.
 	Steps
