@@ -5,9 +5,9 @@
  * University of Idaho CS 384 - Spring 2011
  * GusPHP Subteam
  * File Authors:
- *		Colby Blair
+ *              Colby Blair
  * Documentation:
- *		Cynthia Rempel
+ *              Cynthia Rempel
  * Models used: Page
  * Views used: login, admin, groups/main, home
  * Libraries used: unit_test
@@ -21,7 +21,6 @@ class Admin extends Controller {
 	function Admin(){
 		parent::Controller();	
 		$this->load->model('Page');
-		
 		$this->testmode = false;
 
 		//set page footer
