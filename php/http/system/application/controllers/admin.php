@@ -16,8 +16,10 @@
 
 /**
  * @package GusPackage
- * @subpackage Admin
+ * subpackage Admin
  * @author Colby Blair <cblair@vandals.uidaho.edu>
+ * @version 0.4
+ * @copyright University of Idaho 2011
  */
 
 class Admin extends Controller {

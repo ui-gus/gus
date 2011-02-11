@@ -156,6 +156,7 @@ class Page extends Model {
 	}
 
 	function save($data) {
+		$this->load->database('admin');
 		if($this->db->get_where('page',array('name' => $data['name']))->num_rows < 1) {
 			return($this->db->insert('page',$data));
 		}
