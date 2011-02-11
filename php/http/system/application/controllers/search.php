@@ -14,9 +14,34 @@ class Search extends Controller {
 		$page_name = 'search';
 		$this->pdata['header'] = $this->Find->get_header($page_name);
 		$this->pdata['content'] = $this->Find->get_content($page_name); 
-		$this->load->view('search',$this->pdata);
+		
+		
+		if(!empty($_POST)){	
+			$this->pdata['results'] = $this->getResults($_POST['un']);
+			$this->load->view('search_result',$this->pdata);
+		}
+		else {
+			$this->load->view('search',$this->pdata);
+		}
 	}
 
+	function getResults($data){
+		/* $query = $this->db->get_where('user', array('un'=>$data)); 
+		if($query->nu_rows() > 0);
+		return $query->results(); 
+		*/
+		$result = $this->db->query("SELECT un FROM user WHERE un='$data'")->result(); //slightly changed from colby's format
+		if(empty($result)) return "No Users Found";
+		else{
+			return $_POST['un'];
+			//foreach($result as $key){
+				//echo $key;
+				//$this->pdata['content'] .= $key;
+			//}
+		}
+	}
+	
+	
 	function testDB(){
 		$this->load->library('unit_test');
 		$id = 1;
