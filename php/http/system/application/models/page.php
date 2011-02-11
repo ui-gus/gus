@@ -14,7 +14,7 @@ class Page extends Model {
 	
 	function Page() {
 		parent::Model();
-		$this->load->database('admin');
+		$this->load->database();
 		$this->load->helper('url');
 		$this->load->library('session');
 		$this->css  = '<link href="' . base_url() . 'templates/template.css.php" type="text/css" rel="stylesheet" />';
@@ -36,12 +36,13 @@ class Page extends Model {
 		if($privilege == "admin"){
 			$content = "<a href=\"" . site_url() . "/admin\">Admin</a> | ";
 		}
-		$content = $content . "<a href=\"" . site_url() . "/pm\">Messages</a>" . 
-										" | <a href=\"" . site_url() . "/search\">Search</a>" . 
-										" | <a href=\"" . site_url() . "/forum\">Forum</a>" .
+		$content = $content . "<a href=\"" . site_url() . "/mail\">Messages</a>" .
+		                                                                " | <a href=\"" . site_url() . "/search\">Search</a>" .
+		                                                                " | <a href=\"" . site_url() . "/forum\">Forum</a>" .
 										" | <a href=\"" . site_url() . "/home\">Home</a>" .
 										" | <a href=\"" . site_url() . "/grouppages\">Groups</a> " .
-										" | <a href=\"" . site_url() . "/calendar\">Calendar</a> ";
+										" | <a href=\"" . site_url() . "/calendar\">Calendar</a> " .
+										" | <a href=\"" . site_url() . "/docs\">Docs</a> " ;
 										
 				
 		return("
