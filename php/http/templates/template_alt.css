@@ -1,11 +1,9 @@
-/* This template has been revised to correct errors with margins as well as 
-	small issues with readability and portability. */
 
-	
+
 html {
 	/*Fall Back Option*/
 	background: white;
-	background-image: url('html_background.png');
+	background-image: url('../templates/html_background.png');
 	background-position: left top;
 	background-repeat: repeat-x;
 
@@ -16,7 +14,7 @@ body{
 	margin: auto;
 	width: 1024px;
 	height: auto;
-	background-image: url('body_background_labeled.png');
+	background-image: url('../templates/body_background.png');
 	background-position: left top;
 	background-repeat: no-repeat;
 	padding-bottom: 50px;
@@ -53,7 +51,7 @@ div#links{
 	padding-left: 10px;
 	padding-right: 10px;
 	
-	background-image: url('link_background_swatch.png');
+	background-image: url('../templates/link_background_swatch.png');
 	background-position: left top;
 	background-repeat: repeat-x;
 	background-attachment: fixed;
@@ -93,7 +91,7 @@ div#links_right{
 div#container{
 	width: 1024px;
 	padding-left: 7px;
-	background-image: url('content_background_slice.png');
+	background-image: url('../templates/content_background_slice.png');
 	background-position: left top;
 	background-repeat: repeat-y;
 	font-family: "Arial";
@@ -126,7 +124,7 @@ div#content{
 	width:	730px;  
 	padding: 10px;
 	padding-bottom: 40px;
-	background-image: url('update_holder.png');
+	background-image: url('../templates/update_holder.png');
 	background-position: top left;
 	background-repeat: no-repeat;
 }
@@ -140,7 +138,7 @@ div.update{
 	font-size: 11px;
 	color: #434750;
 	margin-bottom: 15px;
-	background-image: url('update_holder_bottom.png');
+	background-image: url('../templates/update_holder_bottom.png');
 	background-position: bottom right;
 	background-repeat: no-repeat;
 	text-align: justify;
@@ -166,6 +164,12 @@ div.read_more{
 	margin-left: 15px;
 	margin-top: 10px;
 	color: #7f7f7f;
+}
+
+
+div#content img{
+	position: absolute;
+	right: 10px;
 }
 
 img.user_pic{
@@ -216,13 +220,13 @@ h1.title{
 	padding-top: 4px;
 	padding-bottom: 2px;
 	display: block;
-	background-image: url('drop_shadow_group.png');
+	background-image: url('../templates/drop_shadow_group.png');
 	
 	padding-left: 12px;
 }
 
 li#group_column_current {
-	background-image: url('drop_shadow_group_current.png');
+	background-image: url('../templates/drop_shadow_group_current.png');
 }
 
 

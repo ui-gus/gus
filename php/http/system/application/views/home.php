@@ -3,7 +3,9 @@
 <?php 	echo $this->pdata['content'] ?>
 
 <div class="update">
-	<img src = "../templates/profile_label.png" class="label">
+	
+	<?php echo "
+	<img src = \"" . base_url() ."/templates/profile_label.png\">
 					User Info
 				<br><br>
 				Stuff we need to know. 
@@ -11,7 +13,7 @@
 				<b>Viewable with Login</b>
 				<ul>
 					<li>NAME
-					<li>Profile Picture
+					<l 	i>Profile Picture
 					<li>Group Subscriptions
 					<li>Age/Gender/DOB
 					<li>Summary
@@ -51,11 +53,8 @@
 					<li>Age
 					<li>Profile Picture
 					<li>Summary
-				</ul>	
-
-				
-									
+				</ul>						
 </div>
-
+"?>
 
 <?php echo $this->pdata['footer'] ?>
