@@ -8,14 +8,14 @@ html {
 	background-image: url('../templates/html_background.png');
 	background-position: left top;
 	background-repeat: repeat-x;
-	height: 100%;
+	
 }
 
 body{
 	display:block;
 	margin: auto;
 	width: 1024px;
-	height: 100%;
+	height: auto;
 	background-image: url('../templates/body_background.png');
 	background-position: left top;
 	background-repeat: no-repeat;
@@ -30,10 +30,16 @@ div#spreader_top{
 	clear: both;
 }
 
+div#spreader_bottom{
+	height: 150px;
+	width: 1024px;
+	clear: both;
+}
+
 div#links{
 	border: 1px solid black;
 	border-top: 0px;
-	
+		
 	-moz-border-bottom-left-radius: 10px;
 	-moz-border-bottom-right-radius: 1px;
 	-moz-border-top-left-radius: 0px;
@@ -57,7 +63,7 @@ div#links{
 	background-position: left top;
 	background-repeat: repeat-x;
 	background-attachment: fixed;
-		color: white;
+	color: white;
 }
 
 div#links a:link {
@@ -99,8 +105,8 @@ div#container{
 	font-size: 10pt;
 	height: 100%;
 	position: relative;
+	padding-bottom: 50px;	
 }
-
 
 div#footer{
 	height: 50px;
@@ -111,7 +117,7 @@ div#footer{
 	font-color: #666;
 	text-align: center;
 	width: 1010px;
-	background: #25283b;
+	background: #404349;
 	position: absolute;
 	left: 0px;
 	bottom: 0px;
@@ -128,6 +134,11 @@ div#content{
 	background-image: url('../templates/update_holder.png');
 	background-position: top left;
 	background-repeat: no-repeat;
+}
+
+div#content img{
+	position: absolute;
+	right: 10px;
 }
 
 div#content table{
@@ -219,7 +230,7 @@ h1.title{
 	text-align: center;
 	font-family: "Arial";
 	font-size: 14pt;
-	padding-bottom: 40px;
+	padding-bottom: 40px;	
 	padding-top: 10px;
 }
 
@@ -255,4 +266,3 @@ h1.title{
 li#group_column_current {
 	background-image: url('../templates/drop_shadow_group_current.png');
 }
-

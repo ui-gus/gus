@@ -123,15 +123,14 @@ class Page extends Model {
 
 	function get_footer() {
 		return("
-		<div id=\"spreader_top\">
-		</div>
-		<div id=\"footer\">
-			<br>
-			University of Idaho  GUS was implemented by a software engineering team from CS38-384.
-		</div>
+			<div id=\"spreader_bottom\">
+			</div>
+			<div id=\"footer\">
+				<br>
+				University of Idaho  GUS was implemented by a software engineering team from CS38-384.
+			</div>
 		</div>
 	</div>		
-	
 </body>
 </html>");
 	}
