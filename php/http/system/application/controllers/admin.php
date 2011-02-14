@@ -1,17 +1,25 @@
 <?php
-
-/*
+/**
  * Gus - Groups in a University Setting
  * University of Idaho CS 384 - Spring 2011
  * GusPHP Subteam
  * File Authors:
- *              Colby Blair
+ * @author Colby Blair <cblair@vandals.uidaho.edu>
  * Documentation:
  *              Cynthia Rempel
  * Models used: Page
  * Views used: login, admin, groups/main, home
  * Libraries used: unit_test
  * @package GusPackage
+ */
+
+
+/**
+ * @package GusPackage
+ * subpackage Admin
+ * @author Colby Blair <cblair@vandals.uidaho.edu>
+ * @version 0.4
+ * @copyright University of Idaho 2011
  */
 
 class Admin extends Controller {

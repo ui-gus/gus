@@ -47,7 +47,7 @@ class Search extends Controller {
 		$id = 1;
 		$this->db->select('un')->from('user')->where('id',$id);
 		$query = $this->db->get();
-		echo $this->unit->run('test',$query->result(),'Expected Output = False');	
+		echo $this->unit->run(false,'test' == $query->result(),'Expected Output = False');	
 	}
 	
 	function testDBBoundaries(){

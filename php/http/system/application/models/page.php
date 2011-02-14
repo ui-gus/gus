@@ -40,7 +40,7 @@ class Page extends Model {
 			$content = $content . " | <a href=\"" . site_url() . "/admin\">Admin</a> | ";
 		}
 		
-		$content = $content . "<a href=\"" . site_url() . "/mail\">Messages</a>" . 
+		$content = $content . "<a href=\"" . site_url() . "/pm\">Messages</a>" . 
 										" | <a href=\"" . site_url() . "/search\">Search</a>" . 
 										" | <a href=\"" . site_url() . "/forum\">Forum</a>" .
 										" | <a href=\"" . site_url() . "/grouppages\">Groups</a> " .
@@ -156,6 +156,7 @@ class Page extends Model {
 	}
 
 	function save($data) {
+		$this->load->database('admin');
 		if($this->db->get_where('page',array('name' => $data['name']))->num_rows < 1) {
 			return($this->db->insert('page',$data));
 		}
