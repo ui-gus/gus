@@ -12,12 +12,14 @@ html {
 }
 
 body{
+	display:block;
 	margin: auto;
 	width: 1024px;
 	height: 100%;
 	background-image: url('../templates/body_background.png');
 	background-position: left top;
 	background-repeat: no-repeat;
+	padding-bottom: 50px;
 }
 
 /* IDs (unique) elements */
@@ -96,21 +98,26 @@ div#container{
 	font-family: "Lucida Sans Unicode";
 	font-size: 10pt;
 	height: 100%;
-	clear: both;
+	position: relative;
 }
 
 
 div#footer{
-
-	width: 100%;
-	height: 30px;
-	clear: both;
+	height: 50px;
+	margin-left: 6px;
+	margin-right: 6px;
 	border-top: 1px dashed #436188;
-	padding: 10px;
 	font-size: 9px;
 	font-color: #666;
 	text-align: center;
-	float: center;
+	width: 1010px;
+	background: #25283b;
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	border-left: 1px solid #535353;
+	border-right: 1px solid #535353;
+	color: white;
 }
 
 div#content{	
