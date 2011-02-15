@@ -1,4 +1,11 @@
 <?php
+/**
+ * @package GusPackage
+ * subpackage Userpage
+ * @author First Last <flast@vandals.uidaho.edu>
+ * @version 0.4
+ * @copyright University of Idaho 2011
+ */
 
 class Userpage extends Controller {
 	function Userpage(){
