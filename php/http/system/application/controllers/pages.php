@@ -1,12 +1,12 @@
 <?php
+/**
+ * @package GusPackage
+ * subpackage Pages
+ * @author Colby Blair <cblair@vandals.uidaho.edu>
+ * @version 0.4
+ * @copyright University of Idaho 2011
+ */
 
-/******************************************************************************
-*Gus - Groups in a University Setting
- University of Idaho CS 384 - Spring 2011
- GusPHP Subteam
- File Authors:
-                Colby Blair
-******************************************************************************/
 
 class Pages extends Controller {
 	var $pdata; //page data
