@@ -1,5 +1,12 @@
 <?php
-/***** written by Zeke Long *****/
+/**
+ * @package GusPackage
+ * subpackage Admin
+ * @author Zeke Long <long3841@vandals.uidaho.edu>
+ * @version 0.4
+ * @copyright University of Idaho 2011
+ */
+
 class Calendar extends Controller{
 	var $pdata;
 	
