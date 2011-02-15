@@ -1,8 +1,6 @@
 <?php
 /***** written by Zeke Long *****/
-
-class Calendar extends Controller 
-{
+class Calendar extends Controller{
 	var $pdata;
 	
 	function Calendar()           //constructor
@@ -113,3 +111,4 @@ $event_year = $year;
 	}
 }
 ?>
+
