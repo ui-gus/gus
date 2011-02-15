@@ -1,4 +1,11 @@
 <?php
+/**
+ * @package GusPackage
+ * subpackage Search
+ * @author First Last <flast@vandals.uidaho.edu>
+ * @version 0.4
+ * @copyright University of Idaho 2011
+ */
 
 class Search extends Controller {
 	var $pdata;
