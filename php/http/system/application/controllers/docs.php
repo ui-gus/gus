@@ -1,11 +1,12 @@
 <?php
-/******************************************************************************
-*Gus - Groups in a University Setting
- University of Idaho CS 384 - Spring 2011
- GusPHP Subteam
- File Authors:
-		Alex Nilson
-******************************************************************************/
+/**
+ * @package GusPackage
+ * subpackage Admin
+ * @author Alex Nilson <alexnilson@vandals.uidaho.edu>
+ * @version 0.4
+ * @copyright University of Idaho 2011
+ */
+
 class Docs extends Controller {
 
 	function Docs(){
