@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * @package GusPackage
+ * subpackage Forum
+ * @author First Last <flast@vandals.uidaho.edu>
+ * @version 0.4
+ * @copyright University of Idaho 2011
+ */
 class Forum extends Controller {
 	var $pdata;
 
