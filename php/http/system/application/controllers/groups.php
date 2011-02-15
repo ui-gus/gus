@@ -1,16 +1,19 @@
 <?php
 
 /**
- * Gus - Groups in a University Setting
- * University of Idaho CS 384 - Spring 2011
- * GusPHP Subteam
- * File Authors:
- *              Colby Blair
  * Uses: database('admin')
  * Models Used: Page, Group
  * Views Used: Login, groups/main, groups/add, groups/edit, home
  * groups/delete, groups/save
  * @package GusPackage
+ */
+
+/**
+ * @package GusPackage
+ * subpackage Groups
+ * @author Colby Blair <cblair@vandals.uidaho.edu>
+ * @version 0.4
+ * @copyright University of Idaho 2011
  */
 
 class Groups extends Controller {
