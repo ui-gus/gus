@@ -114,10 +114,14 @@ class Docs extends Controller {
 		//index
 		echo $this->unit->run($this->index(), true, 'index');
 		//upload
+                echo $this->unit->run($this->uploadFile(), true, 'Docs: Upload File should probably be commented out as it's in a different controller');
 		//Not needed atm
 		//Download
+                echo $this->unit->run($this->downloadFile(), true, 'downloadFile docs');
 		//Can't be tested afaik
 		//Delete
+                echo $this->unit->run($this->deleteFile(), true, 'deleteFile docs');
 		//Can't be tested afaik
+                echo $this->unit->run($this->organizeFiles(), true, 'organizeFiles docs');
 	}
 }
