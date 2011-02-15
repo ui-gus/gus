@@ -6,6 +6,7 @@
  * Uses Views: grouppage_view
  * Uses Libraries: unit_test
  */
+
 /**
  * @package GusPackage
  * subpackage GroupPage
@@ -41,7 +42,8 @@ class Grouppage extends Controller {
 		//set page name
 		$this->load->library('unit_test');
                 echo $this->unit->run('Gus Groups.',$this->Page->get_content('groups'), 'Userpage test');
-		//$this->load->view('test', $this->pdata);	
+		//$this->load->view('test', $this->pdata);
+        echo $this->unit->run(true,$this->index(), 'group page index');
 	}	
 
 }
