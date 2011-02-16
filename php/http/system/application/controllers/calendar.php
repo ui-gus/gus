@@ -53,7 +53,7 @@ $event_year = $year;
 			}
 			$event_data = $this->input->post('event_data');
 //for debugging purposes
-//echo  $event_year . " " . $event_month . " " . $event_day;      
+echo  $event_year . " " . $event_month . " " . $event_day;  
 			$this->CalendarModel->add_event($event_year."-".$event_month."-".$event_day, $event_data);
 		}
 		
