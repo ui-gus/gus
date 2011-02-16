@@ -95,3 +95,5 @@ $thread=mysql_fetch_array($result);
 </body>
 
 </html>
+
+<?php echo $this->pdata['footer'] ?>

@@ -53,3 +53,5 @@
 </body>
 
 </html>
+
+<?php echo $this->pdata['footer'] ?>
