@@ -15,14 +15,26 @@ class Userpage extends Controller {
 	}
 	
 	function index() {
-		$data['title'] = "User Page";
-		$data['heading'] = "User Page";
-		//$data['query'] = $this->db->where( 'user.id', 4 );
-		//$data['query'] = $this->db->get( 'user' );	
+		//$data['title'] = "User Page";
+		//$data['heading'] = "User Page";
+		//$data['query'] = $this->db->where( 'user.id', 4 );	
 			
 		$data['header'] = $this->Page->get_header('user');
-		$data['content'] = $this->Page->get_content('user');
+
+			//$data['content'] = $this->Page->get_content('user');
+		if( !$this->Page->authed() ){			
+			$data['content'] = "You must be logged in to view this page.";			
+		}	
+		else{
+			//$testsess = $this->session->sess_read();
+			$data['content'] = "You are viewing the user page.";
+				
+		}	
+
+
 		$data['footer'] = $this->Page->get_footer();				
+
+		
 						
 		$this->load->view( 'userpage_view.php', $data );
 
