@@ -10,7 +10,7 @@
 /**
  * @package GusPackage
  * subpackage GroupPage
- * @author First Last <flast@vandals.uidaho.edu>
+ * @author Brett Hitchcock <hitc8494@vandals.uidaho.edu>
  * @version 0.4
  * @copyright University of Idaho 2011
  */
@@ -25,11 +25,35 @@ class Grouppage extends Controller {
 	}
 	
 	function index() {
-		$data['title'] = "Group Page";
-		$data['heading'] = "Group Page";
+		//$data['title'] = "Group Page";
+		//$data['heading'] = "Group Page";
+		//$data['content'] = $this->Page->get_content('groups');
+	
 
 		$data['header'] = $this->Page->get_header('groups');
-		$data['content'] = $this->Page->get_content('groups');
+		
+		if( !$this->Page->authed() ){
+			$data['content'] = "You must be logged in to view this page.";
+		}				
+		else{			
+			$data['content'] = "You are viewing the group page.<br><br>
+				<u>Group Info (with links)</u><br>
+				<ul>
+				<li>Group name:<br>
+				<li>Group summary:<br>
+				<li>Join group: <br>				
+				<li>Etc<br><br>
+				</ul>
+				Need to know: <br>
+				<ul>
+				<li>Group name and members<br>
+				<li>Group calendar events<br>
+				<li>**User's permissions of this group<br>
+				<li>Link/info for group's forums<br>
+				</ul>
+				";
+								
+		}
 		$data['footer'] = $this->Page->get_footer();				
 			
 		$this->load->view( 'grouppage_view.php', $data );

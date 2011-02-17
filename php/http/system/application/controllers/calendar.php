@@ -34,13 +34,12 @@ class Calendar extends Controller{
 		//check to see if there is a new calendar post
 		if($event_day = $this->input->post('event_day'))
 		{
+			$event_data = $this->input->post('event_data');
 			//if it's the php form post (as opposed to the ajax one, which 
 			//doesn't pass year or month)
 			if($this->input->post('event_month'))
 			{
-//to make it work for now
-$event_year = $year;
-//				$event_year = $this->input->post('event_year');
+				$event_year = $this->input->post('event_year');
 				//adjust day and month since they are both off by 1 for some reason
 				$event_month = $this->input->post('event_month') + 1;
 				$event_day = $this->input->post('event_day') + 1;
@@ -51,9 +50,6 @@ $event_year = $year;
 				$event_year = $year;
 				$event_month = $month;
 			}
-			$event_data = $this->input->post('event_data');
-//for debugging purposes
-//echo  $event_year . " " . $event_month . " " . $event_day;      
 			$this->CalendarModel->add_event($event_year."-".$event_month."-".$event_day, $event_data);
 		}
 		

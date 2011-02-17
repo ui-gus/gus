@@ -51,6 +51,7 @@
 </head>
 <body>
 	<?php 	
+		$this->load->helper('form');
 		//display the calendar page
 		echo $this->pdata['header']; 
 		echo $this->pdata['content'];	
@@ -60,19 +61,20 @@
 		{
 			//set the path that the following form is going to route to (this covers for overlooked variations)
 			$form_path = site_url() . "/calendar/index/" . $this->pdata['year'] . "/" . $this->pdata['month'];
-			$form_years = range($this->pdata['year'], date('Y')+10);
+			$form_years = array_combine(range($this->pdata['year'], date('Y')+10), 
+										range($this->pdata['year'], date('Y')+10));
 			
 			echo "<p><i>To add an event, either click on the calendar day or use the menu below</i></p>";
-			//form to add an event to the calendar
+			//form to add an event to the calendar using CI's form helper
 			//the dropdowns change dynamically depending on what date you are currently viewing
 			//events can be planned a maximum of ten years in advance from the current date
 			echo form_open($form_path);
 				echo "Event Description:" . form_input('event_data') . "<br>";
-				echo "Month:" . form_dropdown('event_month', range(1, 12), $this->pdata['month']-1); 
+				echo "Month:" . form_dropdown('event_month', range(1, 12), $this->pdata['month']-1);			
 				echo "Day:" . form_dropdown('event_day', range(1, cal_days_in_month(CAL_GREGORIAN, 
-							$this->pdata['month'], $this->pdata['year'])), date('j')-1);
-				echo "Year:" . form_dropdown('event_year', $form_years) . "<br>";
-				echo form_submit('submit', 'Add Event');
+											$this->pdata['month'], $this->pdata['year'])), date('j')-1);
+				echo "Year:" . form_dropdown('event_year', $form_years);
+				echo "<br>" . form_submit('submit', 'Add Event');
 			echo form_close();	
 		}
 		echo '<p>Page rendered in {elapsed_time} seconds</p>';
