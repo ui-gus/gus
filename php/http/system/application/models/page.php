@@ -160,6 +160,12 @@ class Page extends Model {
 		return($this->session->userdata('un'));
 	}
 
+	function is_pw_secure($pw) {
+		return(
+			strlen($pw) > 6
+		);
+	}
+
 	function save($data) {
 		$this->load->database('admin');
 		if($this->db->get_where('page',array('name' => $data['name']))->num_rows < 1) {

@@ -73,13 +73,23 @@ class Users extends Controller {
 	}
 	
 	function save() {
-		$this->load->database('admin');
-		$data = array('un' => $_POST['un'], 'pw' => $_POST['pw']);
-		if($this->User->save($data)) {
-		 $this->pdata['content'] .= "User saved successfully.<br />\n";
+		//secure pw check
+		if(!$this->Page->is_pw_secure($_POST['pw'])) {
+			$this->pdata['content'] .= "Password was not " .
+				"good enough. Please try again.<br >\n";
+			$this->pdata['default_un'] = $_POST['un'];
+			$this->load->view('users/add',$this->pdata);
+						//$this->testmode);
 		} else {
-		 show_error('User could not be saved');
-		}
-		$this->load->view('users/save',$this->pdata);
+			$this->load->database('admin');
+			$data = array('un' => $_POST['un'], 
+					'pw' => $_POST['pw']);
+			if($this->User->save($data)) {
+			 $this->pdata['content'] .= "User saved successfully.<br />\n";
+			} else {
+			 show_error('User could not be saved');
+			}
+			$this->load->view('users/save',$this->pdata);
+		} //end if secure_pw
 	}
 }
