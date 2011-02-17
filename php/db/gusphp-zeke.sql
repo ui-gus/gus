@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 10, 2011 at 03:45 AM
+-- Generation Time: Feb 17, 2011 at 01:01 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -22,18 +22,33 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE IF NOT EXISTS `calendar` (
   `user` varchar(32) NOT NULL,
   `date` date NOT NULL,
-  `data` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `data` varchar(150) NOT NULL,
+  `eventID` int(11) NOT NULL AUTO_INCREMENT,
+  KEY `eventID` (`eventID`),
+  KEY `eventID_2` (`eventID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `calendar`
 --
 
-INSERT INTO `calendar` (`user`, `date`, `data`) VALUES
-('admin', '2011-02-15', 'this is an event'),
-('long3841', '2011-02-27', 'wake up early'),
-('name', '2011-02-26', 'an event on the 26th'),
-('name', '2011-07-07', 'an event in july'),
-('name', '2011-02-18', 'another event'),
-('admin', '2011-02-17', 'an event');
+INSERT INTO `calendar` (`user`, `date`, `data`, `eventID`) VALUES
+('admin', '2011-02-26', 'another event', 3),
+('admin', '2011-02-24', 'updated', 2),
+('admin', '2011-02-21', 'event', 4),
+('user1', '2011-03-15', 'an event in march', 6);
 
+-- --------------------------------------------------------
+
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`un`, `pw`) VALUES
+('admin', 'admin'),
+('long3841', 'long3841'),
+('user', 'user'),
+('name', 'name'),
+('user1', 'user1'),
+('zeke', 'zeke');
