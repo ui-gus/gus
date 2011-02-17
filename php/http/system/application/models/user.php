@@ -12,7 +12,8 @@ class User extends Model {
 	
 	function User() {
 		parent::Model();	
-		$this->load->database();
+		$this->load->database();		
+		$this->config->load('auth');
 	}
 
 	function get_userlist() {
@@ -24,13 +25,36 @@ class User extends Model {
 		return($data);
 	}
 
-
 	function save($data) {
-		if($this->db->get_where('user',array('un' => $data['un']))->num_rows < 1) {
-			return($this->db->insert('user',$data));
+		if($this->db->get_where('user',array('un' => $data['un']))->num_rows < 1) {		
+			return($this->save_apache($data)
+				&& $this->db->insert('user',$data)
+				);
 		}
 		$this->db->where('un',$data['un']);
-		return($this->db->update('user',$data));
+		return($this->save_apache($data)
+			&& $this->db->update('user',$data)
+			);
+	}
+
+	//need a delete function!!!
+	function save_apache($data) {
+		$auth_config = $this->config->item('auth');
+		if($auth_config['apache'] === true) {
+			//htaccess mode setting
+			$hmode = ""; //htaccess mode
+			if(file_exists($auth_config['htpasswd_fname'])) {
+				$hmode = "-b";
+			}
+			else $hmode  = "-bc";
+			//syscall
+			$cmd = 	"htpasswd $hmode " 
+			 . $auth_config['htpasswd_fname']
+				. " " . $data['un'] . " " . $data['pw'];
+			$status1 = system($cmd);
+			return($status1 !== false);
+		} else return(true); 
+		//^if apache mode == false, report everything ok
 	}
 }
 
