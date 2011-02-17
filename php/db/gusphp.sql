@@ -165,6 +165,56 @@ INSERT INTO `user` VALUES (0,'cblair','SHI/hel7');
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+--
+-- Table structure for table `replies`
+--
+
+CREATE TABLE IF NOT EXISTS `replies` (
+  `thread_id` int(4) NOT NULL DEFAULT '0',
+  `reply_id` int(4) NOT NULL DEFAULT '0',
+  `author` varchar(65) NOT NULL DEFAULT '',
+  `a_email` varchar(65) NOT NULL DEFAULT '',
+  `body` longtext NOT NULL,
+  `datetime` varchar(25) NOT NULL DEFAULT '',
+  KEY `a_id` (`reply_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `replies`
+--
+
+INSERT INTO `replies` (`thread_id`, `reply_id`, `author`, `a_email`, `body`, `datetime`) VALUES
+(5, 0, 'Chaylo', '', 'Just testing the reply counter', '15/Feb/2011 07:59:36'),
+(5, 0, 'testing', '', 'testing some more', '15/Feb/2011 08:50:23'),
+(5, 0, 'testing', '', 'testing', '15/Feb/2011 08:53:16'),
+(6, 0, 'tesing', '', 'testing', '15/Feb/2011 08:53:27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `threads`
+--
+
+CREATE TABLE IF NOT EXISTS `threads` (
+  `id` int(4) NOT NULL AUTO_INCREMENT,
+  `topic` varchar(255) NOT NULL DEFAULT '',
+  `body` longtext NOT NULL,
+  `author` varchar(65) NOT NULL DEFAULT '',
+  `email` varchar(65) NOT NULL DEFAULT '',
+  `datetime` varchar(25) NOT NULL DEFAULT '',
+  `view` int(4) NOT NULL DEFAULT '0',
+  `reply` int(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `threads`
+--
+
+INSERT INTO `threads` (`id`, `topic`, `body`, `author`, `email`, `datetime`, `view`, `reply`) VALUES
+(5, 'First Forum Entry', 'Just a quick test to make sure everything is working', 'Chaylo', '', '15/Feb/2011 07:59:21', 0, 3),
+(6, 'Gotta check it all again!', 'Ugh', 'Chaylo', '', '15/Feb/2011 08:50:01', 0, 1);
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
