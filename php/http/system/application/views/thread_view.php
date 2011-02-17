@@ -32,7 +32,13 @@ $thread=mysql_fetch_array($result);
     <?php echo form_open('forum/delete_thread');?>
     <?php echo form_hidden('id', $this->uri->segment(3));?>
     <input type="submit" value="Delete" >
-    </form></td>
+    </form>
+	<?php echo form_open('forum/edit_thread');?>
+    <?php echo form_hidden('id', $this->uri->segment(3));?>
+    <input type="submit" value="Edit" >
+    </form>
+	</td>
+	
 </tr>
 
 
@@ -70,19 +76,17 @@ $thread=mysql_fetch_array($result);
 
 <tr>
 <td valign="top"><strong>Body</strong></td>
-<td valign="top">:</td>
-<td><textarea name="body" cols="50" rows="3"></textarea></td>
+<td><textarea name="body" cols="70" rows="3"></textarea></td>
 </tr>
 
 <tr>
 <td><strong>Name</strong></td>
-<td>:</td>
 <td><input type="text" name="author" size="50" /></td>
 </tr>
 
 <tr>
 <td>&nbsp;</td>
-<td>&nbsp;</td>
+
 <td><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></td>
 </tr>
 

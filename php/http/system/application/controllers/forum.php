@@ -8,6 +8,7 @@
  */
 class Forum extends Controller {
 	var $pdata;
+	var $fdata;
 
 	function Forum(){
 		parent::Controller();
@@ -41,8 +42,32 @@ function view_thread()
 	$this->load->view('create_thread_view', $this->pdata);
   }
   
+  function edit_thread()
+  {
+    $id=$_POST['id'];
+    $sql="SELECT * FROM threads WHERE id='$id'";
+    $current_thread=mysql_fetch_array(mysql_query($sql));
+	$this->fdata['id']=$id;
+	$this->fdata['topic']=$current_thread['topic'];
+	$this->fdata['body']=$current_thread['body'];
+	
+    $this->pdata['header'] = $this->Page->get_header('forum');	
+    $this->pdata['content'] = $this->Page->get_content('forum');
+	$this->load->view('edit_thread_view', $this->pdata, $this->fdata);  
+  }
+  
+  function thread_update()
+  { 
+    $id=$_POST['id'];
+	$this->db->where('id', $id);
+    $this->db->update('threads', $_POST);
+    redirect('forum/view_thread/'.$_POST['id']);
+  } 
+    
+  
   function thread_insert()
   {
+    /*inserts thread in to database */
     $_POST['datetime']=date("d/M/Y h:i:s");
     $this->db->insert('threads', $_POST);
 	redirect('forum');
@@ -50,14 +75,15 @@ function view_thread()
   
   function reply_insert()
   { 
+    /*pull the reply count and updates it */
     $id=$_POST['thread_id'];
     $sql="SELECT * FROM threads WHERE id='$id'";
     $thread=mysql_fetch_array(mysql_query($sql));
-	
 	$data['reply']=$thread['reply'] + 1;
 	$this->db->where('id', $id);
     $this->db->update('threads', $data); 
 	
+	/*inserts reply in to database */
     $_POST['datetime']=date("d/M/Y h:i:s");
     $this->db->insert('replies', $_POST);
 	redirect('forum/view_thread/'.$_POST['thread_id']);	 
@@ -66,6 +92,7 @@ function view_thread()
   
   function delete_thread()
   {
+    /*deletes thread and all replies from database */
 	$id=$_POST['id'];
     mysql_query("DELETE FROM threads WHERE id='$id'");
     mysql_query("DELETE FROM replies WHERE thread_id='$id'");
