@@ -30,11 +30,13 @@ DROP TABLE IF EXISTS `calendar`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `calendar` (
-  `user` varchar(100) NOT NULL,
+  `user` varchar(32) NOT NULL,
   `date` date NOT NULL,
-  `data` text NOT NULL,
-  PRIMARY KEY (`date`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `data` varchar(150) NOT NULL,
+  `eventID` int(11) NOT NULL AUTO_INCREMENT,
+  KEY `eventID` (`eventID`),
+  KEY `eventID_2` (`eventID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +45,11 @@ CREATE TABLE `calendar` (
 
 LOCK TABLES `calendar` WRITE;
 /*!40000 ALTER TABLE `calendar` DISABLE KEYS */;
-INSERT INTO `calendar` VALUES ('admin','2011-02-15','this is an event'),('cblair','2011-02-07','test'),('cblair','2011-02-08','test');
+INSERT INTO `calendar` (`user`, `date`, `data`, `eventID`) VALUES
+('admin', '2011-02-26', 'another event', 3),
+('admin', '2011-02-24', 'updated', 2),
+('admin', '2011-02-21', 'event', 4),
+('user1', '2011-03-15', 'an event in march', 6);
 /*!40000 ALTER TABLE `calendar` ENABLE KEYS */;
 UNLOCK TABLES;
 
