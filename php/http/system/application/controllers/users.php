@@ -57,7 +57,8 @@ class Users extends Controller {
 		 $this->load->database('admin');
 		 unset($_POST['delete']); //dont need the delete button val
 		 foreach($_POST as $un) {
-		  if($this->db->delete('user',array('un' => $un))) {
+		  //if($this->db->delete('user',array('un' => $un))) {
+		  if($this->User->delete(array('un' => $un))) {
 		 	$this->pdata['content'] .= "<br />\nUser $un deleted."
 				. "<br />\n";
 		  } else {

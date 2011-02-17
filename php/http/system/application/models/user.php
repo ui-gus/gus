@@ -37,7 +37,13 @@ class User extends Model {
 			);
 	}
 
-	//need a delete function!!!
+	function delete($data) {
+		$this->load->database('admin');
+		return($this->db->delete('user',$data)
+			&& $this->delete_apache($data)
+			);
+	}
+
 	function save_apache($data) {
 		$auth_config = $this->config->item('auth');
 		if($auth_config['apache'] === true) {
@@ -56,6 +62,24 @@ class User extends Model {
 		} else return(true); 
 		//^if apache mode == false, report everything ok
 	}
+
+	function delete_apache($data) {
+		$auth_config = $this->config->item('auth');
+		if($auth_config['apache'] === true) {
+			if(!file_exists($auth_config['htpasswd_fname'])) {
+				return(false); 
+				//shouldn't be running in apache mode
+			}
+			//syscall
+			$cmd = 	"htpasswd -D " 
+			 . $auth_config['htpasswd_fname']
+				. " " . $data['un'];
+			$status1 = system($cmd);
+			return($status1 !== false);
+		} else return(true); 
+		//^if apache mode == false, report everything ok
+	}
+
 }
 
 ?>
