@@ -32,22 +32,17 @@ class CalendarModel extends Model
 
 		   {cal_row_start}<tr class="days">{/cal_row_start}
 		   {cal_cell_start}<td class="day">{/cal_cell_start}
-
-		   {cal_cell_content}
-			<div class="days">{day}</div>
-			<div class="content">{content}</div>
-			{/cal_cell_content}
-		   {cal_cell_content_today}
-			//day_num and highlight are two separate classes
-			<div class="day_num highlight">{day}</div>
-			<div class="content">{content}</div>
-		   {/cal_cell_content_today}
-
-		   {cal_cell_no_content}<div class="day_num">{day}</div>{/cal_cell_no_content}
-		   {cal_cell_no_content_today}<div class="day_num highlight">{day}</div>{/cal_cell_no_content_today}
-
-		   {cal_cell_blank}&nbsp;{/cal_cell_blank}
-
+				{cal_cell_content}
+					<div class="day_num">{day}</div>
+					<div class="content">{content}</div>
+				{/cal_cell_content}
+				{cal_cell_content_today}
+					<div class="day_num highlight">{day}</div>
+					<div class="content">{content}</div>
+				{/cal_cell_content_today}
+				{cal_cell_no_content}<div class="day_num">{day}</div>{/cal_cell_no_content}
+				{cal_cell_no_content_today}<div class="day_num highlight">{day}</div>{/cal_cell_no_content_today}
+				{cal_cell_blank}&nbsp;{/cal_cell_blank}
 		   {cal_cell_end}</td>{/cal_cell_end}
 		   {cal_row_end}</tr>{/cal_row_end}
 
