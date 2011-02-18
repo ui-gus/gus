@@ -35,22 +35,10 @@ class Calendar extends Controller{
 		//check to see if there is a new add event post
 		if($event_data = $this->input->post('event_data'))
 		{
-			//if it's the php form post (as opposed to the ajax one, which 
-			//doesn't pass year or month)
-			if($this->input->post('event_month'))
-			{
-				$event_year = $this->input->post('event_year');
-				//adjust day and month since they are both off by 1 for some reason
-				$event_month = $this->input->post('event_month') + 1;
-				$event_day = $this->input->post('event_day') + 1;
-			}
-			else  	//if it's the ajax post
-			{	
-				//the month and year will be from the current calendar shown
-				$event_year = $year;
-				$event_month = $month;
-				$event_day = $this->input->post('event_day') + 1;
-			}
+			$event_year = $this->input->post('event_year');
+			//adjust day and month since they are both off by 1 for some reason
+			$event_month = $this->input->post('event_month') + 1;
+			$event_day = $this->input->post('event_day') + 1;
 			$this->CalendarModel->add_event($event_year."-".$event_month."-".$event_day, $event_data);
 		}
 		
@@ -58,11 +46,23 @@ class Calendar extends Controller{
 		if($this->input->post('view_day_request'))
 		{
 			$event_day = $this->input->post('event_day');
-			$event_year = $year;
-			$event_month = $month;
+			//if it's the php post
+			if($this->input->post('event_month'))
+			{
+				$event_year = $this->input->post('event_year');
+				$event_month = $this->input->post('event_month');
+			}
+			else 		//if it's the jQuery post
+			{
+				$event_year = $year;
+				$event_month = $month;				
+			}
 			//generate calendar content to pass to the view
 			$this->pdata['content'] = 
 					$this->CalendarModel->view_day($event_year."-".$event_month."-".$event_day);
+			$this->pdata['year'] = $event_year;
+			$this->pdata['month'] = $event_month + 1;
+			$this->pdata['day'] = $event_day + 1;
 			//display the day view
 			$this->load->view('calendar_day_view', $this->pdata);
 		}

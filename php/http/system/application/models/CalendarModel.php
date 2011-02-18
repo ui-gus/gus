@@ -50,28 +50,36 @@ class CalendarModel extends Model
 		';
 	}
 
-//still need to implement
-	function view_day($date)
-	{
-		/*This function will get every event for the current user on the spacified day 
-		  and list it in an organized manner with a "DELETE" option for each event shown.
-		  It will replace the usual calendar content
-		*/
-		return 'not yet implemented';
-	}
-
-//still need to implement
-	function remove_event($date = null, $eventID)
-	{
-		return 'not yet implemented';
-		//will return a 1 or a 0
-	}
-	
-	function add_event($date, $event)   	//function to add an event to the calendar
+	function view_day($date)  	
 	{
 		$userName = $this->session->userdata('un');
-		//if the event already occurs on this date for this user
-		if($this->db->select('eventID')->from('calendar')->count_all_results())
+		//get all the events of the day
+		$result = $this->db->query("SELECT data FROM calendar 
+					WHERE date LIKE '$date' AND user='$userName'")->result();
+		$day_data = array();
+
+//just so something shows up for now		
+$day_data[0] = 'a sample event';
+		foreach($result as $row)   
+		{
+			$val = 1;
+			$day_data[$val] = $row->data;
+			$val += 1;
+		}
+		return $day_data;
+	}
+
+	function remove_event($eventID)
+	{
+		$this->db->query("DELETE FROM calendar WHERE eventID='$eventID'");
+		return 1;
+	}
+	
+	function add_event($date, $event, $eventID = null)   	//function to add an event to the calendar
+	{
+		$userName = $this->session->userdata('un');
+		//if the event is being edited
+		if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
 		{
 			//update the event for the user in the calendar table
 			$this->db->query("UPDATE calendar SET data='$event' WHERE user='$userName' AND date='$date'");
