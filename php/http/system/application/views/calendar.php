@@ -61,10 +61,12 @@
 		{
 			//set the path that the following form is going to route to (this covers for overlooked variations)
 			$form_path = site_url() . "/calendar/index/" . $this->pdata['year'] . "/" . $this->pdata['month'];
+			//an indexed array of years
 			$form_years = array_combine(range($this->pdata['year'], date('Y')+10), 
 										range($this->pdata['year'], date('Y')+10));
 			
-			echo "<p><i>To add an event, either click on the calendar day or use the menu below</i></p>";
+			echo "<p><i>To ADD an event, either click on the calendar day or use the menu below</i></p>";
+			echo "<p><i>To VIEW day or DELETE an event, click on the calendar day</i></p>";
 			//form to add an event to the calendar using CI's form helper
 			//the dropdowns change dynamically depending on what date you are currently viewing
 			//events can be planned a maximum of ten years in advance from the current date
@@ -82,16 +84,31 @@
 	?>
 	
 	
-	<!-- jquery script to assist in adding events to the calendar -->
+	<!-- jquery script as a second option events to the calendar -->
 	<script type="text/javascript">
 	$(document).ready(function()
 	{
 		<!-- make each calendar cell clickable (uses same class as css)-->
 		$('.calendar .day').click(function()
-		{
-			event_day = $(this).find('.day_num').html();
-			event_data = prompt('Event Description:', $(this).find('.content').html());
-			if(event_data != null)
+		{		
+			event_day = $(this).find('.day_num').html();		
+			view_day_request = confirm("View or Delete events on this day?");
+			event_data = prompt("Event Description:");
+
+			if(view_day_request != null)
+			{ 	
+				$.ajax(
+				{
+					url: window.location,
+					type: "POST",
+					data: view_day_request,
+					success: function(msg)
+					{
+						location.reload();
+					}
+				});
+			}
+			else if(event_data != null) 
 			{
 				<!-- use ajax to send post to calendar controller -->
 				$.ajax(
@@ -101,7 +118,8 @@
 					data: 
 					{
 						event_day: event_day,
-						event_data: event_data
+						event_data: event_data,
+						view_day_request: view_day_request
 					},
 					success: function(msg)
 					{

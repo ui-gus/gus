@@ -50,31 +50,39 @@ class CalendarModel extends Model
 		';
 	}
 
-	
-	function add_event($date, $event)   	//function to add an event to the calendar
+//still need to implement
+	function view_day($date)
 	{
-		//if the event already occurs on this date for this user
-		if($this->db->select('date')->from('calendar')->where('date', $date)->where('user', $this->session->userdata('un'))->count_all_results())
-		{
-			//update the event for the user in the calendar table
-			$this->db->where('date', $date)->where('user', $this->session->userdata('un'))
-						->update('calendar', array('date' => $date, 'data' => $event));
-		}
-		else		//if this is a new event
-		{	//add the event for the user in the calendar table 
-			$this->db->insert('calendar', array('date' => $date, 'data' => $event, 'user' => $this->session->userdata('un')));
-		}
-		return 1;
+		/*This function will get every event for the current user on the spacified day 
+		  and list it in an organized manner with a "DELETE" option for each event shown.
+		  It will replace the usual calendar content
+		*/
+		return 'not yet implemented';
 	}
 
 //still need to implement
 	function remove_event($date = null, $eventID)
 	{
-		//event_ID 0 is reserved for testing purposes
 		return 'not yet implemented';
 		//will return a 1 or a 0
 	}
-
+	
+	function add_event($date, $event)   	//function to add an event to the calendar
+	{
+		$userName = $this->session->userdata('un');
+		//if the event already occurs on this date for this user
+		if($this->db->select('eventID')->from('calendar')->count_all_results())
+		{
+			//update the event for the user in the calendar table
+			$this->db->query("UPDATE calendar SET data='$event' WHERE user='$userName' AND date='$date'");
+		}
+		else		//if this is a new event
+		{	//add the event for the user in the calendar table 
+			$this->db->query("INSERT INTO calendar (user, date, data) 
+								VALUES ('$userName', '$date', '$event')");
+		}
+		return 1;
+	}
 	
 	function myGenerate($year, $month)
 	{	
@@ -88,14 +96,13 @@ class CalendarModel extends Model
 		//(codeigniter's generate() function from the calendar class, different than myGenerate())
 		return $this->calendar->generate($year, $month, $cal_data);
 	}
-
 	
 	function get_cal_data($year, $month)
 	{
 		$userName = $this->session->userdata('un');
 		//SELECT the entire month's data for the logged in user from the calendar table 
-		$result = $this->db->query("SELECT date, data FROM calendar WHERE date LIKE '$year-$month%' AND user='$userName'")->result();
-
+		$result = $this->db->query("SELECT date, data FROM calendar WHERE date LIKE '$year-$month%' 
+														AND user='$userName'")->result();
 		$cal_data = array();
 		
 		//assign calendar data to appropriate days

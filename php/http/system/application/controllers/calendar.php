@@ -28,13 +28,13 @@ class Calendar extends Controller{
 		if(!$year){ $year = date('Y'); }
 		if(!$month){ $month = date('m'); }
 	
-		//get header
+		//get header and footer
 		$this->pdata['header'] = $this->Page->get_header('calendar');		
-
-		//check to see if there is a new calendar post
-		if($event_day = $this->input->post('event_day'))
+		$this->pdata['footer'] = $this->Page->get_footer();
+		
+		//check to see if there is a new add event post
+		if($event_data = $this->input->post('event_data'))
 		{
-			$event_data = $this->input->post('event_data');
 			//if it's the php form post (as opposed to the ajax one, which 
 			//doesn't pass year or month)
 			if($this->input->post('event_month'))
@@ -49,30 +49,41 @@ class Calendar extends Controller{
 				//the month and year will be from the current calendar shown
 				$event_year = $year;
 				$event_month = $month;
+				$event_day = $this->input->post('event_day') + 1;
 			}
 			$this->CalendarModel->add_event($event_year."-".$event_month."-".$event_day, $event_data);
 		}
 		
-		//get calendar content if user is logged in, otherwise display error message
-		if($this->Page->authed())
-		{		
-			//generate calendar content to pass to the view
-			$this->pdata['content'] = $this->CalendarModel->myGenerate($year, $month);
-			//save year and month to pass to the view
-			$this->pdata['year'] = $year;
-			$this->pdata['month'] = $month;
-		}
-		else
+		//check to see if there is a new post requesting to view the day
+		if($this->input->post('view_day_request'))
 		{
-			$this->pdata['content'] = 'NOT LOGGED IN
-				<p><a href="' . site_url() . '/auth">LOGIN</a> to view your calendar';
+			$event_day = $this->input->post('event_day');
+			$event_year = $year;
+			$event_month = $month;
+			//generate calendar content to pass to the view
+			$this->pdata['content'] = 
+					$this->CalendarModel->view_day($event_year."-".$event_month."-".$event_day);
+			//display the day view
+			$this->load->view('calendar_day_view', $this->pdata);
 		}
-		
-		//get footer
-		$this->pdata['footer'] = $this->Page->get_footer();
-		
-		//pass data to view to display it
-		$this->load->view('calendar', $this->pdata);
+		else		//if not, then show the month view
+		{
+			if($this->Page->authed())       //get calendar content if user is logged in	
+			{		
+				//generate calendar content to pass to the view
+				$this->pdata['content'] = $this->CalendarModel->myGenerate($year, $month);
+				//save year and month to pass to the view
+				$this->pdata['year'] = $year;
+				$this->pdata['month'] = $month;
+				//display the month view
+				$this->load->view('calendar', $this->pdata);
+			}
+			else
+			{
+				$this->pdata['content'] = 'NOT LOGGED IN
+					<p><a href="' . site_url() . '/auth">LOGIN</a> to view your calendar';
+			}
+		}
 	}
 	
 	
