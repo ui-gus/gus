@@ -62,8 +62,8 @@ class Calendar extends Controller{
 			//generate calendar content to pass to the view
 			$this->pdata['content'] = 
 					$this->CalendarModel->view_day($event_year."-".$event_month."-".$event_day);
-			$this->pdata['year'] = $year;
-			$this->pdata['month'] = $month;
+			$this->pdata['year'] = $event_year;
+			$this->pdata['month'] = $event_month;
 			$this->pdata['day'] = $event_day;
 			//display the day view
 			$this->load->view('calendar_day_view', $this->pdata);
