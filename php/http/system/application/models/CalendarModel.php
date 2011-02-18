@@ -53,18 +53,18 @@ class CalendarModel extends Model
 	function view_day($date)  	
 	{
 		$userName = $this->session->userdata('un');
-		//get all the events of the day
-		$result = $this->db->query("SELECT data FROM calendar 
-					WHERE date LIKE '$date' AND user='$userName'")->result();
+		//get all the events of the day along with their corresponding eventID
+		$result = $this->db->query("SELECT data, eventID FROM calendar 
+					WHERE date='$date' AND user='$userName'")->result();
 		$day_data = array();
 
-//just so something shows up for now		
-$day_data[0] = 'a sample event';
+		$value = 0;
+		//save each event into an array
 		foreach($result as $row)   
 		{
-			$val = 1;
-			$day_data[$val] = $row->data;
-			$val += 1;
+//ALSO NEED TO USE THE eventID FOR EDITING AND DELETING  
+			$day_data[$value] = $row->data;
+			$value += 1;
 		}
 		return $day_data;
 	}

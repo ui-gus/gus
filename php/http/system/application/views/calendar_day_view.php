@@ -27,16 +27,16 @@
 		//display each event and supply options
 		foreach($this->pdata['content'] as $item)   
 		{
-//NEED TO MAKE THESE BUTTONS FUNCTIONAL (AND USE THE eventID FOR EDITING AND DELETING)
 			echo form_open($form_path);	
-				echo "<hr />" . $item . " " . form_button('Edit','Edit') . 
-									form_button('Delete','Delete') . "<br>";
+//NEED TO MAKE THESE BUTTONS FUNCTIONAL (AND USE THE eventID FOR EDITING AND DELETING)
+			echo "<hr />" . $item . " " . form_button('Edit','Edit') . form_button('Delete','Delete') . "<br>";
 			echo form_close();	
 		}
 		echo "<hr />";
 		
-		$hidden = array('event_month' => $this->pdata['month'], 
-						'event_day' => $this->pdata['day'], 
+		//hidden values to pass with the following post
+		$hidden = array('event_month' => $this->pdata['month']-1, 
+						'event_day' => $this->pdata['day']-1, 
 						'event_year' => $this->pdata['year']);
 		//form to add an event on the current day
 		echo form_open($form_path, '', $hidden);	

@@ -45,12 +45,14 @@ class Calendar extends Controller{
 		//check to see if there is a new post requesting to view the day
 		if($this->input->post('view_day_request'))
 		{
-			$event_day = $this->input->post('event_day');
+			$event_day = $this->input->post('event_day') + 1;
 			//if it's the php post
 			if($this->input->post('event_month'))
 			{
 				$event_year = $this->input->post('event_year');
-				$event_month = $this->input->post('event_month');
+				$event_month = $this->input->post('event_month') + 1;
+				//put a leading zero in if month is only one digit
+				$event_month = sprintf("%02u",$event_month);
 			}
 			else 		//if it's the jQuery post
 			{
@@ -60,9 +62,9 @@ class Calendar extends Controller{
 			//generate calendar content to pass to the view
 			$this->pdata['content'] = 
 					$this->CalendarModel->view_day($event_year."-".$event_month."-".$event_day);
-			$this->pdata['year'] = $event_year;
-			$this->pdata['month'] = $event_month + 1;
-			$this->pdata['day'] = $event_day + 1;
+			$this->pdata['year'] = $year;
+			$this->pdata['month'] = $month;
+			$this->pdata['day'] = $event_day;
 			//display the day view
 			$this->load->view('calendar_day_view', $this->pdata);
 		}
