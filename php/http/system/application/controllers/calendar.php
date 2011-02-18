@@ -45,7 +45,6 @@ class Calendar extends Controller{
 		//check to see if there is a new post requesting to delete an event
 		if($eventToDelete = $this->input->post('eventToDelete'))
 		{
-echo "made it";
 			$this->CalendarModel->remove_event($eventToDelete);
 		}
 		
