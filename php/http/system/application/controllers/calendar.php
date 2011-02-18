@@ -32,7 +32,7 @@ class Calendar extends Controller{
 		$this->pdata['header'] = $this->Page->get_header('calendar');		
 		$this->pdata['footer'] = $this->Page->get_footer();
 		
-		//check to see if there is a new add event post
+		//check to see if there is a new post requesting to add an event
 		if($event_data = $this->input->post('event_data'))
 		{
 			$event_year = $this->input->post('event_year');
@@ -42,8 +42,15 @@ class Calendar extends Controller{
 			$this->CalendarModel->add_event($event_year."-".$event_month."-".$event_day, $event_data);
 		}
 		
+		//check to see if there is a new post requesting to delete an event
+		if($eventToDelete = $this->input->post('eventToDelete'))
+		{
+echo "made it";
+			$this->CalendarModel->remove_event($eventToDelete);
+		}
+		
 		//check to see if there is a new post requesting to view the day
-		if($this->input->post('view_day_request'))
+		if($this->input->post('view_day_request')||($this->input->post('load_day')))
 		{
 			$event_day = $this->input->post('event_day') + 1;
 			//if it's the php post
