@@ -50,30 +50,36 @@ class CalendarModel extends Model
 		';
 	}
 
+	
 	function view_day($date)  		//function to get data for the day
 	{
 		$userName = $this->session->userdata('un');
 		//get all the events of the day along with their corresponding eventID
-		$result = $this->db->query("SELECT data, eventID FROM calendar 
-					WHERE date='$date' AND user='$userName'")->result();
-		$day_data = array();
-		
-		//save each event into an array
-		foreach($result as $row)   
+		if($result = $this->db->query("SELECT data, eventID FROM calendar 
+					WHERE date='$date' AND user='$userName'")->result())
 		{
-			//push each new event and eventID onto the end of the $day_data array
-			//every other value will be an eventID (will be fixed in calendar_day_view)
-			$day_data[] = $row->data;
-			$day_data[] = $row->eventID;
+			$day_data = array();
+		
+			//save each event into an array
+			foreach($result as $row)   
+			{
+				//push each new event and eventID onto the end of the $day_data array
+				//every other value will be an eventID (will be fixed in calendar_day_view)
+				$day_data[] = $row->data;
+				$day_data[] = $row->eventID;
+			}
+			return $day_data;
 		}
-		return $day_data;
+		else
+			return 0;
 	}
 
+	
 	function remove_event($eventID)
 	{
-		$this->db->query("DELETE FROM calendar WHERE eventID='$eventID'");
-		return 1;
+		return $this->db->query("DELETE FROM calendar WHERE eventID='$eventID'");
 	}
+	
 	
 	function add_event($date, $event, $eventID = null)   	//function to add an event to the calendar
 	{
@@ -82,15 +88,15 @@ class CalendarModel extends Model
 		if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
 		{
 			//update the event for the user in the calendar table
-			$this->db->query("UPDATE calendar SET data='$event' WHERE user='$userName' AND date='$date'");
+			return $this->db->query("UPDATE calendar SET data='$event' WHERE user='$userName' AND date='$date'");
 		}
 		else		//if this is a new event
 		{	//add the event for the user in the calendar table 
-			$this->db->query("INSERT INTO calendar (user, date, data) 
+			return $this->db->query("INSERT INTO calendar (user, date, data) 
 								VALUES ('$userName', '$date', '$event')");
 		}
-		return 1;
 	}
+	
 	
 	function myGenerate($year, $month)
 	{	
@@ -102,24 +108,41 @@ class CalendarModel extends Model
 		
 		//return generated calendar to controller
 		//(codeigniter's generate() function from the calendar class, different than myGenerate())
-		return $this->calendar->generate($year, $month, $cal_data);
+		if($result = $this->calendar->generate($year, $month, $cal_data))
+			return $result;
+		else
+			return 0;
 	}
 	
 	function get_cal_data($year, $month)
 	{
 		$userName = $this->session->userdata('un');
-		//SELECT the entire month's data for the logged in user from the calendar table 
-		$result = $this->db->query("SELECT date, data FROM calendar WHERE date LIKE '$year-$month%' 
-														AND user='$userName'")->result();
-		$cal_data = array();
-		
-		//assign calendar data to appropriate days
-		foreach($result as $row)   
+		//select the entire month's data for the logged in user from the calendar table 
+		if($result = $this->db->query("SELECT date, data FROM calendar WHERE date LIKE
+										'$year-$month%' AND user='$userName'")->result())
 		{
-			//substr($row->date, 8, 2) is the day part of the date
-			$cal_data[substr($row->date, 8, 2)] = $row->data;
+			//2D array since each day can have multiple events
+			$cal_data = array(array());
+		
+			$index = 0;
+			//assign calendar data to appropriate days
+			foreach($result as $row)   
+			{
+				//allows for 100 events in a day, maybe excessive
+				for($i=0; $i<100; $i++)
+				{
+					//substr($row->date, 8, 2) is the day part of the date
+					if(!isset($cal_data[substr($row->date, 8, 2)][$i]))
+					{
+						$cal_data[substr($row->date, 8, 2)][$i] = $row->data;
+						break;
+					}
+				}
+			}
+			return $cal_data;
 		}
-		return $cal_data;
+		else 
+			return 0;
 	}
 }
 ?>
