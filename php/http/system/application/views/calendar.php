@@ -43,7 +43,7 @@
 		}
 	</style>
 	
-	<!-- make src point to jquery library from google so jquery and ajax can be used in the body -->
+	<!-- make src point to jquery library from google so jquery and ajax can be used -->
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js">
 	</script>
@@ -61,8 +61,7 @@
 			//set the path that the following form is going to route to (this covers for overlooked variations)
 			$form_path = site_url() . "/calendar/index/" . $this->pdata['year'] . "/" . $this->pdata['month'];
 			//an indexed array of years
-			$form_years = array_combine(range($this->pdata['year'], date('Y')+10), 
-										range($this->pdata['year'], date('Y')+10));
+			$form_years = array_combine(range(date('Y'),date('Y')+10), range(date('Y'),date('Y')+10));
 			
 			echo "<p><i>To ADD/EDIT/VIEW events, either click on the calendar day or use the options below</i></p>";
 
@@ -81,8 +80,8 @@
 			//form to view a specific day
 			$hidden = array('view_day_request' => '1');
 			echo form_open($form_path, '', $hidden);
-				echo "<p><b>View a day to Add/Edit/Delete events:</b>";
-				echo "Month:" . form_dropdown('event_month', range(1, 12), $this->pdata['month']-1);			
+				echo "<p><b>View a day to Add/Edit/Delete events: </b>";
+				echo " Month:" . form_dropdown('event_month', range(1, 12), $this->pdata['month']-1);			
 				echo "Day:" . form_dropdown('event_day', range(1, cal_days_in_month(CAL_GREGORIAN, 
 											$this->pdata['month'], $this->pdata['year'])), date('j')-1);
 				echo "Year:" . form_dropdown('event_year', $form_years);
@@ -95,7 +94,7 @@
 	?>
 	
 	
-	<!-- jquery script as a second option events to the calendar -->
+	<!-- jquery script as a second option to add events to the calendar -->
 	<script type="text/javascript">
 	$(document).ready(function()
 	{

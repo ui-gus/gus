@@ -80,9 +80,11 @@ class CalendarModel extends Model
 		return $this->db->query("DELETE FROM calendar WHERE eventID='$eventID'");
 	}
 	
-	
+
 	function edit_event($event, $eventID)
 	{
+		//allow for any variation of quotes in input
+		$event = str_replace("'", "''", $event);
 		if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
 		{
 			//update the event for the user in the calendar table
@@ -93,6 +95,8 @@ class CalendarModel extends Model
 	
 	function add_event($date, $event)   	//function to add an event to the calendar
 	{
+		//allow for any variation of quotes in input
+		$event = str_replace("'", "''", $event);
 		$userName = $this->session->userdata('un');
 		//add the event for the user in the calendar table 
 		return $this->db->query("INSERT INTO calendar (user, date, data) 

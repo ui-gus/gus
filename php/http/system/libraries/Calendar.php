@@ -97,7 +97,7 @@ class CI_Calendar {
 	 * @param	array	the data to be shown in the calendar cells
 	 * @return	string
 	 */
-	function generate($year = '', $month = '', $data = array())
+	function generate($year = '', $month = '', $data = array(array()))
 	{
 		// Set and validate the supplied month/year
 		if ($year == '')
@@ -216,11 +216,17 @@ class CI_Calendar {
 			
 				if ($day > 0 AND $day <= $total_days)
 				{ 					
-					if (isset($data[$day]))
+					if (isset($data[$day][0]))
 					{	
 						// Cells with content
+						$myVal = $data[$day][0];
+						for($j = 1; $j < 100; $j++)
+						{
+							if(isset($data[$day][$j]))
+								$myVal .= "<br>" . $data[$day][$j];
+						}
 						$temp = ($is_current_month == TRUE AND $day == $cur_day) ? $this->temp['cal_cell_content_today'] : $this->temp['cal_cell_content'];
-						$out .= str_replace('{day}', $day, str_replace('{content}', $data[$day], $temp));
+						$out .= str_replace('{day}', $day, str_replace('{content}', $myVal, $temp));
 					}
 					else
 					{

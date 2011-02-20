@@ -48,13 +48,20 @@ class Calendar extends Controller{
 			$this->CalendarModel->remove_event($eventToDelete);
 		}
 		
-		//check to see if there is a new post requesting to view the day
-		if($this->input->post('view_day_request')||($this->input->post('load_day')))
+		//check to see if there is a new post requesting to edit an event
+		if($eventID = $this->input->post('eventToEdit'))
 		{
-			$event_day = $this->input->post('event_day') + 1;
+			if($event = $this->input->post('event_data'))
+				$this->CalendarModel->edit_event($event, $eventID);
+		}
+		
+		//check to see if there is a new post requesting to view the day
+		if(($this->input->post('view_day_request'))||($this->input->post('load_day')))
+		{
 			//if it's the php post
 			if($this->input->post('event_month'))
 			{
+				$event_day = $this->input->post('event_day') + 1;
 				$event_year = $this->input->post('event_year');
 				$event_month = $this->input->post('event_month') + 1;
 				//put a leading zero in if month is only one digit
@@ -62,6 +69,7 @@ class Calendar extends Controller{
 			}
 			else 		//if it's the jQuery post
 			{
+				$event_day = $this->input->post('event_day');
 				$event_year = $year;
 				$event_month = $month;				
 			}
@@ -90,14 +98,20 @@ class Calendar extends Controller{
 			{
 				$this->pdata['content'] = 'NOT LOGGED IN
 					<p><a href="' . site_url() . '/auth">LOGIN</a> to view your calendar';
+				//display the month view
+				$this->load->view('calendar', $this->pdata);
 			}
 		}
 	}
 	
 	
 	//tests all of the calendar functions
-	function test($date = null, $year = null, $month = null)    
+	function test()    
 	{	
+		$year = date('Y');
+		$month = date('m');
+		$day = date('j');
+		$date = $year . "-" . $month . "-" . $day;
 		$this->load->library('unit_test');
 		
 		//test get_cal_data() function
@@ -109,24 +123,27 @@ class Calendar extends Controller{
 		//test myGenerate() function
 		$test = $this->CalendarModel->myGenerate($year, $month);
 		$expected_result = 'is_string';
-		$test_name = 'test to see if calendar is properly generated';
+		$test_name = 'test to see if calendar string is generated';
 		$this->unit->run($test, $expected_result, $test_name);
 
 		//test add_event() function
-		$test = $this->CalendarModel->add_event($date, 'something');
+		//uses eventID 0, which is reserved for testing purposes
+		$test = $this->CalendarModel->add_event($date, 'something', 0);
 		$expected_result = 'is_true';
 		$test_name = 'test to see if event is added to calendar table in database';
 		$this->unit->run($test, $expected_result, $test_name);
 
 		//test remove_event() function
-		$test = $this->CalendarModel->remove_event($date, 0);
+		$test = $this->CalendarModel->remove_event(0);
 		$expected_result = 'is_true';
 		$test_name = 'test to see if event is removed from calendar table in database';
 		$this->unit->run($test, $expected_result, $test_name);
 		
-		//test calendar display
-		$data['calendar'] = $this->CalendarModel->myGenerate($year, $month);
-		$this->load->view('calendar', $data);
+		//test view_day() function
+		$test = $this->CalendarModel->view_day($date);
+		$expected_result = 'is_array';
+		$test_name = 'test to see if event data for the requested day is returned';
+		$this->unit->run($test, $expected_result, $test_name);
 		
 		//run full report of tests
 		echo $this->unit->report();     
