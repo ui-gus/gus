@@ -73,7 +73,7 @@ class CalendarModel extends Model
 		else
 			return 0;
 	}
-
+	
 	
 	function remove_event($eventID)
 	{
@@ -81,20 +81,22 @@ class CalendarModel extends Model
 	}
 	
 	
-	function add_event($date, $event, $eventID = null)   	//function to add an event to the calendar
+	function edit_event($event, $eventID)
 	{
-		$userName = $this->session->userdata('un');
-		//if the event is being edited
 		if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
 		{
 			//update the event for the user in the calendar table
-			return $this->db->query("UPDATE calendar SET data='$event' WHERE user='$userName' AND date='$date'");
-		}
-		else		//if this is a new event
-		{	//add the event for the user in the calendar table 
-			return $this->db->query("INSERT INTO calendar (user, date, data) 
+			return $this->db->query("UPDATE calendar SET data='$event' WHERE eventID='$eventID'");
+		}	
+	}
+	
+	
+	function add_event($date, $event)   	//function to add an event to the calendar
+	{
+		$userName = $this->session->userdata('un');
+		//add the event for the user in the calendar table 
+		return $this->db->query("INSERT INTO calendar (user, date, data) 
 								VALUES ('$userName', '$date', '$event')");
-		}
 	}
 	
 	
@@ -134,8 +136,17 @@ class CalendarModel extends Model
 					//substr($row->date, 8, 2) is the day part of the date
 					if(!isset($cal_data[substr($row->date, 8, 2)][$i]))
 					{
-						$cal_data[substr($row->date, 8, 2)][$i] = $row->data;
-						break;
+						if(strlen($row->data) > 9)
+						{
+							$cal_data[substr($row->date, 8, 2)][$i] = 
+										"&#8226" . substr($row->data, 0, 7) . "...";
+							break;
+						}
+						else
+						{
+							$cal_data[substr($row->date, 8, 2)][$i] = "&#8226" . $row->data;
+							break;
+						}
 					}
 				}
 			}
