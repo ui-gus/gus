@@ -43,7 +43,7 @@ class Page extends Model {
 		$content = $content . "<a href=\"" . site_url() . "/pm\">Messages</a>" . 
 										" | <a href=\"" . site_url() . "/search\">Search</a>" . 
 										" | <a href=\"" . site_url() . "/forum\">Forum</a>" .
-										" | <a href=\"" . site_url() . "/grouppages\">Groups</a> " .
+										" | <a href=\"" . site_url() . "/grouppage\">Groups</a> " .
 										" | <a href=\"" . site_url() . "/calendar\">Calendar</a> " .
 		                                                                " | <a href=\"" . site_url() . "/Docs\">Docs</a> ";
 				
