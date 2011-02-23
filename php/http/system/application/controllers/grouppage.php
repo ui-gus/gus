@@ -22,44 +22,52 @@ class Grouppage extends Controller {
 		parent::Controller();
 		$this->load->model('Page');
 		$this->load->helper('url');
+		$this->load->database();
 	}
 	
 	function index() {
-		//$data['title'] = "Group Page";
-		//$data['heading'] = "Group Page";
-		//$data['content'] = $this->Page->get_content('groups');
-	
-
 		$data['header'] = $this->Page->get_header('groups');
-		
+		$data['footer'] = $this->Page->get_footer();			
+		$data['query'] = $this->db->get('ggroup')->result_array();	
+	
 		if( !$this->Page->authed() ){
 			$data['content'] = "You must be logged in to view this page.";
 		}				
-		else{			
-			$data['content'] = "You are viewing the group page.<br><br>
-				<u>Group Info (with links)</u><br>
-				<ul>
-				<li>Group name:<br>
-				<li>Group summary:<br>
-				<li>Join group: <br>				
-				<li>Etc<br><br>
-				</ul>
-				Need to know: <br>
-				<ul>
-				<li>Group name and members<br>
-				<li>Group calendar events<br>
-				<li>**User's permissions of this group<br>
-				<li>Link/info for group's forums<br>
-				</ul>
-				";
-								
+		else{
+			$query = $this->db->get('ggroup');
+			$qquery = $query->result_array();
+			$s = "";
+			foreach( $qquery as $group ):{
+				//$s .= $item['id']; 			
+				//$s .= ("- " . $item['id'] . "<br>");			
+		$s.=anchor('grouppage/view/'.$group['id'] , $group['name'])."<br>";			
+			
+			}
+			endforeach;
+			$data['content'] = $s;
 		}
-		$data['footer'] = $this->Page->get_footer();				
+			
 			
 		$this->load->view( 'grouppage_view.php', $data );
 
 		
 				
+	}
+
+	function view(){
+		$data['header'] = $this->Page->get_header('groups');
+		$data['footer'] = $this->Page->get_footer();
+		if( $this->uri->segment(3) == "" ){
+			$data['content'] = "Empty page.";
+		}	
+		else{
+			$t = $this->uri->segment(3);
+			$query = $this->db->query("SELECT * FROM ggroup WHERE id = $t")->result();
+			$data['content'] = "Group #".$query[0]->id."<br>Name: ".$query[0]->name.
+						"<br>Description: ".$query[0]->description;
+		}
+
+		$this->load->view( 'grouppage_view.php', $data );
 	}
 
 	function test(){
