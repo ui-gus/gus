@@ -160,6 +160,16 @@ div#content td{
 	border-top: 1px solid #f2ebd5;
 }
 
+div#content table.login td {
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	border-top-width: 0px;
+}
+
 div#content a:link {
 		color: #a69d81;
 		text-decoration: none;
