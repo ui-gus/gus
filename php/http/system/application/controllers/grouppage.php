@@ -55,21 +55,25 @@ class Grouppage extends Controller {
 	}
 
 	function view(){
-		$data['header'] = $this->Page->get_header('groups');
-		$data['footer'] = $this->Page->get_footer();
-		if( $this->uri->segment(3) == "" ){
-			$data['content'] = "Empty page.";
+		if( !$this->Page->authed() ){
+			$data['content'] = "You must be logged in to view this page.";
 		}	
 		else{
-			$t = $this->uri->segment(3);
-			$query = $this->db->query("SELECT * FROM ggroup WHERE id = $t")->result();
-			$data['content'] = "Group #".$query[0]->id."<br>Name: ".$query[0]->name.
+			$data['header'] = $this->Page->get_header('groups');
+			$data['footer'] = $this->Page->get_footer();
+			if( $this->uri->segment(3) == "" ){
+				$data['content'] = "Empty page.";
+			}	
+			else{
+				$t = $this->uri->segment(3);
+				$query = $this->db->query("SELECT * FROM ggroup WHERE id = $t")->result();
+				$data['content'] = "Group #".$query[0]->id."<br>Name: ".$query[0]->name.
 						"<br>Description: ".$query[0]->description;
+			}
+
+			$this->load->view( 'grouppage_view.php', $data );
 		}
-
-		$this->load->view( 'grouppage_view.php', $data );
 	}
-
 	function test(){
 		//set page name
 		$this->load->library('unit_test');
