@@ -102,7 +102,7 @@
 		$('.calendar .day').click(function()
 		{		
 			event_day = $(this).find('.day_num').html();		
-			view_day_request = confirm("Add, Edit or View events on this day?");
+			view_day_request = confirm("Add, Edit or View events on this day? (link doesn't work yet, use forms below)");
 <!-- DON'T NEED AJAX, A JQUERY POST WILL WORK JUST FINE -->
 			if(view_day_request != null)
 			{ 	

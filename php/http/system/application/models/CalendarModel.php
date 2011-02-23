@@ -11,7 +11,7 @@ class CalendarModel extends Model
 		
 		//preference variable for when the calendar library is loaded
 		$this->pref = array(
-			'day_type' => 'short',
+			'day_type' => 'long',
 			'show_next_prev' => true,
 			'next_prev_url' => site_url() . '/calendar/index'	
 		);
@@ -93,14 +93,22 @@ class CalendarModel extends Model
 	}
 	
 	
-	function add_event($date, $event)   	//function to add an event to the calendar
+	function add_event($date, $event, $eventID = null)   	//function to add an event to the calendar
 	{
 		//allow for any variation of quotes in input
 		$event = str_replace("'", "''", $event);
-		$userName = $this->session->userdata('un');
-		//add the event for the user in the calendar table 
-		return $this->db->query("INSERT INTO calendar (user, date, data) 
-								VALUES ('$userName', '$date', '$event')");
+		if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
+		{
+			//update the event for the user in the calendar table
+			return $this->db->query("UPDATE calendar SET data='$event' WHERE eventID='$eventID'");
+		}	
+		else
+		{
+			$userName = $this->session->userdata('un');
+			//add the event for the user in the calendar table 
+			return $this->db->query("INSERT INTO calendar (user, date, data) 
+									VALUES ('$userName', '$date', '$event')");
+		}
 	}
 	
 	
@@ -130,7 +138,6 @@ class CalendarModel extends Model
 			//2D array since each day can have multiple events
 			$cal_data = array(array());
 		
-			$index = 0;
 			//assign calendar data to appropriate days
 			foreach($result as $row)   
 			{
@@ -143,7 +150,7 @@ class CalendarModel extends Model
 						if(strlen($row->data) > 9)
 						{
 							$cal_data[substr($row->date, 8, 2)][$i] = 
-										"&#8226" . substr($row->data, 0, 7) . "...";
+										"&#8226" . substr($row->data, 0, 8) . "...";
 							break;
 						}
 						else
@@ -152,6 +159,7 @@ class CalendarModel extends Model
 							break;
 						}
 					}
+					
 				}
 			}
 			return $cal_data;
