@@ -1,0 +1,421 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2011.2.15)  25 FEB 2011 13:37
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./images.tex
+(./images.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, loaded.
+
+(/usr/share/texmf-texlive/tex/latex/base/report.cls
+Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/size12.clo
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+) (/usr/share/texmf-texlive/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+) (/usr/share/texmf-texlive/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in pdf mode not detected.
+) (/usr/share/texmf-texlive/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2009/10/09 v6.79a Hypertext links for LaTeX
+(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+) (/usr/share/texmf-texlive/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+) (/usr/share/texmf-texlive/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2009/01/23 v0.5 Provides ifxetex conditional
+) (/usr/share/texmf-texlive/tex/latex/oberdiek/hycolor.sty
+Package: hycolor 2009/10/02 v1.5 Code for color options of hyperref/bookmark (H
+O)
+(/usr/share/texmf-texlive/tex/latex/oberdiek/xcolor-patch.sty
+Package: xcolor-patch 2009/10/02 xcolor patch
+))
+\@linkdim=\dimen103
+\Hy@linkcounter=\count88
+\Hy@pagecounter=\count89
+(/usr/share/texmf-texlive/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
+) (/usr/share/texmf-texlive/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2007/12/12 v1.2 Prefix for e-TeX command names (HO)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2007/09/09 v1.2 Providing info/warning/message (HO)
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+) (/usr/share/texmf-texlive/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+) (/usr/share/texmf-texlive/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2009/08/13 v3.4 Keyval support for LaTeX options (HO)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2009/07/30 v1.5 Key value parser with default handler suppor
+t (HO)
+))
+Package hyperref Info: Option `colorlinks' set `true' on input line 2864.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 2864.
+Package hyperref Info: Hyper figures OFF on input line 2975.
+Package hyperref Info: Link nesting OFF on input line 2980.
+Package hyperref Info: Hyper index ON on input line 2983.
+Package hyperref Info: Plain pages OFF on input line 2990.
+Package hyperref Info: Backreferencing OFF on input line 2995.
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 3191.
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/url.sty
+\Urlmuskip=\muskip10
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 3428.
+(/usr/share/texmf-texlive/tex/generic/oberdiek/bitset.sty
+Package: bitset 2007/09/28 v1.0 Data type bit set (HO)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/intcalc.sty
+Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
+) (/usr/share/texmf-texlive/tex/generic/oberdiek/bigintcalc.sty
+Package: bigintcalc 2007/11/11 v1.1 Expandable big integer calculations (HO)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2009/09/23 v0.6 LuaTeX support for pdfTeX utility functions
+ (HO)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2009/04/17 v1.2 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+) (/usr/share/texmf-texlive/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2009/08/05 v1.0 Some LaTeX kernel commands for general use (HO
+)
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+)))
+\Fld@menulength=\count90
+\Field@Width=\dimen104
+\Fld@charsize=\dimen105
+\Field@toks=\toks15
+Package hyperref Info: Hyper figures OFF on input line 4377.
+Package hyperref Info: Link nesting OFF on input line 4382.
+Package hyperref Info: Hyper index ON on input line 4385.
+Package hyperref Info: backreferencing OFF on input line 4392.
+Package hyperref Info: Link coloring ON on input line 4395.
+Package hyperref Info: Link coloring with OCG OFF on input line 4402.
+Package hyperref Info: PDF/A mode OFF on input line 4407.
+(/usr/share/texmf-texlive/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
+)
+\Hy@abspage=\count91
+\c@Item=\count92
+\c@Hfootnote=\count93
+)
+*hyperref using default driver hdvips*
+(/usr/share/texmf-texlive/tex/latex/hyperref/hdvips.def
+File: hdvips.def 2009/10/09 v6.79a Hyperref driver for dvips
+(/usr/share/texmf-texlive/tex/latex/hyperref/pdfmark.def
+File: pdfmark.def 2009/10/09 v6.79a Hyperref definitions for pdfmark specials
+\pdf@docset=\toks16
+\pdf@box=\box26
+\pdf@toks=\toks17
+\pdf@defaulttoks=\toks18
+\Fld@listcount=\count94
+)) (/usr/share/texmf-texlive/tex/latex/tools/layout.sty
+Package: layout 2000/09/25 v1.2c Show layout parameters
+\oneinch=\count95
+\cnt@paperwidth=\count96
+\cnt@paperheight=\count97
+\cnt@hoffset=\count98
+\cnt@voffset=\count99
+\cnt@textheight=\count100
+\cnt@textwidth=\count101
+\cnt@topmargin=\count102
+\cnt@oddsidemargin=\count103
+\cnt@evensidemargin=\count104
+\cnt@headheight=\count105
+\cnt@headsep=\count106
+\cnt@marginparsep=\count107
+\cnt@marginparwidth=\count108
+\cnt@marginparpush=\count109
+\cnt@footskip=\count110
+\fheight=\count111
+\ref@top=\count112
+\ref@hoffset=\count113
+\ref@voffset=\count114
+\ref@head=\count115
+\ref@body=\count116
+\ref@foot=\count117
+\ref@margin=\count118
+\ref@marginwidth=\count119
+\ref@marginpar=\count120
+\Interval=\count121
+\ExtraYPos=\count122
+\PositionX=\count123
+\PositionY=\count124
+\ArrowLength=\count125
+) (/usr/share/texmf-texlive/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+) (/etc/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: dvips.def on input line 91.
+(/usr/share/texmf-texlive/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))) (/usr/share/texmf-texlive/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+(/etc/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: dvips.def on input line 130.
+(/usr/share/texmf-texlive/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+)) (/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
+Package: inputenc 2008/03/30 v1.1d Input encoding file
+\inpenc@prehook=\toks19
+\inpenc@posthook=\toks20
+)
+\sizebox=\box27
+\lthtmlwrite=\write3
+No file images.aux.
+\openout1 = `images.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+Package hyperref Info: Link coloring ON on input line 119.
+(/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
+Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
+(/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
+Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
+)
+\c@section@level=\count126
+)
+LaTeX Info: Redefining \ref on input line 119.
+LaTeX Info: Redefining \pageref on input line 119.
+\@outlinefile=\write4
+\openout4 = `images.out'.
+
+\AtBeginShipoutBox=\box28
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
+
+
+latex2htmlLength hsize=349.0pt
+
+latex2htmlLength vsize=632.5pt
+
+latex2htmlLength hoffset=0.0pt
+
+latex2htmlLength voffset=0.0pt
+
+latex2htmlLength topmargin=0.0pt
+
+latex2htmlLength topskip=0.00003pt
+
+latex2htmlLength headheight=0.0pt
+
+latex2htmlLength headsep=0.0pt
+
+latex2htmlLength parskip=0.0pt plus 1.0pt
+
+latex2htmlLength oddsidemargin=39.0pt
+
+latex2htmlLength evensidemargin=39.0pt
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 204.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 204.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 204.
+
+Overfull \hbox (0.50705pt too wide) in paragraph at lines 207--208
+[]\OT1/cmr/bx/n/12 Source/Destination| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 214--215
+[]\OT1/cmr/m/n/12 HTTP
+ []
+
+
+Underfull \hbox (badness 2970) in paragraph at lines 215--216
+[]\OT1/cmr/m/n/12 Dedicated Server or
+ []
+
+
+Underfull \hbox (badness 3148) in paragraph at lines 216--218
+[]\OT1/cmr/m/n/12 This de-vice is re-spon-si-ble
+ []
+
+
+Underfull \hbox (badness 1360) in paragraph at lines 216--218
+\OT1/cmr/m/n/12 for serv-ing HTML con-tent
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 219--220
+[]\OT1/cmr/m/n/12 Requires a
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 219--220
+\OT1/cmr/m/n/12 server-capable
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 223--224
+[]\OT1/cmr/m/n/12 VPS or
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 223--224
+\OT1/cmr/m/n/12 Ded-i-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 223--224
+\OT1/cmr/m/n/12 cated
+ []
+
+
+Underfull \hbox (badness 4013) in paragraph at lines 225--227
+\OT1/cmr/m/n/12 prefer-ably run-ning a pre-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 228--229
+\OT1/cmr/m/n/12 speed In-ter-net
+ []
+
+
+Overfull \hbox (0.50705pt too wide) in paragraph at lines 238--239
+[]\OT1/cmr/bx/n/12 Source/Destination| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 245--246
+[]\OT1/cmr/m/n/12 SQL
+ []
+
+
+Underfull \hbox (badness 2970) in paragraph at lines 246--247
+[]\OT1/cmr/m/n/12 Dedicated Server or
+ []
+
+
+Underfull \hbox (badness 1052) in paragraph at lines 247--248
+[]\OT1/cmr/m/n/12 Works in con-junc-tion with
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 249--250
+[]\OT1/cmr/m/n/12 Requires a
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 249--250
+\OT1/cmr/m/n/12 server-capable
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 255--257
+[]\OT1/cmr/m/n/12 Provides com-pu-ta-tional
+ []
+
+
+Underfull \hbox (badness 1629) in paragraph at lines 255--257
+\OT1/cmr/m/n/12 power so tasks that serve
+ []
+
+
+Underfull \hbox (badness 1383) in paragraph at lines 255--257
+\OT1/cmr/m/n/12 HTML con-tent via apache
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 257--258
+[]\OT1/cmr/m/n/12 Requires a
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 257--258
+\OT1/cmr/m/n/12 server ca-pa-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 258--259
+\OT1/cmr/m/n/12 speed In-ter-net
+ []
+
+
+Overfull \hbox (0.50705pt too wide) in paragraph at lines 268--269
+[]\OT1/cmr/bx/n/12 Source/Destination| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 283--284
+[]\OT1/cmr/m/n/12 Cell
+ []
+
+
+Overfull \hbox (0.50705pt too wide) in paragraph at lines 297--298
+[]\OT1/cmr/bx/n/12 Source/Destination| 
+ []
+
+l2hSize :landscape88:123.03326pt::0.0pt::632.5pt.
+[1
+
+
+
+
+
+]
+
+! LaTeX Error: Float(s) lost.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.315 \lthtmlcheckvsize\clearpage
+                                 }
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+(./images.aux) ) 
+Here is how much of TeX's memory you used:
+ 4130 strings out of 495062
+ 60646 string characters out of 1182644
+ 130682 words of memory out of 3000000
+ 7275 multiletter control sequences out of 15000+50000
+ 6683 words of font info for 24 fonts, out of 3000000 for 9000
+ 28 hyphenation exceptions out of 8191
+ 38i,11n,23p,272b,331s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on images.dvi (1 page, 3064 bytes).
