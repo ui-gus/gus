@@ -16,7 +16,7 @@ $cached_env_img{$key} = q|<IMG
 &amp;
 &amp;
 &amp;
- \hline
+\ \hline
 \end{tabular} \end{table} \end{landscape}">|; 
 
 1;

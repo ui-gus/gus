@@ -1,0 +1,4 @@
+#!/bin/sh
+
+latex2html SSRS.tex
+latex2html SSRS.tex -dir ../http/SSRS/
