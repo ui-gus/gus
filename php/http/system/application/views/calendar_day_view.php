@@ -18,8 +18,7 @@
 	
 </head>
 <body>
-	<?php 	
-		$this->load->helper('form');		
+	<?php 			
 		$form_path = site_url() . "/calendar/index/" . $this->pdata['year'] . "/" . $this->pdata['month'];
 
 		echo $this->pdata['header'];
@@ -50,7 +49,7 @@
 										'load_day' => 1);							
 						//form to edit an event
 						echo "<div class='edit'>" . form_open($form_path, '', $hidden);	
-	//NEED A SCRIPT TO GET UPDATED event_data FROM USER SO I CAN ADD IT TO THE $hidden ARRAY
+//NEED A SCRIPT TO GET UPDATED event_data FROM USER SO I CAN ADD IT TO THE $hidden ARRAY
 							echo form_submit('event', 'Edit');
 						echo form_close() . "</div>";
 						
@@ -74,7 +73,19 @@
 							'load_day' => 1);
 			//form to add an event on the current day
 			echo form_open($form_path, '', $hidden);	
-				echo "<center>" . form_input('event_data') .form_submit('submit', 'Add Event') . "</center>";
+				//check if user is admin
+//is_admin() IS NOT IMPLEMENTED YET, SO SET AS 1 FOR NOW
+//				if($this->User->is_admin() == TRUE)
+if(1)
+				{
+					echo "<center>" . form_input('event_data') . form_submit('AddForGroup', 'Add For Group') 
+									. form_submit('AddForSelf', 'Add For You') . "</center>";
+				}
+				else
+				{
+					echo "<center>" . form_input('event_data') . form_submit('AddForSelf', 'Add Event') 
+						. "</center>";
+				}
 			echo form_close();
 			echo"<br><hr />";
 			

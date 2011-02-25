@@ -17,7 +17,8 @@ class Calendar extends Controller{
 		$this->load->database();
 		//load models so their methods can be used in index function
 		$this->load->model('CalendarModel');
-		$this->load->model('Page');	
+		$this->load->model('Page');
+		$this->load->model('User');
 		$this->load->helper('url');
 		$this->load->helper('form');
 		
@@ -42,7 +43,18 @@ class Calendar extends Controller{
 				//adjust day and month since they are both off by 1 for some reason
 				$event_month = $this->input->post('event_month') + 1;
 				$event_day = $this->input->post('event_day') + 1;
-				$this->CalendarModel->add_event($event_year."-".$event_month."-".$event_day, $event_data);
+				
+				//check if it is an admin adding a group event
+				if($addForGroup = $this->input->post('AddForGroup'))
+				{
+					//add_group_event() will check admin privileges
+					$this->CalendarModel->add_group_event($event_year."-".$event_month."-".$event_day, $event_data);
+				}
+				else
+				{
+					//if it's a regular user
+					$this->CalendarModel->add_event($event_year."-".$event_month."-".$event_day, $event_data);
+				}
 			}
 			
 			//check to see if there is a new post requesting to delete an event
@@ -132,7 +144,15 @@ class Calendar extends Controller{
 		$expected_result = 'is_true';
 		$test_name = 'test to see if event is added to calendar table in database';
 		$this->unit->run($test, $expected_result, $test_name);
+		$this->CalendarModel->remove_event(0);
 
+		//test add_group_event() function (uses eventID 0 also)
+		$test = $this->CalendarModel->add_group_event($date, 'something', 0);
+		$expected_result = 'is_true';
+		$test_name = 'test to see if event is added to calendar table in database';
+		$this->unit->run($test, $expected_result, $test_name);
+		$this->CalendarModel->remove_event(0);
+		
 		//test remove_event() function
 		$test = $this->CalendarModel->remove_event(0);
 		$expected_result = 'is_true';

@@ -8,6 +8,7 @@ class CalendarModel extends Model
 		parent::Model();
 	
 		$this->load->helper('url');  	//need for base_url() function
+		$this->load->model('User');
 		
 		//preference variable for when the calendar library is loaded
 		$this->pref = array(
@@ -53,10 +54,14 @@ class CalendarModel extends Model
 	
 	function view_day($date)  		//function to get data for the day
 	{
+//get_group() NOT IMPLEMENTED YET, SET AS NULL FOR NOW
+//		$groupName = $this->User->get_group();
+$groupName = null;
 		$userName = $this->session->userdata('un');
 		//get all the events of the day along with their corresponding eventID
-		if($result = $this->db->query("SELECT data, eventID FROM calendar 
-					WHERE date='$date' AND user='$userName'")->result())
+		$result = $this->db->query("SELECT data, eventID, user FROM calendar WHERE 
+					date='$date' AND (user='$userName' OR user='$groupName')")->result();
+		if($result)
 		{
 			$day_data = array();
 		
@@ -64,8 +69,17 @@ class CalendarModel extends Model
 			foreach($result as $row)   
 			{
 				//push each new event and eventID onto the end of the $day_data array
-				//every other value will be an eventID (will be fixed in calendar_day_view)
-				$day_data[] = $row->data;
+				if(strcmp($row->user, $userName) == 0)
+				{
+					$day_data[] = "<big>&#8226</big>" . $row->data;
+				}
+				else
+				{
+					//make it blue if it's a group event
+					$day_data[] = "<small><font color='blue'>&#9830</small> " . $row->data . "</font>";
+				}
+				
+				//every other value will be an eventID (will be accounted for in calendar_day_view)
 				$day_data[] = $row->eventID;
 			}
 			return $day_data;
@@ -77,7 +91,18 @@ class CalendarModel extends Model
 	
 	function remove_event($eventID)
 	{
-		return $this->db->query("DELETE FROM calendar WHERE eventID='$eventID'");
+		//only let an admin remove a group event
+//is_admin() IS NOT IMPLEMENTED YET, SO SET AS 1 FOR NOW
+//		if($this->User->is_admin())
+if(1)
+		{
+			return $this->db->query("DELETE FROM calendar WHERE eventID='$eventID'");
+		}
+		else
+		{
+			$userName = $this->session->userdata('un');
+			return $this->db->query("DELETE FROM calendar WHERE eventID='$eventID' AND user='$userName'");
+		}
 	}
 	
 
@@ -85,22 +110,42 @@ class CalendarModel extends Model
 	{
 		//allow for any variation of quotes in input
 		$event = str_replace("'", "''", $event);
-		if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
+//is_admin() IS NOT IMPLEMENTED YET, SO SET AS 1 FOR NOW
+//		if($this->User->is_admin())
+if(1)
 		{
-			//update the event for the user in the calendar table
-			return $this->db->query("UPDATE calendar SET data='$event' WHERE eventID='$eventID'");
+			//if the user is an admin and the eventID matches, whether or not it is a group event
+			if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
+			{
+				//update the event
+				return $this->db->query("UPDATE calendar SET data='$event' WHERE eventID='$eventID'");
+			}			
 		}	
+		else		
+		{
+			//if not an admin, make sure it is not a group event before updating
+			$userName = $this->session->userdata('un');
+			if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID' AND user='$userName'")->result())
+			{
+				//update the event for the user
+				return $this->db->query("UPDATE calendar SET data='$event' WHERE eventID='$eventID'");
+			}	
+			else
+			{
+				echo "<script type='text/javascript'>alert('You don''t have permission to edit group events');</script>";
+			}
+		}
 	}
 	
 	
-	function add_event($date, $event, $eventID = null)   	//function to add an event to the calendar
+	function add_event($date, $event, $eventID = null)   	
 	{
 		//allow for any variation of quotes in input
 		$event = str_replace("'", "''", $event);
+		//update the event for the user if it exists already, otherwise add it
 		if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
 		{
-			//update the event for the user in the calendar table
-			return $this->db->query("UPDATE calendar SET data='$event' WHERE eventID='$eventID'");
+			return $this->db->query("UPDATE calendar SET data='$event', date='$date' WHERE eventID='$eventID'");
 		}	
 		else
 		{
@@ -108,6 +153,31 @@ class CalendarModel extends Model
 			//add the event for the user in the calendar table 
 			return $this->db->query("INSERT INTO calendar (user, date, data) 
 									VALUES ('$userName', '$date', '$event')");
+		}
+	}
+	
+	
+	function add_group_event($date, $event, $eventID = null)  
+	{
+		//allow for any variation of quotes in input
+		$event = str_replace("'", "''", $event);
+//is_admin() IS NOT IMPLEMENTED YET, SO SET AS 1 FOR NOW
+//		if($this->User->is_admin())
+if(1)
+		{
+			//update the group event if it exists already, otherwise add it
+			if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
+			{
+				return $this->db->query("UPDATE calendar SET data='$event', date='$date' WHERE eventID='$eventID'");
+			}	
+			else
+			{
+//get_group() NOT IMPLEMENTED YET, SET AS NULL FOR NOW
+//				$groupName = $this->User->get_group();
+$groupName = null;
+				return $this->db->query("INSERT INTO calendar (user, date, data) 
+										VALUES ('$groupName', '$date', '$event')");
+			}
 		}
 	}
 	
@@ -131,14 +201,18 @@ class CalendarModel extends Model
 	function get_cal_data($year, $month)
 	{
 		$userName = $this->session->userdata('un');
+//get_group() NOT IMPLEMENTED YET, SET AS NULL FOR NOW		
+//		$groupName = $this->User->get_group();
+$groupName = null;
+	
 		//select the entire month's data for the logged in user from the calendar table 
-		if($result = $this->db->query("SELECT date, data FROM calendar WHERE date LIKE
-										'$year-$month%' AND user='$userName'")->result())
+		if($result = $this->db->query("SELECT date, data, user FROM calendar WHERE date LIKE
+					'$year-$month%' AND (user='$userName' OR user='$groupName')")->result())
 		{
 			//2D array since each day can have multiple events
 			$cal_data = array(array());
 		
-			//assign calendar data to appropriate days
+			//for each event that was a match
 			foreach($result as $row)   
 			{
 				//allows for 100 events in a day, maybe excessive
@@ -147,19 +221,40 @@ class CalendarModel extends Model
 					//substr($row->date, 8, 2) is the day part of the date
 					if(!isset($cal_data[substr($row->date, 8, 2)][$i]))
 					{
-						if(strlen($row->data) > 9)
+						//if it is a personal event
+						if(strcmp($row->user, $userName) == 0)	
 						{
-							$cal_data[substr($row->date, 8, 2)][$i] = 
-										"&#8226" . substr($row->data, 0, 8) . "...";
-							break;
+							//adjust the length
+							$tmpData = "<big>&#8226</big>" . substr($row->data, 0, 8);	
+							if(strlen($row->data) > 9)
+							{
+								$cal_data[substr($row->date, 8, 2)][$i] = $tmpData . "...";
+								break;
+							}
+							else
+							{
+								$cal_data[substr($row->date, 8, 2)][$i] = $tmpData;
+								break;
+							}							
 						}
-						else
+						else		//if it's a group event
 						{
-							$cal_data[substr($row->date, 8, 2)][$i] = "&#8226" . $row->data;
-							break;
-						}
-					}
-					
+							//adjust the length and font to show that it's a group event
+							$tmpData = "<small><font color='blue'>&#9830</small> " . 
+										substr($row->data, 0, 8) . "</font>";
+							if(strlen($row->data) > 9)
+							{
+								$cal_data[substr($row->date, 8, 2)][$i] = 
+											$tmpData . "<font color='blue'> ... </font>";
+								break;
+							}
+							else
+							{
+								$cal_data[substr($row->date, 8, 2)][$i] = $tmpData;
+								break;
+							}
+						}	
+					}	
 				}
 			}
 			return $cal_data;
