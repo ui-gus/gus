@@ -13,9 +13,9 @@
 		.calendar .days td
 		{
 			width: 150px; height: 80px; padding: 4px;
-			border: 1px solid #0000FF;
+			border: 3px groove #F4A460;
 			vertical-align: top;
-			background-image: url("../templates/calendar_background.JPG");
+			background-image: url("<?php echo base_url();?>/templates/calendar_day.PNG");
 		}
 		.calendar .days td:hover       
 		{
@@ -26,7 +26,8 @@
 			font-size: 16px;
 			font-family: textile, cursive;
 			font-weight: normal;
-			background-color: #0000FF;
+			border: none;
+			background-image: url("<?php echo base_url();?>/templates/calendar_week.PNG");
 		}
 		table.calendar			
 		{
