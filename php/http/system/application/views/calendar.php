@@ -13,9 +13,9 @@
 		.calendar .days td
 		{
 			width: 150px; height: 80px; padding: 4px;
-			border: 1px solid #999;
+			border: 1px solid #0000FF;
 			vertical-align: top;
-			background-color: #F0F0F0;
+			background-image: url("../templates/calendar_background.JPG");
 		}
 		.calendar .days td:hover       
 		{
@@ -26,7 +26,7 @@
 			font-size: 16px;
 			font-family: textile, cursive;
 			font-weight: normal;
-			background-color: #909090;
+			background-color: #0000FF;
 		}
 		table.calendar			
 		{
@@ -38,8 +38,8 @@
 		.calendar .highlight
 		{
 			font-size: 18px;
-			font-weight: bold; color: #00F
-			
+			font-weight: bold; 
+			color: #00F;
 		}
 	</style>
 	

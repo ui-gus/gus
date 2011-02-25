@@ -25,6 +25,7 @@
 		echo "<h3>Events for " . $this->pdata['month'] . "/" . 
 			  $this->pdata['day'] . "/" . $this->pdata['year'] . "</h3>";
 		echo "<center><a href=\"" . site_url() . "/calendar\">&lt;&lt;Back to Month View</a></center>";
+
 		if($this->Page->authed())
 		{
 			$val = 0;	
@@ -41,26 +42,32 @@
 					}
 					else	//if odd numbered index, then is is an eventID
 					{
-						$hidden = array('eventToEdit' => $item,
-										'eventToDelete' => null,
-										'event_month' => $this->pdata['month']-1, 
-										'event_day' => $this->pdata['day']-1, 
-										'event_year' => $this->pdata['year'],
-										'load_day' => 1);							
-						//form to edit an event
-						echo "<div class='edit'>" . form_open($form_path, '', $hidden);	
+						//check to see if "edit" and "delete" options should be displayed
+						if($item != 0)
+						{
+							$hidden = array('eventToEdit' => $item,
+											'eventToDelete' => null,
+											'event_month' => $this->pdata['month']-1, 
+											'event_day' => $this->pdata['day']-1, 
+											'event_year' => $this->pdata['year'],
+											'load_day' => 1);							
+							//form to edit an event
+							echo "<div class='edit'>" . form_open($form_path, '', $hidden);	
 //NEED A SCRIPT TO GET UPDATED event_data FROM USER SO I CAN ADD IT TO THE $hidden ARRAY
-							echo form_submit('event', 'Edit');
-						echo form_close() . "</div>";
-						
-						//the next two lines must be there so the delete option works
-						$hidden['eventToEdit'] = null;
-						$hidden['eventToDelete'] = $item;
-						
-						//form to delete an event
-						echo "<div class='delete'>" .form_open($form_path, '', $hidden);	
-							echo form_submit('submit', 'Delete');
-						echo form_close() . "</div>";	
+								echo form_submit('event', 'Edit');
+							echo form_close() . "</div>";
+							
+							//the next two lines must be there so the delete option works
+							$hidden['eventToEdit'] = null;
+							$hidden['eventToDelete'] = $item;
+							
+							//form to delete an event
+							echo "<div class='delete'>" .form_open($form_path, '', $hidden);	
+								echo form_submit('submit', 'Delete');
+							echo form_close() . "</div>";	
+						}
+						else
+							echo "<div class='edit'>(Group Event)</div><br><br>";
 					}
 					$val += 1;
 				}

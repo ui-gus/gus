@@ -220,13 +220,13 @@ class CI_Calendar {
 					{	
 						// Cells with content
 						$myVal = $data[$day][0];
-						for($j = 1; $j < 4; $j++)
+						for($j = 1; $j < 3; $j++)
 						{
 							if(isset($data[$day][$j]))
 							{
 								$myVal .= "<br>" . $data[$day][$j];
-								if($j == 3)
-									$myVal .= "<br>&#8226 ...(cont)";
+								if($j == 2)
+									$myVal .= "<br><big>&#8226</big> ...cont...";
 							}
 						}
 						$temp = ($is_current_month == TRUE AND $day == $cur_day) ? $this->temp['cal_cell_content_today'] : $this->temp['cal_cell_content'];

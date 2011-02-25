@@ -68,19 +68,28 @@ $groupName = null;
 			//save each event into an array
 			foreach($result as $row)   
 			{
-				//push each new event and eventID onto the end of the $day_data array
+				//if it's a personal event
 				if(strcmp($row->user, $userName) == 0)
 				{
 					$day_data[] = "<big>&#8226</big>" . $row->data;
+					$day_data[] = $row->eventID;
 				}
-				else
+				else		//if it's a group event
 				{
 					//make it blue if it's a group event
-					$day_data[] = "<small><font color='blue'>&#9830</small> " . $row->data . "</font>";
+					$day_data[] = "<small><font color='blue' size='1'>&#9830</small></font> " . 
+									"<font color='blue'>" . $row->data . "</font>";
+//is_admin() IS NOT IMPLEMENTED YET, SO SET AS 1 FOR NOW
+//					if($this->User->is_admin())
+if(1)
+					{
+						$day_data[] = $row->eventID;
+					}
+					else
+					{
+						$day_data[] = 0;
+					}
 				}
-				
-				//every other value will be an eventID (will be accounted for in calendar_day_view)
-				$day_data[] = $row->eventID;
 			}
 			return $day_data;
 		}
@@ -226,9 +235,9 @@ $groupName = null;
 						{
 							//adjust the length
 							$tmpData = "<big>&#8226</big>" . substr($row->data, 0, 8);	
-							if(strlen($row->data) > 9)
+							if(strlen($row->data) > 8)
 							{
-								$cal_data[substr($row->date, 8, 2)][$i] = $tmpData . "...";
+								$cal_data[substr($row->date, 8, 2)][$i] = $tmpData . " ...";
 								break;
 							}
 							else
@@ -240,9 +249,9 @@ $groupName = null;
 						else		//if it's a group event
 						{
 							//adjust the length and font to show that it's a group event
-							$tmpData = "<small><font color='blue'>&#9830</small> " . 
-										substr($row->data, 0, 8) . "</font>";
-							if(strlen($row->data) > 9)
+							$tmpData = "<font color='blue' size='1'>&#9830</font> " . 
+										"<font color='blue'>" . substr($row->data, 0, 8) . "</font>";
+							if(strlen($row->data) > 8)
 							{
 								$cal_data[substr($row->date, 8, 2)][$i] = 
 											$tmpData . "<font color='blue'> ... </font>";
