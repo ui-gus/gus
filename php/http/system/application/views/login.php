@@ -1,9 +1,15 @@
-<?php echo $this->pdata['header'] ?>
+<?php 
+	echo $this->pdata['header']; 
+	echo $this->pdata['content'];
+?>
 
+<table class="login">
+ <tr>
+  <td>login:</td>
+  <td>
 <?php
 	$un = "";
 	if(isset($_POST['un'])) $un = $_POST['un'];
-	echo $this->pdata['content'];
 	//form
 	$this->load->helper('form');
 	$this->pdata['content'] .= "\n<br />Please Login.";
@@ -16,6 +22,13 @@
                         'size'        => '20',
                         )
                         );
+?>
+  </td>
+ </tr>
+ <tr>
+  <td>password:</td>
+  <td>
+<?php
         echo "\n<br />" . form_input(array(
                         'name'        => 'pw',
                         'id'          => 'pw',
@@ -27,6 +40,9 @@
 			);
 	echo "\n<br />" . form_submit('login', 'Login');
 ?>
+  </td>
+ </tr>
+</table>
 
 <p>Page rendered in {elapsed_time} seconds</p>
 

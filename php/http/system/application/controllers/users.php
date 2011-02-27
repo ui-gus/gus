@@ -31,11 +31,7 @@ class Users extends Controller {
 	}
 	
 	function index() {
-		$this->pdata['content'] .= "\n<br />\n<br />" . 
-		 "<a href=\"users/add\">Add</a>\n<br />\n" . 
-		 "<a href=\"users/edit\">Edit</a>\n<br />" .
-		 "<a href=\"users/delete\">Delete</a>\n<br />";
-		$this->load->view('home',$this->pdata);
+		$this->load->view('users/index',$this->pdata);
 	}
 
 	function add() {

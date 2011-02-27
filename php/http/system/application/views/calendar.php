@@ -13,9 +13,9 @@
 		.calendar .days td
 		{
 			width: 150px; height: 80px; padding: 4px;
-			border: 1px solid #999;
+			border: 3px groove #F4A460;
 			vertical-align: top;
-			background-color: #F0F0F0;
+			background-image: url("<?php echo base_url();?>/templates/calendar_day.PNG");
 		}
 		.calendar .days td:hover       
 		{
@@ -26,7 +26,8 @@
 			font-size: 16px;
 			font-family: textile, cursive;
 			font-weight: normal;
-			background-color: #909090;
+			border: none;
+			background-image: url("<?php echo base_url();?>/templates/calendar_week.PNG");
 		}
 		table.calendar			
 		{
@@ -38,8 +39,8 @@
 		.calendar .highlight
 		{
 			font-size: 18px;
-			font-weight: bold; color: #00F
-			
+			font-weight: bold; 
+			color: #00F;
 		}
 	</style>
 	
@@ -63,18 +64,29 @@
 			//an indexed array of years
 			$form_years = array_combine(range(date('Y'),date('Y')+10), range(date('Y'),date('Y')+10));
 			
-			echo "<p><i>To ADD/EDIT/VIEW events, either click on the calendar day or use the options below</i></p>";
+			echo "<center><i>&#8226 To ADD/EDIT/VIEW events, either click on the calendar day or use the";
+			echo " options below</i>" . "<br><i>&#8226<font color='blue'>Group events are in blue</font>";
+			echo "</i><p></p></center>";
 
-			//form to add an event to the calendar using CI's form helper
-			//the dropdowns change dynamically depending on what date you are currently viewing
-			//events can be planned a maximum of ten years in advance from the current date
+			//form to add an event to the calendar
 			echo form_open($form_path);
 				echo "<b>Event Description:</b>" . form_input('event_data') . "<br>";
 				echo "Month:" . form_dropdown('event_month', range(1, 12), $this->pdata['month']-1);			
 				echo "Day:" . form_dropdown('event_day', range(1, cal_days_in_month(CAL_GREGORIAN, 
 											$this->pdata['month'], $this->pdata['year'])), date('j')-1);
 				echo "Year:" . form_dropdown('event_year', $form_years);
-				echo "  " . form_submit('submit', 'Add Event');
+				
+				//if user has admin priviledges, he or she can add events for the group
+//is_admin() IS NOT IMPLEMENTED YET, SO SET AS 1 FOR NOW
+//				if($this->User->is_admin() == TRUE)
+if(1)
+				{
+					echo "  " . form_submit('AddForGroup', 'Add For Group') . form_submit('AddForSelf', 'Add For You');
+				}
+				else
+				{
+					echo " " . form_submit('AddForSelf', 'Add Event');
+				}
 			echo form_close();	
 			
 			//form to view a specific day
@@ -102,7 +114,7 @@
 		$('.calendar .day').click(function()
 		{		
 			event_day = $(this).find('.day_num').html();		
-			view_day_request = confirm("Add, Edit or View events on this day?");
+			view_day_request = confirm("Add, Edit or View events on this day? (link doesn't work yet, use forms below)");
 <!-- DON'T NEED AJAX, A JQUERY POST WILL WORK JUST FINE -->
 			if(view_day_request != null)
 			{ 	
