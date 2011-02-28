@@ -8,8 +8,10 @@
  */
 
 class Docs extends Controller {
+	var $pdata;
+	var $testmode;
 
-	function Docs(){
+	function docs(){
 		parent::Controller();
 		$this->load->model('Page');
 		$this->load->helper('form');
@@ -33,9 +35,8 @@ class Docs extends Controller {
 	*/
 	}
 
-
+/*
 	function uploadFile() {
-	/*
 	Outsourced to upload.php
 	This function is called when a user wants to upload a file to the group.
 	Codeigniter has a built in "File Uploading Class" that may be useful for this.
@@ -53,9 +54,8 @@ class Docs extends Controller {
 		+ Allowed file types are determined by the Gus admin
 	+ If the file is too large, the user will receive an error
 		+ Maximum file size is determined by the Gus admin and may be restricted due to server memory
-	*/
 	}
-
+*/
 
 	function downloadFile() {
 
@@ -114,7 +114,7 @@ class Docs extends Controller {
 		//index
 		echo $this->unit->run($this->index(), true, 'index');
 		//upload
-                echo $this->unit->run($this->uploadFile(), true, 'Docs: Upload File should probably be commented out as it's in a different controller');
+              //echo $this->unit->run($this->uploadFile(), true, 'Docs: Upload File should probably be commented out as it's in a different controller');
 		//Not needed atm
 		//Download
                 echo $this->unit->run($this->downloadFile(), true, 'downloadFile docs');
