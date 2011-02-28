@@ -69,14 +69,17 @@ class Grouppage extends Controller {
 
 	$t = $this->uri->segment(3);
 	$query = $this->db->query("SELECT * FROM ggroup WHERE id = $t")->result();
-	$data['content'] = "Group #" . $query[0]->id . "<br>Name: " . $query[0]->name . "<br>Description: " . 
-	  $query[0]->description . "<br><br>" . anchor('grouppage/join' , "Join this group<br>") . 
-	  anchor('grouppage/leave' , "Leave this group<br>" );
-	
-
-
-
-	
+	$data['content'] = "<div class=\"update\">"
+		. "<img src=\"" . base_url() . "/uploads/images_(3).jpg\" class=\"profile_pic\">"
+		. "<h1>Group Title: " . $query[0]->name . "</h1>"
+		. "Group id" . $query[0]->id 
+		. "<br><br><img src=\"" . base_url() ."templates/quote_left.png\">"
+		. $query[0]->description
+		. "<img src=\"" . base_url() ."templates/quote_right.png\">"
+		. "<br><br>" 
+		. anchor('grouppage/join' , "Join this group<br>") 
+		. anchor('grouppage/leave' , "Leave this group<br>")
+		. "</div>";
       }
       $this->load->view( 'grouppage_view.php', $data );
     }
@@ -111,6 +114,19 @@ class Grouppage extends Controller {
 	"<li>Should remove the user from the group, then notify the group that the user left.";
       // --- Left off here ---
     }
+    $this->load->view( 'grouppage_view.php', $data );
+  }
+
+  function associations(){
+    $data['header'] = $this->Page->get_header('groups');
+    $data['footer'] = $this->Page->get_footer();
+    $query = $this->db->get('ggroupusers');
+    $qquery = $query->result_array();
+    $s = "Current list of all user/group associations: <br><table border=\"0\"><tr><th>Group ID</th><th>User ID</th><th>Permissions</th></tr>";
+  foreach( $qquery as $group ):{
+      $s .= "<tr><td>" . $group['groupid'] . "</td><td>" . $group['userid'] . "</td><td>" . $group['grouppermissions'] . "</td></tr>"; }
+    endforeach;
+    $data['content'] = $s . "</table>";
     $this->load->view( 'grouppage_view.php', $data );
   }
 

@@ -45,7 +45,7 @@ class Page extends Model {
 										" | <a href=\"" . site_url() . "/forum\">Forum</a>" .
 										" | <a href=\"" . site_url() . "/grouppage\">Groups</a> " .
 										" | <a href=\"" . site_url() . "/calendar\">Calendar</a> " .
-		                                                                " | <a href=\"" . site_url() . "/Docs\">Docs</a> ";
+		                                                                " | <a href=\"" . site_url() . "/docs\">Docs</a> ";
 				
 		return("
 		<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">
@@ -107,13 +107,7 @@ class Page extends Model {
 			-->
 		</div>
 		<!-- This will hold all the updates and other stuff-->
-		<div id=\"content\">
-			
-			
-			
-			
-		
-");
+		<div id=\"content\">");
 	}
 
 	function get_content($page_name) {
@@ -124,7 +118,7 @@ class Page extends Model {
 
 	function get_footer() {
 		return("
-
+		<img src=\"" . base_url() . "/templates/admin_small.png\" class=\"background\">
 			<div id=\"footer\">
 				<br>
 				University of Idaho  GUS was implemented by a software engineering team from CS38-384.

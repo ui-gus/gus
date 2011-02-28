@@ -138,7 +138,12 @@ div#content{
 	
 }
 
-div#content img{
+div#content img.profile_pic{
+	margin-right: 10px;
+	float: left;
+}
+
+div#content img.side{
 	position: absolute;
 	right: 10px;
 }
@@ -204,8 +209,8 @@ div.update{
 	background-position: bottom right;
 	background-repeat: no-repeat;
 	text-align: justify;
-	clear: right;	
-	border-top: 1px solid #f4f4f4;
+	
+	min-height: 175px;
 }
 
 div.update_user{
@@ -284,3 +289,5 @@ h1.title{
 li#group_column_current {
 	background-image: url('../templates/drop_shadow_group_current.png');
 }
+
+
