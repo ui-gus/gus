@@ -14,19 +14,17 @@ class Userpage extends Controller {
     $this->load->helper('url');
   }
   
+ 
+  
+
   function index() {
-    //$data['title'] = "User Page";
-    //$data['heading'] = "User Page";
-    //$data['query'] = $this->db->where( 'user.id', 4 );	
-    
     $data['header'] = $this->Page->get_header('user');
-    
-    //$data['content'] = $this->Page->get_content('user');
+    $data['footer'] = $this->Page->get_footer();
+
     if( !$this->Page->authed() ){			
       $data['content'] = "You must be logged in to view this page.";			
     }	
     else{
-      //$testsess = $this->session->sess_read();
       $data['content'] = "You are viewing the user page.<br><br><u>Personal Info (with links to edit pages)</u><br>
 					<ul>
 					<li>Name: <br>
@@ -45,17 +43,33 @@ class Userpage extends Controller {
 					"	;
       
     }	
-    
-    
-    $data['footer'] = $this->Page->get_footer();				
-    
-    
-    
+   				  
     $this->load->view( 'userpage_view.php', $data );
-    
-    
   }
   
+
+ function view(){
+    if( !$this->Page->authed() ){
+      $data['content'] = "You must be logged in to view this page.";
+    }
+    else{
+      $data['header'] = $this->Page->get_header('user');
+      $data['footer'] = $this->Page->get_footer();
+      if( $this->uri->segment(3) == "" ){
+	redirect("home");
+      }
+      else{
+	$t = $this->uri->segment(3);
+	$query = $this->db->query("SELECT * FROM user WHERE id = $t")->result();
+	$data['content'] = ""
+	  . "User #" . $query[0]->id
+	  . "<br>Username : " . $query[0]->un
+	  ;	
+      }
+      $this->load->view( 'userpage_view.php', $data );
+    }
+  }
+
   function test() {
     //set page name
     $this->load->library('unit_test');
