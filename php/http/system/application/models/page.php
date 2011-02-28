@@ -108,12 +108,7 @@ class Page extends Model {
 		</div>
 		<!-- This will hold all the updates and other stuff-->
 		<div id=\"content\">
-			
-			
-			
-			
-		
-");
+		<img src=\"" . base_url() . "/templates/admin_small.png\" class=\"background\"> ");
 	}
 
 	function get_content($page_name) {
