@@ -69,14 +69,15 @@ class Grouppage extends Controller {
 
 	$t = $this->uri->segment(3);
 	$query = $this->db->query("SELECT * FROM ggroup WHERE id = $t")->result();
-	$data['content'] = "Group #" . $query[0]->id . "<br>Name: " . $query[0]->name . "<br>Description: " . 
-	  $query[0]->description . "<br><br>" . anchor('grouppage/join' , "Join this group<br>") . 
-	  anchor('grouppage/leave' , "Leave this group<br>" );
-	
-
-
-
-	
+	$data['content'] = "<div class=\"update\">"
+		. "<img src=\"" . base_url() . "/uploads/images_(3).jpg\" class=\"profile_pic\">"
+		. "<h1>Group Title: " . $query[0]->name . "</h1>"
+		. "Group id" . $query[0]->id 
+		. "<br>Description: \"" . $query[0]->description . "\""
+		. "<br><br>" 
+		. anchor('grouppage/join' , "Join this group<br>") 
+		. anchor('grouppage/leave' , "Leave this group<br>")
+		. "</div>";
       }
       $this->load->view( 'grouppage_view.php', $data );
     }
