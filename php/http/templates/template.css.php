@@ -139,6 +139,7 @@ div#content{
 }
 
 div#content img.profile_pic{
+	margin-right: 10px;
 	float: left;
 }
 

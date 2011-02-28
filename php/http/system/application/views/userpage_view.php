@@ -4,7 +4,7 @@
 
 <?php
 
-echo $content;
+echo "<img src=\"" . base_url() . "/templates/profile_label.png\" class=\"side\">" . $content;
 
 ?>
 

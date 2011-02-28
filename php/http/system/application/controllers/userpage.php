@@ -61,9 +61,14 @@ class Userpage extends Controller {
       else{
 	$t = $this->uri->segment(3);
 	$query = $this->db->query("SELECT * FROM user WHERE id = $t")->result();
-	$data['content'] = ""
+	$data['content'] = "<div class=\"update\">"
+	  . "<img src=\"" . base_url() . "/uploads/colby.png\" class=\"profile_pic\">"
+	  . "<br><h1> User Profile:" . $query[0]->un . "</h1>"
 	  . "User #" . $query[0]->id
-	  . "<br>Username : " . $query[0]->un
+	  . "<br><br><img src=\"" . base_url() ."templates/quote_left.png\"> "
+	  .	"See, A description should go here, but guess what? There isn't one in the db yet! I should probably add that. :("
+	  . " <img src=\"" . base_url() ."templates/quote_right.png\">"
+	  . "</div>"
 	  ;	
       }
       $this->load->view( 'userpage_view.php', $data );

@@ -73,7 +73,9 @@ class Grouppage extends Controller {
 		. "<img src=\"" . base_url() . "/uploads/images_(3).jpg\" class=\"profile_pic\">"
 		. "<h1>Group Title: " . $query[0]->name . "</h1>"
 		. "Group id" . $query[0]->id 
-		. "<br>Description: \"" . $query[0]->description . "\""
+		. "<br><br><img src=\"" . base_url() ."templates/quote_left.png\">"
+		. $query[0]->description
+		. "<img src=\"" . base_url() ."templates/quote_right.png\">"
 		. "<br><br>" 
 		. anchor('grouppage/join' , "Join this group<br>") 
 		. anchor('grouppage/leave' , "Leave this group<br>")
