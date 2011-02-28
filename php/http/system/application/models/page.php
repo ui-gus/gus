@@ -45,7 +45,7 @@ class Page extends Model {
 										" | <a href=\"" . site_url() . "/forum\">Forum</a>" .
 										" | <a href=\"" . site_url() . "/grouppage\">Groups</a> " .
 										" | <a href=\"" . site_url() . "/calendar\">Calendar</a> " .
-		                                                                " | <a href=\"" . site_url() . "/Docs\">Docs</a> ";
+		                                                                " | <a href=\"" . site_url() . "/docs\">Docs</a> ";
 				
 		return("
 		<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">
