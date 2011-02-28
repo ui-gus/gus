@@ -114,6 +114,19 @@ class Grouppage extends Controller {
     $this->load->view( 'grouppage_view.php', $data );
   }
 
+  function temp(){
+    $data['header'] = $this->Page->get_header('groups');
+    $data['footer'] = $this->Page->get_footer();
+    $query = $this->db->get('ggroupusers');
+    $qquery = $query->result_array();
+    $s = "";
+  foreach( $qquery as $group ):{
+      $s .= $group['groupid'] . " " . $group['userid'] . " " . $group['grouppermissions'] . "<br>"; }
+    endforeach;
+    $data['content'] = $s;
+    $this->load->view( 'grouppage_view.php', $data );
+  }
+
   function test(){
     $this->load->library('unit_test');
     //echo $this->unit->run('Gus Groups.',$this->Page->get_content('groups'), 'Userpage test');
