@@ -20,6 +20,18 @@
                         'size'        => '20',
                         )
                         );
+	echo "<p>Add user to group (optional):</p>\n";
+	echo "<table>\n";
+	foreach($this->pdata['grouplist'] as $key) {
+                echo "<tr>\n";
+                echo "<td>$key:</td>\n";
+                echo "<td>" . form_checkbox(array("name" => 'grouplist[]', 
+						"value" => $key,
+						)
+				) . "</td>\n";
+                echo "</tr>\n";
+        }
+	echo "</table>\n";
 
 	echo "\n<br />" . form_submit('submit', 'Submit');
 ?>

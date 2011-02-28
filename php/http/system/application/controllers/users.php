@@ -35,10 +35,14 @@ class Users extends Controller {
 	}
 
 	function add() {
+		$this->load->model('Group');
 		$this->pdata['default_un'] = "";
-		$this->pdata['content'] .= "<br />\nAdd User.\n";
+		$this->pdata['grouplist'] = $this->Group->get_grouplist();	
 		if(!empty($_POST)) {
 			$this->pdata['default_un'] = $_POST['un'];
+			//if(!empty($this->User->get_group_membershiplist($_POST['un']))) {
+			//	
+			//}
 		}
 		$this->load->view('users/add',$this->pdata);
 	}
@@ -69,21 +73,39 @@ class Users extends Controller {
 	}
 	
 	function save() {
-		//secure pw check
-		if(!$this->Page->is_pw_secure($_POST['pw'])) {
+		if(!$this->Page->is_pw_secure($_POST['pw'])) {//pw is not secure
 			$this->pdata['content'] .= "Password was not " .
 				"good enough. Please try again.<br >\n";
 			$this->pdata['default_un'] = $_POST['un'];
 			$this->load->view('users/add',$this->pdata);
 						//$this->testmode);
-		} else {
+		} else { //pw is secure
 			$this->load->database('admin');
 			$data = array('un' => $_POST['un'], 
 					'pw' => $_POST['pw']);
 			if($this->User->save($data)) {
-			 $this->pdata['content'] .= "User saved successfully.<br />\n";
+				$this->pdata['content'] .= "User saved successfully.<br />\n";
+				$this->load->model('Group');
+				if(isset($_POST['grouplist'])) { //sync to groups
+					foreach($_POST['grouplist'] as $key) { //add user to groups
+					 if($this->Group->add_member($key,$_POST['un'])) {
+					  $this->pdata['content'] .= " Added to group $key<br />\n";
+					 } else {
+					  $this->pdata['content'] .= " ERROR: could not add to group.<br />\n";
+					 }
+					} //end add user to groups
+				} //end sync user to groups
+				foreach($this->Group->get_grouplist() as $key) { //delete user from groups
+				 if(!isset($_POST['grouplist']) || !in_array($key,$_POST['grouplist'])) {
+				  if($this->Group->delete_member($key,$_POST['un'])) {
+				   $this->pdata['content'] .= " Deleted from group $key<br />\n";
+				  } else {
+				   $this->pdata['content'] .= " ERROR: could not delete from group $key.<br />\n";
+				  }
+				 }
+				} //end delete user from groups
 			} else {
-			 show_error('User could not be saved');
+				show_error('User could not be saved');
 			}
 			$this->load->view('users/save',$this->pdata);
 		} //end if secure_pw
