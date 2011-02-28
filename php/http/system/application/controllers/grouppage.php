@@ -114,16 +114,16 @@ class Grouppage extends Controller {
     $this->load->view( 'grouppage_view.php', $data );
   }
 
-  function temp(){
+  function associations(){
     $data['header'] = $this->Page->get_header('groups');
     $data['footer'] = $this->Page->get_footer();
     $query = $this->db->get('ggroupusers');
     $qquery = $query->result_array();
-    $s = "";
+    $s = "Current list of all user/group associations: <br><table border=\"0\"><tr><th>Group ID</th><th>User ID</th><th>Permissions</th></tr>";
   foreach( $qquery as $group ):{
-      $s .= $group['groupid'] . " " . $group['userid'] . " " . $group['grouppermissions'] . "<br>"; }
+      $s .= "<tr><td>" . $group['groupid'] . "</td><td>" . $group['userid'] . "</td><td>" . $group['grouppermissions'] . "</td></tr>"; }
     endforeach;
-    $data['content'] = $s;
+    $data['content'] = $s . "</table>";
     $this->load->view( 'grouppage_view.php', $data );
   }
 
