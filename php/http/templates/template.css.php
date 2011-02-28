@@ -67,8 +67,8 @@ div#links{
 }
 
 div#links a:link {
-		color: ffecc0;
-		text-decoration: none;
+	color: #ffecc0;
+	text-decoration: none;
 }
 
 div#links a:visited{
@@ -128,17 +128,25 @@ div#footer{
 
 div#content{	
  	margin-left: 250px;
-	width:	730px;  
+	width:	750px;  
 	padding: 10px;
 	padding-bottom: 40px;
-	background-image: url('../templates/update_holder.png');
-	background-position: top left;
+	//background-image: url('../templates/admin_small.png');
+	background-position: bottom left;
 	background-repeat: no-repeat;
+	min-height: 750px;
+	
 }
 
 div#content img{
 	position: absolute;
 	right: 10px;
+}
+
+div#content img.background{
+	position: absolute;
+	right: 10px;
+	bottom: 50px;
 }
 
 div#content table{
