@@ -116,12 +116,12 @@ class Docs extends Controller {
 		//upload
               //echo $this->unit->run($this->uploadFile(), true, 'Docs: Upload File should probably be commented out as it's in a different controller');
 		//Not needed atm
-		//Download
-                echo $this->unit->run($this->downloadFile(), true, 'downloadFile docs');
+		//Download - not really testable with these tests
+              //echo $this->unit->run($this->downloadFile(), true, 'downloadFile docs');
 		//Can't be tested afaik
 		//Delete
-                echo $this->unit->run($this->deleteFile(), true, 'deleteFile docs');
+              //echo $this->unit->run($this->deleteFile(), true, 'deleteFile docs');
 		//Can't be tested afaik
-                echo $this->unit->run($this->organizeFiles(), true, 'organizeFiles docs');
+              //echo $this->unit->run($this->organizeFiles(), true, 'organizeFiles docs');
 	}
 }
