@@ -131,7 +131,7 @@ div#content{
 	width:	750px;  
 	padding: 10px;
 	padding-bottom: 40px;
-	background-image: url('../templates/admin_small.png');
+	//background-image: url('../templates/admin_small.png');
 	background-position: bottom left;
 	background-repeat: no-repeat;
 	min-height: 750px;
@@ -146,7 +146,7 @@ div#content img{
 div#content img.background{
 	position: absolute;
 	right: 10px;
-	bottom: 0px;
+	bottom: 50px;
 }
 
 div#content table{
