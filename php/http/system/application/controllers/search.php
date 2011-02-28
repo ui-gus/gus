@@ -12,15 +12,15 @@ class Search extends Controller {
 
 	function Search(){
 		parent::Controller();
-		$this->load->model('Find');
+		$this->load->model('Page');
 		$this->load->helper('form');
-		$this->pdata['footer'] = $this->Find->get_footer();		
+		$this->pdata['footer'] = $this->Page->get_footer();		
 	}
 	
 	function index() {
 		$page_name = 'search';
-		$this->pdata['header'] = $this->Find->get_header($page_name);
-		$this->pdata['content'] = $this->Find->get_content($page_name); 
+		$this->pdata['header'] = $this->Page->get_header($page_name);
+		$this->pdata['content'] = $this->Page->get_content($page_name); 
 		
 		
 		if(!empty($_POST)){	
