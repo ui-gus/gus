@@ -43,31 +43,37 @@ class Calendar extends Controller{
 				//adjust day and month since they are both off by 1 for some reason
 				$event_month = $this->input->post('event_month') + 1;
 				$event_day = $this->input->post('event_day') + 1;
+				$event_date = $event_year."-".$event_month."-".$event_day;
 				
 				//check if it is an admin adding a group event
 				if($addForGroup = $this->input->post('AddForGroup'))
 				{
 					//add_group_event() will check admin privileges
-					$this->CalendarModel->add_group_event($event_year."-".$event_month."-".$event_day, $event_data);
+					$this->CalendarModel->add_group_event($event_date, $event_data);
 				}
 				else
 				{
 					//if it's a regular user
-					$this->CalendarModel->add_event($event_year."-".$event_month."-".$event_day, $event_data);
+					$this->CalendarModel->add_event($event_date, $event_data);
 				}
 			}
 			
 			//check to see if there is a new post requesting to delete an event
-			if($eventToDelete = $this->input->post('eventToDelete'))
-			{
+			if($this->input->post('submitDelete'))
+			{	
+				$eventToDelete = $this->input->post('eventID');
 				$this->CalendarModel->remove_event($eventToDelete);
 			}
 			
 			//check to see if there is a new post requesting to edit an event
-			if($eventID = $this->input->post('eventToEdit'))
+			if($this->input->post('submitEdit'))
 			{
-				if($event = $this->input->post('event_data'))
+				$eventID = $this->input->post('eventID');
+				$event = $this->input->post('event_data');
+				if($event != null)
 					$this->CalendarModel->edit_event($event, $eventID);
+				else
+					$this->CalendarModel->remove_event($eventID);
 			}
 			
 			//check to see if there is a new post requesting to view the day
@@ -88,16 +94,18 @@ class Calendar extends Controller{
 					$event_year = $year;
 					$event_month = $month;				
 				}
+				$event_date = $event_year."-".$event_month."-".$event_day;
 				//generate calendar content to pass to the view
-				$this->pdata['content'] = 
-						$this->CalendarModel->view_day($event_year."-".$event_month."-".$event_day);
+				$this->pdata['content'] = $this->CalendarModel->view_day($event_date);
 				$this->pdata['year'] = $event_year;
 				$this->pdata['month'] = $event_month;
 				$this->pdata['day'] = $event_day;
+				
 				//display the day view
 				$this->load->view('calendar_day_view', $this->pdata);
 			}
-			else		//if not, then show the month view
+			//if not, then show the month view
+			else		
 			{
 				//generate calendar content to pass to the view
 				$this->pdata['content'] = $this->CalendarModel->myGenerate($year, $month);

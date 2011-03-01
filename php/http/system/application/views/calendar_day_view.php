@@ -12,26 +12,38 @@
 		font-size: 20px;
 		text-align: center;
 	}
+	.background
+	{
+		background-color: #F2F2F2;
+	}
 	.edit{ text-align: right; }
 	.delete{ text-align: right; }
 	</style>
 	
+	<!-- make src point to jquery library from google so jquery and ajax can be used -->
+	<script type="text/javascript"
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js">
+	</script>
+	
 </head>
 <body>
-	<?php 			
-		$form_path = site_url() . "/calendar/index/" . $this->pdata['year'] . "/" . $this->pdata['month'];
-
+	<?php 
+		$form_path = site_url() . "/calendar/index/" 
+					. $this->pdata['year'] . "/" . $this->pdata['month'];
 		echo $this->pdata['header'];
 		echo "<h3>Events for " . $this->pdata['month'] . "/" . 
 			  $this->pdata['day'] . "/" . $this->pdata['year'] . "</h3>";
-		echo "<center><a href=\"" . site_url() . "/calendar\">&lt;&lt;Back to Month View</a></center>";
+		echo "<center><a href=\"" . site_url() . "/calendar\">&lt;&lt;Back to Month View</a>";
+		echo "</center>";
 
 		if($this->Page->authed())
 		{
 			$val = 0;	
 			//display each event and supply options
 			if($this->pdata['content'])
-			{
+			{	
+				// background class covers entire foreach loop
+				echo "<div class='background'>";		
 				foreach($this->pdata['content'] as $item)   
 				{
 					//if it's an even numbered index, then it is some event data
@@ -44,26 +56,19 @@
 					{
 						//check to see if "edit" and "delete" options should be displayed
 						if($item != 0)
-						{
-							$hidden = array('eventToEdit' => $item,
-											'eventToDelete' => null,
+						{						
+							//form to edit an event (handled by Ajax script)
+							echo "<div class='edit'>" . form_button('misc', 'Edit') . "</div>";
+							
+							$hidden = array('eventID' => $item,
 											'event_month' => $this->pdata['month']-1, 
 											'event_day' => $this->pdata['day']-1, 
 											'event_year' => $this->pdata['year'],
-											'load_day' => 1);							
-							//form to edit an event
-							echo "<div class='edit'>" . form_open($form_path, '', $hidden);	
-//NEED A SCRIPT TO GET UPDATED event_data FROM USER SO I CAN ADD IT TO THE $hidden ARRAY
-								echo form_submit('event', 'Edit');
-							echo form_close() . "</div>";
-							
-							//the next two lines must be there so the delete option works
-							$hidden['eventToEdit'] = null;
-							$hidden['eventToDelete'] = $item;
-							
+											'load_day' => 1);	
+											
 							//form to delete an event
-							echo "<div class='delete'>" .form_open($form_path, '', $hidden);	
-								echo form_submit('submit', 'Delete');
+							echo "<div class='delete'>" . form_open($form_path, '', $hidden);	
+								echo form_submit('submitDelete', 'Delete');
 							echo form_close() . "</div>";	
 						}
 						else
@@ -72,7 +77,7 @@
 					$val += 1;
 				}
 			}
-			echo "<hr />";
+			echo "<hr /></div>";		//end of background class
 			
 			$hidden = array('event_month' => $this->pdata['month']-1, 
 							'event_day' => $this->pdata['day']-1, 
@@ -85,8 +90,9 @@
 //				if($this->User->is_admin() == TRUE)
 if(1)
 				{
-					echo "<center>" . form_input('event_data') . form_submit('AddForGroup', 'Add For Group') 
-									. form_submit('AddForSelf', 'Add For You') . "</center>";
+					echo "<center>Add Event: " . form_input('event_data') .
+						form_submit('AddForSelf', 'Add For You') . form_submit('AddForGroup', 
+						'Add For Group') . "</center>";
 				}
 				else
 				{
@@ -112,5 +118,41 @@ if(1)
 		echo $this->pdata['footer']; 
 	?>
 		
+	<!-- jQuery Ajax script for editing events -->
+	<script type="text/javascript">
+	$(document).ready(function()
+	{
+		$('.edit').click(function()
+		{		
+			submitEdit = 1;
+			eventID = <?php echo $item; ?>;		
+			event_data = prompt("Edit Event: ", <?php echo $item;?>);
+			event_day = <?php echo $this->pdata['day'];?> - 1;
+			load_day = "TRUE";
+
+			if(event_data != null)
+			{ 	
+				$.ajax(
+				{
+					url: window.location,
+					type: "POST",
+					data: 
+					{
+						submitEdit: submitEdit, 
+						eventID: eventID,
+						event_data: event_data,
+						event_day: event_day,
+						load_day: load_day
+					},
+					success: function(msg)
+					{
+						location.reload();
+					}
+				});
+			}		
+		});
+	});
+	</script>
+	
 </body>
 </html>
