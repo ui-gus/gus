@@ -152,6 +152,7 @@ div#content img.background{
 	position: absolute;
 	right: 10px;
 	bottom: 50px;
+	z-index:-1;
 }
 
 div#content table{
