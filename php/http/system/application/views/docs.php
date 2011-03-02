@@ -5,10 +5,10 @@
 <?php 		//Show a list of files
 		$path = './uploads';
 		$handle = opendir($path);
-		if ($handle == false)
+		if ($handle == false) //Directory doesn't exist!
 			return(false);
                 echo "<ul>";
-		while (false !== ($filename = readdir($handle))) {
+		while (false !== ($filename = readdir($handle))) { //Print a list of the files
 			if ( $filename == "." || $filename == "..")
 				continue;
 			echo "<li>$filename<br>";
