@@ -8,25 +8,26 @@
  */
 
 class Docs extends Controller {
-	var $pdata;
-	var $testmode;
+	var $pdata;    //Page data
+	var $testmode; //Keep track of if we're testing
 
 	function docs(){
 		parent::Controller();
-		$this->load->model('Page');
-		$this->load->helper('form');
-		//set page content
-                $this->pdata['footer'] = $this->Page->get_footer();
+		$this->load->model('Page');  //Use page model as base
+		$this->load->helper('form'); //CI's built in form helper
+              $this->pdata['footer'] = $this->Page->get_footer(); //Set the footer
 		$this->testmode = 'false';
 	}
 	
 	function index() {
-		if ($this->testmode == 'false') {
-                $this->pdata['header'] = $this->Page->get_header('Docs');
-                $this->pdata['content'] = $this->Page->get_content('docs');
-		$this->load->view('docs', $this->pdata); }
+		if ($this->testmode == 'false') { //Don't load the page views if we're testing
+                $this->pdata['header'] = $this->Page->get_header('Docs'); //Set the header
+                $this->pdata['content'] = $this->Page->get_content('docs'); //Pull the content from the database
+		  $this->load->view('docs', $this->pdata); } //Load the docs view
 		return('true');
+
 	/*
+	General outline of the use case; used for reference.
 	This function is called when a user visits the group's shared documents/files page.
 	Steps
 	1. Get the current group
@@ -35,9 +36,11 @@ class Docs extends Controller {
 	*/
 	}
 
-/*
+
 	function uploadFile() {
+	/*
 	Outsourced to upload.php
+	General outline of the use case; used for reference.
 	This function is called when a user wants to upload a file to the group.
 	Codeigniter has a built in "File Uploading Class" that may be useful for this.
 	Steps
@@ -54,22 +57,23 @@ class Docs extends Controller {
 		+ Allowed file types are determined by the Gus admin
 	+ If the file is too large, the user will receive an error
 		+ Maximum file size is determined by the Gus admin and may be restricted due to server memory
+	*/
 	}
-*/
 
 	function downloadFile() {
+	$this->load->helper('download');  //Load CI's download helper
 
-	$this->load->helper('download');
-
-	//$_POST['file']; The location of the filename
-	$location = "uploads/" . $_POST['file'];
-	//echo $location;
+	//$_POST['file']; //The location of the filename; passed in by a form
+	$location = "uploads/" . $_POST['file']; //Set the location for file on the server
+	//echo $location; //Check the location for debugging
 
 	$data = file_get_contents($location); // Read the file's contents
-	$name = $_POST['file'];  //Name file will be downloaded as
+	$name = $_POST['file'];  //Name file will be downloaded as will be the same as the one on ther server
 
-	force_download($name, $data);
+	force_download($name, $data); //Force the user to download the file rather than displaying it
+
 	/*
+	General outline of the use case; used for reference.
 	This function is called when a user chooses to download a file.
 	Steps
 	1. Check user permissions
@@ -81,12 +85,12 @@ class Docs extends Controller {
 
 	function deleteFile() {
 
-	$file = "uploads/" . $_POST['file'];
-	unlink($file);
-	header( 'Location: docs' );
-
+	$file = "uploads/" . $_POST['file'];  //Location of the file on the server; $_POST['file'] given from a form
+	unlink($file);   //Delete the file from the server
+	header( 'Location: docs' ); //Reload the page
 
 	/*
+	General outline of the use case; used for reference.
 	This function is called when a user chooses to delete a file that has been uploaded.
 	Steps
 	1. Check user permissions.
@@ -96,7 +100,9 @@ class Docs extends Controller {
 	}
 
 	function organizeFiles() {
+	//WIP
 	/*
+	General outline of the use case; used for reference.
 	This function brings up a new menu that allows a user to organize, rename, and control access to files
 	Steps
 	1. Check user permissions.
@@ -107,6 +113,7 @@ class Docs extends Controller {
 	}
 
 	function test() {
+	//Test the functions
 		$page_name = 'docs';
 		$this->load->library('unit_test');
 		$this->testmode = 'true';
@@ -114,14 +121,13 @@ class Docs extends Controller {
 		//index
 		echo $this->unit->run($this->index(), true, 'index');
 		//upload
-              //echo $this->unit->run($this->uploadFile(), true, 'Docs: Upload File should probably be commented out as it's in a different controller');
-		//Not needed atm
-		//Download - not really testable with these tests
-              //echo $this->unit->run($this->downloadFile(), true, 'downloadFile docs');
-		//Can't be tested afaik
+              	echo $this->unit->run($this->uploadFile(), true, 'Docs: Upload File should probably be commented out as it\'s in a different controller');
+		//Download
+              	//echo $this->unit->run($this->downloadFile(), true, 'downloadFile docs');
+              	echo $this->unit->run(false, true, 'downloadFile docs');
 		//Delete
-              //echo $this->unit->run($this->deleteFile(), true, 'deleteFile docs');
-		//Can't be tested afaik
-              //echo $this->unit->run($this->organizeFiles(), true, 'organizeFiles docs');
+              	echo $this->unit->run(false, true, 'deleteFile docs');
+		//Organize files
+              	echo $this->unit->run($this->organizeFiles(), true, 'organizeFiles docs');
 	}
 }

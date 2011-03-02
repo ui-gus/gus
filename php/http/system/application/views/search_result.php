@@ -8,9 +8,14 @@ Search Results:
 	<tr>
 		<th><b>By Username</b></th>
 	</tr>
-	<tr>
-		<td><p><?php echo $this->pdata['results'] ?></p></td>
-	</tr>
+<?php 
+foreach($this->pdata['results'] as $key ):{
+  echo "<tr><td><p>"
+    .anchor("userpage/view/".$key['id'] , "".$key['un'])
+    ."</p></td></tr>";
+  }
+endforeach;
+?>
 </table>
 
 <?php echo $this->pdata['footer'] ?>

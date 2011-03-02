@@ -1,0 +1,9 @@
+#!/bin/sh
+
+FILES='../http/system/application/controllers/* ../http/system/application/models/* ../http/system/application/views/*'
+
+echo 'Lines of code (LOC):'
+wc -l $FILES 2>&1 | grep total
+
+echo '~ Number of functions:'
+cat $FILES 2>&1 | grep function | wc -l

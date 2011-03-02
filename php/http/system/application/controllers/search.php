@@ -37,14 +37,20 @@ class Search extends Controller {
 		if($query->nu_rows() > 0);
 		return $query->results(); 
 		*/
-		$result = $this->db->query("SELECT un FROM user WHERE un='$data'")->result(); //slightly changed from colby's format
+		$result = $this->db->query("SELECT * FROM user WHERE un='$data'")->result_array(); //slightly changed from colby's format
 		if(empty($result)) return "No Users Found";
 		else{
-			return $_POST['un'];
-			//foreach($result as $key){
-				//echo $key;
-				//$this->pdata['content'] .= $key;
-			//}
+		  return $result;
+		  //Modified this section to allow multiple user search + 
+		  //link to their user page. - Brett
+		  //$this->pdata['query'] = $result;
+		  //return $_POST['un'];
+		  //$pdata['content'] = $result;
+		  //foreach($result as $key):{
+		    //echo $key['id'];
+		    //$this->pdata['content'] .= anchor("userpage/view/".$key['id'] , "".$key['un']);
+		    //}
+		  // endforeach;
 		}
 	}
 	

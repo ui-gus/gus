@@ -139,10 +139,16 @@ class Page extends Model {
 	}
 
 	function login($un,$pw) {
+		//not sure why I only have to do this here... model load model
+		// reported bug to standardize / fix
+		$ci =& get_instance();
+		$ci->load->model('User');
 		$result = $this->db->query("SELECT un FROM user WHERE un='$un' AND pw='$pw'")->result();
 		if(empty($result)) return(false);
 		//else
 		$this->session->set_userdata('un', $un);
+		//$this->session->set_userdata('gus_perm', $ci->User->get_gus_perm($un));
+		print_r($this->session->userdata);
 		return(true);
 	}
 

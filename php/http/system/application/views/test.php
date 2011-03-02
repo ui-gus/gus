@@ -5,7 +5,8 @@
 	$this->load->helper('url');
 	echo '
 <h2>Tests and docs</h2>
-<a href="http://75.87.248.55/P5/var/git/gus/php/doc/gus_mvc.png">Overview</a>
+
+<a href="../SSRS">SSRS</a>
 
 <p>Tests for models:</p>
 <table>
