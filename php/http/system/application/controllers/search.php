@@ -43,14 +43,6 @@ class Search extends Controller {
 		  return $result;
 		  //Modified this section to allow multiple user search + 
 		  //link to their user page. - Brett
-		  //$this->pdata['query'] = $result;
-		  //return $_POST['un'];
-		  //$pdata['content'] = $result;
-		  //foreach($result as $key):{
-		    //echo $key['id'];
-		    //$this->pdata['content'] .= anchor("userpage/view/".$key['id'] , "".$key['un']);
-		    //}
-		  // endforeach;
 		}
 	}
 	

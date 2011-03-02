@@ -93,7 +93,7 @@ class Grouppage extends Controller {
       $data['content'] = "You must be logged in to view this page.";
     }	
     else { //Need to know the UserID from Session.
-      $data['content'] = "Attempting to join Group #" . "NUM" . "<br><hr><ul>" . 
+      $data['content'] = "Attempting to join Group #" . "NUM" . "<br><ul>" . 
 	"<li>Need to know which UserID to add." . 
 	"<li>Should send a message to the group for review.";
       // --- Left off here ---
