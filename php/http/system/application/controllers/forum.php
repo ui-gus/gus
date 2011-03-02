@@ -6,98 +6,134 @@
  * @version 0.4
  * @copyright University of Idaho 2011
  */
-class Forum extends Controller {
-	var $pdata;
-	var $fdata;
+class Forum extends Controller 
+{
+	var $pdata;					//page daga
+	var $fdata;					//Holds query data for use in views
+	var $username = "Chaylo";	//static temp default username, will be filled from session later
+	var $group_id = 0;			//static temp default group, will be filled from session later
+	
 
-	function Forum(){
+	function Forum()
+	{
 		parent::Controller();
  		$this->load->model('Page');
-                //set page content
-                $this->pdata['footer'] = $this->Page->get_footer();		
+        $this->pdata['footer'] = $this->Page->get_footer();		
 	}
 	
-	function index() {
-                $this->pdata['header'] = $this->Page->get_header('forum');	
-                $this->pdata['content'] = $this->Page->get_content('forum');	
-		
-		$this->pdata['query'] = $this->db->get('threads');
-		$this->load->view('forum_view', $this->pdata);
+	
+	//Eventually this function will pull all the threads for a given group's forum based on the group_id
+	//for now it simply pulls all of them.
+	function index() 
+	{	
+		if ($this->group_id == 0):	//Super Admin Group.  Pulls all threads of all forums.  Current default.
+			$this->fdata['query'] = $this->db->get('threads');
+		else:
+			$this->fdata['query'] = $this->db->get_where('threads', array('group_id' => $this->group_id)); 
+		endif;	
+		$this->pdata['header'] = $this->Page->get_header('forum');	
+		$this->pdata['content'] = $this->Page->get_content('forum');
+		$this->load->view('forum_view', $this->pdata, $this->fdata);
 	}
 
-function view_thread()
-  {
-    $this->pdata['header'] = $this->Page->get_header('forum');	
-    $this->pdata['content'] = $this->Page->get_content('forum');
-	$this->pdata['thread_id'] = $this->uri->segment(3);
-	$this->db->where('thread_id', $this->uri->segment(3));
-	$this->pdata['reply'] = $this->db->get('replies');
-	$this->load->view('thread_view', $this->pdata);
-  }
-  
-  function create_thread()
-  {
-    $this->pdata['header'] = $this->Page->get_header('forum');	
-    $this->pdata['content'] = $this->Page->get_content('forum');
-	$this->load->view('create_thread_view', $this->pdata);
-  }
-  
-  function edit_thread()
-  {
-    $id=$_POST['id'];
-    $sql="SELECT * FROM threads WHERE id='$id'";
-    $current_thread=mysql_fetch_array(mysql_query($sql));
-	$this->fdata['id']=$id;
-	$this->fdata['topic']=$current_thread['topic'];
-	$this->fdata['body']=$current_thread['body'];
 	
-    $this->pdata['header'] = $this->Page->get_header('forum');	
-    $this->pdata['content'] = $this->Page->get_content('forum');
-	$this->load->view('edit_thread_view', $this->pdata, $this->fdata);  
-  }
+	//fills fdata with the chosen thread id and all of that threads replies and calls the thread view
+	function view_thread()
+	{
+		$this->fdata['thread_id'] = $this->uri->segment(3);
+		$this->db->where('thread_id', $this->uri->segment(3));
+		$this->fdata['reply'] = $this->db->get('replies');
+		
+		$this->pdata['header'] = $this->Page->get_header('forum');	
+		$this->pdata['content'] = $this->Page->get_content('forum');
+		$this->load->view('thread_view', $this->fdata, $this->pdata);
+	}
   
-  function thread_update()
-  { 
-    $id=$_POST['id'];
-	$this->db->where('id', $id);
-    $this->db->update('threads', $_POST);
-    redirect('forum/view_thread/'.$_POST['id']);
-  } 
+  
+    //calls the create thread view
+	function create_thread()
+	{
+		$this->pdata['header'] = $this->Page->get_header('forum');	
+		$this->pdata['content'] = $this->Page->get_content('forum');
+		$this->load->view('create_thread_view', $this->pdata, $this->fdata); 
+	}
+  
+  
+    //calls the search forum view
+	function search_forum()
+	{
+		$this->pdata['header'] = $this->Page->get_header('forum');	
+		$this->pdata['content'] = $this->Page->get_content('forum');
+		$this->load->view('search_forum_view', $this->pdata, $this->fdata);
+	}
+  
+  
+    //takes thread id and pulls the topic and the body data from the database and puts it in fdata
+	//then calls the edit thread view.
+	function edit_thread()
+	{
+		$id=$_POST['thread_id'];
+		$sql="SELECT * FROM threads WHERE thread_id='$id'";
+		$current_thread=mysql_fetch_array(mysql_query($sql));
+		$this->fdata['id']=$id;
+		$this->fdata['topic']=$current_thread['thread_topic'];
+		$this->fdata['body']=$current_thread['thread_body'];
+	
+		$this->pdata['header'] = $this->Page->get_header('forum');	
+		$this->pdata['content'] = $this->Page->get_content('forum');
+		$this->load->view('edit_thread_view', $this->pdata, $this->fdata);  
+	}
+  
+    
+	//given a thread id and data this function updates the entry in the database
+	function thread_update()
+	{ 
+		$id=$_POST['thread_id'];
+		$this->db->where('thread_id', $id);
+		$this->db->update('threads', $_POST);
+		redirect('forum/view_thread/'.$id);
+	} 
     
   
-  function thread_insert()
-  {
-    /*inserts thread in to database */
-    $_POST['datetime']=date("d/M/Y h:i:s");
-    $this->db->insert('threads', $_POST);
-	redirect('forum');
-  }
+    //inserts a new thread into the database using the group_id, the current time, and the current user.
+	function thread_insert()
+	{
+		$_POST['group_id']=$this->group_id;
+		$_POST['datetime']=date("d/M/Y h:i:s");
+		$_POST['thread_author'] = $this->username;
+		$this->db->insert('threads', $_POST);
+		redirect('forum/forum/'); 
+	}
   
-  function reply_insert()
-  { 
-    /*pull the reply count and updates it */
-    $id=$_POST['thread_id'];
-    $sql="SELECT * FROM threads WHERE id='$id'";
-    $thread=mysql_fetch_array(mysql_query($sql));
-	$data['reply']=$thread['reply'] + 1;
-	$this->db->where('id', $id);
-    $this->db->update('threads', $data); 
+  
+    //this function first pulls the num_replies for the current thread from the database and increments it
+	//it then inserts the reply into the database then returns you to the thread
+	function reply_insert()
+	{ 
+		//pull the reply count and updates it 
+		$id=$_POST['thread_id'];
+		$sql="SELECT * FROM threads WHERE thread_id='$id'";
+		$thread=mysql_fetch_array(mysql_query($sql));
+		$fdata['num_replies']=$thread['num_replies'] + 1;
+		$this->db->where('thread_id', $id);
+		$this->db->update('threads', $fdata); 
 	
-	/*inserts reply in to database */
-    $_POST['datetime']=date("d/M/Y h:i:s");
-    $this->db->insert('replies', $_POST);
-	redirect('forum/view_thread/'.$_POST['thread_id']);	 
-  }
+		//inserts reply in to database
+		$_POST['datetime']=date("d/M/Y h:i:s");
+		$_POST['author'] = $this->username;
+		$this->db->insert('replies', $_POST);
+		redirect('forum/view_thread/'.$_POST['thread_id']);	 
+	}
   
   
-  function delete_thread()
-  {
-    /*deletes thread and all replies from database */
-	$id=$_POST['id'];
-    mysql_query("DELETE FROM threads WHERE id='$id'");
-    mysql_query("DELETE FROM replies WHERE thread_id='$id'");
-	redirect('forum');
-  }
+    //this function deletes a thread and all of it's threads from the database then sends you to the main forum page.
+	function delete_thread()
+	{
+		$id=$_POST['thread_id'];
+		mysql_query("DELETE FROM threads WHERE thread_id='$id'");
+		mysql_query("DELETE FROM replies WHERE thread_id='$id'");
+		redirect('forum/forum');
+	}
 
 
 }

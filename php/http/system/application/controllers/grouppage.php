@@ -37,21 +37,17 @@ class Grouppage extends Controller {
       $query = $this->db->get('ggroup');
       $qquery = $query->result_array();
       $s = "";
-    foreach( $qquery as $group ):{
-	//$s .= $item['id']; 			
-	//$s .= ("- " . $item['id'] . "<br>");			
+      foreach( $qquery as $group ):{
+	//Display all groups and link to their group/view.
 	$s.=anchor('grouppage/view/'.$group['id'] , $group['name'])."<br>";			
-	
       }
       endforeach;
       $data['content'] = "<u>All Groups</u><br>" . $s;
     }
-    
-    
+
+    //Send all information to the view.
     $this->load->view( 'grouppage_view.php', $data );
   }
-  
-  //INSERT INTO `gusphp`.`ggroupusers` (`groupid`, `userid`, `grouppermissions`) VALUES ('1', '2', '1');
 
   function view(){
     if( !$this->Page->authed() ){
@@ -65,10 +61,10 @@ class Grouppage extends Controller {
       }	
       else{
 
-
-
+	//$t is the third segment of the URL, in this case, grouppage/view/___ 
 	$t = $this->uri->segment(3);
 	$query = $this->db->query("SELECT * FROM ggroup WHERE id = $t")->result();
+	//Scott's CSS stuff below.
 	$data['content'] = "<div class=\"update\">"
 		. "<img src=\"" . base_url() . "/uploads/images_(3).jpg\" class=\"profile_pic\">"
 		. "<h1>Group Title: " . $query[0]->name . "</h1>"
@@ -81,6 +77,7 @@ class Grouppage extends Controller {
 		. anchor('grouppage/leave' , "Leave this group<br>")
 		. "</div>";
       }
+      //Send all information to the view.
       $this->load->view( 'grouppage_view.php', $data );
     }
   }
@@ -93,11 +90,11 @@ class Grouppage extends Controller {
       $data['content'] = "You must be logged in to view this page.";
     }	
     else { //Need to know the UserID from Session.
-      $data['content'] = "Attempting to join Group #" . "NUM" . "<br><hr><ul>" . 
+      $data['content'] = "Attempting to join Group #" . "NUM" . "<br><ul>" . 
 	"<li>Need to know which UserID to add." . 
 	"<li>Should send a message to the group for review.";
-      // --- Left off here ---
     }
+    //Send all information to the view.
     $this->load->view( 'grouppage_view.php', $data );
   }
   
@@ -112,28 +109,30 @@ class Grouppage extends Controller {
       $data['content'] = "Attempting to leave Group #" . "NUM" . "<br><hr><ul>" . 
 	"<li>Need to know which UserID to remove." .
 	"<li>Should remove the user from the group, then notify the group that the user left.";
-      // --- Left off here ---
     }
+    //Send all information to the view.
     $this->load->view( 'grouppage_view.php', $data );
   }
 
+  //Debug function at the moment to show user / group associations.
+  //Will be phased out when Admin is complete.
   function associations(){
     $data['header'] = $this->Page->get_header('groups');
     $data['footer'] = $this->Page->get_footer();
     $query = $this->db->get('ggroupusers');
     $qquery = $query->result_array();
     $s = "Current list of all user/group associations: <br><table border=\"0\"><tr><th>Group ID</th><th>User ID</th><th>Permissions</th></tr>";
-  foreach( $qquery as $group ):{
+    foreach( $qquery as $group ):{
       $s .= "<tr><td>" . $group['groupid'] . "</td><td>" . $group['userid'] . "</td><td>" . $group['grouppermissions'] . "</td></tr>"; }
     endforeach;
     $data['content'] = $s . "</table>";
+    //Send all information to the view.
     $this->load->view( 'grouppage_view.php', $data );
   }
+  //--------------------------------------------------------
 
   function test(){
     $this->load->library('unit_test');
-    //echo $this->unit->run('Gus Groups.',$this->Page->get_content('groups'), 'Userpage test');
-    //$this->load->view('test', $this->pdata);
     echo $this->unit->run(NULL,$this->index(), 'Group page index');
   }	
   
