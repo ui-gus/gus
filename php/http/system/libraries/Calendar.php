@@ -215,7 +215,9 @@ class CI_Calendar {
 				$out .= ($is_current_month == TRUE AND $day == $cur_day) ? $this->temp['cal_cell_start_today'] : $this->temp['cal_cell_start'];
 			
 				if ($day > 0 AND $day <= $total_days)
-				{ 					
+				{ 		
+					//pad single-digit days with a zero 
+					$day = sprintf("%02u",$day);
 					if (isset($data[$day][0]))
 					{	
 						// Cells with content

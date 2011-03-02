@@ -13,46 +13,44 @@ class Upload extends Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->helper(array('form', 'url'));
-		$this->testmode = 'false';
-		$this->load->model('Page');
-		//set page content
-                $this->pdata['footer'] = $this->Page->get_footer();
+		$this->load->helper(array('form', 'url')); //Load CI's form and url helpers
+		$this->testmode = 'false';  //Default not in testmode
+		$this->load->model('Page'); //Based off the page template
+              $this->pdata['footer'] = $this->Page->get_footer(); //Load footer
 	}
 
 
 	function index()
 	{
-		if($this->testmode == 'false') {
-                $this->pdata['header'] = $this->Page->get_header('Upload');
-                $this->pdata['content'] = $this->Page->get_content('upload');
-		$this->load->view('upload_form', array('error' => ' ' )); }
+		if($this->testmode == 'false') { //Don't load page view if we're in testmode
+                $this->pdata['header'] = $this->Page->get_header('Upload'); //load header
+                $this->pdata['content'] = $this->Page->get_content('upload'); //load content
+		  $this->load->view('upload_form', array('error' => ' ' )); } //If there was an error last upload, load that too
 		return(true);
 	}
 
 	function do_upload()
 	{
 		/*File upload settings are in config/upload.php*/
-		$this->load->library('upload');
+		$this->load->library('upload'); //Load CI's upload helper
 
 		{
-			if ( ! $this->upload->do_upload())
+			if ( ! $this->upload->do_upload()) //if the upload fails
 			{
-				$error = array('error' => $this->upload->display_errors());
-				if($this->testmode == 'false') {
+				$error = array('error' => $this->upload->display_errors()); //Store error in the error array
+				if($this->testmode == 'false') {  //If not in test mode, reload the page and show the error
 				  $this->pdata['header'] = $this->Page->get_header('Upload');
 				  $this->pdata['content'] = $this->Page->get_content('upload');
 				  $this->load->view('upload_form', $error); }
-				return($this->upload->display_errors());
+				return($this->upload->display_errors());  //If in testmode, check the error
 			}
-			else
+			else //Upload was successful
 			{
-				//file pointer? $_POST["userfile"];
-				$data = array('upload_data' => $this->upload->data());
-				if($this->testmode == 'false') {
+				$data = array('upload_data' => $this->upload->data()); //Pull data about the file
+				if($this->testmode == 'false') { //Don't load view if we're in test mode
 				  $this->pdata['header'] = $this->Page->get_header('Upload');
 				  $this->pdata['content'] = $this->Page->get_content('upload');
-				  $this->load->view('upload_success', $data); }
+				  $this->load->view('upload_success', $data); } //Load the success page and show the data about the file
 				return('success');
 			}
 		}
@@ -60,6 +58,7 @@ class Upload extends Controller {
 
 	function test()
 	{
+		//Test the functions
 		$page_name = 'upload';
 		$this->load->library('unit_test');
 		$this->testmode = 'true';
