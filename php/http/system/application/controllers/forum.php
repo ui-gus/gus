@@ -32,7 +32,7 @@ class Forum extends Controller
 			$this->fdata['query'] = $this->db->get_where('threads', array('group_id' => $this->group_id)); 
 		endif;	
 		$this->pdata['header'] = $this->Page->get_header('forum');	
-        $this->pdata['content'] = $this->Page->get_content('forum');
+		$this->pdata['content'] = $this->Page->get_content('forum');
 		$this->load->view('forum_view', $this->pdata, $this->fdata);
 	}
 

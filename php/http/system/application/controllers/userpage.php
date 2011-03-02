@@ -43,7 +43,7 @@ class Userpage extends Controller {
 					"	;
       
     }	
-   				  
+    //Send all information to the view.
     $this->load->view( 'userpage_view.php', $data );
   }
   
@@ -61,6 +61,7 @@ class Userpage extends Controller {
       else{
 	$t = $this->uri->segment(3);
 	$query = $this->db->query("SELECT * FROM user WHERE id = $t")->result();
+	//Scott's CSS stuff.
 	$data['content'] = "<div class=\"update\">"
 	  . "<img src=\"" . base_url() . "/uploads/colby.png\" class=\"profile_pic\">"
 	  . "<br><h1> User Profile:" . $query[0]->un . "</h1>"
@@ -76,10 +77,8 @@ class Userpage extends Controller {
   }
 
   function test() {
-    //set page name
     $this->load->library('unit_test');
     echo $this->unit->run('Gus User Page.',$this->Page->get_content('user'), 'Userpage test');
-    //$this->load->view('test', $this->pdata);	
   }	
   
 }
