@@ -7,3 +7,6 @@ wc -l $FILES 2>&1 | grep total
 
 echo '~ Number of functions:'
 cat $FILES 2>&1 | grep function | wc -l
+
+echo 'Number of files:'
+find $FILES 2>&1 | wc -l

@@ -40,9 +40,8 @@ class Users extends Controller {
 		$this->pdata['grouplist'] = $this->Group->get_grouplist();	
 		if(!empty($_POST)) {
 			$this->pdata['default_un'] = $_POST['un'];
-			//if(!empty($this->User->get_group_membershiplist($_POST['un']))) {
-			//	
-			//}
+			$this->pdata['membershiplist'] = 
+			 $this->Group->get_membershiplist($_POST['un']);
 		}
 		$this->load->view('users/add',$this->pdata);
 	}

@@ -1,4 +1,4 @@
 #!/bin/sh
 
-#phpdoc -d ../http/system/application -o HTML:Smarty:default -t ../http/phpdoc-out
-phpdoc -f ../http/system/application/controllers/usergroup.php -o HTML:Smarty:default -t ../http/phpdoc-out
+phpdoc -d ../http/system/application -o HTML:Smarty:default -t ../http/phpdoc-out
+#phpdoc -f ../http/system/application/controllers/usergroup.php -o HTML:Smarty:default -t ../http/phpdoc-out

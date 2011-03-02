@@ -1,5 +1,7 @@
 <?php echo $this->pdata['header'] ?>
 
+Add a User
+
 <?php
 	echo $this->pdata['content'];
 	//form
@@ -22,13 +24,28 @@
                         );
 	echo "<p>Add user to group (optional):</p>\n";
 	echo "<table>\n";
+	print_r($this->pdata['membershiplist']);
 	foreach($this->pdata['grouplist'] as $key) {
                 echo "<tr>\n";
                 echo "<td>$key:</td>\n";
-                echo "<td>" . form_checkbox(array("name" => 'grouplist[]', 
-						"value" => $key,
-						)
+                echo "<td>" . form_checkbox(
+				 array("name" => 'grouplist[]', 
+				 "value" => $key,
+				 //'checked' => in_array($key, 
+				//		$this->pdata['membershiplist']
+				//		)
+				 'checked' => isset($this->pdata['membershiplist'][$key]) 
+				 )
 				) . "</td>\n";
+		echo "<td>r</td>\n";
+		echo "<td>w</td>\n";
+		echo "<td>x</td>\n";
+		echo "<td>r</td>\n";
+		echo "<td>w</td>\n";
+		echo "<td>x</td>\n";
+		echo "<td>r</td>\n";
+		echo "<td>w</td>\n";
+		echo "<td>x</td>\n";
                 echo "</tr>\n";
         }
 	echo "</table>\n";

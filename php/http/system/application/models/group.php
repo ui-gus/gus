@@ -24,6 +24,21 @@ class Group extends Model {
 		return($data);
 	}
 
+        function get_membershiplist($un) {
+                $ci = get_instance();
+		$ci->load->model('User');
+		$this->db->where('uid', $this->User->get_id($un));
+                $data = array();
+                foreach($this->db->get('usergroup')->result() as $key) {
+        		if(empty($data)) {
+				$data = array($this->get_name($key->gid) => 000);
+			} else {       
+	         		$data[$this->get_name($key->gid)] = 000;
+			}
+                }
+                return($data);
+        }
+
 	function get_description($name) {
 		$this->db->select('description');
 		$this->db->where('name',$name);	
@@ -37,6 +52,30 @@ class Group extends Model {
 		$result = $this->db->get('ggroup')->result();
 		return($result[0]->id);
 	}
+
+	function get_name($id) {
+		$this->db->select('name');
+		$this->db->where('id',$id);	
+		$result = $this->db->get('ggroup')->result();
+		return($result[0]->name);
+	}
+
+	/**
+         * gets the perm integer from the gus group in the usergroup table
+         * usergroup gus group is used as the global group
+        */
+        function get_perm($un, $gn) {
+		$ci =& get_instance();
+                $ci->load->model('User');
+                $uid = $ci->User->get_id($un);
+		$gid = $this->get_id($gn);
+                $this->db->select('perm');
+                $this->db->where('uid',$uid);
+		$this->db->where('gid',$gid);
+		$result = $this->db->get('usergroup')->result();
+        	if(empty($result)) return(000);
+	        return($result[0]->perm);
+        }
 
 	function save($data) {
 		if($this->db->get_where('ggroup',array('name' => $data['name']))->num_rows < 1) {

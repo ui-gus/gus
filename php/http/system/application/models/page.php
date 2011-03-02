@@ -142,13 +142,12 @@ class Page extends Model {
 		//not sure why I only have to do this here... model load model
 		// reported bug to standardize / fix
 		$ci =& get_instance();
-		$ci->load->model('User');
+		$ci->load->model('Group');
 		$result = $this->db->query("SELECT un FROM user WHERE un='$un' AND pw='$pw'")->result();
 		if(empty($result)) return(false);
 		//else
 		$this->session->set_userdata('un', $un);
-		//$this->session->set_userdata('gus_perm', $ci->User->get_gus_perm($un));
-		print_r($this->session->userdata);
+		$this->session->set_userdata('perm', $ci->Group->get_perm($un,"admin"));
 		return(true);
 	}
 
@@ -158,6 +157,13 @@ class Page extends Model {
 
 	function authed() {
 		return($this->session->userdata('un'));
+	}
+
+	function is_user_admin() {	
+		if(!$this->authed()) return(false);
+		if($this->session->userdata('perm') == 0) return(false); 
+		if($this->session->userdata('perm') % 700 == 0) return(true);
+		return(false);
 	}
 
 	function is_pw_secure($pw) {
