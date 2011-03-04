@@ -21,6 +21,7 @@ class Grouppage extends Controller {
   function Grouppage(){
     parent::Controller();
     $this->load->model('Page');
+    $this->load->model('Group');
     $this->load->helper('url');
     $this->load->database();
   }
@@ -29,6 +30,16 @@ class Grouppage extends Controller {
     $data['header'] = $this->Page->get_header('groups');
     $data['footer'] = $this->Page->get_footer();		
     $data['query'] = $this->db->get('ggroup')->result_array();	
+    
+  #  $tests = "";
+  #  $test =  $this->Group->delete_member( "test", "test");
+#foreach( $test as $key ):{
+    #    $tests .= $key;
+#    echo $key['gid'];
+    #  }
+#  endforeach;
+    #echo $test;
+    
     
     if( !$this->Page->authed() ){
       $data['content'] = "You must be logged in to view this page.";
@@ -47,6 +58,7 @@ class Grouppage extends Controller {
 
     //Send all information to the view.
     $this->load->view( 'grouppage_view.php', $data );
+    return( true );
   }
 
   function view(){
@@ -80,6 +92,7 @@ class Grouppage extends Controller {
       //Send all information to the view.
       $this->load->view( 'grouppage_view.php', $data );
     }
+    return( true );
   }
 
   function join(){
@@ -96,6 +109,7 @@ class Grouppage extends Controller {
     }
     //Send all information to the view.
     $this->load->view( 'grouppage_view.php', $data );
+    return( true );  
   }
   
   function leave(){
@@ -112,6 +126,7 @@ class Grouppage extends Controller {
     }
     //Send all information to the view.
     $this->load->view( 'grouppage_view.php', $data );
+    return( true );  
   }
 
   //Debug function at the moment to show user / group associations.
@@ -133,7 +148,11 @@ class Grouppage extends Controller {
 
   function test(){
     $this->load->library('unit_test');
-    echo $this->unit->run(NULL,$this->index(), 'Group page index');
+    echo $this->unit->run(true,$this->index(), 'Group page index');
+    echo $this->unit->run(true,$this->view(), 'Group page index');
+    echo $this->unit->run(true,$this->join(), 'Group page index');
+    echo $this->unit->run(true,$this->leave(), 'Group page index');
+    
   }	
   
   }
