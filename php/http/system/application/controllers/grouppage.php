@@ -75,7 +75,9 @@ class Grouppage extends Controller {
 
 	//$t is the third segment of the URL, in this case, grouppage/view/___ 
 	$t = $this->uri->segment(3);
-	$query = $this->db->query("SELECT * FROM ggroup WHERE id = $t")->result();
+	#$query = $this->db->query("SELECT * FROM ggroup WHERE id = $t")->result();
+	$query = $this->db->get_where( 'ggroup', array('id' => $t) )->result(); # <-- Better.
+	
 	//Scott's CSS stuff below.
 	$data['content'] = "<div class=\"update\">"
 		. "<img src=\"" . base_url() . "/uploads/images_(3).jpg\" class=\"profile_pic\">"

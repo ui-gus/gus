@@ -60,7 +60,8 @@ class Userpage extends Controller {
       }
       else{
 	$t = $this->uri->segment(3);
-	$query = $this->db->query("SELECT * FROM user WHERE id = $t")->result();
+	#$query = $this->db->query("SELECT * FROM user WHERE id = $t")->result();
+	$query = $this->db->get_where( 'user', array('id' => $t) )->result();
 	//Scott's CSS stuff.
 	$data['content'] = "<div class=\"update\">"
 	  . "<img src=\"" . base_url() . "/uploads/colby.png\" class=\"profile_pic\">"
