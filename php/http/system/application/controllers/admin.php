@@ -20,6 +20,19 @@ class Admin extends Controller {
 		//set page footer
 		$this->pdata['footer'] = $this->Page->get_footer();
 	}
+
+	function _remap($method) {
+		if(!$this->Page->is_user_admin()) {
+			$page_name = "admin";
+			$this->pdata['header'] = 
+				$this->Page->get_header($page_name);
+			$this->pdata['content'] = 
+				"You must be an admin to do that.<br />\n";
+			$this->load->view('home',$this->pdata);
+		} else {
+			$this->$method();
+		}
+	}
 	
 	function index() {
 		//set page name
