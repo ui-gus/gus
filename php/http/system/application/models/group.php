@@ -29,12 +29,17 @@ class Group extends Model {
 		$ci->load->model('User');
 		$this->db->where('uid', $this->User->get_id($un));
                 $data = array();
-                foreach($this->db->get('usergroup')->result() as $key) {
-        		if(empty($data)) {
-				$data = array($this->get_name($key->gid) => 000);
-			} else {       
-	         		$data[$this->get_name($key->gid)] = 000;
-			}
+		$query = $this->db->get('usergroup')->result(); 
+                foreach($query as $key) {
+	   	 $perm = array('read' => ($key->perm & 4) == 4,
+                                        'write' => ($key->perm & 2) == 2,
+                                        'execute' => ($key->perm & 1) == 1
+                                );
+ 	 	 if(empty($data)) {
+		  $data = array($this->get_name($key->gid) => $perm);
+		  } else {       
+	           $data[$this->get_name($key->gid)] = $perm; 
+		  }
                 }
                 return($data);
         }
@@ -50,6 +55,7 @@ class Group extends Model {
 		$this->db->select('id');
 		$this->db->where('name',$name);	
 		$result = $this->db->get('ggroup')->result();
+		if(empty($result)) return(false);
 		return($result[0]->id);
 	}
 
@@ -73,7 +79,7 @@ class Group extends Model {
                 $this->db->where('uid',$uid);
 		$this->db->where('gid',$gid);
 		$result = $this->db->get('usergroup')->result();
-        	if(empty($result)) return(000);
+        	if(empty($result)) return(0);
 	        return($result[0]->perm);
         }
 
@@ -85,12 +91,22 @@ class Group extends Model {
 		return($this->db->update('ggroup',$data));
 	}
 
-	function add_member($gname, $uname) {
+	function add_member($gname, $uname,$perm) {
 		$this->load->model('User');
 		$gid = $this->get_id($gname);
 		$uid = $this->User->get_id($uname);
-		$data = array('gid' => $gid, 'uid' => $uid);
-		if($this->db->get_where('usergroup',$data)->num_rows < 1) {
+		$data = array('gid' => $gid, 
+				'uid' => $uid,
+				'perm' => $perm['read'] * 4
+					 + $perm['write'] * 2
+					+ $perm['execute'] * 1
+				);
+		if($this->db->get_where('usergroup',
+					array('gid' => $data['gid'],
+						'uid' => $data['uid']
+						)
+					)->num_rows < 1
+		) {
 			return($this->db->insert('usergroup', $data));
 		}
 		$this->db->where('gid',$gid);

@@ -30,17 +30,13 @@ class Page extends Model {
 		 $auth = '<a href="' . site_url() . '/auth">Login</a>';
 		}
 		
-		$privilege = "admin"; //this is just set for the moment to test the function.	
-		//at some point I need to retrieve this info about the user from the DB 
-	
-	
 		$content = " <a href=\"" . site_url() . "/home\">Home</a>" ;
 		
-		if($privilege == "admin"){
-			$content = $content . " | <a href=\"" . site_url() . "/admin\">Admin</a> | ";
+		if($this->is_user_admin()){
+			$content = $content . " | <a href=\"" . site_url() . "/admin\">Admin</a>";
 		}
 		
-		$content = $content . "<a href=\"" . site_url() . "/pm\">Messages</a>" . 
+		$content = $content . " | <a href=\"" . site_url() . "/pm\">Messages</a>" . 
 										" | <a href=\"" . site_url() . "/search\">Search</a>" . 
 										" | <a href=\"" . site_url() . "/forum\">Forum</a>" .
 										" | <a href=\"" . site_url() . "/grouppage\">Groups</a> " .
@@ -147,7 +143,7 @@ class Page extends Model {
 		if(empty($result)) return(false);
 		//else
 		$this->session->set_userdata('un', $un);
-		$this->session->set_userdata('perm', $ci->Group->get_perm($un,"admin"));
+		$this->session->set_userdata('perm', $ci->Group->get_perm($un,"main"));
 		return(true);
 	}
 
@@ -162,7 +158,7 @@ class Page extends Model {
 	function is_user_admin() {	
 		if(!$this->authed()) return(false);
 		if($this->session->userdata('perm') == 0) return(false); 
-		if($this->session->userdata('perm') % 700 == 0) return(true);
+		if($this->session->userdata('perm') % 7 == 0) return(true);
 		return(false);
 	}
 

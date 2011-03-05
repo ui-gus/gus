@@ -87,7 +87,17 @@ class Users extends Controller {
 				$this->load->model('Group');
 				if(isset($_POST['grouplist'])) { //sync to groups
 					foreach($_POST['grouplist'] as $key) { //add user to groups
-					 if($this->Group->add_member($key,$_POST['un'])) {
+					 $perm = array('read' => false,
+							'write' => false,
+							'execute' => false
+						);
+					 if(isset($_POST[$key])) {
+					  $perm = array('read' => in_array('read',$_POST[$key]),
+						   'write' => in_array('write',$_POST[$key]),
+						   'execute' => in_array('execute',$_POST[$key])
+							);
+					  }
+					 if($this->Group->add_member($key,$_POST['un'],$perm)) {
 					  $this->pdata['content'] .= " Added to group $key<br />\n";
 					 } else {
 					  $this->pdata['content'] .= " ERROR: could not add to group.<br />\n";

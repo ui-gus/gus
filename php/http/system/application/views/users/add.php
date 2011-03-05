@@ -24,29 +24,45 @@ Add a User
                         );
 	echo "<p>Add user to group (optional):</p>\n";
 	echo "<table>\n";
-	print_r($this->pdata['membershiplist']);
+	echo " <tr>\n";
+	echo "  <td>group name</td>\n";
+	echo "  <td>member</td>\n";
+	echo "  <td>r</td>\n";
+	echo "  <td>w</td>\n";
+	echo "  <td>x</td>\n";
+
 	foreach($this->pdata['grouplist'] as $key) {
-                echo "<tr>\n";
-                echo "<td>$key:</td>\n";
-                echo "<td>" . form_checkbox(
+                echo " <tr>\n";
+                echo "  <td>$key:</td>\n";
+                echo "  <td>" . form_checkbox(
 				 array("name" => 'grouplist[]', 
 				 "value" => $key,
-				 //'checked' => in_array($key, 
-				//		$this->pdata['membershiplist']
-				//		)
 				 'checked' => isset($this->pdata['membershiplist'][$key]) 
 				 )
+				) . "  </td>\n";
+		echo "  <td>" . form_checkbox(
+				 array("name" => $key ."[]",
+					'id' => 'perm',
+					'value' => 'read',
+					'checked' => isset($this->pdata['membershiplist'][$key]['read']) && $this->pdata['membershiplist'][$key]['read'] === true
+					)
 				) . "</td>\n";
-		echo "<td>r</td>\n";
-		echo "<td>w</td>\n";
-		echo "<td>x</td>\n";
-		echo "<td>r</td>\n";
-		echo "<td>w</td>\n";
-		echo "<td>x</td>\n";
-		echo "<td>r</td>\n";
-		echo "<td>w</td>\n";
-		echo "<td>x</td>\n";
-                echo "</tr>\n";
+		echo "  <td>" . form_checkbox(
+				 array("name" => $key ."[]",
+					'id' => 'perm',
+					'value' => 'write',
+					'checked' => isset($this->pdata['membershiplist'][$key]['write']) && $this->pdata['membershiplist'][$key]['write'] === true
+					)
+				) . "</td>\n";
+		echo "  <td>" . form_checkbox(
+				 array("name" => $key ."[]",
+					'id' => 'perm',
+					'value' => 'execute',
+					'checked' => isset($this->pdata['membershiplist'][$key]['execute']) && $this->pdata['membershiplist'][$key]['execute'] === true
+					)
+				) . "</td>\n";
+
+                echo " </tr>\n";
         }
 	echo "</table>\n";
 
