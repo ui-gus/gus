@@ -90,21 +90,24 @@ class Grouppage extends Controller {
 	  . $query[0]->description
 	  . "<img src=\"" . base_url() ."templates/quote_right.png\">"
 	  . "<br><br>" 
-	  . anchor('grouppage/join' , "Join this group<br>") 
-	  . anchor('grouppage/leave' , "Leave this group<br>")
+	  . anchor('grouppage/join/'.$t , "Join this group<br>") 
+	  . anchor('grouppage/leave/'.$t , "Leave this group<br>")
 	  . "</div>"
 	  // Display all users in the group.
 	  . "<div class=\"update\">"
-	  . "<h3><u>__List of Users__</u></h3>";
+	  . "<h3><u>__List of Users__</u></h3>"
+	  ;
       foreach( $userlist as $key ):{
 	  $data['content'] .= "<h4>" 
 	    . anchor('userpage/view/'.$key['uid'] , $this->User->get_name( $key['uid']) )
-	    ."</h4>";
+	    . "</h4>"
+	    ;
 	}
 	endforeach;
 	$data['content'] .= "<u>__________________</u>"
 	  . " "
-	  . "</div>";
+	  . "</div>"
+	  ;
       }
       //Send all information to the view.
       $this->load->view( 'grouppage_view.php', $data );
@@ -113,55 +116,89 @@ class Grouppage extends Controller {
   }
 
   function join(){
+    $t = $this->uri->segment(3);
     $data['header'] = $this->Page->get_header('groups');
     $data['footer'] = $this->Page->get_footer();
 
-    if( !$this->Page->authed() ){
-      $data['content'] = "You must be logged in to view this page.";
+    if( $t == "" ){
+      redirect("grouppage");
     }	
-    else { //Need to know the UserID from Session.
-      $data['content'] = "Attempting to join Group #" . "NUM" . "<br><ul>" . 
-	"<li>Need to know which UserID to add." . 
-	"<li>Should send a message to the group for review.";
+    else {
+      if( !$this->Page->authed() ){
+	$data['content'] = "You must be logged in to view this page.";
+      }	
+      else { //Main part. 
+	$user = $this->session->userdata('un');
+	$uid = $this->User->get_id( $user );
+	$assoc = $this->db->get_where( 'usergroup', array('uid'=>$uid,'gid'=>$t) )->result();
+
+	if( empty( $assoc ) ){ // User is not currently in the selected group. Add them.
+	  $data['content'] = "You have joined "
+	    . $this->Group->get_name( $t )
+	    . "<br><br>"
+	    . anchor( 'grouppage/view/'.$t , "Return to group page" )
+	    ;
+	  $this->Group->add_member( $this->Group->get_name( $t ) , $user, 0 );
+	}
+	else { // User is already in the group. Do not add.
+	  $data['content'] = "You are already a member of this group.<br><br>"
+	    . anchor( 'grouppage/view/'.$t , "Return to group page" )
+	    ;
+	}
+      }
+      //Send all information to the view.
+      $this->load->view( 'grouppage_view.php', $data );
+      return( true );  
     }
-    //Send all information to the view.
-    $this->load->view( 'grouppage_view.php', $data );
-    return( true );  
-  }
-  
+  } 
+
   function leave(){
+    $t = $this->uri->segment(3);
     $data['header'] = $this->Page->get_header('groups');
     $data['footer'] = $this->Page->get_footer();
 
-    if( !$this->Page->authed() ){
-      $data['content'] = "You must be logged in to view this page.";
-    }	
-    else { //Need to know the UserID from Session.
-      $data['content'] = "Attempting to leave Group #" . "NUM" . "<br><hr><ul>" . 
-	"<li>Need to know which UserID to remove." .
-	"<li>Should remove the user from the group, then notify the group that the user left.";
+    if( $t == "" ){
+      redirect("grouppage");
     }
-    //Send all information to the view.
-    $this->load->view( 'grouppage_view.php', $data );
-    return( true );  
+    else {
+      if( !$this->Page->authed() ){
+	$data['content'] = "You must be logged in to view this page.";
+      }	
+      else { //Main part.
+	$user = $this->session->userdata('un');
+	$uid = $this->User->get_id( $user );
+	$assoc = $this->db->get_where( 'usergroup', array('uid'=>$uid,'gid'=>$t) )->result();
+
+	if( empty( $assoc ) ){ // User is not currently in the selected group. Do nothing.
+	  $data['content'] = "You are not a member of "
+	    . $this->Group->get_name( $t )
+	    . "<br><br>"
+	    . anchor( 'grouppage/view/'.$t , "Return to group page" )
+	    ;
+	}
+	else { // User is already in the group. Attempt to leave it.
+	  $data['content'] = "You have left "
+	    . $this->Group->get_name( $t )
+	    . "<br><br>"
+	    . anchor( 'grouppage/view/'.$t , "Return to group page" )
+	    ;
+	  $this->Group->delete_member( $this->Group->get_name( $t ) , $user );
+	}
+	
+	
+	
+      }
+      //Send all information to the view.
+      $this->load->view( 'grouppage_view.php', $data );
+      return( true );  
+    }
   }
 
-  //Debug function at the moment to show user / group associations.
-  //Will be phased out when Admin is complete.
-  function associations(){
-    $data['header'] = $this->Page->get_header('groups');
-    $data['footer'] = $this->Page->get_footer();
-    $query = $this->db->get('ggroupusers');
-    $qquery = $query->result_array();
-    $s = "Current list of all user/group associations: <br><table border=\"0\"><tr><th>Group ID</th><th>User ID</th><th>Permissions</th></tr>";
-    foreach( $qquery as $group ):{
-      $s .= "<tr><td>" . $group['groupid'] . "</td><td>" . $group['userid'] . "</td><td>" . $group['grouppermissions'] . "</td></tr>"; }
-    endforeach;
-    $data['content'] = $s . "</table>";
-    //Send all information to the view.
-    $this->load->view( 'grouppage_view.php', $data );
-  }
-  //--------------------------------------------------------
+
+
+
+  //$s = "Current list of all user/group associations: <br><table border=\"0\"><tr><th>Group ID</th><th>User ID</th><th>Permissions</th></tr>";
+  //$s .= "<tr><td>" . $group['groupid'] . "</td><td>" . $group['userid'] . "</td><td>" . $group['grouppermissions'] . "</td></tr>"; }
 
   function test(){
     $this->load->library('unit_test');
