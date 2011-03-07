@@ -11,6 +11,7 @@ class Userpage extends Controller {
   function Userpage(){
     parent::Controller();
     $this->load->model('Page');
+    $this->load->model('Group');
     $this->load->helper('url');
   }
   
@@ -60,18 +61,33 @@ class Userpage extends Controller {
       }
       else{
 	$t = $this->uri->segment(3);
-	#$query = $this->db->query("SELECT * FROM user WHERE id = $t")->result();
 	$query = $this->db->get_where( 'user', array('id' => $t) )->result();
+	$grouplist = $this->db->get_where( 'usergroup', array('uid' => $t) )->result_array();
+	
 	//Scott's CSS stuff.
 	$data['content'] = "<div class=\"update\">"
 	  . "<img src=\"" . base_url() . "/uploads/colby.png\" class=\"profile_pic\">"
 	  . "<br><h1> User Profile:" . $query[0]->un . "</h1>"
 	  . "User #" . $query[0]->id
 	  . "<br><br><img src=\"" . base_url() ."templates/quote_left.png\"> "
-	  .	"See, A description should go here, but guess what? There isn't one in the db yet! I should probably add that. :("
+	  . "A description should go here."
 	  . " <img src=\"" . base_url() ."templates/quote_right.png\">"
 	  . "</div>"
-	  ;	
+	  // Display all groups the user is in.
+	  . "<div class=\"update\">"
+	  . "<h3><u>__List of Groups__</u></h3>"
+	  ;
+      foreach( $grouplist as $key ):{
+	  $data['content'] .= "<h4>"
+	    . anchor('grouppage/view/'.$key['gid'] , $this->Group->get_name($key['gid']) )
+	    . "</h4>"
+	    ;
+	}
+	endforeach;
+	$data['content'] .= "<u>__________________</u>"
+	  . " "
+	  . "</div>"
+	  ;
       }
       $this->load->view( 'userpage_view.php', $data );
     }
