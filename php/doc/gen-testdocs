@@ -1,0 +1,7 @@
+#!/bin/sh
+
+DEST='../http/testdoc'
+
+latex2html testing/test_metric_plan.lex
+rm -rf $DEST
+cp -rf testing/test_metric_plan $DEST

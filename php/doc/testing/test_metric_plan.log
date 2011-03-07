@@ -1,0 +1,332 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.2.15)  7 MAR 2011 12:04
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**test_metric_plan.lex
+(./test_metric_plan.lex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, loaded.
+(/usr/share/texmf-texlive/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/size12.clo
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf-texlive/tex/latex/tools/layout.sty
+Package: layout 2000/09/25 v1.2c Show layout parameters
+\oneinch=\count87
+\cnt@paperwidth=\count88
+\cnt@paperheight=\count89
+\cnt@hoffset=\count90
+\cnt@voffset=\count91
+\cnt@textheight=\count92
+\cnt@textwidth=\count93
+\cnt@topmargin=\count94
+\cnt@oddsidemargin=\count95
+\cnt@evensidemargin=\count96
+\cnt@headheight=\count97
+\cnt@headsep=\count98
+\cnt@marginparsep=\count99
+\cnt@marginparwidth=\count100
+\cnt@marginparpush=\count101
+\cnt@footskip=\count102
+\fheight=\count103
+\ref@top=\count104
+\ref@hoffset=\count105
+\ref@voffset=\count106
+\ref@head=\count107
+\ref@body=\count108
+\ref@foot=\count109
+\ref@margin=\count110
+\ref@marginwidth=\count111
+\ref@marginpar=\count112
+\Interval=\count113
+\ExtraYPos=\count114
+\PositionX=\count115
+\PositionY=\count116
+\ArrowLength=\count117
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/etc/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2009/08/25 v0.04m Graphics/color for pdfTeX
+\Gread@gobject=\count118
+)))
+No file test_metric_plan.aux.
+\openout1 = `test_metric_plan.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count119
+\scratchdimen=\dimen103
+\scratchbox=\box26
+\nofMPsegments=\count120
+\nofMParguments=\count121
+\everyMPshowfont=\toks14
+\MPscratchCnt=\count122
+\MPscratchDim=\dimen104
+\MPnumerator=\count123
+\everyMPtoPDFconversion=\toks15
+)
+No file test_metric_plan.toc.
+\tf@toc=\write3
+\openout3 = `test_metric_plan.toc'.
+
+! Argument of \@xdblarg has an extra }.
+<inserted text> 
+                \par 
+l.11 \section}
+               {Management Plan}
+? 
+Runaway argument?
+! Paragraph ended before \@xdblarg was complete.
+<to be read again> 
+                   \par 
+l.11 \section}
+               {Management Plan}
+? 
+! Too many }'s.
+<recently read> }
+                 
+l.11 \section}
+               {Management Plan}
+? 
+! Undefined control sequence.
+l.15 	\url
+          {http://www.nwerp.org/trac/gus/report/6}\\
+? 
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 18.
+(/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 18.
+
+! Undefined control sequence.
+l.30 \url
+         {http://www.nwerp.org/gus/index.php/test}\\
+? 
+! Undefined control sequence.
+l.35 	\url
+          {http://wiki.services.openoffice.org/wiki/Test_case_specification_...
+
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.35 ...://wiki.services.openoffice.org/wiki/Test_
+                                                  case_specification_templat...
+
+? 
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 35.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 35.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 35.
+! Extra }, or forgotten $.
+l.35 ...org/wiki/Test_case_specification_template}
+                                                  \\
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.37 	\begin{itemize}
+                     
+? 
+! Interruption.
+<to be read again> 
+                   \par 
+l.37 	\begin{itemize}
+                     
+? 
+! Missing \endgroup inserted.
+<inserted text> 
+                \endgroup 
+l.37 	\begin{itemize}
+                     
+? 
+! Interruption.
+<to be read again> 
+                   $
+l.37 	\begin{itemize}
+                     
+? 
+
+Overfull \hbox (233.12633pt too wide) in paragraph at lines 35--37
+\OML/cmm/m/it/12 Eachsoftwaredeveloperwillusethetestcasespecificationtemplateid
+entifiedinclasstowritetheirtestcases:Wherepossible; thetestcasewill \OT1/cmr/m/
+n/12 :$ 
+ []
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.38 		\item h
+              ave the developer's name on top
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.39 		\item c
+              ross-reference the use-case in the SSRS
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.40 		\item c
+              ross-reference the page illustrating the use-case
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.41 		\item c
+              ross-reference the page showing the results of the unit test
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.42 		\item d
+              ocument what was tested
+? 
+
+! LaTeX Error: \begin{document} ended by \end{itemize}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.43 	\end{itemize}
+                   
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.43 	\end{itemize}
+                   
+? 
+! Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.43 	\end{itemize}
+                   
+? 
+! Undefined control sequence.
+l.46 	\url
+          {http://codeigniter.com/user_guide/libraries/unit_testing.html}\\
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.46 	\url{http://codeigniter.com/user_
+                                       guide/libraries/unit_testing.html}\\
+? 
+! Extra }, or forgotten $.
+l.46 ...om/user_guide/libraries/unit_testing.html}
+                                                  \\
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.48 
+     
+? 
+
+Overfull \hbox (1352.6965pt too wide) in paragraph at lines 46--48
+\OML/cmm/m/it/12 Toautomateintegrationandstructuraltesting; eachunittestwilluse
+CodeIgniterUnitTesting\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 wherepossible\OT1/cmr/m
+/n/12 )\OML/cmm/m/it/12 :Unittestswilltrytodemonstratethattheunitdoesindeeddowh
+atit[]sdesignedtodo; bycomparingactualresultsagainstwhattheunitissupposedtodo:E
+achUnitTestwillrepresentanedgeintheSSRSUseCases; andwillbedirectlylinkedtobytha
+tdocumentation:$ 
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 72--75
+
+ []
+
+[3] [4] (./test_metric_plan.aux) )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 46 ({)
+### bottom level 
+Here is how much of TeX's memory you used:
+ 921 strings out of 495061
+ 11403 string characters out of 1182621
+ 63570 words of memory out of 3000000
+ 4144 multiletter control sequences out of 15000+50000
+ 7894 words of font info for 28 fonts, out of 3000000 for 9000
+ 28 hyphenation exceptions out of 8191
+ 25i,4n,20p,748b,147s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12
+.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/
+share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-
+texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/font
+s/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/pub
+lic/amsfonts/cm/cmsy8.pfb>
+Output written on test_metric_plan.pdf (4 pages, 80954 bytes).
+PDF statistics:
+ 39 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
