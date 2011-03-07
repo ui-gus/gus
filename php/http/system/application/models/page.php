@@ -103,7 +103,7 @@ class Page extends Model {
 			-->
 		</div>
 		<!-- This will hold all the updates and other stuff-->
-		<div id=\"content\">");
+		<div id=\"content\">"	);
 	}
 
 	function get_content($page_name) {
@@ -114,7 +114,6 @@ class Page extends Model {
 
 	function get_footer() {
 		return("
-		<img src=\"" . base_url() . "/templates/admin_small.png\" class=\"background\">
 			<div id=\"footer\">
 				<br>
 				University of Idaho  GUS was implemented by a software engineering team from CS38-384.

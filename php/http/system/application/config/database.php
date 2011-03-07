@@ -38,7 +38,7 @@ $active_group = "default";
 $active_record = TRUE;
 
 $db['default']['hostname'] = "localhost";
-$db['default']['username'] = "gus_admin"; //need to set back to gus_std, but C's wont load admin group. ??
+$db['default']['username'] = "gus_std"; //need to set back to gus_std, but C's wont load admin group. ??
 $db['default']['password'] = "SHI/hel7";
 $db['default']['database'] = "gusphp";
 $db['default']['dbdriver'] = "mysql";

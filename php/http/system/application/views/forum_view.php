@@ -2,8 +2,8 @@
 <?php 	echo $this->pdata['content'] ?>
 
 
-<html>
-<body>
+<!--<html>
+<body>-->
 	<table width="90%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CCCCCC">
 		<tr>
 			<td width="59%" align="center" bgcolor="#E6E6E6"><strong>Topic</strong></td>
@@ -27,7 +27,7 @@
 			</form>
 		</tr>
 	</table>
-</body>
-</html>
+<!--</body>
+</html>-->
 
 <?php echo $this->pdata['footer'] ?>

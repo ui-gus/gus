@@ -105,7 +105,7 @@ div#container{
 	font-size: 10pt;
 	height: 100%;
 	position: relative;
-	padding-bottom: 50px;	
+	padding-bottom: 50px;
 }
 
 div#footer{
@@ -131,11 +131,10 @@ div#content{
 	width:	750px;  
 	padding: 10px;
 	padding-bottom: 40px;
-	//background-image: url('../templates/admin_small.png');
-	background-position: bottom left;
+	background-image: url('../templates/admin_small_edited.png');
+	background-position: bottom right;
 	background-repeat: no-repeat;
 	min-height: 750px;
-//z-index: 1;
 }
 
 div#content img.profile_pic{
@@ -152,7 +151,7 @@ div#content img.background{
 	position: absolute;
 	right: 10px;
         bottom: 50px;
-        z-index: 0;
+        z-index: -1;
 }
 
 div#content table{
