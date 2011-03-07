@@ -32,6 +32,13 @@ class User extends Model {
                 return($result[0]->id);
         }
 
+	function get_name($id) {
+                $this->db->select('un');
+                $this->db->where('id',$id);
+                $result = $this->db->get('user')->result();
+                return($result[0]->un);
+        }
+
 	function save($data) {
 		if($this->db->get_where('user',array('un' => $data['un']))->num_rows < 1) {		
 			return($this->save_apache($data)

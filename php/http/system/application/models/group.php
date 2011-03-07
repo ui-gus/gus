@@ -13,6 +13,7 @@ class Group extends Model {
 	function Group() {
 		parent::Model();	
 		$this->load->database();
+		$this->load->model('User');
 	}
 
 	function get_grouplist() {
@@ -31,14 +32,14 @@ class Group extends Model {
                 $data = array();
 		$query = $this->db->get('usergroup')->result(); 
                 foreach($query as $key) {
-	   	 $perm = array('read' => ($key->perm & 4) == 4,
-                                        'write' => ($key->perm & 2) == 2,
-                                        'execute' => ($key->perm & 1) == 1
+		  $perm = array('read' => ($key->perm & 4) == 4,
+				'write' => ($key->perm & 2) == 2,
+				'execute' => ($key->perm & 1) == 1
                                 );
- 	 	 if(empty($data)) {
-		  $data = array($this->get_name($key->gid) => $perm);
+		  if(empty($data)) {
+		    $data = array($this->get_name($key->gid) => $perm);
 		  } else {       
-	           $data[$this->get_name($key->gid)] = $perm; 
+		    $data[$this->get_name($key->gid)] = $perm; 
 		  }
                 }
                 return($data);

@@ -32,15 +32,14 @@ class Grouppage extends Controller {
     $data['query'] = $this->db->get('ggroup')->result_array();	
     
   #  $tests = "";
-  #  $test =  $this->Group->delete_member( "test", "test");
-#foreach( $test as $key ):{
-    #    $tests .= $key;
-#    echo $key['gid'];
-    #  }
-#  endforeach;
-    #echo $test;
-    
-    
+  #  $test = $this->Group->get_membershiplist( "brett" );
+  #foreach( $test as $key ):{
+  #    $tests .= $key['read'] . "<br>";
+  #    #echo $key['id'];
+  #  }
+  #  endforeach;
+  #  echo $tests;
+        
     if( !$this->Page->authed() ){
       $data['content'] = "You must be logged in to view this page.";
     }				
@@ -77,19 +76,35 @@ class Grouppage extends Controller {
 	$t = $this->uri->segment(3);
 	#$query = $this->db->query("SELECT * FROM ggroup WHERE id = $t")->result();
 	$query = $this->db->get_where( 'ggroup', array('id' => $t) )->result(); # <-- Better.
+	$userlist = $this->db->get_where( 'usergroup', array('gid' => $t) )->result_array();
 	
+	//$uid = $this->User->get_id( $this->session->userdata('un') );
+	
+
 	//Scott's CSS stuff below.
 	$data['content'] = "<div class=\"update\">"
-		. "<img src=\"" . base_url() . "/uploads/images_(3).jpg\" class=\"profile_pic\">"
-		. "<h1>Group Title: " . $query[0]->name . "</h1>"
-		. "Group id" . $query[0]->id 
-		. "<br><br><img src=\"" . base_url() ."templates/quote_left.png\">"
-		. $query[0]->description
-		. "<img src=\"" . base_url() ."templates/quote_right.png\">"
-		. "<br><br>" 
-		. anchor('grouppage/join' , "Join this group<br>") 
-		. anchor('grouppage/leave' , "Leave this group<br>")
-		. "</div>";
+	  . "<img src=\"" . base_url() . "/uploads/images_(3).jpg\" class=\"profile_pic\">"
+	  . "<h1>Group Title: " . $query[0]->name . "</h1>"
+	  . "Group id" . $query[0]->id 
+	  . "<br><br><img src=\"" . base_url() ."templates/quote_left.png\">"
+	  . $query[0]->description
+	  . "<img src=\"" . base_url() ."templates/quote_right.png\">"
+	  . "<br><br>" 
+	  . anchor('grouppage/join' , "Join this group<br>") 
+	  . anchor('grouppage/leave' , "Leave this group<br>")
+	  . "</div>"
+	  // Display all users in the group.
+	  . "<div class=\"update\">"
+	  . "<h3><u>__List of Users__</u></h3>";
+      foreach( $userlist as $key ):{
+	  $data['content'] .= "<h4>" 
+	    . anchor('userpage/view/'.$key['uid'] , $this->User->get_name( $key['uid']) )
+	    ."</h4>";
+	}
+	endforeach;
+	$data['content'] .= "<u>__________________</u>"
+	  . " "
+	  . "</div>";
       }
       //Send all information to the view.
       $this->load->view( 'grouppage_view.php', $data );

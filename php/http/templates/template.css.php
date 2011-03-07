@@ -135,7 +135,7 @@ div#content{
 	background-position: bottom left;
 	background-repeat: no-repeat;
 	min-height: 750px;
-	
+//z-index: 1;
 }
 
 div#content img.profile_pic{
@@ -151,8 +151,8 @@ div#content img.side{
 div#content img.background{
 	position: absolute;
 	right: 10px;
-	bottom: 50px;
-	z-index:-1;
+        bottom: 50px;
+        z-index: 0;
 }
 
 div#content table{
@@ -210,7 +210,6 @@ div.update{
 	background-position: bottom right;
 	background-repeat: no-repeat;
 	text-align: justify;
-	
 	min-height: 175px;
 }
 
