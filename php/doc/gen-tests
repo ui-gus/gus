@@ -1,0 +1,33 @@
+#!/bin/bash
+
+FILES='system/application/controllers'
+
+cd ../http
+TESTDATE=`date +"%m-%d-%y"`
+OUTDIR="tests/$TESTDATE"
+
+mkdir -p $OUTDIR
+
+echo 'Generating test outputs'
+
+
+#CONTROLLERS="admin auth calendar docs forum grouppage groups home mail pages pm search test upload userpage users"
+CONTROLLERS=""
+for file in `ls $FILES`; 
+do
+	CONTROLLERS="$CONTROLLERS `echo $file | sed -n '/[a-Z^\.]*\.php/p' | sed 's/\([a-Z]*\)\.php/\1/'`"
+done
+
+
+rm $OUTDIR/all.html
+for cont in $CONTROLLERS; do
+	echo " Processing controller $cont..."
+	php index.php $cont test > $OUTDIR/$cont.html
+	cat $OUTDIR/$cont.html >> $OUTDIR/all.html
+done
+
+PASSED=`grep Passed $OUTDIR/all.html | wc -l`
+FAILED=`grep Failed $OUTDIR/all.html | wc -l`
+
+echo "Passed: $PASSED <br />" > $OUTDIR/index.html
+echo "Failed: $FAILED" >> $OUTDIR/index.html
