@@ -1,9 +1,9 @@
 <?php
 /***** written by Zeke Long *****/
 
-class CalendarModel extends Model 
+class Calendarmodel extends Model 
 {
-	function CalendarModel()		//constructor
+	function Calendarmodel()		//constructor
 	{
 		parent::Model();
 	

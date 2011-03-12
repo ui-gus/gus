@@ -29,5 +29,5 @@ done
 PASSED=`grep Passed $OUTDIR/all.html | wc -l`
 FAILED=`grep Failed $OUTDIR/all.html | wc -l`
 
-echo "Passed: $PASSED <br />" > $OUTDIR/index.html
-echo "Failed: $FAILED" >> $OUTDIR/index.html
+echo "Passed: $PASSED <br />" > $OUTDIR/results.html
+echo "Failed: $FAILED" >> $OUTDIR/results.html
