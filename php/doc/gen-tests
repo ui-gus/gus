@@ -33,7 +33,9 @@ echo "Passed: $PASSED <br />" > $OUTDIR/results.html
 echo "Failed: $FAILED" >> $OUTDIR/results.html
 
 #create coverage reports
-cd phpcoverage/reports
+REPORTS=phpcoverage/reports
+mkdir -p $REPORTS
+cd $REPORTS
 for cont in $CONTROLLERS; do
 	rm $cont-report -rf
 	php ../bin/all.php $cont test
