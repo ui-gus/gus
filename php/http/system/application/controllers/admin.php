@@ -22,7 +22,7 @@ class Admin extends Controller {
 	}
 
 	function _remap($method) {
-		if(!$this->Page->is_user_admin()) {
+		if(!$this->Page->is_user_admin() && $method != "test") {
 			$page_name = "admin";
 			$this->pdata['header'] = 
 				$this->Page->get_header($page_name);
@@ -118,8 +118,9 @@ class Admin extends Controller {
 		
 		echo $this->unit->run(true,$this->users(), 'admin users');
 		
-		echo $this->unit->run(true,$this->users(), 'admin forums');
+		//these are do nothing funcs and may be gotten rid of	
+		echo $this->unit->run(true,$this->forums(), 'admin forums');
 		
-		
+		echo $this->unit->run(true,$this->pages(), 'admin pages');
 	}
 }

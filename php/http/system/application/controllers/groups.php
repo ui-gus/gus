@@ -33,7 +33,7 @@ class Groups extends Controller {
 
 	//used for class wide reroute to login if not authed
 	function _remap($method) {
-		if(!$this->Page->authed()) {
+		if(!$this->Page->authed() && $method != "test") {
 			$this->load->view('login');
 		} else {
 			$this->$method();
