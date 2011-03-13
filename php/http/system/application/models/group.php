@@ -85,6 +85,7 @@ class Group extends Model {
         }
 
 	function save($data) {
+		$this->db = $this->load->database('admin', TRUE);
 		if($this->db->get_where('ggroup',array('name' => $data['name']))->num_rows < 1) {
 			return($this->db->insert('ggroup',$data));
 		}

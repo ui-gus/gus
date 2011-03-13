@@ -40,6 +40,7 @@ class User extends Model {
         }
 
 	function save($data) {
+		$this->db = $this->load->database('admin', TRUE);
 		if($this->db->get_where('user',array('un' => $data['un']))->num_rows < 1) {		
 			return($this->save_apache($data)
 				&& $this->db->insert('user',$data)

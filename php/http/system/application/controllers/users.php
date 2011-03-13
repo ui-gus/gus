@@ -79,7 +79,6 @@ class Users extends Controller {
 			$this->load->view('users/add',$this->pdata);
 						//$this->testmode);
 		} else { //pw is secure
-			$this->load->database('admin');
 			$data = array('un' => $_POST['un'], 
 					'pw' => $_POST['pw']);
 			if($this->User->save($data)) {
