@@ -36,7 +36,8 @@
     $cov = new CoverageRecorder($includePaths, $excludePaths, $reporter);
     $cov->startInstrumentation();
     #include "test_driver.php";
-    include "/var/git/gus-dev/php/http/index.php";
+    #include "/var/git/gus-dev/php/http/index.php";
+    include "../../index.php";
     
     $cov->stopInstrumentation();
 
