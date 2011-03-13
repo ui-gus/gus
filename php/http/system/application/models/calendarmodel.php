@@ -9,7 +9,8 @@ class Calendarmodel extends Model
 	
 		$this->load->helper('url');  	//need for base_url() function
 		$this->load->model('User');
-		
+		$this->db = $this->load->database('admin', TRUE);	
+	
 		//preference variable for when the calendar library is loaded
 		$this->pref = array(
 			'day_type' => 'long',

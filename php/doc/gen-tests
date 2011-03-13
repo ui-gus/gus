@@ -31,3 +31,11 @@ FAILED=`grep Failed $OUTDIR/all.html | wc -l`
 
 echo "Passed: $PASSED <br />" > $OUTDIR/results.html
 echo "Failed: $FAILED" >> $OUTDIR/results.html
+
+#create coverage reports
+cd phpcoverage/reports
+for cont in $CONTROLLERS; do
+	rm $cont-report -rf
+	php ../bin/all.php $cont test
+	mv report $cont-report
+done

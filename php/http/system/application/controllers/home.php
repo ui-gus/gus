@@ -31,32 +31,10 @@ class Home extends Controller {
 	}
 
 	function test() {
-		define("PHPCOVERAGE_HOME", "phpcoverage/src");
-		#require_once "phpcoverage.inc.php"; 
-		require_once PHPCOVERAGE_HOME . "/../samples/local/phpcoverage.inc.php"; 
-		require_once PHPCOVERAGE_HOME . "/CoverageRecorder.php";
-		require_once PHPCOVERAGE_HOME . "/reporter/HtmlCoverageReporter.php";
-		require_once PHPCOVERAGE_HOME . "/util/Utility.php";
-		
-		global $util;
-		$util = new Utility();
-		$reporter = new HtmlCoverageReporter("Code Coverage Report", "", "report");
-		$includePaths = array("/var/git/gus-dev/php/http/system/application/controllers/home.php");
-		$excludePaths = array();
-		$cov = new CoverageRecorder($includePaths, $excludePaths, $reporter);
-		$cov->startInstrumentation();
-		include "/var/git/gus-dev/php/http/system/application/controllers/home.php";
-
 		//really not much to test here that shouldn't already be tested in the page
 		$this->load->library('unit_test');
 		echo $this->unit->run(true,0 < substr_count($this->Page->css,
 						'templates/template.css.php" type="text/css" rel="stylesheet" />'),
 				'css.1 - Check that CSS is loading correctly');
-
-		
-		$cov->stopInstrumentation();
-		$cov->generateReport();
-		$reporter->printTextSummary();
-		
 	}
 }	

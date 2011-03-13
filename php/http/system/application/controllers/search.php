@@ -47,16 +47,12 @@ class Search extends Controller {
 	}
 	
 	
-	function testDB(){
+	function test(){
 		$this->load->library('unit_test');
 		$id = 1;
 		$this->db->select('un')->from('user')->where('id',$id);
 		$query = $this->db->get();
 		echo $this->unit->run(false,'test' == $query->result(),'Expected Output = False');	
-	}
-	
-	function testDBBoundaries(){
-		$this->load->library('unit_test');
 		
 		//echo $this->unit->run('un',$query,	'Testing Database');
 		 $this->db->select('name');
