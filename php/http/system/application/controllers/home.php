@@ -2,16 +2,30 @@
 
 /**
  * @package GusPackage
- * subpackage Home
  * @author Colby Blair <cblair@vandals.uidaho.edu>
- * @version 0.4
  * @copyright University of Idaho 2011
  */
 
+/**
+ * @package GusPackage
+ * @subpackage controllers
+ * @author Colby Blair <cblair@vandals.uidaho.edu>
+ */
 class Home extends Controller {
-	var $pdata; //page data
+	/**
+	 * @uses junkdrawer passes controller data to views.
+	 * @var array
+	*/
+	var $pdata;
+	/**
+	 * @uses testing set to true to disable views from rendering
+	 * @var bool
+	*/
 	var $testmode;
 
+	/**
+	 * @return void
+	*/
 	function Home()
 	{
 		parent::Controller();	
@@ -20,7 +34,10 @@ class Home extends Controller {
 		$this->testmode = false;
 		$this->pdata['footer'] = $this->Page->get_footer();
 	}
-	
+
+	/**
+	 * @return bool
+	*/
 	function index()
 	{
 		//set page name
@@ -33,6 +50,9 @@ class Home extends Controller {
 		return(true);
 	}
 
+	/**
+	 * @return void
+	*/
 	function test() {
 		//really not much to test here that shouldn't already be tested in the page
 		$this->load->library('unit_test');
