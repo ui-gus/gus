@@ -64,14 +64,23 @@ class Userpage extends Controller {
 	$query = $this->db->get_where( 'user', array('id' => $t) )->result();
 	$grouplist = $this->db->get_where( 'usergroup', array('uid' => $t) )->result_array();
 	
+	$personal = $this->User->get_id($this->session->userdata('un'));
+	
 	//Scott's CSS stuff.
+
 	$data['content'] = "<div class=\"update\">"
 	  . "<img src=\"" . base_url() . "/uploads/colby.png\" class=\"profile_pic\">"
 	  . "<br><h1> User Profile:" . $query[0]->un . "</h1>"
 	  . "User #" . $query[0]->id
-	  . "<br><br><img src=\"" . base_url() ."templates/quote_left.png\"> "
-	  . "A description should go here."
-	  . " <img src=\"" . base_url() ."templates/quote_right.png\">"
+	  . "<br><br><img src=\"" . base_url() ."templates/quote_left.png\"> ";
+	
+	if( $personal == $t ){
+	  $data['content'] .= "This is your personal page. There should be additional functionality soon.";
+	}
+	else {
+	  $data['content'] .= "A description should go here.";
+	    }
+	  $data['content'] .= " <img src=\"" . base_url() ."templates/quote_right.png\">"
 	  . "</div>"
 	  // Display all groups the user is in.
 	  . "<div class=\"update\">"
@@ -93,9 +102,14 @@ class Userpage extends Controller {
     }
   }
 
-  function test() {
-    $this->load->library('unit_test');
-    echo $this->unit->run('Gus User Page.',$this->Page->get_content('user'), 'Userpage test');
-  }	
-  
+ function personal(){
+   $personal = $this->User->get_id($this->session->userdata('un'));
+   redirect("userpage/view/".$personal);
+ }
+ 
+ function test() {
+   $this->load->library('unit_test');
+   echo $this->unit->run('Gus User Page.',$this->Page->get_content('user'), 'Userpage test');
+ }	
+ 
 }
