@@ -22,15 +22,17 @@ class Page extends Model {
 	
 	function get_header($page_name) {
 		//left links
+	        $content = "";
 		$greeting = "";
 		if($this->authed()) {
 		 $auth = '<a href="' . site_url() . '/auth/logout">Logout</a>';
 		 $greeting = "Greetings <u>" . $this->session->userdata('un')  . "</u> <img src=\"" . base_url() . "templates/mail.png\">";
+		  $content = $content . anchor("userpage/personal", "!!!");
 		} else {
 		 $auth = '<a href="' . site_url() . '/auth">Login</a>';
 		}
 		
-		$content = " <a href=\"" . site_url() . "/home\">Home</a>" ;
+		$content = $content . " <a href=\"" . site_url() . "/home\">Home</a>" ;
 		
 		if($this->is_user_admin()){
 			$content = $content . " | <a href=\"" . site_url() . "/admin\">Admin</a>";
