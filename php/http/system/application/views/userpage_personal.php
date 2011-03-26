@@ -2,20 +2,20 @@
 
 <?php echo "<img src=\"" 
              . base_url() 
-             . "/templates/profile_label.png\" class=\"side\">" ?>
+             . "/templates/personal_label.png\" class=\"side\">" ?>
 
 <?php
 if( $authed ){
   echo "<div class=\"update\">"
     . "<img src=\"" . base_url() . "/uploads/colby.png\" class=\"profile_pic\">"
-    . "<h1> User Profile:" . $name . "</h1>"
-    . "User #" . $id . "<br><br>"
+    . "<h1> Personal Profile : " . $name . "</h1>"
+    . "User # " . $id . "<br><br>"
     . "<img src=\"" . base_url() ."templates/quote_left.png\"> "
     . "A description should go here."
     . "<img src=\"" . base_url() ."templates/quote_right.png\">"
+    . "<br><br>"
+    . anchor( 'userpage/edit' , "Edit my Profile" )
     . "</div>"
-    
-    // Display all groups the user is in.
     . "<div class=\"update\">"
     . "<h3><u>__List of Groups__</u></h3>"
     ;
