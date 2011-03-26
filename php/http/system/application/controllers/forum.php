@@ -11,7 +11,7 @@ class Forum extends Controller
 	var $pdata;					//page daga
 	var $fdata;					//Holds query data for use in views
 	var $username = "Chaylo";	//static temp default username, will be filled from session later
-	var $group_id = 0;			//static temp default group, will be filled from session later
+	//var $group_id = 0;			//static temp default group, will be filled from session later
 	
 
 	function Forum()
@@ -22,20 +22,38 @@ class Forum extends Controller
 	}
 	
 	
-	//Eventually this function will pull all the threads for a given group's forum based on the group_id
-	//for now it simply pulls all of them.
+	//This function checks if you are logged in and directs you accordingly
 	function index() 
 	{	
-		if ($this->group_id == 0):	//Super Admin Group.  Pulls all threads of all forums.  Current default.
-			$this->fdata['query'] = $this->db->get('threads');
-		else:
-			$this->fdata['query'] = $this->db->get_where('threads', array('group_id' => $this->group_id)); 
-		endif;	
+		$this->pdata['header'] = $this->Page->get_header('forum');	
+		$this->pdata['content'] = $this->Page->get_content('forum');	   
+
+		if( !$this->Page->authed() )
+		{
+			$this->load->view('forum_error', $this->pdata);
+		}				
+		else
+		{
+			$this->load->view('forum_main', $this->pdata, $this->fdata);
+		}	
+		return( true );	
+	}
+	
+	
+	//This function pulls all the threads of a given forum from teh DB then calls the forun view.
+	
+	function view_forum()
+	{
+		$this->fdata['group_name']=$_POST['group_name'];
+		$this->fdata['group_id']=$_POST['group_id'];
+	    $this->fdata['query'] = $this->db->get_where('threads', array('group_id' => $this->fdata['group_id']));
+
 		$this->pdata['header'] = $this->Page->get_header('forum');	
 		$this->pdata['content'] = $this->Page->get_content('forum');
-		$this->load->view('forum_view', $this->pdata, $this->fdata);
+		$this->load->view('forum_view', $this->fdata, $this->pdata);
 	}
-
+	
+	
 	
 	//fills fdata with the chosen thread id and all of that threads replies and calls the thread view
 	function view_thread()
@@ -53,6 +71,9 @@ class Forum extends Controller
     //calls the create thread view
 	function create_thread()
 	{
+	    $this->fdata['group_name']=$_POST['group_name'];
+		$this->fdata['group_id']=$_POST['group_id'];
+
 		$this->pdata['header'] = $this->Page->get_header('forum');	
 		$this->pdata['content'] = $this->Page->get_content('forum');
 		$this->load->view('create_thread_view', $this->pdata, $this->fdata); 
@@ -98,7 +119,6 @@ class Forum extends Controller
     //inserts a new thread into the database using the group_id, the current time, and the current user.
 	function thread_insert()
 	{
-		$_POST['group_id']=$this->group_id;
 		$_POST['datetime']=date("d/M/Y h:i:s");
 		$_POST['thread_author'] = $this->username;
 		$this->db->insert('threads', $_POST);
