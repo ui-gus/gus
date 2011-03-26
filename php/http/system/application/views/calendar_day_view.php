@@ -38,12 +38,12 @@
 
 		if($this->Page->authed())
 		{
+			// background class covers entire foreach loop
+			echo "<div class='background'>";		
 			$val = 0;	
 			//display each event and supply options
 			if($this->pdata['content'])
 			{	
-				// background class covers entire foreach loop
-				echo "<div class='background'>";		
 				foreach($this->pdata['content'] as $item)   
 				{
 					//if it's an even numbered index, then it is some event data
