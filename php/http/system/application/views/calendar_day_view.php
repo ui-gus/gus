@@ -16,8 +16,9 @@
 	{
 		background-color: #F2F2F2;
 	}
-	.edit{ text-align: right; }
-	.delete{ text-align: right; }
+	.edit{ text-align: left; }
+	.options{ text-align: left; }
+
 	</style>
 	
 	<!-- make src point to jquery library from google so jquery and ajax can be used -->
@@ -39,11 +40,12 @@
 		if($this->Page->authed())
 		{
 			// background class covers entire foreach loop
-			echo "<div class='background'>";		
+			echo "<div class='background'>";
 			$val = 0;	
 			//display each event and supply options
 			if($this->pdata['content'])
-			{	
+			{			
+				$description = null;
 				foreach($this->pdata['content'] as $item)   
 				{
 					//if it's an even numbered index, then it is some event data
@@ -54,22 +56,39 @@
 					}
 					else	//if odd numbered index, then is is an eventID
 					{
-						//check to see if "edit" and "delete" options should be displayed
+						//check to see if options should be displayed
 						if($item != 0)
 						{						
-							//form to edit an event (handled by Ajax script)
-							echo "<div class='edit'>" . form_button('misc', 'Edit') . "</div>";
-							
 							$hidden = array('eventID' => $item,
 											'event_month' => $this->pdata['month']-1, 
 											'event_day' => $this->pdata['day']-1, 
 											'event_year' => $this->pdata['year'],
-											'load_day' => 1);	
+											'load_day' => 1);
 											
-							//form to delete an event
-							echo "<div class='delete'>" . form_open($form_path, '', $hidden);	
+							//get the actual event data so it can be used by ajax for editing the event
+							$tmp = $this->db->query("SELECT data FROM calendar WHERE eventID='$item'")->result();
+							//$tmp is an array, so get the string value (it is a one item array)
+							foreach($tmp as $row)
+							{
+								//save the value so ajax can use it
+								$description = $row->data;	
+							}
+								
+							//button to edit an event (handled by Ajax script)
+							echo "<div class='edit'>" . form_button('misc', 'Edit') . "</div>";	
+							
+							//use a form for the remaining options 
+							//button to delete an event
+							echo "<div class='options'>" . form_open($form_path, '', $hidden);	
 								echo form_submit('submitDelete', 'Delete');
-							echo form_close() . "</div>";	
+								
+							//button to invite group members to event
+							echo form_button('invite', 'Invite Group Members');
+							
+							//button to see who is attending the event
+							echo form_button('attending', 'See who\'s Attending');
+								
+							echo form_close() . "</div>";		//end of "options" div
 						}
 						else
 							echo "<div class='edit'>(Group Event)</div><br><br>";
@@ -77,7 +96,7 @@
 					$val += 1;
 				}
 			}
-			echo "<hr /></div>";		//end of background class
+			echo "<hr /><hr /></div>";		//end of background class
 			
 			$hidden = array('event_month' => $this->pdata['month']-1, 
 							'event_day' => $this->pdata['day']-1, 
@@ -86,8 +105,7 @@
 			//form to add an event on the current day
 			echo form_open($form_path, '', $hidden);	
 				//check if user is admin
-//is_admin() IS NOT IMPLEMENTED YET, SO SET AS 1 FOR NOW
-//				if($this->User->is_admin() == TRUE)
+//				if($this->Page->is_user_admin())
 if(1)
 				{
 					echo "<center>Add Event: " . form_input('event_data') .
@@ -126,7 +144,7 @@ if(1)
 		{		
 			submitEdit = 1;
 			eventID = <?php echo $item; ?>;		
-			event_data = prompt("Edit Event: ", <?php echo $item;?>);
+			event_data = prompt("Edit Event: ", '<?php echo $description;?>');
 			event_day = <?php echo $this->pdata['day'];?> - 1;
 			load_day = "TRUE";
 

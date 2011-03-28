@@ -48,7 +48,7 @@ class Calendar extends Controller{
 				//check if it is an admin adding a group event
 				if($addForGroup = $this->input->post('AddForGroup'))
 				{
-					//add_group_event() will check admin privileges
+					//note: add_group_event() will check admin privileges
 					$this->Calendarmodel->add_group_event($event_date, $event_data);
 				}
 				else
