@@ -51,7 +51,7 @@
 </head>
 <body>
 	<?php 	
-		//display the calendar page
+		//display the calendar
 		echo $this->pdata['header']; 
 		echo $this->pdata['content'];	
 		
@@ -65,9 +65,10 @@
 			$form_years = array_combine(range(date('Y'),date('Y')+10), 
 										range(date('Y'),date('Y')+10));
 			
-			echo "<center><i>&#8226 To ADD/EDIT/VIEW events, either click on the calendar day or";
-			echo " use the options below</i>" . "<br><i>&#8226<font color='blue'>Group events are ";
-			echo "in blue</font></i><p></p></center>";
+			echo "<center><i>&#8226 To ADD/EDIT/VIEW events, either go to day view or";
+			echo " use the options below";
+			echo "<br>&#8226 To INVITE/JOIN events, go to day view";
+			echo "<br>&#8226<font color='blue'>Group events are in blue</font><p></p></i></center>";
 
 			//form to add an event to the calendar
 			echo form_open($form_path);
@@ -77,8 +78,7 @@
 										$this->pdata['month'], $this->pdata['year'])), date('j')-1);
 				echo "Year:" . form_dropdown('event_year', $form_years);				
 				//if user has admin priviledges, he or she can add events for the group
-//is_admin() IS NOT IMPLEMENTED YET, SO SET AS 1 FOR NOW
-//				if($this->User->is_admin() == TRUE)
+//				if($this->Page->is_user_admin())
 if(1)
 				{
 					echo "  " . form_submit('AddForSelf', 'Add For You') 
@@ -115,7 +115,7 @@ if(1)
 			event_day = $(this).find('.day_num').html();		
 			view_day_request = confirm("Add, Edit or View events on this day? 
 									(link doesn't work yet, use forms below)");
-<!-- DON'T NEED AJAX, A JQUERY POST WILL WORK JUST FINE -->
+// DON'T NEED AJAX, A JQUERY POST WILL WORK JUST FINE
 			if(view_day_request != null)
 			{ 	
 				$.ajax(

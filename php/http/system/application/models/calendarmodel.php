@@ -9,7 +9,8 @@ class Calendarmodel extends Model
 	
 		$this->load->helper('url');  	//need for base_url() function
 		$this->load->model('User');
-		$this->db = $this->load->database('admin', TRUE);	
+//the next line creates an error, NEED TO FIX (maybe ask Colby about configurations)
+//		$this->db = $this->load->database('admin', TRUE);	
 	
 		//preference variable for when the calendar library is loaded
 		$this->pref = array(
@@ -83,8 +84,7 @@ $groupName = null;
 					//make it blue if it's a group event
 					$day_data[] = "<small><font color='blue' size='1'>&#9830</small></font> " . 
 									"<font color='blue'>" . $row->data . "</font>";
-//is_admin() IS NOT IMPLEMENTED YET, SO SET AS 1 FOR NOW
-//					if($this->User->is_admin())
+//					if($this->Page->is_user_admin())
 if(1)
 						$day_data[] = $row->eventID;
 					else
@@ -101,8 +101,7 @@ if(1)
 	function remove_event($eventID)
 	{
 		//only let an admin remove a group event
-//is_admin() IS NOT IMPLEMENTED YET, SO SET AS 1 FOR NOW
-//		if($this->User->is_admin())
+//		if($this->Page->is_user_admin())
 if(1)
 		{
 			return $this->db->query("DELETE FROM calendar WHERE eventID='$eventID'");
@@ -120,8 +119,7 @@ if(1)
 	{
 		//allow for any variation of quotes in input
 		$event = str_replace("'", "''", $event);
-//is_admin() IS NOT IMPLEMENTED YET, SO SET AS 1 FOR NOW
-//		if($this->User->is_admin())
+//		if($this->Page->is_user_admin())
 if(1)
 		{
 			//if the user is an admin and the eventID matches, whether or not it is a group event
@@ -174,8 +172,8 @@ if(1)
 	{
 		//allow for any variation of quotes in input
 		$event = str_replace("'", "''", $event);
-//is_admin() IS NOT IMPLEMENTED YET, SO SET AS 1 FOR NOW
-//		if($this->User->is_admin())
+
+//		if($this->Page->is_user_admin())
 if(1)
 		{
 			//update the group event if it exists already, otherwise add it
@@ -212,11 +210,12 @@ $groupName = null;
 			return 0;
 	}
 	
+	
 	function get_cal_data($year, $month)
 	{
 		$userName = $this->session->userdata('un');
 //get_group() NOT IMPLEMENTED YET, SET AS NULL FOR NOW		
-//		$groupName = $this->User->get_group();
+//		$groupName = $this->Page->get_group();
 $groupName = null;
 	
 		//select the entire month's data for the logged in user from the calendar table 

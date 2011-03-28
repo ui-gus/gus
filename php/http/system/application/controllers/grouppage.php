@@ -38,7 +38,6 @@ class Grouppage extends Controller {
     }				
     else{
       $data['authed'] = true;
-      //$data['groups'] = $this->db->get('ggroup')->result_array();
       $data['groups'] = $this->Group->get_grouplist();
     }
 
@@ -49,7 +48,7 @@ class Grouppage extends Controller {
     return( true );
   }
 
-  function view(){
+  function view( $testgroup ){
     $data['header'] = $this->Page->get_header('groups');
     $data['footer'] = $this->Page->get_footer();
     
@@ -59,16 +58,19 @@ class Grouppage extends Controller {
     else{
       $data['authed'] = true;
       $t = $this->uri->segment(3);
-      if( $t == "" ){
+      
+      if( $t == "" && $this->testing == false ){
 	redirect("grouppage");
-      }	
-      else{
+      }      
+      else {
 	$query = $this->db->get_where( 'ggroup', array('id' => $t) )->result();
 	$userlist = $this->db->get_where( 'usergroup', array('gid' => $t) )->result_array();
 	
-	$data['group'] = $query[0];
+	if( sizeof($query) > 0 ){
+	  $data['group'] = $query[0];
+	}
 	$data['gid'] = $t;
-	$data['members'] = $userlist;//$this->Group->get_membershiplist($t);
+	$data['members'] = $userlist;
       }
       //Send all information to the view.
       if( $this->testing == false ){
@@ -78,12 +80,16 @@ class Grouppage extends Controller {
     return( true );
   }
 
-  function join(){
+  function join( $testgroup ){
     $t = $this->uri->segment(3);
     $data['header'] = $this->Page->get_header('groups');
     $data['footer'] = $this->Page->get_footer();
 
-    if( $t == "" ){
+    if( $testgroup != "" && $this->testing == true ){
+      $t = $testgroup;
+    }
+
+    if( $t == "" && $this->testing == false ){
       redirect("grouppage");
     }	
     else {
@@ -94,7 +100,7 @@ class Grouppage extends Controller {
 	$user = $this->session->userdata('un');
 	$uid = $this->User->get_id( $user );
 	$assoc = $this->db->get_where( 'usergroup', array('uid'=>$uid,'gid'=>$t) )->result();
-	
+
 	$data['authed'] = true;
 	$data['gid'] = $t;
 	if( empty( $assoc ) ){ // User is not currently in the selected group. Add them.
@@ -109,8 +115,8 @@ class Grouppage extends Controller {
       if( $this->testing == false ){
 	$this->load->view( 'grouppage_join.php', $data );
       }
-      return( true );  
     }
+    return( true );  
   } 
 
   function leave(){
@@ -145,28 +151,19 @@ class Grouppage extends Controller {
       if( $this->testing == false ){
 	$this->load->view( 'grouppage_leave.php', $data );
       }
-      return( true );  
     }
+    return( true ); 
   }
-
-
-
-
-  //$s = "Current list of all user/group associations: <br><table border=\"0\"><tr><th>Group ID</th><th>User ID</th><th>Permissions</th></tr>";
-  //$s .= "<tr><td>" . $group['groupid'] . "</td><td>" . $group['userid'] . "</td><td>" . $group['grouppermissions'] . "</td></tr>"; }
 
   function test(){
     $this->load->library('unit_test');
 
     $this->testing = true;
     echo $this->unit->run(true,$this->index(), 'Grouppage index() test');
-    #echo $this->unit->run(true,$this->view(), 'Group page index');
-    #echo $this->unit->run(true,$this->join(), 'Group page index');
-    #echo $this->unit->run(true,$this->leave(), 'Group page index');
-    
-    
+    echo $this->unit->run(true,$this->view(''), 'Attempting to go to grouppage/view/ without a group id. Redirect to grouppage.');
+    echo $this->unit->run(true,$this->view('0'), 'Attempting to view Group.');
   }	
   
-  }
+}
 
 ?>

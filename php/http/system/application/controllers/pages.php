@@ -15,10 +15,12 @@ class Pages extends Controller {
 		parent::Controller();	
 		$this->load->model('Page');
 		$this->load->helper('form');
+		$this->load->model('tinyMCE');
 		$page_name = 'pages';
 		$this->pdata['header'] = $this->Page->get_header($page_name);
 		$this->pdata['content'] = $this->Page->get_content($page_name); 
 		$this->pdata['footer'] = $this->Page->get_footer();
+		$this->pdata['tinyMCE'] = $this->tinyMCE->outputJScript(array("newpagecontent"));
 	}
 
 	//used for class wide reroute to login if not authed

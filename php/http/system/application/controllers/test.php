@@ -92,4 +92,10 @@ class Test extends Controller {
 					)
 				), 'save.1');
 	}
+
+	function allModels() {
+		$this->page();
+		$this->group();
+		$this->user();
+	}
 }

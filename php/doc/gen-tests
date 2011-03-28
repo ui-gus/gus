@@ -33,11 +33,16 @@ echo "Passed: $PASSED <br />" > $OUTDIR/results.html
 echo "Failed: $FAILED" >> $OUTDIR/results.html
 
 #create coverage reports
-REPORTS=phpcoverage/reports
+REPORTS=phpcoverage/reports/$TESTDATE
 mkdir -p $REPORTS
 cd $REPORTS
 for cont in $CONTROLLERS; do
 	rm $cont-report -rf
-	php ../bin/all.php $cont test
+	if [[ "$cont" == "test" ]]; then
+		#test controller, which can't have a test() func. Has 'allModels' instead
+		php ../../bin/all.php $cont allModels
+	else
+		php ../../bin/all.php $cont test
+	fi
 	mv report $cont-report
 done

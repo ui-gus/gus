@@ -22,7 +22,7 @@
 <?php
     #require_once "phpcoverage.inc.php";
     #define("PHPCOVERAGE_HOME", "/var/git/gus-dev/php/http/phpcoverage/src");
-    define("PHPCOVERAGE_HOME", "../src");
+    define("PHPCOVERAGE_HOME", "../../src");
     require_once PHPCOVERAGE_HOME . "/CoverageRecorder.php";
     require_once PHPCOVERAGE_HOME . "/reporter/HtmlCoverageReporter.php";
 
@@ -31,13 +31,17 @@
     #$includePaths = array(".");
     #$excludePaths = array("codeCoverageMain.php", "test_driver.php");
     #$includePaths = array("/var/git/gus-dev/php/http/system/application/controllers/" . $argv[1] . ".php");
-    $includePaths = array("../../system/application/controllers/" . $argv[1] . ".php");
+    if($argv[1] == "test") {
+	$includePaths = array("../../../system/application/controllers/" . $argv[1] . ".php", "../../../system/application/models/");
+    } else {
+	$includePaths = array("../../../system/application/controllers/" . $argv[1] . ".php");
+    }
     $excludePaths = array(""); 
     $cov = new CoverageRecorder($includePaths, $excludePaths, $reporter);
     $cov->startInstrumentation();
     #include "test_driver.php";
     #include "/var/git/gus-dev/php/http/index.php";
-    include "../../index.php";
+    include "../../../index.php";
     
     $cov->stopInstrumentation();
 

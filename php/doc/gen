@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#GENS="gen-phpdocs gen-ssrs gen-stats gen-testdocs gen-tests"
+
+#for gen in $GENS; do
+for gen in `ls gen-*`; do
+	echo "Processing $gen..."
+	sleep 1
+	./$gen
+	echo "Done processing $gen."
+done

@@ -1,10 +1,15 @@
 <?php echo $header ?>
 
-<?php echo "<img src=\"" . base_url() . "/templates/group_label.png\" class=\"side\">"; ?>
+<?php 
+echo "<img src=\"".base_url()."/templates/group_label.png\" class=\"side\">" 
+  . "<div class=\"update\">"
+  ;
+?>
 
 <?php 
 if( $authed ){
-  echo "<u>All Groups</u><br>";
+  echo "<u>All Groups</u><br>"
+    ;
  foreach( $groups as $group ):{
     //Display all groups and link to their group/view.
     echo anchor('grouppage/view/'.$this->Group->get_id($group) , $group)
@@ -18,4 +23,8 @@ if( $authed ){
  }
 ?>
 
+<?php 
+echo "</div>";
+?>
+ 
 <?php echo $footer ?>

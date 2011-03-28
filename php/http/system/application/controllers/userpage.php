@@ -17,9 +17,6 @@ class Userpage extends Controller {
 
     $this->testing = false;
   }
-  
- 
-  
 
   function index() { //This page may never be used...
     $data['header'] = $this->Page->get_header('user');
@@ -39,7 +36,7 @@ class Userpage extends Controller {
   }
   
 
-function view(){
+function view( $testuser ){
   $data['header'] = $this->Page->get_header('user');
   $data['content'] = $this->Page->get_content('user');
   $data['footer'] = $this->Page->get_footer();
@@ -48,7 +45,7 @@ function view(){
     $data['authed'] = false;
   }
   else{
-    if( $this->uri->segment(3) == "" ){
+    if( $this->uri->segment(3) == "" && $this->testing == false ){
       redirect("home");
     }
     else{
@@ -70,20 +67,52 @@ function view(){
       }
     }
   }
+  if( $this->testing == false ){
+    $this->load->view( 'userpage_view.php', $data );
+  }    
   return( true );
 }
 
  function edit(){
+   if( !$this->Page->authed() ){
+     redirect("home");
+   }
    $data['header'] = $this->Page->get_header('user');
    $data['content'] = $this->Page->get_content('user');
    $data['footer'] = $this->Page->get_footer();
+   
+   $data['style'] = 
+     array( 'name' => 'un',
+	    'id' => 'un',
+	    'value' => '',
+	    'maxlength' => '20',
+	    'size' => '20',
+	    //'style' => 'width:50%',
+	    );
+   
+   
+   //if(isset($_POST['un'])) $un = $_POST['un'];
+   
+   if(!empty($_POST)){	
+     $data['results'] = $this->getResults($_POST['un']);
+     //echo $data['results'];
+     //$this->load->view('userpage_edit',$data);
+   }
+   else {
+     //$this->load->view('userpage_edit', $data);
+   }
+   
+   
    if( $this->testing == false ){
-     $this->load->view( 'userpage_edit.php', $data );
+     $this->load->view( 'userpage_edit', $data );
    }
    return( true );
  }
  
  function personal(){
+   if( !$this->Page->authed() ){
+     redirect("home");
+   }
    $personal = $this->User->get_id($this->session->userdata('un'));
    redirect("userpage/view/".$personal);
  }
@@ -93,8 +122,8 @@ function view(){
    $this->testing = true;
    
    echo $this->unit->run(true, $this->index(), 'Userpage index() test');
-   echo $this->unit->run(true, $this->edit(), 'Userpage view() test');
-   
+   echo $this->unit->run(true, $this->view( "0" ), 'Attempting to view User.');
+   echo $this->unit->run(true, $this->edit(), "Attempting to edit User's personal page." );
  }	
  
   }

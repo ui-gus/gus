@@ -1,6 +1,10 @@
 <?php echo $header ?>
 
-<?php echo "<img src=\"" . base_url() . "/templates/group_label.png\" class=\"side\">"; ?>
+<?php 
+echo "<img src=\"".base_url()."/templates/group_label.png\" class=\"side\">"
+  . "<div class=\"update\">" 
+  ;
+?>
 
 <?php 
 if( $authed ){
@@ -22,6 +26,10 @@ if( $authed ){
  else{
    echo "You must be logged in to view this page.";
  }
+?>
+
+<?php 
+echo "</div>";
 ?>
 
 <?php echo $footer ?>

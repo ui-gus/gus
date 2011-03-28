@@ -7,6 +7,7 @@ http/phpcoverage/
 http/report/
 http/testdoc/
 http/tests/
+doc/testing/test_metric_plan/
 http/uploads
 http/MY_URI.zip
 http/PhpDocumentor-1.4.3.zip
