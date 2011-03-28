@@ -28,14 +28,16 @@ $thread=mysql_fetch_array($result);
 			<td bgcolor="#FFFFFF"><?php echo $thread['thread_body']; ?></td>
 			<td align="center" bgcolor="#FFFFFF"><?php echo $thread['datetime']; ?></td>
 			<td align="center" bgcolor="#FFFFFF">
-				<?php echo form_open('forum/delete_thread');?>
-				<?php echo form_hidden('thread_id', $this->uri->segment(3));?>
-					<input type="submit" value="Delete" >
-				</form>
-				<?php echo form_open('forum/edit_thread');?>
-				<?php echo form_hidden('thread_id', $this->uri->segment(3));?>
-					<input type="submit" value="Edit" >
-				</form>
+				<?php if ($thread['thread_author'] == $this->session->userdata['un']): ?>
+					<?php echo form_open('forum/delete_thread');?>
+					<?php echo form_hidden('thread_id', $this->uri->segment(3));?>
+						<input type="submit" value="Delete" >
+					</form>
+					<?php echo form_open('forum/edit_thread');?>
+					<?php echo form_hidden('thread_id', $this->uri->segment(3));?>
+						<input type="submit" value="Edit" >
+					</form>
+				<?php endif; ?>
 			</td>
 		</tr>
 
@@ -47,7 +49,20 @@ $thread=mysql_fetch_array($result);
 			<td align="center" bgcolor="#FFFFFF"><?php echo $row->author; ?></td>
 			<td bgcolor="#FFFFFF"><?php echo $row->body; ?></td>
 			<td align="center" bgcolor="#FFFFFF"><?php echo $row->datetime; ?></td>
-			<td align="center" bgcolor="#FFFFFF"></td>
+			<td align="center" bgcolor="#FFFFFF">
+				<?php if ($row->author == $this->session->userdata['un']): ?>
+					<?php echo form_open('forum/delete_reply');?>
+					<?php echo form_hidden('reply_id', $row->reply_id);?>
+					<?php echo form_hidden('thread_id', $this->uri->segment(3));?>
+						<input type="submit" value="Delete" >
+					</form>
+					<?php echo form_open('forum/edit_reply');?>
+					<?php echo form_hidden('reply_id', $row->reply_id);?>
+					<?php echo form_hidden('thread_id', $this->uri->segment(3));?>
+						<input type="submit" value="Edit" >			
+					</form>
+				<?php endif; ?>
+			</td>
 		</tr>
 		<?php endforeach; ?>
 		<?php endif; ?>

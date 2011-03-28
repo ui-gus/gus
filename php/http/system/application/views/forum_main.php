@@ -8,7 +8,7 @@
 
 <!--<html>
 <body>-->
-		<u>All Forums</u><br>
+		<u>Welcome <?php echo $this->session->userdata['un']; ?>. These are all your Forums.</u><br>
 		<?php foreach($qquery as $group): ?>
 			<?php echo form_open('forum/view_forum');?>
 			<?php echo form_hidden('group_name', $group['name']);?>

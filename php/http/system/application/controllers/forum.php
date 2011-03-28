@@ -11,7 +11,6 @@ class Forum extends Controller
 	var $pdata;					//page daga
 	var $fdata;					//Holds query data for use in views
 	var $username = "Chaylo";	//static temp default username, will be filled from session later
-	//var $group_id = 0;			//static temp default group, will be filled from session later
 	
 
 	function Forum()
@@ -30,6 +29,7 @@ class Forum extends Controller
 
 		if( !$this->Page->authed() )
 		{
+			$this->pdata['message'] = "You must be logged in to view this page.";
 			$this->load->view('forum_error', $this->pdata);
 		}				
 		else
@@ -114,18 +114,25 @@ class Forum extends Controller
 		$this->db->update('threads', $_POST);
 		redirect('forum/view_thread/'.$id);
 	} 
+	//given a thread id and data this function updates the entry in the database
+	function reply_update()
+	{ 
+		$reply_id=$_POST['reply_id'];
+		$thread_id=$_POST['thread_id'];
+		$this->db->where('reply_id', $id);
+		$this->db->update('replies', $_POST);
+		redirect('forum/view_thread/'.$thread_id);
+	} 	
     
-  
+	
     //inserts a new thread into the database using the group_id, the current time, and the current user.
 	function thread_insert()
 	{
 		$_POST['datetime']=date("d/M/Y h:i:s");
-		$_POST['thread_author'] = $this->username;
+		$_POST['thread_author'] = $this->session->userdata['un'];
 		$this->db->insert('threads', $_POST);
 		redirect('forum/forum/'); 
 	}
-  
-  
     //this function first pulls the num_replies for the current thread from the database and increments it
 	//it then inserts the reply into the database then returns you to the thread
 	function reply_insert()
@@ -140,13 +147,13 @@ class Forum extends Controller
 	
 		//inserts reply in to database
 		$_POST['datetime']=date("d/M/Y h:i:s");
-		$_POST['author'] = $this->username;
+		$_POST['author'] = $this->session->userdata['un'];
 		$this->db->insert('replies', $_POST);
 		redirect('forum/view_thread/'.$_POST['thread_id']);	 
 	}
   
   
-    //this function deletes a thread and all of it's threads from the database then sends you to the main forum page.
+    //this function deletes a thread and all of it's replies from the database then sends you to the main forum page.
 	function delete_thread()
 	{
 		$id=$_POST['thread_id'];
@@ -154,6 +161,13 @@ class Forum extends Controller
 		mysql_query("DELETE FROM replies WHERE thread_id='$id'");
 		redirect('forum/forum');
 	}
+    //this function deletes a reply from the database then sends you to the main forum page.
+	function delete_reply()
+	{
+		$id=$_POST['reply_id'];
+		mysql_query("DELETE FROM replies WHERE reply_id='$id'");
+		redirect('forum/view_thread/'.$_POST['thread_id']);
+	}	
 
 
 }
