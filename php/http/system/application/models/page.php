@@ -17,7 +17,9 @@ class Page extends Model {
 		$this->load->database();
 		$this->load->helper('url');
 		$this->load->library('session');
+		
 		$this->css  = '<link href="' . base_url() . 'templates/template.css.php" type="text/css" rel="stylesheet" />';
+		
 	}
 	
 	function get_header($page_name) {
@@ -51,6 +53,8 @@ class Page extends Model {
 		 <head>
 		 " . $this->css . "
          <title>Gus - $page_name</title>
+		 
+		 
         </head>
 <body>
 

@@ -1,6 +1,7 @@
 <?php echo $this->pdata['header'] ?>
 
 <?php
+	echo $this->pdata['tinyMCE'];	
 	echo $this->pdata['content'];
 	//form
 	$this->load->helper('form');
@@ -14,7 +15,7 @@
                         );
         echo "\n<br />" . form_textarea(array(
                         'name'	=> 'content',
-                        'id'  	=> 'content',
+                        'id'  	=> 'newpagecontent',
                         'value'	=> $this->pdata['add_content'],
                         'cols'	=> '80',
                         'rows'	=> '20',
