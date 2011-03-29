@@ -10,9 +10,7 @@ class Forum extends Controller
 {
 	var $pdata;					//page daga
 	var $fdata;					//Holds query data for use in views
-	var $username = "Chaylo";	//static temp default username, will be filled from session later
 	
-
 	function Forum()
 	{
 		parent::Controller();
@@ -27,7 +25,7 @@ class Forum extends Controller
 		$this->pdata['header'] = $this->Page->get_header('forum');	
 		$this->pdata['content'] = $this->Page->get_content('forum');	   
 
-		if( !$this->Page->authed() )
+		if( !$this->Page->authed())
 		{
 			$this->pdata['message'] = "You must be logged in to view this page.";
 			$this->load->view('forum_error', $this->pdata);
@@ -104,6 +102,20 @@ class Forum extends Controller
 		$this->pdata['content'] = $this->Page->get_content('forum');
 		$this->load->view('edit_thread_view', $this->pdata, $this->fdata);  
 	}
+		function edit_reply()
+	{
+		$reply_id=$_POST['reply_id'];
+		$this->fdata['thread_id']=$_POST['thread_id'];
+		$sql="SELECT * FROM replies WHERE reply_id='$reply_id'";
+		$current_reply=mysql_fetch_array(mysql_query($sql));
+		$this->fdata['reply_id']=$reply_id;
+		$this->fdata['body']=$current_reply['body'];
+	
+		$this->pdata['header'] = $this->Page->get_header('forum');	
+		$this->pdata['content'] = $this->Page->get_content('forum');
+		$this->load->view('edit_reply_view', $this->pdata, $this->fdata);  
+	}
+	
   
     
 	//given a thread id and data this function updates the entry in the database
@@ -119,7 +131,7 @@ class Forum extends Controller
 	{ 
 		$reply_id=$_POST['reply_id'];
 		$thread_id=$_POST['thread_id'];
-		$this->db->where('reply_id', $id);
+		$this->db->where('reply_id', $reply_id);
 		$this->db->update('replies', $_POST);
 		redirect('forum/view_thread/'.$thread_id);
 	} 	
@@ -157,15 +169,15 @@ class Forum extends Controller
 	function delete_thread()
 	{
 		$id=$_POST['thread_id'];
-		mysql_query("DELETE FROM threads WHERE thread_id='$id'");
-		mysql_query("DELETE FROM replies WHERE thread_id='$id'");
+		$this->db->delete('threads', array('thread_id' => $id));
+		$this->db->delete('replies', array('thread_id' => $id));
 		redirect('forum/forum');
 	}
     //this function deletes a reply from the database then sends you to the main forum page.
 	function delete_reply()
 	{
 		$id=$_POST['reply_id'];
-		mysql_query("DELETE FROM replies WHERE reply_id='$id'");
+		$this->db->delete('replies', array('reply_id' => $id)); 
 		redirect('forum/view_thread/'.$_POST['thread_id']);
 	}	
 

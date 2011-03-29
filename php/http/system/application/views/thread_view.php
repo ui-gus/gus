@@ -1,6 +1,4 @@
-
 <?php echo $this->pdata['header'] ?>
-
 <?php 	echo $this->pdata['content'] ?>
 
 <html>
