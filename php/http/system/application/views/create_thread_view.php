@@ -12,8 +12,6 @@
 	<table width="400" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
 		<tr>
 			<?php echo form_open('forum/thread_insert');?>
-			<?php echo form_hidden('group_name', $this->fdata['group_name']);?>
-			<?php echo form_hidden('group_id', $this->fdata['group_id']);?>
 			<td>
 				<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
 					<tr>

@@ -18,10 +18,6 @@
 						<td colspan="3" bgcolor="#E6E6E6"><strong>Forum Search</strong> </td>
 					</tr>
 					<tr>
-						<td width="14%"><strong>By Groups</strong></td>
-						<td width="84%"><input type="text" name="topic" size="80" /></td>
-					</tr>
-					<tr>
 						<td width="14%"><strong>By User</strong></td>
 						<td width="84%"><input type="text" name="topic" size="80" /></td>
 					</tr>

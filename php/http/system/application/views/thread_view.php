@@ -1,32 +1,25 @@
 <?php echo $this->pdata['header'] ?>
-<?php 	echo $this->pdata['content'] ?>
+<?php echo $this->pdata['content'] ?>
 
 <html>
 
-
-<?php
-$sql="SELECT * FROM threads WHERE thread_id='$thread_id'";
-$result=mysql_query($sql);
-$thread=mysql_fetch_array($result);
-?>
-
 <body>
+	<?php echo form_open('forum/view_forum');?>
+		<input type="submit" value="Return to Forum" ></form>
 	<table width="95%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CCCCCC">
+		<?php foreach($thread->result() as $row): ?>
 		<tr>
 			<td width="15%" align="center" bgcolor="#E6E6E6"><strong>Author</strong></td>
-			<td width="65%" align="center" bgcolor="#E6E6E6"><strong><?php echo $thread['thread_topic']; ?></strong></td>
+			<td width="65%" align="center" bgcolor="#E6E6E6"><strong><?php echo $row->thread_topic; ?></strong></td>
 			<td width="12%" align="center" bgcolor="#E6E6E6"><strong>Date/Time</strong></td>
 			<td width="8%" align="center" bgcolor="#E6E6E6"></td>
-			</tr>
-			
-<!-- Author Display -->
-		
+		</tr>
 		<tr>
-			<td align="center" bgcolor="#FFFFFF"><?php echo $thread['thread_author']?></td>
-			<td bgcolor="#FFFFFF"><?php echo $thread['thread_body']; ?></td>
-			<td align="center" bgcolor="#FFFFFF"><?php echo $thread['datetime']; ?></td>
-			<td align="center" bgcolor="#FFFFFF">
-				<?php if ($thread['thread_author'] == $this->session->userdata['un']): ?>
+			<td align="center" bgcolor="#FFFACD"><?php echo $row->thread_author; ?></td>
+			<td bgcolor="#FFFACD"><?php echo $row->thread_body; ?></td>
+			<td align="center" bgcolor="#FFFACD"><?php echo $row->datetime; ?></td>
+			<td align="center" bgcolor="#FFFACD">
+				<?php if ($row->thread_author == $this->session->userdata['un'] || $this->session->userdata('group_perm') == 7): ?>
 					<?php echo form_open('forum/delete_thread');?>
 					<?php echo form_hidden('thread_id', $this->uri->segment(3));?>
 						<input type="submit" value="Delete" >
@@ -36,19 +29,22 @@ $thread=mysql_fetch_array($result);
 						<input type="submit" value="Edit" >
 					</form>
 				<?php endif; ?>
-			</td>
+			</td>	
 		</tr>
-
+		<?php endforeach; ?>
+	</table><br></br>
+		
 <!-- Reply Displays -->
-
-		<?php if ($reply->num_rows() > 0): ?>
+	
+	<?php if ($reply->num_rows() > 0): ?>
+	<table width="95%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CCCCCC">
 		<?php foreach($reply->result() as $row): ?>
 		<tr>
-			<td align="center" bgcolor="#FFFFFF"><?php echo $row->author; ?></td>
-			<td bgcolor="#FFFFFF"><?php echo $row->body; ?></td>
+			<td width="15%" align="center" bgcolor="#FFFFFF"><?php echo $row->author; ?></td>
+			<td width="65%" align="left" bgcolor="#FFFFFF"><?php echo $row->body; ?></td>
 			<td align="center" bgcolor="#FFFFFF"><?php echo $row->datetime; ?></td>
 			<td align="center" bgcolor="#FFFFFF">
-				<?php if ($row->author == $this->session->userdata['un']): ?>
+				<?php if ($row->author == $this->session->userdata['un'] || $this->session->userdata('group_perm') == 7): ?>
 					<?php echo form_open('forum/delete_reply');?>
 					<?php echo form_hidden('reply_id', $row->reply_id);?>
 					<?php echo form_hidden('thread_id', $this->uri->segment(3));?>
@@ -67,7 +63,7 @@ $thread=mysql_fetch_array($result);
 	</table>
 
 <!-- Reply Dialog Box Display -->
-
+	<?php if (($this->session->userdata('group_perm') >= 6)): ?>
 	<table width="400" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
 		<tr>
 			<td>
@@ -90,6 +86,7 @@ $thread=mysql_fetch_array($result);
 			</td>
 		</tr>
 	</table>
+	<?php endif; ?>
 </body>
 
 </html>

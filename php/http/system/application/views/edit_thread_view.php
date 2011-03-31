@@ -11,7 +11,7 @@
 	<table width="400" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
 		<tr>
 			<?php echo form_open('forum/thread_update');?>
-			<?php echo form_hidden('thread_id', $this->fdata['id']);?>
+			<?php echo form_hidden('thread_id', $this->fdata['thread_id']);?>
 			<td>
 				<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
 					<tr>
@@ -19,11 +19,11 @@
 					</tr>
 					<tr>
 						<td width="14%"><strong>Title</strong></td>
-						<td width="84%"><input type="text" name="thread_topic" value= "<?php echo $this->fdata['topic']; ?>" size="80" /></td>
+						<td width="84%"><input type="text" name="thread_topic" value= "<?php echo $this->fdata['thread_topic']; ?>" size="80" /></td>
 					</tr>
 					<tr>
 						<td valign="top"><strong>Body</strong></td>
-						<td><textarea name="thread_body" cols="70" rows="3"><?php	echo $this->fdata['body']; ?></textarea></td>
+						<td><textarea name="thread_body" cols="70" rows="3"><?php	echo $this->fdata['thread_body']; ?></textarea></td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>

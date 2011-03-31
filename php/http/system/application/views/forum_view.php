@@ -1,10 +1,12 @@
 <?php echo $this->pdata['header'] ?>
-<?php 	echo $this->pdata['content'] ?>
+<?php echo $this->pdata['content'] ?>
 
 
 <!--<html>
 <body>-->
-    <h1> <?php echo $this->fdata['group_name'] ?> Forum</h1>
+    <h1> <?php echo $this->session->userdata('group_name') ?> Forum</h1>
+	<?php echo form_open('forum/forum');?>
+		<input type="submit" value="Return to Forum Main Page" ></form>
 	<table width="90%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CCCCCC">
 		<tr>
 			<td width="59%" align="center" bgcolor="#E6E6E6"><strong>Topic</strong></td>
@@ -20,14 +22,16 @@
 		<?php endforeach; ?>
 		
 		<tr>
+			<?php if ($this->session->userdata('group_perm') >= 6):?>
+				<?php echo form_open('forum/create_thread');?>
+					<td width="50%" align="left" bgcolor="#E6E6E6"><input type="submit" value="Create New Thread" /td>
+				</form>
+			<?php else: ?>
+				<td bgcolor="#E6E6E6"></td>
+			<?php endif ?>	
+			<td bgcolor="#E6E6E6"></td>	
 			<?php echo form_open('forum/search_forum');?>
-				<td width="50%" align="left" bgcolor="#E6E6E6"><input type="submit" value="Search Forum" /td>
-			</form>
-			<td bgcolor="#E6E6E6"></td>
-			<?php echo form_open('forum/create_thread');?>
-			<?php echo form_hidden('group_name', $this->fdata['group_name']);?>
-			<?php echo form_hidden('group_id', $this->fdata['group_id']);?>
-				<td width="50%" align="right" bgcolor="#E6E6E6"><input type="submit" value="Create New Thread" /td>
+				<td width="50%" align="right" bgcolor="#E6E6E6"><input type="submit" value="Search Forum" /td>
 			</form>
 		</tr>
 		
