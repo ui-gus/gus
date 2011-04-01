@@ -29,7 +29,8 @@ class Page extends Model {
 		if($this->authed()) {
 		 $auth = '<a href="' . site_url() . '/auth/logout">Logout</a>';
 		 $greeting = "Greetings <u>" . $this->session->userdata('un')  . "</u> <img src=\"" . base_url() . "templates/mail.png\">";
-		  $content = $content . anchor("userpage/personal", "!!!");
+		  //sorry, this messes up layout, had to kill for demo. -CJB
+		  //$content = $content . anchor("userpage/personal", "!!!");
 		} else {
 		 $auth = '<a href="' . site_url() . '/auth">Login</a>';
 		}
