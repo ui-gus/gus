@@ -14,6 +14,7 @@ class Userpage extends Controller {
     $this->load->model('User');
     $this->load->model('Group');
     $this->load->helper('url');
+    $this->load->helper('form');
 
     $this->testing = false;
   }
@@ -81,27 +82,23 @@ function view( $testuser ){
    $data['content'] = $this->Page->get_content('user');
    $data['footer'] = $this->Page->get_footer();
    
-   $data['style'] = 
-     array( 'name' => 'un',
-	    'id' => 'un',
-	    'value' => '',
-	    'maxlength' => '20',
-	    'size' => '20',
-	    //'style' => 'width:50%',
-	    );
+   $data['style']=array('name'=>'un','id'=>'un','value'=>'','maxlength'=>'20','size'=>'20',
+			//'style'=>'width:50%',
+  );
    
    
    //if(isset($_POST['un'])) $un = $_POST['un'];
    
-   if(!empty($_POST)){	
-     $data['results'] = $this->getResults($_POST['un']);
-     //echo $data['results'];
-     //$this->load->view('userpage_edit',$data);
+   if(!empty($_POST)){
+     //$data['results'] = $this->getResults($_POST['un']);
+     $data['content'] = $_POST['email'] . $_POST['phone'] . $_POST['major'];     
+     $this->load->view('userpage_edit',$data);
    }
    else {
-     //$this->load->view('userpage_edit', $data);
+     $this->load->view('userpage_edit', $data);
    }
    
+   //echo form_open('userpage/edit',array('class' => '', 'id' => ''));
    
    if( $this->testing == false ){
      $this->load->view( 'userpage_edit', $data );
