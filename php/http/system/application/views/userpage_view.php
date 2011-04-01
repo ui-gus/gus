@@ -12,7 +12,10 @@ if( $authed ){
     . "User #" . $id . "<br><br>"
     . "<img src=\"" . base_url() ."templates/quote_left.png\"> "
     . "A description should go here."
-    . "<img src=\"" . base_url() ."templates/quote_right.png\">"
+    . "<img src=\"" . base_url() ."templates/quote_right.png\">" . "<br>"
+    . "email : " . $personal['email'] . "<br>"
+    . "phone : " . $personal['contact'] . "<br>"
+    . "major : " . $personal['major'] . "<br>"
     . "</div>"
     
     // Display all groups the user is in.

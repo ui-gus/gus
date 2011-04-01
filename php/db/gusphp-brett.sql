@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 31, 2011 at 06:49 PM
+-- Generation Time: Mar 31, 2011 at 10:07 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.2-1ubuntu4.7
 
@@ -41,11 +41,11 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `un`, `pw`, `profile`, `email`, `contact`, `major`) VALUES
-(0, 'cblair', 'SHI/hel7', '', '', '', ''),
-(11, 'anilson', 'supersecurepassword1234!@#$', '', '', '', ''),
+(0, 'cblair', 'SHI/hel7', 't', 'e', 's', 't'),
+(11, 'anilson', 'supersecurepassword1234!@#$', 'sfdsfd', 'fdfd', 'saas', 'dsd'),
 (12, 'long3841', 'long3841', '', '', '', ''),
 (13, 'sbeddall', '0017761826', '', '', '', ''),
-(15, 'brett', 'brett256', '', '', '', ''),
+(15, 'brett', 'brett256', 'sdsd', 'here@there.com', '929-384903-393', 'CS'),
 (17, 'timb', 'frost741', '', '', '', ''),
 (18, 'claurino', '22877822', '', '', '', ''),
 (19, 'lwegner', '7ndustr8', '', '', '', ''),

@@ -53,11 +53,16 @@ function view( $testuser ){
       $t = $this->uri->segment(3);
       $grouplist = $this->db->get_where( 'usergroup', array('uid' => $t) )->result_array();
       $personal = $this->User->get_id($this->session->userdata('un'));
+      $temp = $this->db->get_where( 'user', array('id' => $t) )->result_array();
       
       $data['name'] = $this->User->get_name( $t );
       $data['id'] = $t;
       $data['authed'] = true;
       $data['grouplist'] = $grouplist;
+      $data['personal']['profile'] = $temp[0]['profile'];
+      $data['personal']['email']   = $temp[0]['email'];
+      $data['personal']['contact'] = $temp[0]['contact'];
+      $data['personal']['major']   = $temp[0]['major'];
       if( $this->testing == false ){
 	if( $personal == $t ){
 	  $this->load->view( 'userpage_personal.php', $data );
@@ -68,9 +73,9 @@ function view( $testuser ){
       }
     }
   }
-  if( $this->testing == false ){
-    $this->load->view( 'userpage_view.php', $data );
-  }    
+  //if( $this->testing == false ){
+  //  $this->load->view( 'userpage_view.php', $data );
+  //}    
   return( true );
 }
 
@@ -82,24 +87,25 @@ function view( $testuser ){
    $data['content'] = $this->Page->get_content('user');
    $data['footer'] = $this->Page->get_footer();
    
-   $data['style']=array('name'=>'un','id'=>'un','value'=>'','maxlength'=>'20','size'=>'20',
-			//'style'=>'width:50%',
-  );
-   
-   
-   //if(isset($_POST['un'])) $un = $_POST['un'];
+   $t = $this->User->get_id( $this->session->userdata('un') );
+   $temp = $this->db->get_where( 'user', array('id' => $t) )->result_array();
+   $data['personal']['profile'] = $temp[0]['profile'];
+   $data['personal']['email']   = $temp[0]['email'];
+   $data['personal']['contact'] = $temp[0]['contact'];
+   $data['personal']['major']   = $temp[0]['major'];
    
    if(!empty($_POST)){
-     //$data['results'] = $this->getResults($_POST['un']);
-     $data['content'] = $_POST['email'] . $_POST['phone'] . $_POST['major'];     
-     $this->load->view('userpage_edit',$data);
+     //redirect($this->uri->uri_string());
+     $this->db->update('user', 
+		       array('profile'=>$_POST['profile'], 'email'=>$_POST['email'],
+			     'contact'=>$_POST['contact'], 'major'=>$_POST['major']),
+		       array('id'=>$t));
+     redirect( 'userpage/personal' );
    }
    else {
-     $this->load->view('userpage_edit', $data);
+     
    }
-   
-   //echo form_open('userpage/edit',array('class' => '', 'id' => ''));
-   
+  
    if( $this->testing == false ){
      $this->load->view( 'userpage_edit', $data );
    }
