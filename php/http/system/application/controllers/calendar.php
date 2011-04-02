@@ -139,7 +139,16 @@ class Calendar extends Controller{
 		$expected_result = 'is_array';
 		$test_name = 'test to see if month data array is retrieved from database';
 		$this->unit->run($test, $expected_result, $test_name);
-		
+
+	
+		//test index
+		//not logged in
+		$this->unit->run($this->index(), true, "index function");	
+		//logged in
+		$this->Page->login("test","test123");
+		$this->unit->run($this->index(), true, "index function");	
+
+	
 		//test myGenerate() function
 		$test = $this->Calendarmodel->myGenerate($year, $month);
 		$expected_result = 'is_string';

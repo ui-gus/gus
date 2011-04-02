@@ -138,7 +138,7 @@ class Forum extends Controller
 		$id=$_POST['thread_id'];
 		$this->db->where('thread_id', $id);
 		$this->db->update('threads', $_POST);
-		redirect('forum/view_thread/'.$id);
+		if(!$this->testmode) redirect('forum/view_thread/'.$id);
 	} 
 	//given a thread id and data this function updates the entry in the database
 	function reply_update()
@@ -147,7 +147,7 @@ class Forum extends Controller
 		$thread_id=$_POST['thread_id'];
 		$this->db->where('reply_id', $reply_id);
 		$this->db->update('replies', $_POST);
-		redirect('forum/view_thread/'.$thread_id);
+		if(!$this->testmode) redirect('forum/view_thread/'.$thread_id);
 	} 	
     
 	
@@ -206,8 +206,58 @@ class Forum extends Controller
 	
 		$reply_id=$_POST['reply_id'];
 		$this->db->delete('replies', array('reply_id' => $reply_id)); 
-		redirect('forum/view_thread/'.$_POST['thread_id']);
+		if(!$this->testmode) redirect('forum/view_thread/'.$_POST['thread_id']);
 	}	
 
+	function test() {
+		$this->load->library('unit_test');
+		$this->testmode = 'true';
 
+
+		//index
+		//not authed
+		echo $this->unit->run($this->index(), true, 'index');
+		//authed
+		$this->Page->login("test","test123");		
+		echo $this->unit->run($this->index(), true, 'index');
+
+		//set_group
+		echo $this->unit->run($this->set_group(), true, 'set_group');
+
+		//view_forum
+		echo $this->unit->run($this->view_forum(), true, 'view_forum');
+
+		//view_thread
+		echo $this->unit->run($this->view_thread(), true, 'view_thread');
+
+		//create_thread
+		echo $this->unit->run($this->create_thread(), true, 'create_thread');
+
+		//search_forum
+		echo $this->unit->run($this->search_forum(), true, 'search_forum');
+
+		//edit_thread
+		$_POST['thread_id'] = 0;
+		//echo $this->unit->run($this->edit_thread(), true, 'edit_thread');
+
+		//edit_reply
+		echo $this->unit->run($this->edit_reply(), true, 'edit_reply');
+
+		//thread_update
+		$_POST['thread_id'] = 0;
+		echo $this->unit->run($this->thread_update(), true, 'thread_update');
+
+		//reply_update
+		echo $this->unit->run($this->reply_update(), true, 'reply_update');
+
+		//thread_insert
+		echo $this->unit->run($this->thread_insert(), true, 'thread_insert');
+
+		//reply_insert
+		//can't go through for db reasons, needs fixing
+		//echo $this->unit->run($this->reply_insert(), true, 'reply_insert');
+
+		//delete_thread
+		echo $this->unit->run($this->delete_reply(), true, 'delete_reply');
+	}
 }

@@ -117,16 +117,14 @@ class Docs extends Controller {
 		$page_name = 'docs';
 		$this->load->library('unit_test');
 		$this->testmode = 'true';
-		//begin tests
+		
 		//index
 		echo $this->unit->run($this->index(), true, 'index');
-		//upload
-              	echo $this->unit->run($this->uploadFile(), true, 'Docs: Upload File should probably be commented out as it\'s in a different controller');
+		
 		//Download
-              	//echo $this->unit->run($this->downloadFile(), true, 'downloadFile docs');
-              	echo $this->unit->run(false, true, 'downloadFile docs');
+              	echo $this->unit->run($this->downloadFile(), true, 'downloadFile');
 		//Delete
-              	echo $this->unit->run(false, true, 'deleteFile docs');
+              	echo $this->unit->run($this->deleteFile(), true, 'deleteFile docs');
 		//Organize files
               	echo $this->unit->run($this->organizeFiles(), true, 'organizeFiles docs');
 	}

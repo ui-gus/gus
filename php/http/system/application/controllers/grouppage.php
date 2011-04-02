@@ -157,11 +157,26 @@ class Grouppage extends Controller {
 
   function test(){
     $this->load->library('unit_test');
-
     $this->testing = true;
-    echo $this->unit->run(true,$this->index(), 'Grouppage index() test');
-    echo $this->unit->run(true,$this->view(''), 'Attempting to go to grouppage/view/ without a group id. Redirect to grouppage.');
-    echo $this->unit->run(true,$this->view('0'), 'Attempting to view Group.');
+
+	//index
+	//not athed
+	echo $this->unit->run(true,$this->index(), 'index not authed');
+	//authed
+	$this->Page->login("test","test123");
+	echo $this->unit->run(true,$this->index(), 'index authed');
+	
+	//view
+	echo $this->unit->run(true,$this->view(''), 'view');
+    	echo $this->unit->run(true,$this->view('0'), 'Attempting to view Group.');
+
+	//join
+	//echo $this->unit->run(true,$this->join(), 'join');
+	echo $this->unit->run(true,false, 'join');
+
+	//leave
+	//echo $this->unit->run(true,$this->leave(), 'leave');
+	echo $this->unit->run(true,false, 'leave');
   }	
   
 }
