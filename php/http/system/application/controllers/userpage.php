@@ -25,15 +25,17 @@ class Userpage extends Controller {
 
     if( !$this->Page->authed() ){			
       $data['authed'] = false;			
+      $status = false;
     }	
     else{
       $data['authed'] = true;
+      $status = true;
     }	
     //Send all information to the view.
     if( $this->testing == false ){
       $this->load->view( 'userpage.php', $data );
     }
-    return( true );
+    return( $status );
   }
   
 
@@ -42,7 +44,7 @@ function view( $testuser ){
   $data['content'] = $this->Page->get_content('user');
   $data['footer'] = $this->Page->get_footer();
   
-  if( !$this->Page->authed() ){
+  if( !$this->Page->authed() && $this->testing != true){
     $data['authed'] = false;
   }
   else{
@@ -81,7 +83,11 @@ function view( $testuser ){
 
  function edit(){
    if( !$this->Page->authed() ){
-     redirect("home");
+	if($this->testing == false) {
+     		redirect("home");
+	} else {
+		return(false);
+	}
    }
    $data['header'] = $this->Page->get_header('user');
    $data['content'] = $this->Page->get_content('user');
@@ -100,33 +106,61 @@ function view( $testuser ){
 		       array('profile'=>$_POST['profile'], 'email'=>$_POST['email'],
 			     'contact'=>$_POST['contact'], 'major'=>$_POST['major']),
 		       array('id'=>$t));
-     redirect( 'userpage/personal' );
+     if($this->testing == false) {
+		redirect( 'userpage/personal' );
+	} else {
+		$status = true;
+	}
    }
    else {
-     
+     	$status = false; 
    }
   
    if( $this->testing == false ){
      $this->load->view( 'userpage_edit', $data );
    }
-   return( true );
+   return( $status );
  }
  
  function personal(){
-   if( !$this->Page->authed() ){
-     redirect("home");
+   $status = true;
+   if( !$this->Page->authed()){
+     if($this->testing != true) redirect("home");
+     else $status = false;
    }
    $personal = $this->User->get_id($this->session->userdata('un'));
-   redirect("userpage/view/".$personal);
+   if ($this->testing != true) redirect("userpage/view/".$personal);
+   return($status);
  }
  
  function test() {
    $this->load->library('unit_test');
    $this->testing = true;
-   
+
+   //unauthed tests
+   $this->Page->logout();
+   echo $this->unit->run(false, $this->index(), 'Userpage index() test');
+   echo $this->unit->run(false, $this->view( "0" ), 'Attempting to view User.');
+   echo $this->unit->run(false, $this->edit(), "Attempting to edit User's personal page." );
+   echo $this->unit->run(false, $this->personal(), 'personal');
+ 
+  
+   //authed tests
+   //setup a user session
+   $this->Page->login("test","test123");
+ 
    echo $this->unit->run(true, $this->index(), 'Userpage index() test');
    echo $this->unit->run(true, $this->view( "0" ), 'Attempting to view User.');
+   //no POST data
+   echo $this->unit->run(true, $this->edit(), "Attempting to edit User's personal page." );
+   echo $this->unit->run(false, $this->personal(), 'personal');
+   
+   //POST data
+   $_POST['profile'] = "test";
+   $_POST['email'] = "test@gus.org";
+   $_POST['contact'] = "800 555-TEST";
+   $_POST['major'] = "computer science";
    echo $this->unit->run(true, $this->edit(), "Attempting to edit User's personal page." );
  }	
  
-  }
+}
