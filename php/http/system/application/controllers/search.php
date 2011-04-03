@@ -2,19 +2,21 @@
 /**
  * @package GusPackage
  * subpackage Search
- * @author First Last <flast@vandals.uidaho.edu>
+ * @author Scott Beddal <flast@vandals.uidaho.edu>
  * @version 0.4
  * @copyright University of Idaho 2011
  */
 
 class Search extends Controller {
 	var $pdata;
+	var $testmode;
 
 	function Search(){
 		parent::Controller();
 		$this->load->model('Page');
 		$this->load->helper('form');
 		$this->pdata['footer'] = $this->Page->get_footer();		
+		$this->testmode = false;
 	}
 	
 	function index() {
@@ -22,13 +24,14 @@ class Search extends Controller {
 		$this->pdata['header'] = $this->Page->get_header($page_name);
 		$this->pdata['content'] = $this->Page->get_content($page_name); 
 		
-		
 		if(!empty($_POST)){	
 			$this->pdata['results'] = $this->getResults($_POST['un']);
-			$this->load->view('search_result',$this->pdata);
+			$this->load->view('search_result',$this->pdata,$this->testmode);
+			return(true);
 		}
 		else {
-			$this->load->view('search',$this->pdata);
+			$this->load->view('search',$this->pdata,$this->testmode);
+			return(true);
 		}
 	}
 
@@ -49,11 +52,12 @@ class Search extends Controller {
 	
 	function test(){
 		$this->load->library('unit_test');
+		$this->testmode = true;
+
 		$id = 1;
 		$this->db->select('un')->from('user')->where('id',$id);
 		$query = $this->db->get();
-		echo $this->unit->run(false,'test' == $query->result(),'Expected Output = False');	
-		
+		echo $this->unit->run(false,'test' == $query->result(),'Expected Output = False');		
 		//echo $this->unit->run('un',$query,	'Testing Database');
 		 $this->db->select('name');
          $data = array();
@@ -63,7 +67,15 @@ class Search extends Controller {
 		foreach($data as $key){
 			echo $this->unit->run('search',$key != null, $key);
 		}
+
+		//index	
+		//default view, no POST data
+		unset($_POST);
+		$this->unit->run(true,$this->index(),'index');		
+		$_POST['un'] = "test";
+		$this->unit->run(true,$this->index(),'index');		
+		
+
+		echo $this->unit->report();
 	}	
-	
-	
 }
