@@ -13,8 +13,8 @@
 		text-align: center;
 	}
 	.background{ background-color: #F2F2F2; }
-	.edit{ text-align: left; }
-	.options{ text-align: left; }
+	.edit{ text-align: right; }
+	.delete{ text-align: right; }
 	.invite{ text-align: right; }	
 	.attending{ text-align: right; }
 
@@ -79,7 +79,7 @@
 							//use a form for the remaining options 
 							//button to delete an event
 							echo "<div class='delete'>" . form_open($form_path, '', $hidden);	
-								echo form_submit('submitDelete', 'Delete');
+								echo form_submit('submitDelete', 'Delete') . "</div>";
 								
 							//button to invite group members to event
 							echo "<div class='invite'>" . form_button('invite', 'Invite Group Members') . "</div>";
@@ -95,7 +95,7 @@
 					$val += 1;
 				}
 			}
-			echo "<hr /><hr /></div>";		//end of background class
+			echo "<hr /></div>";			//end of background class
 			
 			$hidden = array('event_month' => $this->pdata['month']-1, 
 							'event_day' => $this->pdata['day']-1, 
