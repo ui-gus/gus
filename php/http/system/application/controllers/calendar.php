@@ -76,6 +76,18 @@ class Calendar extends Controller{
 					$this->Calendarmodel->remove_event($eventID);
 			}
 			
+			//check to see if there is a new post requesting to invite people to an event
+//NEED TO FINISH
+			if($this->input->post('submitInvite'))
+			{
+			}
+			
+			//check to see if there is a new post requesting to drop an event
+//NEED TO FINISH
+			if($this->input->post('dropEvent'))
+			{
+			}
+			
 			//check to see if there is a new post requesting to view the day
 			if(($this->input->post('view_day_request'))||($this->input->post('load_day')))
 			{

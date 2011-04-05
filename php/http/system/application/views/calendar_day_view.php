@@ -12,12 +12,11 @@
 		font-size: 20px;
 		text-align: center;
 	}
-	.background
-	{
-		background-color: #F2F2F2;
-	}
+	.background{ background-color: #F2F2F2; }
 	.edit{ text-align: left; }
 	.options{ text-align: left; }
+	.invite{ text-align: right; }	
+	.attending{ text-align: right; }
 
 	</style>
 	
@@ -79,16 +78,16 @@
 							
 							//use a form for the remaining options 
 							//button to delete an event
-							echo "<div class='options'>" . form_open($form_path, '', $hidden);	
+							echo "<div class='delete'>" . form_open($form_path, '', $hidden);	
 								echo form_submit('submitDelete', 'Delete');
 								
 							//button to invite group members to event
-							echo form_button('invite', 'Invite Group Members');
+							echo "<div class='invite'>" . form_button('invite', 'Invite Group Members') . "</div>";
 							
 							//button to see who is attending the event
-							echo form_button('attending', 'See who\'s Attending');
+							echo "<div class='attending'>" . form_button('attending', 'See who\'s Attending') . "</div>";
 								
-							echo form_close() . "</div>";		//end of "options" div
+							echo form_close();
 						}
 						else
 							echo "<div class='edit'>(Group Event)</div><br><br>";
@@ -146,7 +145,7 @@ if(1)
 			eventID = <?php echo $item; ?>;		
 			event_data = prompt("Edit Event: ", '<?php echo $description;?>');
 			event_day = <?php echo $this->pdata['day'];?> - 1;
-			load_day = "TRUE";
+			load_day = 1;
 
 			if(event_data != null)
 			{ 	
@@ -168,6 +167,75 @@ if(1)
 					}
 				});
 			}		
+		});
+	});
+	</script>
+	
+		<!-- jQuery Ajax script for inviting group members to an event -->
+	<script type="text/javascript">
+	$(document).ready(function()
+	{
+		$('.invite').click(function()
+		{		
+			submitInvite = 1;
+			eventID = <?php echo $item; ?>;	
+//NEED TO IMPLEMENT CHECKBOX INVITATION LIST
+			who_is_invited = alert("this will be a group user list with checkboxes");
+			event_day = <?php echo $this->pdata['day'];?> - 1;
+			load_day = 1;
+	
+			$.ajax(
+			{
+				url: window.location,
+				type: "POST",
+				data: 
+				{
+					submitInvite: submitInvite, 
+					eventID: eventID,
+					who_is_invited: who_is_invited,
+					event_day: event_day,
+					load_day: load_day
+				},
+				success: function(msg)
+				{
+					location.reload();
+				}
+			});		
+		});
+	});
+	</script>
+
+	
+	<!-- jQuery Ajax script for viewing expected attendance of event -->
+	<script type="text/javascript">
+	$(document).ready(function()
+	{
+		$('.attending').click(function()
+		{		
+			viewAttendanceList = 1;
+			eventID = <?php echo $item; ?>;	
+//NEED TO IMPLEMENT LIST OF CONFIRMED ATTENDEES
+			who_is_attending = alert("This will be the list of confirmed attendees");
+			event_day = <?php echo $this->pdata['day'];?> - 1;
+			load_day = 1;
+
+			$.ajax(
+			{
+				url: window.location,
+				type: "POST",
+				data: 
+				{
+					viewAttendanceList: viewAttendanceList, 
+					who_is_attending: who_is_attending,
+					eventID: eventID,
+					event_day: event_day,
+					load_day: load_day
+				},
+				success: function(msg)
+				{
+					location.reload();
+				}
+			});	
 		});
 	});
 	</script>
