@@ -87,6 +87,9 @@ class Docs extends Controller {
 
 	$file = "uploads/" . $_POST['file'];  //Location of the file on the server; $_POST['file'] given from a form
 	unlink($file);   //Delete the file from the server
+	//Get thumbnail too
+	$file = "uploads/thumbs/tn_" . $_POST['file'];
+	unlink($file);
 	header( 'Location: docs' ); //Reload the page
 
 	/*
@@ -97,6 +100,21 @@ class Docs extends Controller {
 	2. Double check that the user wants to delete the file.
 	3. Delete the file.
 	*/
+	}
+
+	function viewFile() {
+	$file = "uploads/" . $_POST['file'];
+	$display = "<iframe src=../../" . $file . " width=100% height=100% frameborder=0></iframe>";
+	if ($this->testmode == 'false') {
+              $this->pdata['content'] = $display;//$this->Page->get_content('docs');}
+
+	/*
+	This Function is called when a user wants to view a file online, without downloading it directly.
+	Steps
+	1. Check user permissions.
+	2. Check file type.
+	3. Open new window.
+	4. Display file in window.
 	}
 
 	function organizeFiles() {
