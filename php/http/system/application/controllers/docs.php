@@ -11,7 +11,8 @@ class Docs extends Controller {
 	var $pdata;    //Page data
 	var $testmode; //Keep track of if we're testing
 
-	function docs(){
+	function docs()
+	{
 		parent::Controller();
 		$this->load->model('Page');  //Use page model as base
 		$this->load->helper('form'); //CI's built in form helper
@@ -19,14 +20,8 @@ class Docs extends Controller {
 		$this->testmode = 'false';
 	}
 	
-	function index() {
-		if ($this->testmode == 'false') { //Don't load the page views if we're testing
-                $this->pdata['header'] = $this->Page->get_header('Docs'); //Set the header
-                $this->pdata['content'] = $this->Page->get_content('docs'); //Pull the content from the database
-		  $this->load->view('docs', $this->pdata); } //Load the docs view
-		return('true');
-
 	/*
+	index
 	General outline of the use case; used for reference.
 	This function is called when a user visits the group's shared documents/files page.
 	Steps
@@ -34,15 +29,23 @@ class Docs extends Controller {
 	2. Get the user's permission level within the group
 	3. Check user's permission level against each file, displaying only the appropriate ones
 	*/
+	function index() 
+	{
+		if ($this->testmode == 'false') 
+		{ //Don't load the page views if we're testing
+                $this->pdata['header'] = $this->Page->get_header('Docs'); //Set the header
+                $this->pdata['content'] = $this->Page->get_content('docs'); //Pull the content from the database
+		  $this->load->view('docs', $this->pdata); //Load the docs view
+		}
+		return('true');
 	}
 
 
-	function uploadFile() {
 	/*
+	uploadFile
 	Outsourced to upload.php
 	General outline of the use case; used for reference.
 	This function is called when a user wants to upload a file to the group.
-	Codeigniter has a built in "File Uploading Class" that may be useful for this.
 	Steps
 	1. Get the current group
 	2. Get the user's permission level within the group
@@ -58,21 +61,13 @@ class Docs extends Controller {
 	+ If the file is too large, the user will receive an error
 		+ Maximum file size is determined by the Gus admin and may be restricted due to server memory
 	*/
+	function uploadFile()
+	{
 	}
 
-	function downloadFile() {
-	$this->load->helper('download');  //Load CI's download helper
-
-	//$_POST['file']; //The location of the filename; passed in by a form
-	$location = "uploads/" . $_POST['file']; //Set the location for file on the server
-	//echo $location; //Check the location for debugging
-
-	$data = file_get_contents($location); // Read the file's contents
-	$name = $_POST['file'];  //Name file will be downloaded as will be the same as the one on ther server
-
-	force_download($name, $data); //Force the user to download the file rather than displaying it
 
 	/*
+	downloadFile
 	General outline of the use case; used for reference.
 	This function is called when a user chooses to download a file.
 	Steps
@@ -81,18 +76,19 @@ class Docs extends Controller {
 	Notes:
 	+ If the file does not exist, the user will receive an error.
 	*/
+
+	function downloadFile()
+	{
+	$this->load->helper('download');  //Load CI's download helper
+	$location = "uploads/" . $_POST['file']; //Set the location for file on the server
+	$data = file_get_contents($location); // Read the file's contents
+	$name = $_POST['file'];  //Name file will be downloaded as will be the same as the one on ther server
+	force_download($name, $data); //Force the user to download the file rather than displaying it
 	}
 
-	function deleteFile() {
-
-	$file = "uploads/" . $_POST['file'];  //Location of the file on the server; $_POST['file'] given from a form
-	unlink($file);   //Delete the file from the server
-	//Get thumbnail too
-	$file = "uploads/thumbs/tn_" . $_POST['file'];
-	unlink($file);
-	header( 'Location: docs' ); //Reload the page
 
 	/*
+	deleteFile
 	General outline of the use case; used for reference.
 	This function is called when a user chooses to delete a file that has been uploaded.
 	Steps
@@ -100,26 +96,42 @@ class Docs extends Controller {
 	2. Double check that the user wants to delete the file.
 	3. Delete the file.
 	*/
+
+	function deleteFile()
+	{
+	$file = "uploads/" . $_POST['file'];  //Location of the file on the server; $_POST['file'] given from a form
+	unlink($file);   //Delete the file from the server
+	//Get thumbnail too
+	$file = "uploads/thumbs/tn_" . $_POST['file'];
+	unlink($file);
+	header( 'Location: docs' ); //Reload the page
 	}
 
-	function viewFile() {
-	$file = "uploads/" . $_POST['file'];
-	$display = "<iframe src=../../" . $file . " width=100% height=100% frameborder=0></iframe>";
-	if ($this->testmode == 'false') {
-              $this->pdata['content'] = $display;//$this->Page->get_content('docs');}
 
 	/*
+	viewFile
 	This Function is called when a user wants to view a file online, without downloading it directly.
 	Steps
 	1. Check user permissions.
 	2. Check file type.
 	3. Open new window.
 	4. Display file in window.
+	*/
+
+	function viewFile() 
+	{
+	$file = "uploads/" . $_POST['file'];
+	$display = "<iframe src=../../" . $file . " width=100% height=100% frameborder=0></iframe>";
+	if ($this->testmode == 'false')
+		{
+              	$this->pdata['content'] = $display;//$this->Page->get_content('docs');
+			$this->load->view('view_doc', $this->pdata);
+		}
 	}
 
-	function organizeFiles() {
-	//WIP
+
 	/*
+	organizeFiles
 	General outline of the use case; used for reference.
 	This function brings up a new menu that allows a user to organize, rename, and control access to files
 	Steps
@@ -128,9 +140,14 @@ class Docs extends Controller {
 	3. User organizes files.
 	4. User finishes organizing files.
 	*/
+
+	function organizeFiles() 
+	{
+	//WIP
 	}
 
-	function test() {
+	function test() 
+	{
 	//Test the functions
 		$page_name = 'docs';
 		$this->load->library('unit_test');
@@ -147,3 +164,4 @@ class Docs extends Controller {
               	echo $this->unit->run($this->organizeFiles(), true, 'organizeFiles docs');
 	}
 }
+?>
