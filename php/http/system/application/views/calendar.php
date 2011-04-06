@@ -17,10 +17,6 @@
 			vertical-align: top;
 			background-image: url("<?php echo base_url();?>/templates/calendar_day.PNG");
 		}
-		.calendar .days td:hover       
-		{
-			background-color: #FFF;
-		}
 		.calendar .weeks td
 		{
 			font-size: 16px;
@@ -67,7 +63,7 @@
 			
 			echo "<center><i>&#8226 To ADD/EDIT/VIEW events, either go to day view or";
 			echo " use the options below";
-			echo "<br>&#8226 To INVITE/JOIN events, go to day view";
+			echo "<br>&#8226 To INVITE/JOIN/DROP/DELETE events, go to day view";
 			echo "<br>&#8226<font color='blue'>Group events are in blue</font><p></p></i></center>";
 
 			//form to add an event to the calendar
@@ -112,26 +108,12 @@ if(1)
 		<!-- make each calendar cell clickable (uses same class as css)-->
 		$('.calendar .day').click(function()
 		{		
+			view_day_request = confirm("Add, Edit or View events on this day? \(link doesn\'t work yet, use forms below\)");
 			event_day = $(this).find('.day_num').html();		
-			view_day_request = confirm("Add, Edit or View events on this day? 
-									(link doesn't work yet, use forms below)");
-// DON'T NEED AJAX, A JQUERY POST WILL WORK JUST FINE
+
 			if(view_day_request != null)
 			{ 	
-				$.ajax(
-				{
-					url: window.location,
-					type: "POST",
-					data: 
-					{
-						view_day_request: view_day_request,
-						event_day: event_day
-					},
-					success: function(msg)
-					{
-						location.reload();
-					}
-				});
+//FIGURE OUT HOW TO POST THIS SO DAY VIEW LOADS
 			}		
 		});
 	});
