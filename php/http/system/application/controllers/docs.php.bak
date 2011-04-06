@@ -33,8 +33,8 @@ class Docs extends Controller {
 	1. Get the current group
 	2. Get the user's permission level within the group
 	3. Check user's permission level against each file, displaying only the appropriate ones
-	*/
 	}
+	*/
 
 
 	function uploadFile() {
@@ -107,7 +107,7 @@ class Docs extends Controller {
 	$display = "<iframe src=../../" . $file . " width=100% height=100% frameborder=0></iframe>";
 	if ($this->testmode == 'false') {
               $this->pdata['content'] = $display;//$this->Page->get_content('docs');}
-
+	}
 	/*
 	This Function is called when a user wants to view a file online, without downloading it directly.
 	Steps
@@ -115,8 +115,9 @@ class Docs extends Controller {
 	2. Check file type.
 	3. Open new window.
 	4. Display file in window.
+	*/
 	}
-
+	
 	function organizeFiles() {
 	//WIP
 	/*
