@@ -42,9 +42,7 @@ class Grouppage extends Controller {
     }
 
     //Send all information to the view.
-    if( $this->testing == false ){
-      $this->load->view( 'grouppage.php', $data );
-    }
+    $this->load->view( 'grouppage.php', $data, $this->testing );
     return( true );
   }
 
@@ -65,17 +63,21 @@ class Grouppage extends Controller {
       else {
 	$query = $this->db->get_where( 'ggroup', array('id' => $t) )->result();
 	$userlist = $this->db->get_where( 'usergroup', array('gid' => $t) )->result_array();
+	$un = $this->session->userdata('un');
+	$gn = $this->Group->get_name( $t );
+	$perm = $this->Group->get_perm($un, $gn);
 	
 	if( sizeof($query) > 0 ){
 	  $data['group'] = $query[0];
 	}
+	$data['permissions']['read'] = $perm & 4;
+	$data['permissions']['write'] = $perm & 2;
+	$data['permissions']['execute'] = $perm & 1;	
 	$data['gid'] = $t;
 	$data['members'] = $userlist;
       }
       //Send all information to the view.
-      if( $this->testing == false ){
-	$this->load->view( 'grouppage_view.php', $data );
-      }
+      $this->load->view( 'grouppage_view.php', $data, $this->testing );
     }
     return( true );
   }
@@ -113,7 +115,7 @@ class Grouppage extends Controller {
       }
       //Send all information to the view.
       if( $this->testing == false ){
-	$this->load->view( 'grouppage_join.php', $data );
+	$this->load->view( 'grouppage_join.php', $data, $this->testing );
       }
     }
     return( true );  
@@ -148,9 +150,7 @@ class Grouppage extends Controller {
 	}
       }
       //Send all information to the view.
-      if( $this->testing == false ){
-	$this->load->view( 'grouppage_leave.php', $data );
-      }
+      $this->load->view( 'grouppage_leave.php', $data, $this->testing );
     }
     return( true ); 
   }
@@ -171,7 +171,7 @@ class Grouppage extends Controller {
     	echo $this->unit->run(true,$this->view('0'), 'Attempting to view Group.');
 
 	//join
-	//echo $this->unit->run(true,$this->join(), 'join');
+	//echo $this->unit->run(true, $this->join('0'), 'join');
 	echo $this->unit->run(true,false, 'join');
 
 	//leave
