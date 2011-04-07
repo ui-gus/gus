@@ -1,6 +1,14 @@
 <?php
 header( 'Content-type: text/css' ); 
 ?>
+/*Quick Reference
+Link Font: Lucida Sans Unicode
+General Use: Georgia
+Headers and Otherwise: Trebuchet MS
+
+*/
+
+
 
 html {
 	/*Fall Back Option*/
@@ -8,7 +16,6 @@ html {
 	background-image: url('../templates/html_background.png');
 	background-position: left top;
 	background-repeat: repeat-x;
-	
 }
 
 body{
@@ -20,10 +27,12 @@ body{
 	background-position: left top;
 	background-repeat: no-repeat;
 	padding-bottom: 50px;
+	font-family: "Trebuchet MS";
 }
 
 /* IDs (unique) elements */
 
+/*space elements*/
 div#spreader_top{
 	height: 150px;
 	width: 1024px;
@@ -36,6 +45,7 @@ div#spreader_bottom{
 	clear: both;
 }
 
+/*top right navigation css*/
 div#links{
 	border: 1px solid black;
 	border-top: 0px;
@@ -79,9 +89,10 @@ div#links a:hover{
 	text-decoration: underline;
 }
 
-div#links_left{
 
-	font-family: "calibri";
+/*inside the top right navigation, float left and float right the two different elements*/
+div#links_left{
+	font-family: "Lucida Sans Unicode";
 	text-align: left;
 	font-size: 12px;
 	float: left;
@@ -94,41 +105,87 @@ div#links_right{
 	float: right;
 }
 
-
+/*Giant div that will contain both left and right columns*/
 div#container{
 	width: 1024px;
 	padding-left: 7px;
 	background-image: url('../templates/content_background_slice.png');
 	background-position: left top;
 	background-repeat: repeat-y;
-	font-family: "Lucida Sans Unicode";
+	
 	font-size: 10pt;
 	height: 100%;
 	position: relative;
 	padding-bottom: 50px;
 }
 
-div#footer{
-	height: 50px;
-	margin-left: 6px;
-	margin-right: 6px;
-	border-top: 1px dashed #436188;
-	font-size: 9px;
-	font-color: #666;
-	text-align: center;
-	width: 1010px;
-	background: #404349;
-	position: absolute;
+
+/*left column. Static links go here*/
+#group_column{
+	float: left;
 	left: 0px;
-	bottom: 0px;
-	border-left: 1px solid #535353;
-	border-right: 1px solid #535353;
+	text-align: left;
+	font-size: 26pt;
+	padding-bottom: 40px;	
+	font-family: "Rockwell";
 	color: white;
 }
 
+#group_column img.lawl{
+	position: absolute;
+	left: 0px;
+	top: -50px; 
+}
+
+//LOLHACK
+#group_controls{
+	margin: auto;
+	width: auto;
+	text-align: left;
+	padding-left: 10px;
+}
+
+#group_column ul{
+	list-style: none;
+
+	text-align: left;
+	color: white;
+	display: inline;
+}
+
+#group_column li{
+	padding: 0;
+}
+
+#group_column li:hover{
+	padding: 0;
+}
+
+#group_column a:link{
+	background-color:#dcdcdc;
+	display: inline;	
+	padding: 2px;
+	text-decoration: none;
+	color: white;	
+}
+
+#group_column a:hover{
+	background-color: #404349;
+	display: inline;
+	padding: 2px;
+	text-decoration: none;
+	color: white;	
+}
+
+li#group_column_current {
+	background-image: url('../templates/drop_shadow_group_current.png');
+}
+	
+
+/*right content window, where all the dynamic stuff usually will go*/
 div#content{	
- 	margin-left: 250px;
-	width:	750px;  
+ 	margin-left: 150px;
+	width:	850px;  
 	padding: 10px;
 	padding-bottom: 40px;
 	background-image: url('../templates/admin_small_edited.png');
@@ -196,12 +253,13 @@ div#content a:hover{
 	text-decoration: underline;
 }
 
+
+/*small divs that will fall inside content*/
 div.update{
 	padding: 10px;	
 	padding-left: 7px;
 	float: center;
-	width: 680px;
-	font-family: verdana;
+	width: 680px;	
 	font-size: 11px;
 	color: #434750;
 	margin-bottom: 15px;
@@ -237,56 +295,31 @@ img.user_pic{
 	clear: right;
 }
 
-h1.title{
+div.update_user h1{
 	font-size: 13px;
-	font-family: arial;
+	font-family: "Times New Roman";
 	margin-left: 10px;
 	font-weight: normal;
 	color: #5b3c33;
 }
 
-#group_column{
-	float: left;
-	left: 0px;
-	width: 240px;
+/*Footer Style*/
+
+div#footer{
+	height: 50px;
+	margin-left: 6px;
+	margin-right: 6px;
+	border-top: 1px dashed #436188;
+	font-size: 9px;
+	font-color: #666;
+	font-family: "Verdana";
 	text-align: center;
-	font-family: "Arial";
-	font-size: 14pt;
-	padding-bottom: 40px;	
-	padding-top: 10px;
+	width: 1010px;
+	background: #404349;
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	border-left: 1px solid #535353;
+	border-right: 1px solid #535353;
+	color: white;
 }
-
-#group_controls{
-	margin: auto;
-	width: 150px;
-	text-align: left;
-	padding-left: 10px;
-}
-
-#group_column ul{
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	text-align: left;
-	color:#9e9e9e;
-}
-
-#group_column li{
-	margin-top: 3px;
-	height: 26px;
-	width: 188px;
-	margin: 0;
-	padding: 0;
-	padding-top: 4px;
-	padding-bottom: 2px;
-	display: block;
-	background-image: url('../templates/drop_shadow_group.png');
-	
-	padding-left: 12px;
-}
-
-li#group_column_current {
-	background-image: url('../templates/drop_shadow_group_current.png');
-}
-
-
