@@ -11,7 +11,7 @@ if( $authed ){
   if( $successful ){
     echo "You have joined "
       . $this->Group->get_name( $gid )
-      . "<br><br>"
+      . ".<br><br>"
       . anchor( 'grouppage/view/'.$gid , "Return to group page" )
       ;
   }

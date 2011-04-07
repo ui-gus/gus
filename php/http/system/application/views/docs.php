@@ -33,42 +33,9 @@
 				echo form_close();
 			}
 			
-			//Make and display thumbnail
-			$new_w = 100;
-			$new_h = 100;
+			//Display thumbnail
 			$name= "uploads/thumbs/tn_" . $filename;
-			$filenamepath= "uploads/" . $filename;
-			if (preg_match('/jpg|jpeg|png/', $system[1])){
-				if (preg_match('/jpg|jpeg/', $system[1])){
-					$src_img=imagecreatefromjpeg($filenamepath);
-				}
-				if (preg_match('/png/', $system[1])){
-					$src_img=imagecreatefrompng($filenamepath);
-				}
-				$old_x=imageSX($src_img);
-				$old_y=imageSY($src_img);
-				if ($old_x > $old_y) {
-					$thumb_w=$new_w;
-					$thumb_h=$old_y*($new_h/$old_x);
-				}
-				if ($old_x < $old_y) {
-					$thumb_w=$old_x*($new_w/$old_y);
-					$thumb_h=$new_h;
-				}
-				if ($old_x == $old_y) {
-					$thumb_w=$new_w;
-					$thumb_h=$new_h;
-				}
-				$dst_img=ImageCreateTrueColor($thumb_w,$thumb_h);
-				imagecopyresampled($dst_img,$src_img,0,0,0,0,$thumb_w,$thumb_h,$old_x,$old_y);
-				if (preg_match("/png/",$system[1]))
-				{
-					imagepng($dst_img,$name); 
-				} else {
-					imagejpeg($dst_img,$name); 
-				}
-				imagedestroy($dst_img); 
-				imagedestroy($src_img);
+			if (preg_match('/jpg|jpeg|png|gif/', $system[1])){
 				echo "<img src=../" . $name . ">";
 			}
 		}

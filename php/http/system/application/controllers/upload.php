@@ -50,7 +50,26 @@ class Upload extends Controller {
 				if($this->testmode == 'false') { //Don't load view if we're in test mode
 				  $this->pdata['header'] = $this->Page->get_header('Upload');
 				  $this->pdata['content'] = $this->Page->get_content('upload');
-				  $this->load->view('upload_success', $data); } //Load the success page and show the data about the file
+				  $this->load->view('upload_success', $data); //Load the success page and show the data about the file
+				}
+				//Make a thumbnail if it's an image
+				if($data['upload_data']['is_image'] == 1)
+				{
+					$name= $data['upload_data']['file_path'] . "/thumbs/tn_" . $data['upload_data']['file_name'];
+					//Set up for thumbnail creation
+					$config['width']=100;  //Thumbnail dimensions
+					$config['height']=100;
+					$config['source_image']= $data['upload_data']['full_path'];
+					$config['new_image']= $name;
+					$this->load->library('image_lib', $config); //CI's built in image manip library
+					$this->image_lib->resize();
+
+					/*debugging
+					if ( ! $this->image_lib->resize())
+					{
+					    echo $this->image_lib->display_errors();
+					}*/
+				}
 				return('success');
 			}
 		}
