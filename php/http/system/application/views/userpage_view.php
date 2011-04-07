@@ -9,9 +9,10 @@ if( $authed ){
   echo "<div class=\"update\">"
     . "<img src=\"" . base_url() . "/uploads/colby.png\" class=\"profile_pic\">"
     . "<h1> User Profile:" . $name . "</h1>"
-    . "User #" . $id . "<br><br>"
+    . "User #" . $id . "<br>"
+    . "Full name: " . $personal['fullname']
     . "<img src=\"" . base_url() ."templates/quote_left.png\"> "
-    . "A description should go here."
+    . $personal['description']
     . "<img src=\"" . base_url() ."templates/quote_right.png\">" . "<br>"
     . "email : " . $personal['email'] . "<br>"
     . "phone : " . $personal['contact'] . "<br>"

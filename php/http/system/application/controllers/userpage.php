@@ -61,10 +61,12 @@ function view( $testuser ){
       $data['id'] = $t;
       $data['authed'] = true;
       $data['grouplist'] = $grouplist;
-      $data['personal']['profile'] = $temp[0]['profile'];
-      $data['personal']['email']   = $temp[0]['email'];
-      $data['personal']['contact'] = $temp[0]['contact'];
-      $data['personal']['major']   = $temp[0]['major'];
+      $data['personal']['fullname'   ] = $temp[0]['fullname'];
+      $data['personal']['description'] = $temp[0]['description'];
+      $data['personal']['profile']     = $temp[0]['profile'];
+      $data['personal']['email']       = $temp[0]['email'];
+      $data['personal']['contact']     = $temp[0]['contact'];
+      $data['personal']['major']       = $temp[0]['major'];
       if( $this->testing == false ){
 	if( $personal == $t ){
 	  $this->load->view( 'userpage_personal.php', $data );
@@ -74,10 +76,7 @@ function view( $testuser ){
 	}
       }
     }
-  }
-  //if( $this->testing == false ){
-  //  $this->load->view( 'userpage_view.php', $data );
-  //}    
+  }   
   return( true );
 }
 
@@ -95,16 +94,19 @@ function view( $testuser ){
    
    $t = $this->User->get_id( $this->session->userdata('un') );
    $temp = $this->db->get_where( 'user', array('id' => $t) )->result_array();
-   $data['personal']['profile'] = $temp[0]['profile'];
-   $data['personal']['email']   = $temp[0]['email'];
-   $data['personal']['contact'] = $temp[0]['contact'];
-   $data['personal']['major']   = $temp[0]['major'];
+   $data['personal']['fullname'   ] = $temp[0]['fullname'];
+   $data['personal']['description'] = $temp[0]['description'];
+   $data['personal']['profile']     = $temp[0]['profile'];
+   $data['personal']['email']       = $temp[0]['email'];
+   $data['personal']['contact']     = $temp[0]['contact'];
+   $data['personal']['major']       = $temp[0]['major'];
    
    if(!empty($_POST)){
      //redirect($this->uri->uri_string());
      $this->db->update('user', 
-		       array('profile'=>$_POST['profile'], 'email'=>$_POST['email'],
-			     'contact'=>$_POST['contact'], 'major'=>$_POST['major']),
+		       array('fullname'=>$_POST['fullname'], 'description'=>$_POST['description'],
+			     'profile'=>$_POST['profile']  , 'email'=>$_POST['email'],
+			     'contact'=>$_POST['contact']  , 'major'=>$_POST['major']),
 		       array('id'=>$t));
      if($this->testing == false) {
 		redirect( 'userpage/personal' );
