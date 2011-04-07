@@ -125,10 +125,11 @@ div#container{
 	float: left;
 	left: 0px;
 	text-align: left;
-	font-size: 26pt;
+	font-size: 20pt;
 	padding-bottom: 40px;	
 	font-family: "Rockwell";
 	color: white;
+		margin-top: 20px;
 }
 
 #group_column img.lawl{
@@ -140,6 +141,7 @@ div#container{
 //LOLHACK
 #group_controls{
 	margin: auto;
+	margin-top: 20px;
 	width: auto;
 	text-align: left;
 	padding-left: 10px;
@@ -147,35 +149,47 @@ div#container{
 
 #group_column ul{
 	list-style: none;
-
-	text-align: left;
+	text-align: right;
 	color: white;
 	display: inline;
 }
 
 #group_column li{
-	padding: 0;
+	
 }
 
 #group_column li:hover{
-	padding: 0;
+
 }
 
 #group_column a:link{
-	background-color:#dcdcdc;
-	display: inline;	
-	padding: 2px;
+	padding: 4px;
+	padding-left: 20px;
+	display: block;	
+	padding-right: 6px;
 	text-decoration: none;
-	color: white;	
+	color: #404349;	
+}
+
+#group_column a:visited{
+	padding: 4px;
+		padding-left: 20px;
+	display: block;	
+	padding-right: 6px;
+	text-decoration: none;
+	color: #404349;		
 }
 
 #group_column a:hover{
 	background-color: #404349;
-	display: inline;
-	padding: 2px;
+	display: block;
+	padding: 4px;
+		padding-left: 20px;
+	padding-right: 6px;
 	text-decoration: none;
-	color: white;	
+	color: white;
 }
+
 
 li#group_column_current {
 	background-image: url('../templates/drop_shadow_group_current.png');
@@ -259,8 +273,8 @@ div.update{
 	padding: 10px;	
 	padding-left: 7px;
 	float: center;
-	width: 680px;	
-	font-size: 11px;
+	width: 790px;	
+	font-size: 11pt;
 	color: #434750;
 	margin-bottom: 15px;
 	background-image: url('../templates/update_holder_bottom.png');
