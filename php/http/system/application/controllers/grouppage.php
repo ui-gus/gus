@@ -17,12 +17,12 @@
 
 
 class Grouppage extends Controller {
-  
   function Grouppage(){
     parent::Controller();
     $this->load->model('Page');
     $this->load->model('User');
     $this->load->model('Group');
+    $this->load->model('tinyMCE');
     $this->load->helper('url');
     $this->load->database();
     
@@ -64,16 +64,21 @@ class Grouppage extends Controller {
 	$query = $this->db->get_where( 'ggroup', array('id' => $t) )->result();
 	$userlist = $this->db->get_where( 'usergroup', array('gid' => $t) )->result_array();
 	$un = $this->session->userdata('un');
+	$uid = $this->User->get_id($un);
+	$isamember = $this->db->get_where('usergroup',array('gid'=>$t,'uid'=>$uid))->result_array()==NULL; 
 	$gn = $this->Group->get_name( $t );
 	$perm = $this->Group->get_perm($un, $gn);
 	
 	if( sizeof($query) > 0 ){
 	  $data['group'] = $query[0];
 	}
+	$data['admin'] = ($perm == 7);
+	$data['content'] = $this->Page->get_content( 'group_' . $gn );
 	$data['permissions']['read'] = $perm & 4;
 	$data['permissions']['write'] = $perm & 2;
 	$data['permissions']['execute'] = $perm & 1;	
 	$data['gid'] = $t;
+	$data['member'] = !$isamember;
 	$data['members'] = $userlist;
       }
       //Send all information to the view.
@@ -81,7 +86,46 @@ class Grouppage extends Controller {
     }
     return( true );
   }
-
+  
+  function edit( ){
+    $data['header'] = $this->Page->get_header('groups');
+    $data['footer'] = $this->Page->get_footer();
+    if( !$this->Page->authed() ){
+      $data['authed'] = false;
+    }
+    else{
+      $data['authed'] = true;
+      $t = $this->uri->segment(3);
+      if( $t == "" && $this->testing == false ){
+	redirect( 'home' );
+      }   
+      else{    
+	$un = $this->session->userdata('un');
+	$gn = $this->Group->get_name( $t );
+	$perm = $this->Group->get_perm($un, $gn);
+	if( $perm != 7 ){
+	  $data['admin'] = false;
+	}
+	else {
+	  $data['admin'] = true;
+	  if( !empty($_POST) ){
+	    $editedpage['name']    = 'group_' . $gn;
+	    $editedpage['content'] = $_POST['content'];
+	    $this->Page->save( $editedpage );
+	    redirect( 'grouppage/view/' . $t );
+	  }
+	  else {
+	    $data['gn'] = $t;
+	    $data['content']= $this->Page->get_content('group_' . $gn );
+	    $data['tinyMCE'] = $this->tinyMCE->outputJScript( array("grouppage_edit"), 1 );
+	  }
+	}
+      }
+      $_POST['lastpage'] = $t;
+      $this->load->view( 'grouppage_edit.php', $data, $this->testing );
+    }
+    return( true );
+  }
   function join( $testgroup ){
     $t = $this->uri->segment(3);
     $data['header'] = $this->Page->get_header('groups');
@@ -154,7 +198,7 @@ class Grouppage extends Controller {
     }
     return( true ); 
   }
-
+  
   function test(){
     $this->load->library('unit_test');
     $this->testing = true;

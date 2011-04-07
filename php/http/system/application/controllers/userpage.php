@@ -44,8 +44,9 @@ function view( $testuser ){
   $data['content'] = $this->Page->get_content('user');
   $data['footer'] = $this->Page->get_footer();
   
-  if( !$this->Page->authed() && $this->testing != true){
+  if( !$this->Page->authed() ){
     $data['authed'] = false;
+    $this->load->view( 'userpage_view.php', $data, $this->testing );
   }
   else{
     if( $this->uri->segment(3) == "" && $this->testing == false ){
@@ -69,10 +70,10 @@ function view( $testuser ){
       $data['personal']['major']       = $temp[0]['major'];
       if( $this->testing == false ){
 	if( $personal == $t ){
-	  $this->load->view( 'userpage_personal.php', $data );
+	  $this->load->view( 'userpage_personal.php', $data, $this->testing );
 	}
 	else {
-	  $this->load->view( 'userpage_view.php', $data );
+	  $this->load->view( 'userpage_view.php', $data, $this->testing );
 	}
       }
     }

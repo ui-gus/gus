@@ -19,16 +19,23 @@ if( $authed ){
     . "<br>" 
     ;
   if( $permissions['read'] && $permissions['write'] && $permissions['execute'] ){
-    echo "You are an admin of this group.<br>";
+    echo "You are an admin of this group. " 
+      . anchor('grouppage/edit/'.$gid, "Edit this page.")
+      . "<br>"
+      ;
   }
-  echo ""
-    . anchor('grouppage/join/'.$gid , "Join this group<br>") 
-    . anchor('grouppage/leave/'.$gid , "Leave this group<br>")
-    . "</div>"
-    ;
+  if( $member ){
+    echo "You are a member of this group.<br>";
+    echo anchor('grouppage/leave/'.$gid , "Leave this group<br>");
+  }
+  else {
+    echo anchor('grouppage/join/'.$gid , "Join this group<br>");     
+  }
+  echo "</div>";
+  
   if( $permissions['read'] ){
     // Display all users in the group.
-    echo "<div class=\"update\">"
+    /* echo "<div class=\"update\">"
       . "<h3><u>__List of Users__</u></h3>"
       ;
   foreach( $members as $member ):{
@@ -38,13 +45,19 @@ if( $authed ){
 		 )
 	. "</h4>"
 	;
-    }
+	}
     endforeach;
     echo "<u>__________________</u>"
       . " "
       . "</div>"
+      ;*/
+    //Display unique page content.
+    echo "<div class=\"update\">"
+      . "<center><u>Custom Group Content</u></center>"
+      . $content
+      . "</div>"
       ;
-  }
+  }//End unique page content.
   else {
     echo "<div class=\"update\">"
       . "You do not yet have permission to view this group."

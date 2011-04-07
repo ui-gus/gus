@@ -23,7 +23,7 @@ if( $authed ){
     . anchor( 'userpage/edit' , "Edit my Profile" )
     . "</div>"
     . "<div class=\"update\">"
-    . "<h3><u>__List of Groups__</u></h3>"
+    . "<h3><u> &nbsp &nbsp List of Groups &nbsp &nbsp </u></h3>"
     ;
     
  foreach( $grouplist as $key ):{
@@ -36,7 +36,7 @@ if( $authed ){
   }
   endforeach;
 
-  echo "<u>___________________</u>"
+  echo "<u>_____________________</u>"
     . "</div>"
     ;
   

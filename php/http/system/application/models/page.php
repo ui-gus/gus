@@ -27,8 +27,13 @@ class Page extends Model {
 	        $content = "";
 		$greeting = "";
 		if($this->authed()) {
-		 $auth = '<a href="' . site_url() . '/auth/logout">Logout</a>';
-		 $greeting = "Greetings, <u>" . anchor("userpage/personal",$this->session->userdata('un'))  . "</u>";
+		  $un = $this->session->userdata('un');
+		  if( strlen( $un ) > 8 ){
+		    $un = substr( $un, 0, 8 );
+		    $un .= "...";
+		  }
+		  $auth = '<a href="' . site_url() . '/auth/logout">Logout</a>';
+		  $greeting = "Greetings, <u>" . anchor("userpage/personal",$un )  . "</u>";
 		  //sorry, this messes up layout, had to kill for demo. -CJB
 		  //$content = $content . anchor("userpage/personal", "!!!");
 		  

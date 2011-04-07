@@ -1,6 +1,6 @@
 <?php echo $header ?>
 <?php echo $content ?>
-<!-- <?php echo "<img src=\"" . base_url() . "/templates/personal_label.png\" class=\"side\">" ?> -->
+<?php echo "<img src=\"" . base_url() . "/templates/registration_label.png\" class=\"side\">" ?>
 
 <?php
   echo "<div class=\"update\">"

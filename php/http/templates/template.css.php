@@ -274,7 +274,7 @@ div.update{
 	padding-left: 7px;
 	float: center;
 	width: 790px;	
-	font-size: 11pt;
+	font-size: 10pt;
 	color: #434750;
 	margin-bottom: 15px;
 	background-image: url('../templates/update_holder_bottom.png');
