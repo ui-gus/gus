@@ -102,19 +102,29 @@ class Calendar extends Controller{
 				}
 				else 		//if it's the jQuery post
 				{
-					$event_day = $this->input->post('event_day');
+					parse_str($_SERVER['QUERY_STRING'], $_GET);
+					$event_day = $_GET['event_day'];
 					$event_year = $year;
 					$event_month = $month;				
 				}
 				$event_date = $event_year."-".$event_month."-".$event_day;
+
 				//generate calendar content to pass to the view
 				$this->pdata['content'] = $this->Calendarmodel->view_day($event_date);
 				$this->pdata['year'] = $event_year;
 				$this->pdata['month'] = $event_month;
 				$this->pdata['day'] = $event_day;
-				
+
 				//display the day view
-				$this->load->view('calendar_day_view', $this->pdata);
+				if($event_day)
+				{
+					$this->load->view('calendar_day_view', $this->pdata);
+				}
+				else
+				{
+					$this->pdata['content'] = $this->Calendarmodel->myGenerate($year, $month);
+					$this->load->view('calendar', $this->pdata);
+				}
 			}
 			//if not, then show the month view
 			else		

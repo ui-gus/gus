@@ -109,32 +109,28 @@ if(1)
 		<!-- make each calendar cell clickable (uses same class as css)-->
 		$('.calendar .day').click(function()
 		{		
-			view_day_request = confirm("Add, Edit or View events on this day?");
 			event_day = $(this).find('.day_num').html();	
 			path = '<?php  echo site_url() . "/calendar/index/" . $this->pdata['year']
-													. "/" . $this->pdata['month']; ?>';
-			if(view_day_request != null)
-			{ 	
-				method = "post";
+													. "/" . $this->pdata['month']; ?>';	
+			method = "post";
 
-				form = document.createElement("form");
-				form.setAttribute("action", path);
+			form = document.createElement("form");
+			form.setAttribute("action", path);
 
-				hiddenField = document.createElement("input");
-				hiddenField.setAttribute("type", "hidden");
-				hiddenField.setAttribute("name", "event_day");
-				hiddenField.setAttribute("value", event_day);
-				form.appendChild(hiddenField);
+			hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "event_day");
+			hiddenField.setAttribute("value", event_day);
+			form.appendChild(hiddenField);
+		
+			hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "load_day");
+			hiddenField.setAttribute("value", "TRUE");
+			form.appendChild(hiddenField);			
 			
-				hiddenField = document.createElement("input");
-				hiddenField.setAttribute("type", "hidden");
-				hiddenField.setAttribute("name", "load_day");
-				hiddenField.setAttribute("value", "TRUE");
-				form.appendChild(hiddenField);			
-				
-				document.body.appendChild(form);
-				form.submit();
-			}		
+			document.body.appendChild(form);
+			form.submit();	
 		});
 	});
 	</script>
