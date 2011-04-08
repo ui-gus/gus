@@ -35,12 +35,12 @@ class Forum extends Controller
 		if( !$this->Page->authed() )
 		{
 			$this->pdata['message'] = "You must be logged in to view this page.";
-			$this->load->view('forum_error', $this->pdata);
+			$this->load->view('/forum/forum_error', $this->pdata);
 		}				
 		else
 		{
 			$this->fdata['groups'] = $this->db->get_where('usergroup', array('uid' => $this->User->get_id($this->session->userdata['un'])));
-			$this->load->view('forum_main', $this->fdata, $this->pdata);
+			$this->load->view('/forum/forum_main', $this->fdata, $this->pdata);
 		}	
 		return( true );	
 	}
@@ -62,7 +62,7 @@ class Forum extends Controller
 
 		$this->pdata['header'] = $this->Page->get_header('forum');	
 		$this->pdata['content'] = $this->Page->get_content('forum');
-		$this->load->view('forum_view', $this->fdata, $this->pdata);
+		$this->load->view('/forum/forum_view', $this->fdata, $this->pdata);
 	}
 	
 	
@@ -76,7 +76,7 @@ class Forum extends Controller
 		
 		$this->pdata['header'] = $this->Page->get_header('forum');	
 		$this->pdata['content'] = $this->Page->get_content('forum');
-		$this->load->view('thread_view', $this->fdata, $this->pdata);
+		$this->load->view('/forum/thread_view', $this->fdata, $this->pdata);
 	}
   
   
@@ -85,7 +85,7 @@ class Forum extends Controller
 	{
 		$this->pdata['header'] = $this->Page->get_header('forum');	
 		$this->pdata['content'] = $this->Page->get_content('forum');
-		$this->load->view('create_thread_view', $this->pdata, $this->fdata); 
+		$this->load->view('/forum/create_thread_view', $this->pdata, $this->fdata); 
 	}
   
   
@@ -94,7 +94,17 @@ class Forum extends Controller
 	{
 		$this->pdata['header'] = $this->Page->get_header('forum');	
 		$this->pdata['content'] = $this->Page->get_content('forum');
-		$this->load->view('search_forum_view', $this->pdata, $this->fdata);
+		$this->load->view('/forum/search_forum_view', $this->pdata, $this->fdata);
+	}
+	function search_by_user()
+	{
+		$this->search_criteria = $_POST['search_criteria'];
+	    $this->fdata['query'] = $this->db->get_where('threads', array('thread_author' => $this->search_criteria, 'group_id' => $this->session->userdata('group_id')));
+		
+		$this->pdata['header'] = $this->Page->get_header('forum');	
+		$this->pdata['content'] = $this->Page->get_content('forum');
+		$this->load->view('/forum/forum_search_results_view', $this->fdata, $this->pdata);		
+		
 	}
   
   
@@ -114,7 +124,7 @@ class Forum extends Controller
 		
 		$this->pdata['header'] = $this->Page->get_header('forum');	
 		$this->pdata['content'] = $this->Page->get_content('forum');
-		$this->load->view('edit_thread_view', $this->pdata, $this->fdata);  
+		$this->load->view('/forum/edit_thread_view', $this->pdata, $this->fdata);  
 	}
 	function edit_reply()
 	{
@@ -127,7 +137,7 @@ class Forum extends Controller
 	
 		$this->pdata['header'] = $this->Page->get_header('forum');	
 		$this->pdata['content'] = $this->Page->get_content('forum');
-		$this->load->view('edit_reply_view', $this->pdata, $this->fdata);  
+		$this->load->view('/forum/edit_reply_view', $this->pdata, $this->fdata);  
 	}
 	
   
@@ -171,9 +181,9 @@ class Forum extends Controller
 		$query=$this->db->get_where('threads', array('thread_id' => $this->fdata['thread_id']));
 		foreach ($query->result() as $result)  {$num_replies=$result->num_replies;}
 		
-		$fdata['num_replies']=$num_replies + 1;
+		$this->fdata['num_replies']=$num_replies + 1;
 		$this->db->where('thread_id', $this->fdata['thread_id']);
-		$this->db->update('threads', $fdata); 
+		$this->db->update('threads', $this->fdata); 
 	
 		//inserts reply in to database
 		$_POST['datetime']=date("d/M/Y h:i:s");
@@ -181,6 +191,24 @@ class Forum extends Controller
 		$this->db->insert('replies', $_POST);
 		redirect('forum/view_thread/'.$_POST['thread_id']);	 
 	}
+	
+	function lock_thread()
+	{
+		$this->fdata['thread_id']=$_POST['thread_id'];
+		$this->fdata['lock_flag']=1;
+		$this->db->where('thread_id', $this->fdata['thread_id']);
+		$this->db->update('threads', $this->fdata); 
+		redirect('forum/view_thread/'.$_POST['thread_id']);
+	}
+	function unlock_thread()
+	{
+		$this->fdata['thread_id']=$_POST['thread_id'];
+		$this->fdata['lock_flag']=0;
+		$this->db->where('thread_id', $this->fdata['thread_id']);
+		$this->db->update('threads', $this->fdata); 
+		redirect('forum/view_thread/'.$_POST['thread_id']);
+	}
+	
   
   
     //this function deletes a thread and all of it's replies from the database then sends you to the main forum page.
@@ -200,14 +228,35 @@ class Forum extends Controller
 		$query=$this->db->get_where('threads', array('thread_id' => $this->fdata['thread_id']));
 		foreach ($query->result() as $result)  {$num_replies=$result->num_replies;}
 		
-		$fdata['num_replies']=$num_replies - 1;
+		$this->fdata['num_replies']=$num_replies - 1;
 		$this->db->where('thread_id', $this->fdata['thread_id']);
-		$this->db->update('threads', $fdata);
-	
+		$this->db->update('threads', $this->fdata);
+		
 		$reply_id=$_POST['reply_id'];
 		$this->db->delete('replies', array('reply_id' => $reply_id)); 
 		if(!$this->testmode) redirect('forum/view_thread/'.$_POST['thread_id']);
 	}	
+	function confirm_delete_thread()
+	{
+		$this->fdata['thread_id']=$_POST['thread_id'];
+		$this->fdata['thread_topic']=$_POST['thread_topic'];
+		
+		$this->pdata['header'] = $this->Page->get_header('forum');	
+		$this->pdata['content'] = $this->Page->get_content('forum');
+		$this->load->view('/forum/confirm_delete_thread_view', $this->fdata, $this->pdata);
+	}
+	function confirm_delete_reply()
+	{
+		$this->fdata['thread_id']=$_POST['thread_id'];
+		$this->fdata['reply_id']=$_POST['reply_id'];
+		$this->fdata['thread_topic']=$_POST['thread_topic'];
+		
+		$this->pdata['header'] = $this->Page->get_header('forum');	
+		$this->pdata['content'] = $this->Page->get_content('forum');
+		$this->load->view('/forum/confirm_delete_reply_view', $this->fdata, $this->pdata);
+	}
+
+
 
 	function test() {
 		$this->load->library('unit_test');
