@@ -89,7 +89,7 @@ class Calendar extends Controller{
 			}
 			
 			//check to see if there is a new post requesting to view the day
-			if(($this->input->post('view_day_request'))||($this->input->post('load_day')))
+			if( $this->input->post('view_day_request') || isset($_SERVER['QUERY_STRING']['load_day']) )
 			{
 				//if it's the php post
 				if($this->input->post('event_month'))

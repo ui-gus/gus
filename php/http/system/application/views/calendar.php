@@ -40,10 +40,11 @@
 		}
 	</style>
 	
-	<!-- make src point to jquery library from google so jquery and ajax can be used -->
+	<!-- make src point to jquery library from google -->
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js">
 	</script>
+	
 </head>
 <body>
 	<?php 	
@@ -101,19 +102,38 @@ if(1)
 	?>
 	
 	
-	<!-- jquery script as a second option to add events to the calendar -->
+	<!-- jquery script as a second option to view a day -->
 	<script type="text/javascript">
 	$(document).ready(function()
 	{
 		<!-- make each calendar cell clickable (uses same class as css)-->
 		$('.calendar .day').click(function()
 		{		
-			view_day_request = confirm("Add, Edit or View events on this day? \(link doesn\'t work yet, use forms below\)");
-			event_day = $(this).find('.day_num').html();		
-
+			view_day_request = confirm("Add, Edit or View events on this day?");
+			event_day = $(this).find('.day_num').html();	
+			path = '<?php  echo site_url() . "/calendar/index/" . $this->pdata['year']
+													. "/" . $this->pdata['month']; ?>';
 			if(view_day_request != null)
 			{ 	
-//FIGURE OUT HOW TO POST THIS SO DAY VIEW LOADS
+				method = "post";
+
+				form = document.createElement("form");
+				form.setAttribute("action", path);
+
+				hiddenField = document.createElement("input");
+				hiddenField.setAttribute("type", "hidden");
+				hiddenField.setAttribute("name", "event_day");
+				hiddenField.setAttribute("value", event_day);
+				form.appendChild(hiddenField);
+			
+				hiddenField = document.createElement("input");
+				hiddenField.setAttribute("type", "hidden");
+				hiddenField.setAttribute("name", "load_day");
+				hiddenField.setAttribute("value", "TRUE");
+				form.appendChild(hiddenField);			
+				
+				document.body.appendChild(form);
+				form.submit();
 			}		
 		});
 	});
