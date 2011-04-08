@@ -20,30 +20,31 @@
 			<td bgcolor="#FFFACD"><?php echo $curr_thread->thread_body; ?></td>
 			<td align="center" bgcolor="#FFFACD"><?php echo $curr_thread->datetime; ?></td>
 			<td align="center" bgcolor="#FFFACD">
-				<?php if ($curr_thread->lock_flag == 0): ?>
+				
+				<?php if ($curr_thread->lock_flag == 0 && $this->session->userdata('group_perm') == 7): ?>
 					<?php echo form_open('forum/lock_thread');?>
 					<?php echo form_hidden('thread_id', $this->uri->segment(3));?>
 						<input type="submit" value="Lock" >
 					</form>
-					<?php if ($curr_thread->thread_author == $this->session->userdata['un'] || $this->session->userdata('group_perm') == 7): ?>
-						<?php echo form_open('forum/confirm_delete_thread');?>
-						<?php echo form_hidden('thread_id', $this->uri->segment(3));?>
-						<?php echo form_hidden('thread_topic', $curr_thread->thread_topic);?>
-							<input type="submit" value="Delete" >
-						</form>
-						<?php echo form_open('forum/edit_thread');?>
-						<?php echo form_hidden('thread_id', $this->uri->segment(3));?>
-							<input type="submit" value="Edit" >
-						</form>
-					<?php endif; ?>	
-			
-				<?php else: ?>	
+				<?php elseif ($this->session->userdata('group_perm')  == 7):?>	
 					<?php echo form_open('forum/unlock_thread');?>
 					<?php echo form_hidden('thread_id', $this->uri->segment(3));?>
 						<input type="submit" value="Unlock" >
 					</form>
+				<?php endif; ?>
 				
-				<?php endif; ?>			
+				<?php if (($curr_thread->thread_author == $this->session->userdata['un'] || $this->session->userdata('group_perm') == 7) && $curr_thread->lock_flag == 0): ?>
+					<?php echo form_open('forum/confirm_delete_thread');?>
+					<?php echo form_hidden('thread_id', $this->uri->segment(3));?>
+					<?php echo form_hidden('thread_topic', $curr_thread->thread_topic);?>
+						<input type="submit" value="Delete" >
+					</form>
+					<?php echo form_open('forum/edit_thread');?>
+					<?php echo form_hidden('thread_id', $this->uri->segment(3));?>
+						<input type="submit" value="Edit" >
+					</form>
+				<?php endif; ?>	
+			
 			</td>	
 		</tr>
 		<?php endforeach; ?>
