@@ -19,6 +19,7 @@ class Calendar extends Controller{
 		$this->load->model('Calendarmodel');
 		$this->load->model('Page');
 		$this->load->model('User');
+		$this->load->model('Group');
 		$this->load->helper('url');
 		$this->load->helper('form');
 		

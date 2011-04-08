@@ -12,6 +12,12 @@
 		font-size: 20px;
 		text-align: center;
 	}
+	.groupname
+	{
+		font-family: Arial Rounded MT Bold;
+		font-size: 12px;
+		text-align: left;
+	}
 	.background{ background-color: #F2F2F2; }
 	.edit{ text-align: right; }
 	.delete{ text-align: right; }
@@ -31,6 +37,7 @@
 		$form_path = site_url() . "/calendar/index/" 
 					. $this->pdata['year'] . "/" . $this->pdata['month'];
 		echo $this->pdata['header'];
+		echo "<div class='groupname'>Group Name: " . $this->Calendarmodel->getCurrentGroup() . "</div>";
 		echo "<h3>Events for " . $this->pdata['month'] . "/" . 
 			  $this->pdata['day'] . "/" . $this->pdata['year'] . "</h3>";
 		echo "<center><a href=\"" . site_url() . "/calendar\">&lt;&lt;Back to Month View</a>";
@@ -79,11 +86,18 @@
 							//button to delete an event
 							echo "<div class='delete'>" . form_open($form_path, '', $hidden);	
 								echo form_submit('submitDelete', 'Delete') . "</div>";
-								
-							//button to invite group members to event
+			
+							//get group name
+							$groupName = $this->Calendarmodel->getCurrentGroup();
+							//get array of members in the group (used by a script)
+							$members = implode("\\n", $this->User->get_userlist($groupName));						
+							//button to invite group members to event (handled by Ajax script)
 							echo "<div class='invite'>" . form_button('invite', 'Invite Group Members') . "</div>";
 							
-							//button to see who is attending the event
+							//create an array of confirmed attendees (used by a script)
+							$names = array();
+							$attendees = $this->db->query("SELECT name FROM calendar_rsvp WHERE eventID='$item' AND yes=1")->result();
+							//button to see who is attending the event (handled by Ajax script)
 							echo "<div class='attending'>" . form_button('attending', 'See who\'s Attending') . "</div>";
 								
 							echo form_close();
@@ -173,6 +187,7 @@
 	});
 	</script>
 	
+	
 	<!-- jQuery Ajax script for inviting group members to an event -->
 	<script type="text/javascript">
 	$(document).ready(function()
@@ -181,14 +196,20 @@
 		{		
 			submitInvite = 1;
 			eventID = <?php echo $item; ?>;	
-//NEED TO IMPLEMENT CHECKBOX INVITATION LIST
-			who_is_invited = alert("this will be a group user list with checkboxes");
 			event_day = <?php echo $this->pdata['day'];?> - 1;
 			view_day_request = 1;
+			path = '<?php  echo site_url() . "/calendar/index/" . $this->pdata['year']
+													. "/" . $this->pdata['month']; ?>';	
+											
+//STILL NEED TO ADD THE RADIO BUTTONS BESIDE EACH MEMBER'S NAME											
+			members = '<?php echo $members; ?>';
+			who_is_invited = " ";
+			
+			alert(members);
 	
 			$.ajax(
 			{
-				url: window.location,
+				url: path,
 				type: "POST",
 				data: 
 				{
@@ -214,30 +235,17 @@
 	{
 		$('.attending').click(function()
 		{		
-			viewAttendanceList = 1;
-			eventID = <?php echo $item; ?>;	
-//NEED TO IMPLEMENT LIST OF CONFIRMED ATTENDEES
-			who_is_attending = alert("This will be the list of confirmed attendees");
-			event_day = <?php echo $this->pdata['day'];?> - 1;
-			view_day_request = 1;
-
-			$.ajax(
-			{
-				url: window.location,
-				type: "POST",
-				data: 
-				{
-					viewAttendanceList: viewAttendanceList, 
-					who_is_attending: who_is_attending,
-					eventID: eventID,
-					event_day: event_day,
-					view_day_request: view_day_request
-				},
-				success: function(msg)
-				{
-					location.reload();
-				}
-			});	
+			people = '<?php foreach($attendees as $row)
+							{
+								array_push($names, $row->name);
+							}
+							//implode the array so it can be displayed
+							echo implode("\\n", $names); 
+						?>';
+			if(people)			
+				alert(people);
+			else
+				alert("No confirmed attendees yet");
 		});
 	});
 	</script>

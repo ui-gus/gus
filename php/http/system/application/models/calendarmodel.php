@@ -9,6 +9,7 @@ class Calendarmodel extends Model
 	
 		$this->load->helper('url');  	//need for base_url() function
 		$this->load->model('User');
+		$this->load->model('Group');
 		$this->load->model('Page');
 		$this->db = $this->load->database('admin', TRUE);	
 	
@@ -59,9 +60,7 @@ class Calendarmodel extends Model
 	
 	function view_day($date)  		//function to get data for the day
 	{
-//get_group() NOT IMPLEMENTED YET, SET AS NULL FOR NOW
-//		$groupName = $this->User->get_group();
-$groupName = null;
+		$groupName = $groupName = $this->getCurrentGroup();
 		$userName = $this->session->userdata('un');
 		//get all the events of the day along with their corresponding eventID
 		$result = $this->db->query("SELECT data, eventID, user FROM calendar WHERE 
@@ -83,9 +82,9 @@ $groupName = null;
 				{
 					//make it blue if it's a group event
 					$day_data[] = "<small><font color='blue' size='1'>&#9830</small></font> " . 
-									"<font color='blue'>" . $row->data . "</font>";
-//					if($this->Page->is_user_admin())
-if(1)
+									"<font color='blue'>" . $row->data . "</font>\t(Group event 
+									for " . $this->getCurrentGroup() . ")";
+					if($this->Page->is_user_admin())
 						$day_data[] = $row->eventID;
 					else
 						$day_data[] = 0;
@@ -150,6 +149,7 @@ if(1)
 	{
 		//allow for any variation of quotes in input
 		$event = str_replace("'", "''", $event);
+//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
 		//update the event for the user if it exists already, otherwise add it
 		if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
 		{
@@ -181,13 +181,32 @@ if(1)
 			}
 			else
 			{
-//get_group() NOT IMPLEMENTED YET, SET AS NULL FOR NOW
-//				$groupName = $this->User->get_group();
-$groupName = null;
+				$groupName = $this->getCurrentGroup();
 				return $this->db->query("INSERT INTO calendar (user, date, data) 
 										VALUES ('$groupName', '$date', '$event')");
 			}
 		}
+	}
+	
+	
+	function getCurrentGroup()
+	{
+		$groupName = null;
+		//get the userID
+		$userID = $this->User->get_id($this->session->userdata('un'));
+		//get the groupID
+		$gid = $this->db->query("SELECT gid FROM usergroup WHERE uid='$userID'")->result();
+		foreach($gid as $row)
+		{
+			$groupID = $row->gid;
+			//get the groupName
+			$gName = $this->db->query("SELECT name FROM ggroup WHERE id='$groupID'")->result();
+			foreach($gName as $xyz)
+			{
+				$groupName = $xyz->name;
+			}
+		}
+		return $groupName;
 	}
 	
 	
@@ -210,10 +229,8 @@ $groupName = null;
 	
 	function get_cal_data($year, $month)
 	{
-		$userName = $this->session->userdata('un');
-//get_group() NOT IMPLEMENTED YET, SET AS NULL FOR NOW		
-//		$groupName = $this->Page->get_group();
-$groupName = null;
+		$userName = $this->session->userdata('un');		
+		$groupName = $groupName = $this->getCurrentGroup();
 	
 		//select the entire month's data for the logged in user from the calendar table 
 		if($result = $this->db->query("SELECT date, data, user FROM calendar WHERE date LIKE
