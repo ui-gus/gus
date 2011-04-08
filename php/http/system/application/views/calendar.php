@@ -38,6 +38,12 @@
 			font-weight: bold; 
 			color: #00F;
 		}
+		.groupname
+		{
+			font-family: Arial Rounded MT Bold;
+			font-size: 12px;
+			text-align: left;
+		}
 	</style>
 	
 	<!-- make src point to jquery library from google -->
@@ -50,6 +56,7 @@
 	<?php 	
 		//display the calendar
 		echo $this->pdata['header']; 
+		echo "<div class='groupname'>Group Name: " . $this->Calendarmodel->getCurrentGroup() . "</div>";
 		echo $this->pdata['content'];	
 		
 		//if user is logged in, display a form to add an event
