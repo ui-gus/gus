@@ -9,6 +9,7 @@ class Calendarmodel extends Model
 	
 		$this->load->helper('url');  	//need for base_url() function
 		$this->load->model('User');
+		$this->load->model('Page');
 		$this->db = $this->load->database('admin', TRUE);	
 	
 		//preference variable for when the calendar library is loaded
@@ -100,8 +101,7 @@ if(1)
 	function remove_event($eventID)
 	{
 		//only let an admin remove a group event
-//		if($this->Page->is_user_admin())
-if(1)
+		if($this->Page->is_user_admin())
 		{
 			return $this->db->query("DELETE FROM calendar WHERE eventID='$eventID'");
 		}
@@ -118,8 +118,7 @@ if(1)
 	{
 		//allow for any variation of quotes in input
 		$event = str_replace("'", "''", $event);
-//		if($this->Page->is_user_admin())
-if(1)
+		if($this->Page->is_user_admin())
 		{
 			//if the user is an admin and the eventID matches, whether or not it is a group event
 			if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
@@ -172,8 +171,7 @@ if(1)
 		//allow for any variation of quotes in input
 		$event = str_replace("'", "''", $event);
 
-//		if($this->Page->is_user_admin())
-if(1)
+		if($this->Page->is_user_admin())
 		{
 			//update the group event if it exists already, otherwise add it
 			if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())

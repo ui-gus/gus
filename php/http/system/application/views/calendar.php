@@ -75,8 +75,7 @@
 										$this->pdata['month'], $this->pdata['year'])), date('j')-1);
 				echo "Year:" . form_dropdown('event_year', $form_years);				
 				//if user has admin priviledges, he or she can add events for the group
-//				if($this->Page->is_user_admin())
-if(1)
+				if($this->Page->is_user_admin())
 				{
 					echo "  " . form_submit('AddForSelf', 'Add For You') 
 								. form_submit('AddForGroup', 'Add For Group');

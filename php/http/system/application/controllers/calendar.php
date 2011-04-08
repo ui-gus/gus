@@ -102,7 +102,7 @@ class Calendar extends Controller{
 				}
 				else 		//if it's the jQuery post
 				{
-					parse_str($_SERVER['QUERY_STRING'], $_GET);
+					parse_str($_SERVER['QUERY_STRING'], $_GET);		//enable $_GET
 					$event_day = $_GET['event_day'];
 					$event_year = $year;
 					$event_month = $month;				

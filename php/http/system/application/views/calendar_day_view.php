@@ -62,7 +62,7 @@
 											'event_month' => $this->pdata['month']-1, 
 											'event_day' => $this->pdata['day']-1, 
 											'event_year' => $this->pdata['year'],
-											'load_day' => 1);
+											'view_day_request' => 1);
 											
 							//get the actual event data so it can be used by ajax for editing the event
 							$tmp = $this->db->query("SELECT data FROM calendar WHERE eventID='$item'")->result();
@@ -76,7 +76,6 @@
 							//button to edit an event (handled by Ajax script)
 							echo "<div class='edit'>" . form_button('misc', 'Edit') . "</div>";	
 							
-							//use a form for the remaining options 
 							//button to delete an event
 							echo "<div class='delete'>" . form_open($form_path, '', $hidden);	
 								echo form_submit('submitDelete', 'Delete') . "</div>";
@@ -100,12 +99,12 @@
 			$hidden = array('event_month' => $this->pdata['month']-1, 
 							'event_day' => $this->pdata['day']-1, 
 							'event_year' => $this->pdata['year'],
-							'load_day' => 1);
+							'view_day_request' => 1);
+							
 			//form to add an event on the current day
 			echo form_open($form_path, '', $hidden);	
 				//check if user is admin
-//				if($this->Page->is_user_admin())
-if(1)
+				if($this->Page->is_user_admin())
 				{
 					echo "<center>Add Event: " . form_input('event_data') .
 						form_submit('AddForSelf', 'Add For You') . form_submit('AddForGroup', 
@@ -119,8 +118,8 @@ if(1)
 			echo form_close();
 			echo"<br><hr />";
 			
-			$form_years = array_combine(range(date('Y'), date('Y')+10), range(date('Y'), date('Y')+10));
 			//form to view a different day
+			$form_years = array_combine(range(date('Y'), date('Y')+10), range(date('Y'), date('Y')+10));
 			$hidden = array('view_day_request' => '1');
 			echo form_open($form_path, '', $hidden);
 				echo "<center>View a different day:  ";
@@ -135,6 +134,7 @@ if(1)
 		echo $this->pdata['footer']; 
 	?>
 		
+		
 	<!-- jQuery Ajax script for editing events -->
 	<script type="text/javascript">
 	$(document).ready(function()
@@ -145,13 +145,15 @@ if(1)
 			eventID = <?php echo $item; ?>;		
 			event_data = prompt("Edit Event: ", '<?php echo $description;?>');
 			event_day = <?php echo $this->pdata['day'];?> - 1;
-			load_day = 1;
+			view_day_request = 1;
+			path = '<?php  echo site_url() . "/calendar/index/" . $this->pdata['year']
+													. "/" . $this->pdata['month']; ?>';	
 
 			if(event_data != null)
 			{ 	
 				$.ajax(
 				{
-					url: window.location,
+					url: path,
 					type: "POST",
 					data: 
 					{
@@ -159,7 +161,7 @@ if(1)
 						eventID: eventID,
 						event_data: event_data,
 						event_day: event_day,
-						load_day: load_day
+						view_day_request: view_day_request
 					},
 					success: function(msg)
 					{
@@ -171,7 +173,7 @@ if(1)
 	});
 	</script>
 	
-		<!-- jQuery Ajax script for inviting group members to an event -->
+	<!-- jQuery Ajax script for inviting group members to an event -->
 	<script type="text/javascript">
 	$(document).ready(function()
 	{
@@ -182,7 +184,7 @@ if(1)
 //NEED TO IMPLEMENT CHECKBOX INVITATION LIST
 			who_is_invited = alert("this will be a group user list with checkboxes");
 			event_day = <?php echo $this->pdata['day'];?> - 1;
-			load_day = 1;
+			view_day_request = 1;
 	
 			$.ajax(
 			{
@@ -194,7 +196,7 @@ if(1)
 					eventID: eventID,
 					who_is_invited: who_is_invited,
 					event_day: event_day,
-					load_day: load_day
+					view_day_request: view_day_request
 				},
 				success: function(msg)
 				{
@@ -217,7 +219,7 @@ if(1)
 //NEED TO IMPLEMENT LIST OF CONFIRMED ATTENDEES
 			who_is_attending = alert("This will be the list of confirmed attendees");
 			event_day = <?php echo $this->pdata['day'];?> - 1;
-			load_day = 1;
+			view_day_request = 1;
 
 			$.ajax(
 			{
@@ -229,7 +231,7 @@ if(1)
 					who_is_attending: who_is_attending,
 					eventID: eventID,
 					event_day: event_day,
-					load_day: load_day
+					view_day_request: view_day_request
 				},
 				success: function(msg)
 				{
