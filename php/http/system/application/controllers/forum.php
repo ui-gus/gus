@@ -79,7 +79,6 @@ class Forum extends Controller
 		$this->load->view('/forum/thread_view', $this->fdata, $this->pdata);
 	}
   
-  
     //calls the create thread view
 	function create_thread()
 	{
@@ -99,13 +98,24 @@ class Forum extends Controller
 	function search_by_user()
 	{
 		$this->search_criteria = $_POST['search_criteria'];
-	    $this->fdata['query'] = $this->db->get_where('threads', array('thread_author' => $this->search_criteria, 'group_id' => $this->session->userdata('group_id')));
+		$this->fdata['query'] = $this->db->get_where('threads', array('thread_author' => $this->search_criteria, 'group_id' => $this->session->userdata('group_id')));
 		
 		$this->pdata['header'] = $this->Page->get_header('forum');	
 		$this->pdata['content'] = $this->Page->get_content('forum');
-		$this->load->view('/forum/forum_search_results_view', $this->fdata, $this->pdata);		
-		
+		$this->load->view('/forum/forum_search_results_view', $this->fdata, $this->pdata);			
 	}
+	function search_by_topic()
+	{
+		$this->search_criteria = $_POST['search_criteria'];
+		
+		$this->db->like('thread_topic', $this->search_criteria);
+	    $this->fdata['query'] = $this->db->get_where('threads', array('group_id' => $this->session->userdata('group_id')));
+	
+		$this->pdata['header'] = $this->Page->get_header('forum');	
+		$this->pdata['content'] = $this->Page->get_content('forum');
+		$this->load->view('/forum/forum_search_results_view', $this->fdata, $this->pdata);			
+	}	
+	
   
   
     //takes thread id and pulls the topic and the body data from the database and puts it in fdata
