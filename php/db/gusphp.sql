@@ -37,7 +37,7 @@ CREATE TABLE `calendar` (
   `eventID` int(11) NOT NULL AUTO_INCREMENT,
   KEY `eventID` (`eventID`),
   KEY `eventID_2` (`eventID`)
-) ENGINE=MyISAM AUTO_INCREMENT=190 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=218 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,8 +46,41 @@ CREATE TABLE `calendar` (
 
 LOCK TABLES `calendar` WRITE;
 /*!40000 ALTER TABLE `calendar` DISABLE KEYS */;
-INSERT INTO `calendar` VALUES ('admin','2011-02-26','another event',3),('admin','2011-02-24','updated',2),('admin','2011-02-21','event',4),('user1','2011-03-15','an event in march',6),('admin','2011-02-23','updated',7),('admin','0000-00-00','different event',8),('long3841','2011-02-19','event',9),('cblair','2011-02-21','asdfasdf',10),('cblair','2011-02-27','asdfasfdasfd',11),('long3841','2011-02-21','something',12),('cblair','2011-03-12','test',13),('','2011-03-12','test2',14),('','2011-03-12','something',28),('','2011-03-31','something',189),('','2011-03-31','something',188),('','2011-03-31','something',187),('','2011-03-31','something',186),('','2011-03-29','something',181),('long3841','2011-03-15','something',109),('','2011-03-29','something',180),('','2011-03-29','something',179),('','2011-03-29','something',178),('','2011-03-30','something',184),('','2011-03-21','something',114),('','2011-03-30','something',185),('','2011-03-27','something',173),('','2011-03-20','something',110),('','2011-03-30','something',182),('','2011-03-30','something',183),('','2011-03-18','something',107);
+INSERT INTO `calendar` (`user`, `date`, `data`, `eventID`) VALUES
+('main', '2011-04-08', 'event', 209),
+('long3841', '2011-04-08', 'something else', 201),
+('admin', '2011-04-08', 'event!', 215);
 /*!40000 ALTER TABLE `calendar` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `calendar_rsvp`
+--
+
+DROP TABLE IF EXISTS `calendar_rsvp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calendar_rsvp` (
+  `eventID` int(11) NOT NULL,
+  `groupID` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `yes` int(11) NOT NULL,
+  `no` int(11) NOT NULL,
+  `maybe` int(11) NOT NULL,
+  `unanswered` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `calendar_rsvp`
+--
+
+LOCK TABLES `calendar_rsvp` WRITE;
+/*!40000 ALTER TABLE `calendar_rsvp` DISABLE KEYS */;
+INSERT INTO `calendar_rsvp` (`eventID`, `groupID`, `name`, `yes`, `no`, `maybe`, `unanswered`) VALUES
+(201, 0, 'long3841', 1, 0, 0, 0),
+(201, 0, 'admin', 1, 0, 0, 0);
+/*!40000 ALTER TABLE `calendar_rsvp` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
