@@ -1,92 +1,90 @@
 <?php
+session_start();
 
 class Pm extends Controller {
 
 	function Pm()
 	{
-		parent::Controller();
-		$this->load->model('PM_Model');
-		$this->PM_Model->initialise(1);
+		parent::Controller();	
 	}
 	
-	function index()
-	{
-		$this->messages();
+	function inbox(){
+		redirect('pm/index', 'refresh');
 	}
 	
-	function message()
-	{
-		$id=$this->uri->segment(3);
-		
-		$messages=$this->PM_Model->getmessage($id);
-		
-		$this->PM_Model->viewed($id);
-		
-		$data['messages']=$messages;
-		
-		$this->load->view('pm/list', $data);
-	}
 	
-	function messages()
-	{
-		$type=$this->uri->segment(3);
-		$messages=array();
-		
-		switch($type)
-		{
-			case 'new': 
-				$messages=$this->PM_Model->getmessages(0);
-				break;
+	function view_message($id){
+		$msg = $this->m_messages->get_message($id);
+		$data['title'] = $msg->subject;
+		$data['main_view'] = 'pm/view_message';
+		$data['user'] = $_SESSION['logged_in_user'];
+		$data['msg'] = $msg;
+		$data['usernames'] = $this->m_users->list_user_names();
+		$this->load->vars($data);
+	}
 
-			case 'sent': 
-				$messages=$this->PM_Model->getmessages(2); 
-				break;
+	function index(){
+		$data['title'] = 'Your Inbox';
+		$data['main_view'] = 'pm/inbox';
+		$data['user'] = $_SESSION['logged_in_user'];
+		$data['messages'] = $this->m_messages->list_messages_to($_SESSION['userid']);
+		$data['usernames'] = $this->m_users->list_user_names();
+		$this->load->vars($data);
+	}
 
-			case 'viewed': 
-				$messages=$this->PM_Model->getmessages(1); 
-				break;
+	function sent(){
+		$data['title'] = 'Sent Messages';
+		$data['main_view'] = 'pm/sent';
+		$data['user'] = $_SESSION['logged_in_user'];
+		$data['messages'] = $this->m_messages->list_messages_from($_SESSION['userid']);
+		$data['usernames'] = $this->m_users->list_user_names();
+		$this->load->vars($data);
+	}	
 
-			case 'trashed': 
-				$messages=$this->PM_Model->getmessages(3); 
-				break;
-			// get all
-			default: 
-				$messages=$this->PM_Model->getmessages();
-				break;
-		}
-					
-		$data['messages']=$messages;
-		
-		$this->load->view('pm/detail', $data);
+	function archive(){
+		$data['title'] = 'Your Archives';
+		$data['main_view'] = 'pm/archive';
+		$data['user'] = $_SESSION['logged_in_user'];
+		$data['messages'] = $this->m_messages->list_messages_to($_SESSION['userid'],'archived');
+		$data['usernames'] = $this->m_users->list_user_names();
+		$this->load->vars($data);
+	}
+
+	function compose(){
+		$data['title'] = 'Compose Message';
+		$data['main_view'] = 'pm/compose';
+		$data['user'] = $_SESSION['logged_in_user'];
+		$data['usernames'] = $this->m_users->list_user_names();
+		$this->load->vars($data);
+	}
+
+	function respond($id){
+		$data['title'] = 'Respond';
+		$data['respondid'] = $id;
+		$data['message'] = $this->m_messages->get_message($id);
+		$data['main_view'] = 'pm/respond';
+		$data['user'] = $_SESSION['logged_in_user'];
+		$data['usernames'] = $this->m_users->list_user_names();
+		$this->load->vars($data);
 	}
 	
-	function compose($replyto='')
-	{
-		$arrPost=$_POST;
-		$msg="";
-		
-		if(!empty($arrPost['btnPost']))
-		{
-			if(!empty($arrPost['txtTo']))
-			{
-				$to=$arrPost['txtTo'];
-				$title=$arrPost['txtTitle'];
-				$message=$arrPost['txtMessage'];
-				
-				if($this->PM_Model->sendmessage($to,$title,$message)) {
-        				$this->load->helper('url');
-					redirect("/pm");
-				} else {
-					$msg="Failure message";
-				}
-			}
-			else
-				$msg="Invalid message";
-		}
-		
-		$data['msg']=$msg;
-		$this->load->view('pm/compose', $data);
+	
+	function send_message(){
+		$this->m_messages->send_message($_SESSION['userid']);
+		redirect('pm/index','refresh');
+	
 	}
+	
+	function archive_message($id){
+		$this->m_messages->move_message($id);
+		redirect('pm/index','refresh');
+	
+	}	
+	
+	function inbox_message($id){
+		$this->m_messages->move_message($id,'inbox');
+		redirect('pm/index','refresh');
+	
+	}		
+	
 }
-
-?>
