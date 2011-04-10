@@ -126,6 +126,16 @@ class Page extends Model {
 		return($data);
 	}
 
+	function get_un() {
+		return($this->session->userdata('un'));
+	}
+
+	function get_uid() {
+		$ci =& get_instance();
+		$ci->load->model('User');
+		return($ci->User->get_id($this->session->userdata('un')));
+	}
+
 	function login($un,$pw) {
 		//not sure why I only have to do this here... model load model
 		// reported bug to standardize / fix
@@ -136,6 +146,7 @@ class Page extends Model {
 		//else
 		$this->session->set_userdata('un', $un);
 		$this->session->set_userdata('perm', $ci->Group->get_perm($un,"main"));
+		print_r($this->session);
 		return(true);
 	}
 

@@ -27,8 +27,13 @@ margin: 			0 0 4px 0;
 </head>
 <body>
 	<div id="content">
+		<?php 
+		echo '<img src="' . base_url() . '/images/error_db.jpg" />';
+		?>
 		<h1><?php echo $heading; ?></h1>
 		<?php echo $message; ?>
+		<p>Something terrible has happened, and those
+			reponsible are being punished.</p>
 	</div>
 </body>
 </html>

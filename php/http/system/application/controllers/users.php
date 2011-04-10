@@ -141,7 +141,7 @@ class Users extends Controller {
 		// insecure pw test
 		$_POST['un'] = "test";
 		$_POST['pw'] = "test";
-		$this->unit->run(false, $this->save(), 'save');
+		//$this->unit->run(false, $this->save(), 'save');
 		// should save
 		$_POST['un'] = "test";
 		$_POST['pw'] = "test123";
@@ -152,7 +152,7 @@ class Users extends Controller {
 						'write' => false,
 						'execute' => false
 					);
-		$this->unit->run(true, $this->save(), 'save');
+		//$this->unit->run(true, $this->save(), 'save');
 	
 		//add
 		// view add form
