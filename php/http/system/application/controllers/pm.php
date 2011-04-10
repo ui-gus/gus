@@ -6,8 +6,9 @@ class Pm extends Controller {
 	function Pm()
 	{
 		parent::Controller();	
+		$this->load->model('Page');
 	}
-	
+
 	function inbox(){
 		redirect('pm/index', 'refresh');
 	}
@@ -17,7 +18,7 @@ class Pm extends Controller {
 		$msg = $this->m_messages->get_message($id);
 		$data['title'] = $msg->subject;
 		$data['main_view'] = 'pm/view_message';
-		$data['user'] = $_SESSION['logged_in_user'];
+		$data['user'] = $this->Page->get_un();
 		$data['msg'] = $msg;
 		$data['usernames'] = $this->m_users->list_user_names();
 		$this->load->vars($data);
