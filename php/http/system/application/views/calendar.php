@@ -62,16 +62,16 @@
 		//if user is logged in, display a form to add an event
 		if($this->Page->authed())
 		{
-			//set the path that the following form is going to route to 
+			//set the path that the forms going to route to 
 			$form_path = site_url() . "/calendar/index/" . $this->pdata['year']
 													. "/" . $this->pdata['month'];
 			//an indexed array of years
 			$form_years = array_combine(range(date('Y'),date('Y')+10), 
 										range(date('Y'),date('Y')+10));
 			
-			echo "<center><i>&#8226 To ADD/EDIT/VIEW events, either go to day view or";
+			echo "<center><i>&#8226 To ADD/VIEW events, either go to day view or";
 			echo " use the options below";
-			echo "<br>&#8226 To INVITE/JOIN/DROP/DELETE events, go to day view";
+			echo "<br>&#8226 To EDIT/INVITE/JOIN/DROP/DELETE events, go to day view";
 			echo "<br>&#8226<font color='blue'>Group events are in blue</font><p></p></i></center>";
 
 			//form to add an event to the calendar

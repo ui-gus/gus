@@ -189,6 +189,22 @@ class Calendarmodel extends Model
 	}
 	
 	
+	function invite_to_event($eventID, $groupID, $userArray)
+	{
+		foreach($userArray as $name)
+		{
+			$this->db->query("INSERT INTO calendar_rsvp (eventID, groupID, name, unanswered)
+							VALUES ('$eventID', '$groupID', '$name', 1)");
+		}
+	}
+	
+	
+	function drop_event($eventID, $userName)
+	{
+		return $this->db->query("DELETE FROM calendar_rsvp WHERE eventID='$eventID' AND name='$userName'");
+	}
+	
+	
 	function getCurrentGroup()
 	{
 		$groupName = null;

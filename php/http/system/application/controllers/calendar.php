@@ -78,15 +78,29 @@ class Calendar extends Controller{
 			}
 			
 			//check to see if there is a new post requesting to invite people to an event
-//NEED TO FINISH
 			if($this->input->post('submitInvite'))
 			{
+				$eventID = $this->input->post('eventID');
+				$eventOwner = $this->User->get_id($this->session->userdata('un'));
+				$groupID = null;
+				//get the groupID
+				$gid = $this->db->query("SELECT gid FROM usergroup WHERE uid='$eventOwner'")->result();
+				foreach($gid as $row)
+				{
+					$groupID = $row->gid;
+				}
+				$userArray = $this->input->post('who_is_invited');
+				$this->Calendarmodel->invite_to_event($eventID, $groupID, $userArray);
+				//(database table will initially show response as "unanswered")
 			}
 			
 			//check to see if there is a new post requesting to drop an event
-//NEED TO FINISH
 			if($this->input->post('dropEvent'))
 			{
+				$eventID = $this->input->post('eventID');
+				$userID = $this->input->post('userID');
+				$userName = $this->User->get_name($userID);
+				$this->Calendarmodel->drop_event($eventID, $userName);
 			}
 			
 			//check to see if there is a new post requesting to view the day

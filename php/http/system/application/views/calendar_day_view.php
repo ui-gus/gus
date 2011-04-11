@@ -196,7 +196,6 @@
 		{		
 			submitInvite = 1;
 			eventID = <?php echo $item; ?>;	
-			event_day = <?php echo $this->pdata['day'];?> - 1;
 			view_day_request = 1;
 			path = '<?php  echo site_url() . "/calendar/index/" . $this->pdata['year']
 													. "/" . $this->pdata['month']; ?>';	
@@ -216,7 +215,6 @@
 					submitInvite: submitInvite, 
 					eventID: eventID,
 					who_is_invited: who_is_invited,
-					event_day: event_day,
 					view_day_request: view_day_request
 				},
 				success: function(msg)
