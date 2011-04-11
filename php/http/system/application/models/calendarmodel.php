@@ -75,19 +75,19 @@ class Calendarmodel extends Model
 				//if it's a personal event
 				if(strcmp($row->user, $userName) == 0)
 				{
-					$day_data[] = "<big>&#8226</big>" . $row->data;
-					$day_data[] = $row->eventID;
+					array_push($day_data, "<big>&#8226</big>" . $row->data);
+					array_push($day_data, $row->eventID);
 				}
 				else		//if it's a group event
 				{
 					//make it blue if it's a group event
-					$day_data[] = "<small><font color='blue' size='1'>&#9830</small></font> " . 
+					array_push($day_data, "<small><font color='blue' size='1'>&#9830</small></font> " . 
 									"<font color='blue'>" . $row->data . "</font>\t(Group event 
-									for " . $this->getCurrentGroup() . ")";
+									for " . $this->getCurrentGroup() . ")");
 					if($this->Page->is_user_admin())
-						$day_data[] = $row->eventID;
+						array_push($day_data, $row->eventID);
 					else
-						$day_data[] = 0;
+						array_push($day_data , 0);
 				}
 			}
 			return $day_data;
@@ -97,22 +97,6 @@ class Calendarmodel extends Model
 	}
 	
 	
-	function remove_event($eventID)
-	{
-		//only let an admin remove a group event
-		if($this->Page->is_user_admin())
-		{
-			return $this->db->query("DELETE FROM calendar WHERE eventID='$eventID'");
-		}
-		else
-		{
-			$userName = $this->session->userdata('un');
-			return $this->db->query("DELETE FROM calendar WHERE 
-									eventID='$eventID' AND user='$userName'");
-		}
-	}
-	
-
 	function edit_event($event, $eventID)
 	{
 		//allow for any variation of quotes in input
@@ -149,10 +133,10 @@ class Calendarmodel extends Model
 	{
 		//allow for any variation of quotes in input
 		$event = str_replace("'", "''", $event);
-//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
 		//update the event for the user if it exists already, otherwise add it
 		if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
 		{
+			//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
 			return $this->db->query("UPDATE calendar SET data='$event', 
 									date='$date' WHERE eventID='$eventID'");
 		}
@@ -160,9 +144,43 @@ class Calendarmodel extends Model
 		{
 			$userName = $this->session->userdata('un');
 			//add the event for the user in the calendar table 
+			//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
 			return $this->db->query("INSERT INTO calendar (user, date, data) 
 									VALUES ('$userName', '$date', '$event')");
 		}
+	}
+	
+	
+	function remove_event($eventID)
+	{
+		//only let an admin remove a group event
+		if($this->Page->is_user_admin())
+		{
+			return $this->db->query("DELETE FROM calendar WHERE eventID='$eventID'");
+		}
+		else
+		{
+			$userName = $this->session->userdata('un');
+			return $this->db->query("DELETE FROM calendar WHERE 
+									eventID='$eventID' AND user='$userName'");
+		}
+	}
+	
+	
+	function invite_to_event($eventID, $groupID, $userArray)
+	{
+		foreach($userArray as $name)
+		{
+			$this->db->query("INSERT INTO calendar_rsvp (eventID, groupID, name, unanswered)
+							VALUES ('$eventID', '$groupID', '$name', 1)");
+		}
+		return 1;
+	}
+	
+	
+	function drop_event($eventID, $userName)
+	{
+		return $this->db->query("DELETE FROM calendar_rsvp WHERE eventID='$eventID' AND name='$userName'");
 	}
 	
 	
@@ -176,32 +194,18 @@ class Calendarmodel extends Model
 			//update the group event if it exists already, otherwise add it
 			if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
 			{
+				//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
 				return $this->db->query("UPDATE calendar SET data='$event', date='$date' 
-																WHERE eventID='$eventID'");
+																WHERE eventID='$eventID'");									
 			}
 			else
 			{
 				$groupName = $this->getCurrentGroup();
+				//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
 				return $this->db->query("INSERT INTO calendar (user, date, data) 
 										VALUES ('$groupName', '$date', '$event')");
 			}
 		}
-	}
-	
-	
-	function invite_to_event($eventID, $groupID, $userArray)
-	{
-		foreach($userArray as $name)
-		{
-			$this->db->query("INSERT INTO calendar_rsvp (eventID, groupID, name, unanswered)
-							VALUES ('$eventID', '$groupID', '$name', 1)");
-		}
-	}
-	
-	
-	function drop_event($eventID, $userName)
-	{
-		return $this->db->query("DELETE FROM calendar_rsvp WHERE eventID='$eventID' AND name='$userName'");
 	}
 	
 	
