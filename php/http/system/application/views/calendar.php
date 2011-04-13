@@ -55,23 +55,23 @@
 <body>
 	<?php 	
 		//display the calendar
-		echo $this->pdata['header']; 
-		echo "<div class='groupname'>Group Name: " . $this->Calendarmodel->getCurrentGroup() . "</div>";
-		echo $this->pdata['content'];	
+		echo $this->pdata['header']; 	
 		
 		//if user is logged in, display a form to add an event
 		if($this->Page->authed())
 		{
-			//set the path that the following form is going to route to 
+			echo "<div class='groupname'>Group Name: " . $this->Calendarmodel->getCurrentGroup() . "</div>";
+			echo $this->pdata['content'];
+			//set the path that the forms going to route to 
 			$form_path = site_url() . "/calendar/index/" . $this->pdata['year']
 													. "/" . $this->pdata['month'];
 			//an indexed array of years
 			$form_years = array_combine(range(date('Y'),date('Y')+10), 
 										range(date('Y'),date('Y')+10));
 			
-			echo "<center><i>&#8226 To ADD/EDIT/VIEW events, either go to day view or";
+			echo "<center><i>&#8226 To ADD/VIEW events, either go to day view or";
 			echo " use the options below";
-			echo "<br>&#8226 To INVITE/JOIN/DROP/DELETE events, go to day view";
+			echo "<br>&#8226 To EDIT/INVITE/JOIN/DROP/DELETE events, go to day view";
 			echo "<br>&#8226<font color='blue'>Group events are in blue</font><p></p></i></center>";
 
 			//form to add an event to the calendar
@@ -81,7 +81,7 @@
 				echo "Day:" . form_dropdown('event_day', range(1, cal_days_in_month(CAL_GREGORIAN, 
 										$this->pdata['month'], $this->pdata['year'])), date('j')-1);
 				echo "Year:" . form_dropdown('event_year', $form_years);				
-				//if user has admin priviledges, he or she can add events for the group
+				//if user has admin privileges, he or she can add events for the group
 				if($this->Page->is_user_admin())
 				{
 					echo "  " . form_submit('AddForSelf', 'Add For You') 
