@@ -15,7 +15,7 @@
 			width: 150px; height: 80px; padding: 4px;
 			border: 3px groove #F4A460;
 			vertical-align: top;
-			background-image: url("<?php echo base_url();?>/templates/calendar_day.PNG");
+			background-image: url("../templates/calendar_day.PNG");
 		}
 		.calendar .weeks td
 		{
@@ -23,7 +23,7 @@
 			font-family: textile, cursive;
 			font-weight: normal;
 			border: none;
-			background-image: url("<?php echo base_url();?>/templates/calendar_week.PNG");
+			background-image: url("../templates/calendar_week.PNG");
 		}
 		table.calendar			
 		{
@@ -55,13 +55,13 @@
 <body>
 	<?php 	
 		//display the calendar
-		echo $this->pdata['header']; 
-		echo "<div class='groupname'>Group Name: " . $this->Calendarmodel->getCurrentGroup() . "</div>";
-		echo $this->pdata['content'];	
+		echo $this->pdata['header']; 	
 		
 		//if user is logged in, display a form to add an event
 		if($this->Page->authed())
 		{
+			echo "<div class='groupname'>Group Name: " . $this->Calendarmodel->getCurrentGroup() . "</div>";
+			echo $this->pdata['content'];
 			//set the path that the forms going to route to 
 			$form_path = site_url() . "/calendar/index/" . $this->pdata['year']
 													. "/" . $this->pdata['month'];
@@ -81,7 +81,7 @@
 				echo "Day:" . form_dropdown('event_day', range(1, cal_days_in_month(CAL_GREGORIAN, 
 										$this->pdata['month'], $this->pdata['year'])), date('j')-1);
 				echo "Year:" . form_dropdown('event_year', $form_years);				
-				//if user has admin priviledges, he or she can add events for the group
+				//if user has admin privileges, he or she can add events for the group
 				if($this->Page->is_user_admin())
 				{
 					echo "  " . form_submit('AddForSelf', 'Add For You') 
