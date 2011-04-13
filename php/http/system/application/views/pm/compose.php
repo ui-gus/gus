@@ -4,7 +4,8 @@ needs: form validation, upload of photo
 */
 
 
-echo heading("Compose a Message!", 2);
+//echo heading("Compose a Message!", 2);
+echo $this->pdata['header'];
 echo form_open('pm/send_message');
 
 echo form_label('To', 'to_id');
@@ -24,5 +25,8 @@ echo br(2);
 echo form_submit('send','send');
 
 echo form_close();
+
+
+echo $this->pdata['footer'];
 
 ?>

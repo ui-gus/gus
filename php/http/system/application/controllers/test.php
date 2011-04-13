@@ -81,7 +81,7 @@ class Test extends Controller {
 
 	function user() {
 		$this->load->model('User');
-
+		$this->User->mode = "test";
 		//get_userlist
 		echo $this->unit->run(true,$this->User->get_userlist(), 'get_userlist.1');
 

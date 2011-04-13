@@ -71,6 +71,7 @@ class Pm extends Controller {
 		$data['user'] = $this->Page->get_un();
 		$data['usernames'] = $this->User->get_userlist();
 		$this->load->vars($data);
+		$this->load->view('pm/compose',$this->pdata,$this->testmode);		
 	}
 
 	function respond($id){
