@@ -146,7 +146,6 @@ class Page extends Model {
 		//else
 		$this->session->set_userdata('un', $un);
 		$this->session->set_userdata('perm', $ci->Group->get_perm($un,"main"));
-		print_r($this->session);
 		return(true);
 	}
 

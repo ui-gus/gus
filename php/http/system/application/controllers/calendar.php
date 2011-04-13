@@ -37,8 +37,18 @@ class Calendar extends Controller{
 			if(!$year){ $year = date('Y'); }
 			if(!$month){ $month = date('m'); }
 			
+			//check to see if there is a new post requesting to edit an event
+			if($this->input->post('submitEdit'))
+			{
+				$eventID = $this->input->post('eventID');
+				$event = $this->input->post('event_data');			
+				if($event != null)
+					$this->Calendarmodel->edit_event($event, $eventID);
+				else
+					$this->Calendarmodel->remove_event($eventID);
+			}			
 			//check to see if there is a new post requesting to add an event
-			if($event_data = $this->input->post('event_data'))
+			else if($event_data = $this->input->post('event_data'))
 			{
 				$event_year = $this->input->post('event_year');
 				//adjust day and month since they are both off by 1 for some reason
@@ -66,21 +76,11 @@ class Calendar extends Controller{
 				$this->Calendarmodel->remove_event($eventToDelete);
 			}
 			
-			//check to see if there is a new post requesting to edit an event
-			if($this->input->post('submitEdit'))
-			{
-				$eventID = $this->input->post('eventID');
-				$event = $this->input->post('event_data');
-				if($event != null)
-					$this->Calendarmodel->edit_event($event, $eventID);
-				else
-					$this->Calendarmodel->remove_event($eventID);
-			}
-			
 			//check to see if there is a new post requesting to invite people to an event
 			if($this->input->post('submitInvite'))
 			{
 				$eventID = $this->input->post('eventID');
+				$userArray = $this->input->post('userArray');
 				$eventOwner = $this->User->get_id($this->session->userdata('un'));
 				$groupID = null;
 				//get the groupID
@@ -89,17 +89,23 @@ class Calendar extends Controller{
 				{
 					$groupID = $row->gid;
 				}
-				$userArray = $this->input->post('who_is_invited');
 				$this->Calendarmodel->invite_to_event($eventID, $groupID, $userArray);
 				//(database table will initially show response as "unanswered")
 			}
 			
-			//check to see if there is a new post requesting to drop an event
-			if($this->input->post('dropEvent'))
+			//check to see if there is a new post requesting to join an event
+			if($this->input->post('submitJoin'))
 			{
 				$eventID = $this->input->post('eventID');
-				$userID = $this->input->post('userID');
-				$userName = $this->User->get_name($userID);
+				$userName = $this->session->userdata('un');
+				$this->Calendarmodel->join_event($eventID, $userName);
+			}			
+			
+			//check to see if there is a new post requesting to drop an event
+			if($this->input->post('submitDrop'))
+			{
+				$eventID = $this->input->post('eventID');
+				$userName = $this->session->userdata('un');
 				$this->Calendarmodel->drop_event($eventID, $userName);
 			}
 			
@@ -112,20 +118,21 @@ class Calendar extends Controller{
 					$event_day = $this->input->post('event_day') + 1;
 					$event_year = $this->input->post('event_year');
 					$event_month = $this->input->post('event_month') + 1;
-					//put a leading zero in if month is only one digit
-					$event_month = sprintf("%02u",$event_month);
+					//add a leading zero if month or day are only one digit
+					$event_month = sprintf("%02s",$event_month);
 				}
 				else 		//if it's the jQuery post
 				{
 					parse_str($_SERVER['QUERY_STRING'], $_GET);		//enable $_GET
 					$event_day = $_GET['event_day'];
 					$event_year = $year;
-					$event_month = $month;				
+					$event_month = $month;	
 				}
 				$event_date = $event_year."-".$event_month."-".$event_day;
 
 				//generate calendar content to pass to the view
 				$this->pdata['content'] = $this->Calendarmodel->view_day($event_date);
+				$this->pdata['invite'] = $this->Calendarmodel->view_day_invites($event_date);
 				$this->pdata['year'] = $event_year;
 				$this->pdata['month'] = $event_month;
 				$this->pdata['day'] = $event_day;

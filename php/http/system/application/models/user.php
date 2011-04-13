@@ -17,6 +17,7 @@ class User extends Model {
 	}
 
 	function get_userlist() {
+		//if($this->mode === "test") {$this->db = $this->load->database('test',TRUE);
 		$this->db->select('un');
                 $data = array();
                 foreach($this->db->get('user')->result() as $key) {

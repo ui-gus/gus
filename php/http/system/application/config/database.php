@@ -63,7 +63,20 @@ $db['admin']['cachedir'] = "";
 $db['admin']['char_set'] = "utf8";
 $db['admin']['dbcollat'] = "utf8_general_ci";
 
-
+/*
+$db['admin']['hostname'] = "localhost";
+$db['admin']['username'] = "gus_admin";
+$db['admin']['password'] = "SHI/hel7";
+$db['admin']['database'] = "gusphp_test";
+$db['admin']['dbdriver'] = "mysql";
+$db['admin']['dbprefix'] = "";
+$db['admin']['pconnect'] = TRUE;
+$db['admin']['db_debug'] = TRUE;
+$db['admin']['cache_on'] = FALSE;
+$db['admin']['cachedir'] = "";
+$db['admin']['char_set'] = "utf8";
+$db['admin']['dbcollat'] = "utf8_general_ci";
+*/
 
 /* End of file database.php */
 /* Location: ./system/application/config/database.php */
