@@ -80,6 +80,7 @@ class Calendar extends Controller{
 			if($this->input->post('submitInvite'))
 			{
 				$eventID = $this->input->post('eventID');
+				$userArray = $this->input->post('userArray');
 				$eventOwner = $this->User->get_id($this->session->userdata('un'));
 				$groupID = null;
 				//get the groupID
@@ -88,7 +89,6 @@ class Calendar extends Controller{
 				{
 					$groupID = $row->gid;
 				}
-				$userArray = $this->input->post('who_is_invited');
 				$this->Calendarmodel->invite_to_event($eventID, $groupID, $userArray);
 				//(database table will initially show response as "unanswered")
 			}

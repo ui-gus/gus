@@ -207,8 +207,13 @@ class Calendarmodel extends Model
 	{
 		foreach($userArray as $name)
 		{
-			$this->db->query("INSERT INTO calendar_rsvp (eventID, groupID, name, unanswered)
-							VALUES ('$eventID', '$groupID', '$name', 1)");
+			//if the user is not already invited
+			if(! $this->db->query("SELECT name FROM calendar_rsvp 
+				WHERE eventID='$eventID' AND name='$name'")->result())
+			{
+				$this->db->query("INSERT INTO calendar_rsvp (eventID, groupID, name, unanswered)
+														VALUES ('$eventID', '$groupID', '$name', 1)");
+			}		
 		}
 		return 1;
 	}
@@ -216,7 +221,8 @@ class Calendarmodel extends Model
 	
 	function join_event($eventID, $userName)
 	{
-		return $this->db->query("UPDATE calendar_rsvp SET yes=1, no=0 WHERE eventID='$eventID' AND name='$userName'");
+		return $this->db->query("UPDATE calendar_rsvp SET yes=1, no=0, unanswered=0
+										WHERE eventID='$eventID' AND name='$userName'");
 	}
 	
 	
@@ -292,15 +298,13 @@ class Calendarmodel extends Model
 	function get_cal_data($year, $month)
 	{
 		$userName = $this->session->userdata('un');		
-		$groupName = $groupName = $this->getCurrentGroup();
+		$groupName = $this->getCurrentGroup();
+		$cal_data = array(array());		//2D array since each day can have multiple events
 	
 		//select the entire month's data for the logged in user from the calendar table 
 		if($result = $this->db->query("SELECT date, data, user FROM calendar WHERE date LIKE
 					'$year-$month%' AND (user='$userName' OR user='$groupName')")->result())
 		{
-			//2D array since each day can have multiple events
-			$cal_data = array(array());
-		
 			//for each event that was a match
 			foreach($result as $row)   
 			{

@@ -21,7 +21,7 @@
 	.background{ background-color: #F2F2F2; }
 	.edit{ text-align: right; }
 	.delete{ text-align: right; }
-	.invite{ text-align: right; }	
+	.invite{ text-align: center; }
 	.attending{ text-align: right; }
 	.joinEvent{ text-align: left; }
 	.dropEvent{ text-align: left; }
@@ -91,27 +91,67 @@
 							}
 								
 							//button to edit an event (handled by Ajax script)
-							echo "<div class='edit'>" . form_button('submitEdit', 'Edit') . "</div>";	
+							echo "<div class='edit'>" . form_button('submitEdit', 'Edit') . "</div>";
 							
 							//button to delete an event
 							echo "<div class='delete'>" . form_open($form_path, '', $hidden);	
 								echo form_submit('submitDelete', 'Delete') . "</div>";
-			
-							//get group name
-							$groupName = $this->Calendarmodel->getCurrentGroup();
-							//get array of members in the group (used by a script)
-							$members = implode("\\n", $this->User->get_userlist($groupName));
+							echo form_close();
 							
-							//button to invite group members to event (handled by Ajax script)
-							echo "<div class='invite'>" . form_button('invite', 'Invite Group Members') . "</div>";
-							
-							//create an array of confirmed attendees (used by a script)
-							$names = array();
-							$attendees = $this->db->query("SELECT name FROM calendar_rsvp WHERE eventID='$item' AND yes=1")->result();
+							//create an array of confirmed attendees
+							$names = array();	
+							$attendees = $this->db->query("SELECT name FROM calendar_rsvp WHERE 
+															eventID='$item' AND yes='1'")->result();
+							foreach($attendees as $row)
+							{
+								array_push($names, $row->name);
+							}
+							//implode the array so it can be displayed
+							$names = implode("\\n", $names);
+	
 							//button to see who is attending the event (handled by Ajax script)
 							echo "<div class='attending'>" . form_button('attending', 'See who\'s Attending') . "</div>";
-								
-							echo form_close();
+							?>
+							
+							<!-- jQuery Ajax script for viewing expected attendance of event -->
+							<script type="text/javascript">
+							$(document).ready(function()
+							{
+								$('.attending').click(function()
+								{		
+									people = '<?php echo $names; ?>';
+									eventID = '<?php echo $item; ?>';
+									if(people)			
+										alert("eventID (for debugging): " + eventID + "\n\n" + people);
+									else
+										alert("eventID (for debugging): " + eventID + "\n\nNo confirmed attendees yet");
+								});
+							});
+							</script>
+							
+							<?php			
+							//get group name
+							$groupName = $this->Calendarmodel->getCurrentGroup();
+							$options = null;
+							//get array of members in the group
+							$members = $this->User->get_userlist($groupName);
+							foreach($members as $member)
+							{
+								$options[$member] = $member;
+							}
+							$hidden = array('view_day_request' => 1,
+											'eventID' => $item,
+											'event_day' => $event_day,
+											'event_month' => $event_month,
+											'event_year' => $event_year,
+											'submitInvite' => 1);
+											
+							//dropdown list for inviting group members to event
+							echo form_open($form_path, '', $hidden);
+								echo "<div class='invite'>Invite Members: " . 
+									form_multiselect('userArray[]', $options) . 
+									form_submit('submitInvite', 'Invite') . "</div>";
+							echo form_close();							
 						}
 					}
 					$val += 1;		//increment the even-odd counter
@@ -131,15 +171,9 @@
 						echo "<hr />" . $item2;
 					}	
 					else		//else it's an event ID
-					{		
-						$hidden = array('eventID' => $item2, 
-										'userName' => $userName,
-										'event_month' => $event_month, 
-										'event_day' => $event_day, 
-										'event_year' => $event_year,										
-										'view_day_request' => 1);
-										
-						$statusTmp = $this->db->query("SELECT yes FROM calendar_rsvp WHERE eventID='$item2' AND name='$userName'")->result();
+					{					
+						$statusTmp = $this->db->query("SELECT yes FROM calendar_rsvp WHERE
+														eventID='$item2' AND name='$userName'")->result();
 						$status = null;
 						foreach($statusTmp as $row)
 						{
@@ -188,9 +222,9 @@
 			$hidden = array('view_day_request' => '1');
 			echo form_open($form_path, '', $hidden);
 				echo "<center>View a different day:  ";
-				echo "M:" . form_dropdown('event_month', range(1, 12), $this->pdata['month']-1);			
+				echo "M:" . form_dropdown('event_month', range(1, 12), $event_month);			
 				echo "D:" . form_dropdown('event_day', range(1, cal_days_in_month(CAL_GREGORIAN, 
-											$this->pdata['month'], $this->pdata['year'])), date('j')-1);
+														$event_month, $event_year)), date('j')-1);
 				echo "Y:" . form_dropdown('event_year', $form_years);
 				echo "  " . form_submit('submit', 'View Day') . "</center>";
 			echo form_close();	
@@ -198,83 +232,8 @@
 
 		echo $this->pdata['footer']; 
 	?>
-		
-		
-	<!-- jQuery Ajax script for editing events -->
-	<script type="text/javascript">
-	$(document).ready(function()
-	{
-		$('.edit').click(function()
-		{		
-			submitEdit = 1;
-			eventID = <?php echo $item; ?>;		
-			event_data = prompt("Edit Event: ", '<?php echo $description;?>');
-			event_day = <?php echo $event_day;?>;
-			view_day_request = 1;
-			path = '<?php  echo site_url() . "/calendar/index/" . $event_year . "/" . $event_month; ?>';													
+	
 
-			if(event_data != null)
-			{ 	
-				$.ajax(
-				{
-					url: path,
-					type: "POST",
-					data: 
-					{
-						submitEdit: submitEdit, 
-						eventID: eventID,
-						event_data: event_data,
-						event_day: event_day,
-						view_day_request: view_day_request
-					},
-					success: function(msg)
-					{
-						location.reload();
-					}
-				});
-			}		
-		});
-	});
-	</script>
-	
-	
-	<!-- jQuery Ajax script for inviting group members to an event -->
-	<script type="text/javascript">
-	$(document).ready(function()
-	{
-		$('.invite').click(function()
-		{		
-			submitInvite = 1;
-			eventID = <?php echo $item; ?>;	
-			view_day_request = 1;
-			path = '<?php  echo site_url() . "/calendar/index/" . $event_year . "/" . $event_month; ?>';	
-											
-//STILL NEED TO ADD THE RADIO BUTTONS BESIDE EACH MEMBER'S NAME											
-			members = '<?php echo $members; ?>';
-			who_is_invited = " ";
-			
-			alert(members);
-	
-			$.ajax(
-			{
-				url: path,
-				type: "POST",
-				data: 
-				{
-					submitInvite: submitInvite, 
-					eventID: eventID,
-					who_is_invited: who_is_invited,
-					view_day_request: view_day_request
-				},
-				success: function(msg)
-				{
-					location.reload();
-				}
-			});		
-		});
-	});
-	</script>
-	
 	<!-- jQuery Ajax script for joining an event -->
 	<script type="text/javascript">
 	$(document).ready(function()
@@ -286,7 +245,6 @@
 			event_day = <?php echo $event_day;?>;
 			view_day_request = 1;
 			path = '<?php  echo site_url() . "/calendar/index/" . $event_year . "/" . $event_month; ?>';													
-
 			$.ajax(
 			{
 				url: path,
@@ -337,26 +295,40 @@
 			});		
 		});
 	});
-	</script>
-
-	
-	<!-- jQuery Ajax script for viewing expected attendance of event -->
+	</script>	
+		
+	<!-- jQuery Ajax script for editing events -->
 	<script type="text/javascript">
 	$(document).ready(function()
 	{
-		$('.attending').click(function()
+		$('.edit').click(function()
 		{		
-			people = '<?php foreach($attendees as $row)
-							{
-								array_push($names, $row->name);
-							}
-							//implode the array so it can be displayed
-							echo implode("\\n", $names); 
-						?>';
-			if(people)			
-				alert(people);
-			else
-				alert("No confirmed attendees yet");
+			submitEdit = 1;
+			eventID = <?php echo $item; ?>;		
+			event_data = prompt("Edit Event: ", '<?php echo $description;?>');
+			event_day = <?php echo $event_day;?>;
+			view_day_request = 1;
+			path = '<?php  echo site_url() . "/calendar/index/" . $event_year . "/" . $event_month; ?>';
+			if(event_data != null)
+			{ 	
+				$.ajax(
+				{
+					url: path,
+					type: "POST",
+					data: 
+					{
+						submitEdit: submitEdit, 
+						eventID: eventID,
+						event_data: event_data,
+						event_day: event_day,
+						view_day_request: view_day_request
+					},
+					success: function(msg)
+					{
+						location.reload();
+					}
+				});
+			}		
 		});
 	});
 	</script>	
