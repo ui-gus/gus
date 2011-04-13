@@ -17,7 +17,7 @@
 					</tr>
 					<tr>
 						<?php echo form_open('forum/search_by_user');?>
-							<td width="10%"><strong>By User</strong></td>
+							<td width="10%"><strong>By Author</strong></td>
 							<td width="80%"><input type="text" name="search_criteria" size="80" /></td>
 							<td width="10%"><input type="submit" value="Submit" /></td>
 						</form>
@@ -25,6 +25,13 @@
 					<tr>
 						<?php echo form_open('forum/search_by_topic');?>
 							<td width="14%"><strong>By Topic</strong></td>
+							<td width="84%"><input type="text" name="search_criteria" size="80" /></td>
+							<td width="10%"><input type="submit" value="Submit" /></td>
+						</form>						
+					</tr>
+					<tr>
+						<?php echo form_open('forum/search_by_content');?>
+							<td width="14%"><strong>By Content</strong></td>
 							<td width="84%"><input type="text" name="search_criteria" size="80" /></td>
 							<td width="10%"><input type="submit" value="Submit" /></td>
 						</form>						
