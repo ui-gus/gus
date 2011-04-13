@@ -27,7 +27,7 @@ class Pm extends Controller {
 		$data['main_view'] = 'pm/view_message';
 		$data['user'] = $this->Page->get_un();
 		$data['msg'] = $msg;
-		$data['usernames'] = $this->m_users->list_user_names();
+		$data['usernames'] = $this->User->get_userlist();
 		$this->load->vars($data);
 	}
 
@@ -39,59 +39,68 @@ class Pm extends Controller {
 		$data['messages'] = $this->pm_model->list_messages_to($this->Page->get_uid());
 		$data['usernames'] = $this->User->get_userlist();
 		$this->load->vars($data);
-		$this->load->view('pm/index',$this->pdata,$this->testmode);
+		$this->load->view('pm/index',$this->pdata,$this->testmode);		
+		
 	}
 
 	function sent(){
+		$this->load->model('User');
 		$data['title'] = 'Sent Messages';
 		$data['main_view'] = 'pm/sent';
-		$data['user'] = $_SESSION['logged_in_user'];
-		$data['messages'] = $this->pm_model->list_messages_from($_SESSION['userid']);
-		$data['usernames'] = $this->m_users->list_user_names();
+		$data['user'] = $this->Page->get_un();
+		$data['messages'] = $this->pm_model->list_messages_from($this->Page->get_uid());
+		$data['usernames'] = $this->User->get_userlist();
 		$this->load->vars($data);
+		$this->load->view('template');
 	}	
 
 	function archive(){
+		$this->load->model('User');
 		$data['title'] = 'Your Archives';
 		$data['main_view'] = 'pm/archive';
-		$data['user'] = $_SESSION['logged_in_user'];
-		$data['messages'] = $this->pm_model->list_messages_to($_SESSION['userid'],'archived');
-		$data['usernames'] = $this->m_users->list_user_names();
+		$data['user'] = $this->Page->get_un();
+		$data['messages'] = $this->pm_model->list_messages_to($this->Page->get_uid(),'archived');
+		$data['usernames'] = $this->User->get_userlist();
 		$this->load->vars($data);
 	}
 
 	function compose(){
+		$this->load->model('User');
 		$data['title'] = 'Compose Message';
 		$data['main_view'] = 'pm/compose';
-		$data['user'] = $_SESSION['logged_in_user'];
-		$data['usernames'] = $this->m_users->list_user_names();
+		$data['user'] = $this->Page->get_un();
+		$data['usernames'] = $this->User->get_userlist();
 		$this->load->vars($data);
 	}
 
 	function respond($id){
+		$this->load->model('User');
 		$data['title'] = 'Respond';
 		$data['respondid'] = $id;
 		$data['message'] = $this->pm_model->get_message($id);
 		$data['main_view'] = 'pm/respond';
-		$data['user'] = $_SESSION['logged_in_user'];
-		$data['usernames'] = $this->m_users->list_user_names();
+		$data['user'] = $this->Page->get_un();
+		$data['usernames'] = $this->User->get_userlist();
 		$this->load->vars($data);
 	}
 	
 	
 	function send_message(){
-		$this->pm_model->send_message($_SESSION['userid']);
+		$this->load->model('User');
+		$this->pm_model->send_message($this->Page->get_uid());
 		redirect('pm/index','refresh');
 	
 	}
 	
 	function archive_message($id){
+		$this->load->model('User');
 		$this->pm_model->move_message($id);
 		redirect('pm/index','refresh');
 	
 	}	
 	
 	function inbox_message($id){
+		$this->load->model('User');
 		$this->pm_model->move_message($id,'inbox');
 		redirect('pm/index','refresh');
 	
