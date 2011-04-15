@@ -49,6 +49,7 @@ class Group extends Model {
 		$this->db->select('description');
 		$this->db->where('name',$name);	
 		$result = $this->db->get('ggroup')->result();
+		if(empty($result)) return(false);
 		return($result[0]->description);
 	}
 
@@ -64,6 +65,7 @@ class Group extends Model {
 		$this->db->select('name');
 		$this->db->where('id',$id);	
 		$result = $this->db->get('ggroup')->result();
+		if(empty($result)) return(false);
 		return($result[0]->name);
 	}
 

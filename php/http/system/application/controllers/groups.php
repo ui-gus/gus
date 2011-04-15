@@ -47,7 +47,7 @@ class Groups extends Controller {
 
 	function add() {
 		$this->pdata['default_name'] = $this->pdata['default_description'] = "";
-		if(!empty($_POST)) {
+		if(isset($_POST['name'])) {
 			$this->pdata['default_name'] = $_POST['name'];
 			$this->pdata['default_description'] = $this->Group->get_description($_POST['name']);
 		}
