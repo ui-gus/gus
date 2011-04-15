@@ -113,7 +113,7 @@
 							echo "<div class='attending'>" . form_button('attending', 'See who\'s Attending') . "</div>";
 							?>
 							
-							<!-- jQuery Ajax script for viewing expected attendance of event -->
+							<!-- jQuery script for viewing expected attendance of event -->
 							<script type="text/javascript">
 							$(document).ready(function()
 							{
@@ -121,10 +121,10 @@
 								{		
 									people = '<?php echo $names; ?>';
 									eventID = '<?php echo $item; ?>';
-									if(people)			
+									if(people)										
 										alert("eventID (for debugging): " + eventID + "\n\n" + people);
 									else
-										alert("eventID (for debugging): " + eventID + "\n\nNo confirmed attendees yet");
+										alert("eventID (for debugging): " + eventID + "\n\nNo confirmed attendees");
 								});
 							});
 							</script>
