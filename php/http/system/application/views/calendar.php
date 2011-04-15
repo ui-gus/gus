@@ -15,7 +15,7 @@
 			width: 150px; height: 80px; padding: 4px;
 			border: 3px groove #F4A460;
 			vertical-align: top;
-			background-image: url("<?php echo base_url();?>/templates/calendar_day.PNG");
+			background-image: url("../templates/calendar_day.PNG");
 		}
 		.calendar .weeks td
 		{
@@ -23,7 +23,7 @@
 			font-family: textile, cursive;
 			font-weight: normal;
 			border: none;
-			background-image: url("<?php echo base_url();?>/templates/calendar_week.PNG");
+			background-image: url("../templates/calendar_week.PNG");
 		}
 		table.calendar			
 		{
