@@ -23,8 +23,7 @@
 	.delete{ text-align: right; }
 	.invite{ text-align: center; }
 	.attending{ text-align: right; }
-	.joinEvent{ text-align: left; }
-	.dropEvent{ text-align: left; }
+	.dropJoin{ text-align: left; }
 
 	</style>
 	
@@ -38,9 +37,7 @@
 	<?php 
 		$form_path = site_url() . "/calendar/index/"
 					. $this->pdata['year'] . "/" . $this->pdata['month'];
-		$userName = $this->session->userdata('un');
 		echo $this->pdata['header'];
-		echo "<div class='groupname'>Group Name: " . $this->Calendarmodel->getCurrentGroup() . "</div>";
 		echo "<h3>Events for " . $this->pdata['month'] . "/" . 
 			  $this->pdata['day'] . "/" . $this->pdata['year'] . "</h3>";
 		echo "<center><a href=\"" . site_url() . "/calendar\">&lt;&lt;Back to Month View</a>";
@@ -48,6 +45,7 @@
 
 		if($this->Page->authed())
 		{
+			$userName = $this->session->userdata('un');
 			$event_day = sprintf("%02s", $this->pdata['day']-1);
 			$event_month = sprintf("%02s", $this->pdata['month']-1);
 			$event_year = $this->pdata['year'];
@@ -58,7 +56,10 @@
 			//display each event and supply options
 			if($this->pdata['content'])
 			{			
-				$description = null;		//used by Ajax
+				$names = array(array());
+				$idArray = array();
+				$eventInfo = array(array());		
+				$countIndex = 0;			//index for $eventInfo, $idArray and $names			
 				foreach($this->pdata['content'] as $item)   
 				{
 					//if it's an even numbered index, then it is some event data
@@ -69,6 +70,9 @@
 					}	
 					else	//if $val is not an even number, then it is an event ID
 					{
+						//save the event ID to keep the $idArray and $eventInfo values consistent
+						$idArray[$countIndex] = $item;
+
 						//if it's a group event and the user isn't an admin
 						if( strcmp($item, "notAdm") == 0 )
 							echo "<div class='edit'>(Group Event)</div><br><br>";
@@ -87,7 +91,7 @@
 							foreach($tmp as $row)
 							{
 								//save the value so ajax can use it
-								$description = $row->data;	
+								$eventInfo[$countIndex]['event'] = $row->data;		
 							}
 								
 							//button to edit an event (handled by Ajax script)
@@ -97,39 +101,34 @@
 							echo "<div class='delete'>" . form_open($form_path, '', $hidden);	
 								echo form_submit('submitDelete', 'Delete') . "</div>";
 							echo form_close();
-							
-							//create an array of confirmed attendees
-							$names = array();	
-							$attendees = $this->db->query("SELECT name FROM calendar_rsvp WHERE 
-															eventID='$item' AND yes='1'")->result();
-							foreach($attendees as $row)
+														
+							//check for confirmed attendees
+							$attendees = $this->db->query("SELECT name, yes FROM calendar_rsvp 
+															WHERE eventID='$item'")->result();
+							if($attendees)
 							{
-								array_push($names, $row->name);
+								$countIndex2D = 0;
+								foreach($attendees as $row)
+								{									
+									if($row->name)
+									{
+										//set flag to show that people have been invited
+										$eventInfo[$countIndex]['inviteFlag'] = 1;
+										if($row->yes)
+										{
+											//create the array to show who accepted the invite
+											$names[$countIndex][$countIndex2D] = $row->name;
+											$countIndex2D += 1;
+											//set flag to show that at least one person RSVP'd
+											$eventInfo[$countIndex]['yesFlag'] = 1;
+										}
+									}
+								}
 							}
-							//implode the array so it can be displayed
-							$names = implode("\\n", $names);
 	
 							//button to see who is attending the event (handled by Ajax script)
 							echo "<div class='attending'>" . form_button('attending', 'See who\'s Attending') . "</div>";
-							?>
 							
-							<!-- jQuery script for viewing expected attendance of event -->
-							<script type="text/javascript">
-							$(document).ready(function()
-							{
-								$('.attending').click(function()
-								{		
-									people = '<?php echo $names; ?>';
-									eventID = '<?php echo $item; ?>';
-									if(people)										
-										alert("eventID (for debugging): " + eventID + "\n\n" + people);
-									else
-										alert("eventID (for debugging): " + eventID + "\n\nNo confirmed attendees");
-								});
-							});
-							</script>
-							
-							<?php			
 							//get group name
 							$groupName = $this->Calendarmodel->getCurrentGroup();
 							$options = null;
@@ -155,13 +154,23 @@
 						}
 					}
 					$val += 1;		//increment the even-odd counter
+					if($val%2 == 0)
+						$countIndex += 1;		//increment the index					
 				}
+				//make the arrays javascript friendly		
+				$jsonIdArray = json_encode($idArray);					
+				//$jsonNames and $jsonEventInfo are 2D arrays
+				$jsonNames = json_encode(json_encode($names));
+				$jsonEventInfo = json_encode(json_encode($eventInfo));	
 			}
+			
 			
 			//display the events the user is invited to on the specified day
 			if($this->pdata['invite'])
 			{
+				$idArray2 = array(array());		//initialize arrays used by Ajax							
 				$val = 0;
+				$countIndex = 0;
 				foreach($this->pdata['invite'] as $item2)
 				{
 					//if it's an even numbered index, then it is some event data
@@ -172,26 +181,32 @@
 					}	
 					else		//else it's an event ID
 					{					
-						$statusTmp = $this->db->query("SELECT yes FROM calendar_rsvp WHERE
-														eventID='$item2' AND name='$userName'")->result();
-						$status = null;
+						$idArray2[$countIndex]['id'] = $item2;	//save the event ID		
+						
+						$statusTmp = $this->db->query("SELECT yes, no FROM calendar_rsvp 
+														WHERE (eventID='$item2' AND name='$userName')")->result();
 						foreach($statusTmp as $row)
-						{
-							$status = $row->yes;
+						{		
+							if($row->yes)
+							{
+								//user has accepted the invite
+								$idArray2[$countIndex]['answer'] = "1";	
+								//show button to drop event (handled by Ajax)
+								echo "<div class='dropJoin'>" . form_button('', 'Drop') . "</div>";					
+							}	
+							else if($row->no)	
+							{
+								$idArray2[$countIndex]['answer'] = "0";
+								//show button to join event (handled by Ajax)
+								echo "<div class='dropJoin'>" . form_button('', 'Join') . "</div>";
+							}												
 						}
-						//button to drop an event    (handled by Ajax)
-						if($status == 1)
-						{
-							echo "<div class='dropEvent'>" . form_button('submitDrop', 'Drop') . "</div>";
-						}
-						//button to join an event (handled by Ajax)
-						else		
-						{
-							echo "<div class='joinEvent'>" . form_button('submitJoin', 'Join') . "</div>";
-						}
+						$countIndex += 1;		//increment the index
 					}
-					$val += 1;		//increment the even-odd counter
+					$val += 1;		//increment the even-odd counter					
 				}
+				//make the 2D array javascript friendly
+				$jsonIdArray2 = json_encode(json_encode($idArray2));
 			}
 			echo "<hr /></div>";			//end of background class
 			
@@ -233,83 +248,82 @@
 		echo $this->pdata['footer']; 
 	?>
 	
-
-	<!-- jQuery Ajax script for joining an event -->
-	<script type="text/javascript">
-	$(document).ready(function()
-	{
-		$('.joinEvent').click(function()
-		{		
-			submitJoin = 1;
-			eventID = <?php echo $item2; ?>;		
-			event_day = <?php echo $event_day;?>;
-			view_day_request = 1;
-			path = '<?php  echo site_url() . "/calendar/index/" . $event_year . "/" . $event_month; ?>';													
-			$.ajax(
-			{
-				url: path,
-				type: "POST",
-				data: 
-				{
-					submitJoin: submitJoin, 
-					eventID: eventID,
-					event_day: event_day,
-					view_day_request: view_day_request
-				},
-				success: function(msg)
-				{
-					location.reload();
-				}
-			});	
-		});
-	});
-	</script>
 	
-	<!-- jQuery Ajax script for dropping event -->
+	<!-- jQuery Ajax script for dropping and joining events -->
 	<script type="text/javascript">
-	$(document).ready(function()
-	{
-		$('.dropEvent').click(function()
-		{		
-			submitDrop = 1;
-			eventID = <?php echo $item2; ?>;		
-			event_day = <?php echo $event_day;?>;
-			view_day_request = 1;
-			path = '<?php  echo site_url() . "/calendar/index/" . $event_year . "/" . $event_month; ?>';			
+	$('.dropJoin').each(function(i)
+	{	
+		event_day = <?php echo $event_day;?>;
+		view_day_request = 1;
+		path = '<?php  echo site_url() . "/calendar/index/" . $event_year . "/" . $event_month; ?>';	
+		//idAndAnswer is a 2D array
+		idAndAnswer = $.parseJSON(<?php echo $jsonIdArray2; ?>);	
 
-			$.ajax(
+		$(this).click(function()
+		{	
+			//note: brackets have to be used for the integer index, and period for the string index
+			//(if both indexes were strings, it would be idAndAnswer.i.answer)
+			if(idAndAnswer[i].answer == 1)
 			{
-				url: path,
-				type: "POST",
-				data: 
+				$.ajax(
 				{
-					submitDrop: submitDrop, 
-					eventID: eventID,
-					event_day: event_day,
-					view_day_request: view_day_request
-				},
-				success: function(msg)
+					url: path,
+					type: "POST",
+					data: 
+					{
+						submitDrop: 1, 
+						eventID: idAndAnswer[i].id,
+						event_day: event_day,
+						view_day_request: view_day_request
+					},
+					success: function(msg)
+					{
+						location.reload();
+					}
+				});	
+			}
+			else
+			{
+				$.ajax(
 				{
-					location.reload();
-				}
-			});		
+					url: path,
+					type: "POST",
+					data: 
+					{
+						submitJoin: 1, 
+						eventID: idAndAnswer[i].id,
+						event_day: event_day,
+						view_day_request: view_day_request
+					},
+					success: function(msg)
+					{
+						location.reload();
+					}
+				});
+			}
 		});
 	});
 	</script>	
-		
+	
+	
 	<!-- jQuery Ajax script for editing events -->
 	<script type="text/javascript">
-	$(document).ready(function()
-	{
-		$('.edit').click(function()
-		{		
-			submitEdit = 1;
-			eventID = <?php echo $item; ?>;		
-			event_data = prompt("Edit Event: ", '<?php echo $description;?>');
-			event_day = <?php echo $event_day;?>;
-			view_day_request = 1;
-			path = '<?php  echo site_url() . "/calendar/index/" . $event_year . "/" . $event_month; ?>';
-			if(event_data != null)
+	$('.edit').each(function(i)
+	{	
+		submitEdit = 1;
+		event_day = <?php echo $event_day;?>;		
+		view_day_request = 1;
+		path = '<?php  echo site_url() . "/calendar/index/" . $event_year . "/" . $event_month; ?>';
+		//descripArray is a 2D array
+		descripArray = $.parseJSON(<?php echo $jsonEventInfo; ?>);
+		eventIdArr = <?php echo $jsonIdArray; ?>;	
+		eventArray = {};
+		
+		$(this).click(function()
+		{	
+			eventArray[i] = prompt("Edit Event: ", descripArray[i].event);
+							
+			if(eventArray[i] != null)
 			{ 	
 				$.ajax(
 				{
@@ -318,8 +332,8 @@
 					data: 
 					{
 						submitEdit: submitEdit, 
-						eventID: eventID,
-						event_data: event_data,
+						eventID: eventIdArr[i],
+						event_data: eventArray[i],
 						event_day: event_day,
 						view_day_request: view_day_request
 					},
@@ -332,6 +346,35 @@
 		});
 	});
 	</script>	
+	
+	
+	<!-- jQuery script for viewing expected attendance of event -->
+	<script type="text/javascript">
+	$('.attending').each(function(i)
+	{	
+		//2D array of attendees
+		peopleArr = $.parseJSON(<?php echo $jsonNames; ?>);			
+		//2D array of event info
+		eventArr = $.parseJSON(<?php echo $jsonEventInfo; ?>);	
+		listAttendees = "";
+		
+		$(this).click(function()
+		{
+			for(j in peopleArr[i])
+			{
+				//add newlines
+				listAttendees = listAttendees + "\n" + peopleArr[i][j];
+			}
+			
+			if(!eventArr[i].inviteFlag)
+				alert("Event: " + eventArr[i].event + "\n\nYou haven\'t invited anyone to this event");		
+			else if(eventArr[i].yesFlag)
+				alert("Event: " + eventArr[i].event + "\n\nConfirmed attendees:" + listAttendees);			
+			else
+				alert("Event: " + eventArr[i].event + "\n\nNo confirmed attendees yet");					
+		});
+	});
+	</script>
 	
 </body>
 </html>
