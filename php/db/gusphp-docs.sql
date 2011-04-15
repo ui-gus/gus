@@ -1,0 +1,22 @@
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+
+CREATE TABLE IF NOT EXISTS `files` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `filename` text NOT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `gid` int(11) DEFAULT NULL,
+  `date` int(11) DEFAULT NULL,
+  `size` float DEFAULT NULL,
+  `perm` int(11) DEFAULT '7',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+
+INSERT INTO `files` (`id`, `filename`, `uid`, `gid`, `date`, `size`, `perm`) VALUES
+(27, '9j31F.jpg', 13, 5, 20110415, 52.48, 7),
+(32, 'magikarp-swear.gif', 13, 5, 20110415, 8.15, 7);
