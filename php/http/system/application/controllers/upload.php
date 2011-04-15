@@ -22,6 +22,11 @@ class Upload extends Controller {
 
 	function index()
 	{
+		if( !$this->Page->authed() )
+		{
+			header( 'Location: home' ); //Reload the page
+		}
+		else {
 		if($this->testmode == 'false') { //Don't load page view if we're in testmode
                 $this->pdata['header'] = $this->Page->get_header('Upload'); //load header
                 $this->pdata['content'] = $this->Page->get_content('upload'); //load content
@@ -36,11 +41,17 @@ class Upload extends Controller {
 		  $data = array('error' => ' ', 'grouplist' => $grouplist);
 
 		  $this->load->view('upload_form', $data); } //Pass everything to the view
+		}
 		return(true);
 	}
 
 	function do_upload()
 	{
+		if( !$this->Page->authed() )
+		{
+			header( 'Location: ../home' ); //Reload the page
+		}
+		else {
 		/*File upload settings are in config/upload.php*/
 		$this->load->library('upload'); //Load CI's upload helper
 		{
@@ -117,10 +128,16 @@ class Upload extends Controller {
 				return('success');
 			}
 		}
+		}
 	}
 
 	function test()
 	{
+		if( !$this->Page->authed() )
+		{
+			header( 'Location: ../home' ); //Reload the page
+		}
+		else {
 		//Test the functions
 		$page_name = 'upload';
 		$this->load->library('unit_test');
@@ -136,6 +153,6 @@ class Upload extends Controller {
 		echo $this->unit->run($this->do_upload(), '<p>The filetype you are attempting to upload is not allowed.</p>', 'do_upload - bad file type');
 		echo $this->unit->run($this->do_upload(), 'success', 'do_upload - success');
 */
-	}
+	}}
 }
 ?>
