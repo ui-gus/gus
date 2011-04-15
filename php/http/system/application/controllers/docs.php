@@ -15,6 +15,8 @@ class Docs extends Controller {
 	{
 		parent::Controller();
 		$this->load->model('Page');  //Use page model as base
+		$this->load->model('User');
+		$this->load->model('Group');
 		$this->load->helper('form'); //CI's built in form helper
               $this->pdata['footer'] = $this->Page->get_footer(); //Set the footer
 		$this->testmode = 'false';
@@ -30,12 +32,25 @@ class Docs extends Controller {
 	3. Check user's permission level against each file, displaying only the appropriate ones
 	*/
 	function index() 
-	{
+	{		
 		if ($this->testmode == 'false') 
 		{ //Don't load the page views if we're testing
                 $this->pdata['header'] = $this->Page->get_header('Docs'); //Set the header
                 $this->pdata['content'] = $this->Page->get_content('docs'); //Pull the content from the database
+		  $un = $this->session->userdata('un');
+		  $uid = $this->User->get_id($un);
+		  $this->pdata['grouplist'] = $this->db->get_where( 'usergroup', array('uid' => $uid) )->result_array();
 		  $this->load->view('docs', $this->pdata); //Load the docs view
+		//Get user infos
+/*
+		  $un = $this->session->userdata('un');
+		  $uid = $this->User->get_id($un);
+		  $grouplist = $this->db->get_where( 'usergroup', array('uid' => $uid) )->result_array();
+		foreach ( $grouplist as $key )
+		{
+			//echo $key['gid']; //gid
+			$this->Group->get_name($key['gid']) //name
+		}*/
 		}
 		return('true');
 	}
@@ -99,12 +114,16 @@ class Docs extends Controller {
 
 	function deleteFile()
 	{
-	$file = "uploads/" . $_POST['file'];  //Location of the file on the server; $_POST['file'] given from a form
-	unlink($file);   //Delete the file from the server
-	//Get thumbnail too
-	$file = "uploads/thumbs/tn_" . $_POST['file'];
-	unlink($file);
-	header( 'Location: ../docs' ); //Reload the page
+		$file = "uploads/" . $_POST['file'];  //Location of the file on the server; $_POST['file'] given from a form
+		unlink($file);   //Delete the file from the server
+		//Get thumbnail too
+		$file = "uploads/thumbs/tn_" . $_POST['file'];
+		unlink($file);
+		//And let's not forget the database
+		$this->load->database('default', TRUE);
+		$this->db->where('filename',$_POST['file']);
+		$this->db->delete('files');
+		header( 'Location: ../docs' ); //Reload the page
 	}
 
 
@@ -131,7 +150,7 @@ class Docs extends Controller {
 
 
 	/*
-	organizeFiles
+	modifyFile and do_modify()
 	General outline of the use case; used for reference.
 	This function brings up a new menu that allows a user to organize, rename, and control access to files
 	Steps
@@ -140,10 +159,49 @@ class Docs extends Controller {
 	3. User organizes files.
 	4. User finishes organizing files.
 	*/
-
-	function organizeFiles() 
+	//Load view to get infos from user
+	function modifyFile() 
 	{
-	//WIP
+	if ($this->testmode == 'false')
+		{
+			$this->pdata['header'] = $this->Page->get_header('Docs'); //Set the header
+                	$this->pdata['content'] = $this->Page->get_content('docs'); //Pull the content from the database
+			$this->load->view('modify_doc', $this->pdata);
+		}
+	}
+	//Do the actual modifying
+	function do_modify()
+	{
+	if ($this->testmode == 'false')
+		{
+		//Set up view
+		$this->pdata['header'] = $this->Page->get_header('Docs'); //Set the header
+              $this->pdata['content'] = $this->Page->get_content('docs'); //Pull the content from the database
+		$this->load->view('modify_doc', $this->pdata);
+
+		//echo $_POST['new_name']; //new name
+		//echo $_POST['file']; //old name
+		//echo $_POST['perm']; //permission level for file
+
+		//Build new file entry for database
+		//$data = array('filename'=>$_POST['new_name'], 'perm'=> $_POST['perm']);
+		$data = array('perm'=> $_POST['perm']);
+		
+		//update database
+		$this->load->database('default', TRUE);
+		$this->db->where('filename',$_POST['file']);
+		$this->db->update('files',$data);
+		
+		//rename file
+		//$oldpath = "../../uploads/" . $_POST['file'];
+		//$newpath = "../../uploads/" . $_POST['new_name'];
+		//echo $oldpath;
+		//echo $newpath;
+		//move_uploaded_file($oldpath , $newpath);
+
+		//Return to docs
+		header( 'Location: ../docs' ); 
+		}
 	}
 
 	function test() 
@@ -161,7 +219,7 @@ class Docs extends Controller {
 		//Delete
               	echo $this->unit->run($this->deleteFile(), true, 'deleteFile docs');
 		//Organize files
-              	echo $this->unit->run($this->organizeFiles(), true, 'organizeFiles docs');
+              	echo $this->unit->run($this->modifyFiles(), true, 'organizeFiles docs');
 	}
 }
 ?>
