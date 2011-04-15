@@ -2,28 +2,37 @@
 
 //needs threading for responses/etc
 
-echo heading("Your Inbox",2);
-echo anchor("pm/index", "inbox") . nbs(2) . "|" . nbs(2);
-echo anchor("pm/sent", "sent") . nbs(2) . "|" . nbs(2);
+echo $this->pdata['header'];
+
+echo "<font size =6 color = '#474747'>Your Inbox</font>";
+
+echo "<br /><br />";
+
+echo anchor("pm/index", "inbox   |") ;
+echo anchor("pm/sent", "sent   |");
 echo anchor("pm/archive", "archives");
 
-echo br(2);
+echo "<br /><br />";
+
+
 echo "Subject: <b>". $msg->subject ."</b>";
-echo br();
-echo "From: ". $usernames[$msg->from_id];
-echo br();
+echo "<br /><br />";
+
+echo "From: ". $this->user->get_name($msg->from_id);
+echo "<br /><br />";
+
 echo "To: ". $usernames[$msg->to_id];
-echo br();
+echo "<br /><br />";
+
 echo "Sent: ". $msg->created;
-echo br(2);
-echo auto_typography($msg->message);
-echo br();
-echo anchor("pm/respond/".$msg->id, "respond");
-echo nbs(2) . "|" . nbs(2);
-echo anchor("pm/inbox_message/".$msg->id, "move to inbox"); 
-echo nbs(2) . "|" . nbs(2);
+echo "<br /><br />";
+
+echo "Message: ". $msg->message;
+echo "<br /><br />";
+
+echo anchor("pm/respond/".$msg->id, "respond   |");
+echo anchor("pm/inbox_message/".$msg->id, "move to inbox   |"); 
 echo anchor("pm/archive_message/".$msg->id, "archive this"); 
-echo "<hr/>";
-echo br();
+echo $this->pdata['footer'];
 
 ?>

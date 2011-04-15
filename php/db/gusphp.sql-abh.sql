@@ -83,19 +83,18 @@ DROP TABLE IF EXISTS `messages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `messages` (
-`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`respond_id` INT NULL ,
-`from_id` INT NOT NULL ,
-`to_id` INT NOT NULL ,
-`subject` VARCHAR( 64 ) NOT NULL ,
-`message` VARCHAR( 255 ) NOT NULL ,
-`location` ENUM( 'inbox', 'sent', 'archived' ) NOT NULL ,
-`created` TIMESTAMP NOT NULL
-) ENGINE = MYISAM ;
+  `id` int(11) NOT NULL auto_increment,
+  `respond_id` int(11) default NULL,
+  `from_id` int(11) NOT NULL,
+  `to_id` int(11) NOT NULL,
+  `subject` varchar(64) collate utf8_unicode_ci NOT NULL,
+  `message` varchar(255) collate utf8_unicode_ci NOT NULL,
+  `location` enum('inbox','sent','archived') collate utf8_unicode_ci NOT NULL,
+  `created` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 /*!40101 SET character_set_client = @saved_cs_client */;
-
-INSERT INTO `messages` VALUES (1,0,1,0,'test','test','inbox','2011-02-10 20:13:09');
 
 --
 -- Dumping data for table `messages`
@@ -103,6 +102,7 @@ INSERT INTO `messages` VALUES (1,0,1,0,'test','test','inbox','2011-02-10 20:13:0
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
+INSERT INTO `messages` VALUES (1,0,1,0,'test','test','inbox','2011-02-10 20:13:09');
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 

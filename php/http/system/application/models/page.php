@@ -87,6 +87,7 @@ class Page extends Model {
 		<div id=\"group_column\">
 			<ul>
 				<li><a href=\"" . site_url() . "/home\">Home</a></li>
+				<li><a href=\"" . site_url() . "/pm/compose\">Compose</a></li>
 				<li><a href=\"" . site_url() . "/search\">Search</a></li>
 				<li><a href=\"" . site_url() . "/grouppage	\">Groups</a> 
 				<li><a href=\"#\">Help</a></li>

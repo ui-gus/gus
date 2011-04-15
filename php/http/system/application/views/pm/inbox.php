@@ -2,17 +2,25 @@
 
 //needs threading for responses/etc
 
-echo heading("Your Inbox",2);
-echo "inbox" . nbs(2) . "|" . nbs(2);
-echo anchor("pm/sent", "sent") . nbs(2) . "|" . nbs(2);
+echo $this->pdata['header'];
+echo $this->pdata['content'];
+
+echo "<font size =6 color = '#474747'>Your Inbox</font>";
+
+echo "<br /><br />";
+
+echo "inbox   |";
+echo anchor("pm/sent", "sent   |");
 echo anchor("pm/archive", "archives");
+
+echo "<br /><br />";
+
 $TABLE = array();
 
 //time format!
 $format = "%m/%d/%Y %h:%i %a";
 
 
-echo br(2);
 if (count($messages)){
 	foreach ($messages as $key => $msg){
 		$stamp = mysql_to_unix($msg->created);
@@ -33,9 +41,13 @@ if (count($messages)){
 	
 	echo $this->table->generate($pretty);
 
+}
 
-}else{
+else{
 	echo "No messages in inbox!";
 
 }
+
+echo $this->pdata['footer'];
+
 ?>
