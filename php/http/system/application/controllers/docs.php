@@ -33,6 +33,11 @@ class Docs extends Controller {
 	*/
 	function index() 
 	{		
+		if( !$this->Page->authed() )
+		{
+			header( 'Location: home' ); //Reload the page
+		}
+		else {
 		if ($this->testmode == 'false') 
 		{ //Don't load the page views if we're testing
                 $this->pdata['header'] = $this->Page->get_header('Docs'); //Set the header
@@ -51,6 +56,7 @@ class Docs extends Controller {
 			//echo $key['gid']; //gid
 			$this->Group->get_name($key['gid']) //name
 		}*/
+		}
 		}
 		return('true');
 	}
@@ -76,9 +82,6 @@ class Docs extends Controller {
 	+ If the file is too large, the user will receive an error
 		+ Maximum file size is determined by the Gus admin and may be restricted due to server memory
 	*/
-	function uploadFile()
-	{
-	}
 
 
 	/*
@@ -94,11 +97,17 @@ class Docs extends Controller {
 
 	function downloadFile()
 	{
-	$this->load->helper('download');  //Load CI's download helper
-	$location = "uploads/" . $_POST['file']; //Set the location for file on the server
-	$data = file_get_contents($location); // Read the file's contents
-	$name = $_POST['file'];  //Name file will be downloaded as will be the same as the one on ther server
-	force_download($name, $data); //Force the user to download the file rather than displaying it
+	if( !$this->Page->authed() )
+		{
+			header( 'Location: ../home' ); //Reload the page
+		}
+	else {
+		$this->load->helper('download');  //Load CI's download helper
+		$location = "uploads/" . $_POST['file']; //Set the location for file on the server
+		$data = file_get_contents($location); // Read the file's contents
+		$name = $_POST['file'];  //Name file will be downloaded as will be the same as the one on ther server
+		force_download($name, $data); //Force the user to download the file rather than displaying it
+	     }
 	}
 
 
