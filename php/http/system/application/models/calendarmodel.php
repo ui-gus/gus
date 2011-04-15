@@ -114,17 +114,27 @@ class Calendarmodel extends Model
 				$eventDate = null;
 				$eventData = null;
 				$result = $this->db->query("SELECT user, date, data FROM calendar WHERE eventID='$eventID'")->result();
-				foreach($result as $xyz)
+				//if the event still exists
+				if($result)
 				{
-					$eventOwner = $xyz->user;
-					$eventDate = $xyz->date;
-					$eventData = $xyz->data;
+					foreach($result as $xyz)
+					{
+						$eventOwner = $xyz->user;
+						$eventDate = $xyz->date;
+						$eventData = $xyz->data;
+					}
+					//add the event to the array of events
+					if($eventDate == $date)
+					{
+						array_push($invite_data, "<big>&#8226</big>" . $eventData . "\t(invited by " . $eventOwner . ")");
+						array_push($invite_data, ($eventID));
+					}
 				}
-				//add the event to the array of events
-				if($eventDate == $date)
+				//if the event does not exist
+				else
 				{
-					array_push($invite_data, "<big>&#8226</big>" . $eventData . "\t(invited by " . $eventOwner . ")");
-					array_push($invite_data, ($eventID));
+					//clean up the calendar_rsvp table
+					$this->db->query("DELETE FROM calendar_rsvp WHERE eventID='$eventID'");
 				}
 			}
 		}		
