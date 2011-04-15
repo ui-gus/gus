@@ -220,7 +220,7 @@
 				//check if user is admin
 				if($this->Page->is_user_admin())
 				{
-					echo "<center>Add New Event: " . form_input('event_data') .
+					echo "<center><b>Add New Event:</b> " . form_input('event_data') .
 						form_submit('AddForSelf', 'Add For You') . form_submit('AddForGroup', 
 						'Add For Group') . "</center>";
 				}
@@ -230,13 +230,15 @@
 						. "</center>";
 				}
 			echo form_close();
+			echo "<center><i><font color='blue'>For events that you are invited to: If they disappear after adding ";
+			echo "a new event,<br> go back to Month View and click on the date to make them re-appear.</font></i></center>"; 
 			echo"<br><hr />";
 			
 			//form to view a different day
 			$form_years = array_combine(range(date('Y'), date('Y')+10), range(date('Y'), date('Y')+10));
 			$hidden = array('view_day_request' => '1');
 			echo form_open($form_path, '', $hidden);
-				echo "<center>View a different day:  ";
+				echo "<center><b>View a different day:</b>  ";
 				echo "M:" . form_dropdown('event_month', range(1, 12), $event_month);			
 				echo "D:" . form_dropdown('event_day', range(1, cal_days_in_month(CAL_GREGORIAN, 
 														$event_month, $event_year)), date('j')-1);
@@ -364,15 +366,15 @@
 			for(j in peopleArr[i])
 			{
 				//add newlines
-				listAttendees = listAttendees + "\n" + peopleArr[i][j];
+				listAttendees = listAttendees + peopleArr[i][j] + "\n";
 			}
 			
 			if(!eventArr[i].inviteFlag)
-				alert("Event: " + eventArr[i].event + "\n\nYou haven\'t invited anyone to this event");		
+				alert("Event:  " + eventArr[i].event + "\n\nYou haven\'t invited anyone to this event");		
 			else if(eventArr[i].yesFlag)
-				alert("Event: " + eventArr[i].event + "\n\nConfirmed attendees:" + listAttendees);			
+				alert("Event:  " + eventArr[i].event + "\n\nConfirmed attendees:\n" + listAttendees);			
 			else
-				alert("Event: " + eventArr[i].event + "\n\nNo confirmed attendees yet");					
+				alert("Event:  " + eventArr[i].event + "\n\nNo confirmed attendees yet");					
 		});
 	});
 	</script>

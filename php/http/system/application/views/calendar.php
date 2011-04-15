@@ -60,7 +60,7 @@
 		//if user is logged in, display a form to add an event
 		if($this->Page->authed())
 		{
-			echo "<div class='groupname'>Group Name: " . $this->Calendarmodel->getCurrentGroup() . "</div>";
+			echo "<div class='groupname'>Currently logged on to: " . $this->Calendarmodel->getCurrentGroup() . "</div>";
 			echo $this->pdata['content'];
 			//set the path that the forms going to route to 
 			$form_path = site_url() . "/calendar/index/" . $this->pdata['year']
@@ -69,14 +69,14 @@
 			$form_years = array_combine(range(date('Y'),date('Y')+10), 
 										range(date('Y'),date('Y')+10));
 			
-			echo "<center><i>&#8226 To ADD/VIEW events, either go to day view or";
+			echo "<center><i>&#8226 To ADD/VIEW events, either click on a calendar day or";
 			echo " use the options below";
-			echo "<br>&#8226 To EDIT/INVITE/JOIN/DROP/DELETE events, go to day view";
+			echo "<br>&#8226 To EDIT/INVITE/JOIN/DROP/DELETE events, click on a calendar day";
 			echo "<br>&#8226<font color='blue'>Group events are in blue</font><p></p></i></center>";
 
 			//form to add an event to the calendar
 			echo form_open($form_path);
-				echo "<b>Event Description:</b>" . form_input('event_data') . "<br>";
+				echo "<b>Add New Event:</b>" . form_input('event_data') . "<br>";
 				echo "Month:" . form_dropdown('event_month', range(1, 12), $this->pdata['month']-1);			
 				echo "Day:" . form_dropdown('event_day', range(1, cal_days_in_month(CAL_GREGORIAN, 
 										$this->pdata['month'], $this->pdata['year'])), date('j')-1);
@@ -94,7 +94,7 @@
 			//form to view a specific day
 			$hidden = array('view_day_request' => '1');
 			echo form_open($form_path, '', $hidden);
-				echo "<p><b>View a day to Add/Edit/Delete events: </b>";
+				echo "<p><b>View A Day: </b>";
 				echo "<br> Month:" . form_dropdown('event_month', range(1, 12), $this->pdata['month']-1);			
 				echo "Day:" . form_dropdown('event_day', range(1, cal_days_in_month(CAL_GREGORIAN, 
 										$this->pdata['month'], $this->pdata['year'])), date('j')-1);
