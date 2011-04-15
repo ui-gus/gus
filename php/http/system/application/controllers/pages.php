@@ -22,7 +22,7 @@ class Pages extends Controller {
 		$this->pdata['header'] = $this->Page->get_header($page_name);
 		$this->pdata['content'] = $this->Page->get_content($page_name); 
 		$this->pdata['footer'] = $this->Page->get_footer();
-		$this->pdata['tinyMCE'] = $this->tinyMCE->outputJScript(array("newpagecontent"),2);
+		$this->pdata['tinyMCE'] = $this->tinyMCE->outputJScript(array("newpagecontent"),1);
 	}
 
 	//used for class wide reroute to login if not authed

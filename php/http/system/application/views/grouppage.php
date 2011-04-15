@@ -2,21 +2,35 @@
 
 <?php 
 //"<img src=\"".base_url()."/templates/group_label.png\" class=\"side\">" 
-echo "<div class=\"update\">"
-  ;
+
 ?>
 
 <?php 
 if( $authed ){
-  echo "<u>All Groups</u><br>"
+ 
+  echo ""
+    . "<table id=\"t2\"><tr>" 
+    . "<td><h2>My Groups</h2><br>"
     ;
- foreach( $groups as $group ):{
-    //Display all groups and link to their group/view.
-    echo anchor('grouppage/view/'.$this->Group->get_id($group) , $group)
-      ."<br>"
+ foreach( $grouplist as $key ):{
+    echo "<br>"
+      . anchor('grouppage/view/'.$key['gid'] , 
+	       $this->Group->get_name($key['gid']))
       ;
   }
   endforeach;
+  echo "</td>";
+  
+  echo "<td><h2>All Groups</h2><br>"
+    ;
+ foreach( $groups as $group ):{
+    //Display all groups and link to their group/view.
+    echo "<br>"
+      . anchor('grouppage/view/'.$this->Group->get_id($group) , $group)
+      ;
+  }
+  endforeach;
+  echo "</td></tr></table>";
  }
  else{
    echo "You must be logged in to view this page.";
@@ -24,7 +38,7 @@ if( $authed ){
 ?>
 
 <?php 
-echo "</div>";
+
 ?>
  
 <?php echo $footer ?>

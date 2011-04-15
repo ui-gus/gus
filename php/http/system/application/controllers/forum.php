@@ -115,7 +115,17 @@ class Forum extends Controller
 		$this->pdata['content'] = $this->Page->get_content('forum');
 		$this->load->view('/forum/forum_search_results_view', $this->fdata, $this->pdata);			
 	}	
+	function search_by_content()
+	{
+		$this->search_criteria = $_POST['search_criteria'];
+		
+		$this->db->like('thread_body', $this->search_criteria);
+	    $this->fdata['query'] = $this->db->get_where('threads', array('group_id' => $this->session->userdata('group_id')));
 	
+		$this->pdata['header'] = $this->Page->get_header('forum');	
+		$this->pdata['content'] = $this->Page->get_content('forum');
+		$this->load->view('/forum/forum_search_results_view', $this->fdata, $this->pdata);			
+	}	
   
   
     //takes thread id and pulls the topic and the body data from the database and puts it in fdata
@@ -174,6 +184,7 @@ class Forum extends Controller
     //inserts a new thread into the database using the group_id, the current time, and the current user.
 	function thread_insert()
 	{
+		if ($_POST['thread_topic'] != '');
 		$_POST['group_id']=$this->session->userdata('group_id');
 		$_POST['datetime']=date("d/M/Y h:i:s");
 		$_POST['thread_author'] = $this->session->userdata['un'];

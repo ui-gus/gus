@@ -47,7 +47,6 @@ class tinyMCE extends Model{
 							theme : \"advanced\",	
 							theme_advanced_buttons1 : \"bold,italic,underline,|,justifyleft,justifycenter,justifyright,|,fontselect,fontsizeselect,formatselect\",
 							theme_advanced_buttons2 : \"bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink,image\",  
-							theme_advanced_buttons3 : \"\",
 							theme_advanced_toolbar_location : \"bottom\",
 							theme_advanced_toolbar_align : \"left\",
 							theme_advanced_resizing : false

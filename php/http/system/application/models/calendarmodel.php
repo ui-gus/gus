@@ -114,17 +114,27 @@ class Calendarmodel extends Model
 				$eventDate = null;
 				$eventData = null;
 				$result = $this->db->query("SELECT user, date, data FROM calendar WHERE eventID='$eventID'")->result();
-				foreach($result as $xyz)
+				//if the event still exists
+				if($result)
 				{
-					$eventOwner = $xyz->user;
-					$eventDate = $xyz->date;
-					$eventData = $xyz->data;
+					foreach($result as $xyz)
+					{
+						$eventOwner = $xyz->user;
+						$eventDate = $xyz->date;
+						$eventData = $xyz->data;
+					}
+					if($eventDate == $date)
+					{
+						//add the event to the array of events
+						array_push($invite_data, "<big>&#8226</big>" . $eventData . "\t(invited by " . $eventOwner . ")");
+						array_push($invite_data, ($eventID));
+					}
 				}
-				//add the event to the array of events
-				if($eventDate == $date)
+				//if the event does not exist
+				else
 				{
-					array_push($invite_data, "<big>&#8226</big>" . $eventData . "\t(invited by " . $eventOwner . ")");
-					array_push($invite_data, ($eventID));
+					//clean up the calendar_rsvp table
+					$this->db->query("DELETE FROM calendar_rsvp WHERE eventID='$eventID'");
 				}
 			}
 		}		
@@ -139,7 +149,7 @@ class Calendarmodel extends Model
 		//update the event for the user if it exists already, otherwise add it
 		if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
 		{
-			//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
+//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
 			return $this->db->query("UPDATE calendar SET data='$event', 
 									date='$date' WHERE eventID='$eventID'");
 		}
@@ -147,7 +157,7 @@ class Calendarmodel extends Model
 		{
 			$userName = $this->session->userdata('un');
 			//add the event for the user in the calendar table 
-			//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
+//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
 			return $this->db->query("INSERT INTO calendar (user, date, data) 
 									VALUES ('$userName', '$date', '$event')");
 		}
@@ -212,7 +222,7 @@ class Calendarmodel extends Model
 				WHERE eventID='$eventID' AND name='$name'")->result())
 			{
 				$this->db->query("INSERT INTO calendar_rsvp (eventID, groupID, name, unanswered)
-														VALUES ('$eventID', '$groupID', '$name', 1)");
+													VALUES ('$eventID', '$groupID', '$name', 1)");
 			}		
 		}
 		return 1;
@@ -221,14 +231,15 @@ class Calendarmodel extends Model
 	
 	function join_event($eventID, $userName)
 	{
-		return $this->db->query("UPDATE calendar_rsvp SET yes=1, no=0, unanswered=0
-										WHERE eventID='$eventID' AND name='$userName'");
+		return $this->db->query("UPDATE calendar_rsvp SET yes=1, no=0, maybe=0, 
+								unanswered=0 WHERE eventID='$eventID' AND name='$userName'");
 	}
 	
 	
 	function drop_event($eventID, $userName)
 	{
-		return $this->db->query("UPDATE calendar_rsvp SET yes=0, no=1 WHERE eventID='$eventID' AND name='$userName'");
+		return $this->db->query("UPDATE calendar_rsvp SET yes=0, no=1, maybe=0,
+								unanswered=0 WHERE eventID='$eventID' AND name='$userName'");
 	}
 	
 	
@@ -242,14 +253,14 @@ class Calendarmodel extends Model
 			//update the group event if it exists already, otherwise add it
 			if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
 			{
-				//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
+//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
 				return $this->db->query("UPDATE calendar SET data='$event', date='$date' 
 																WHERE eventID='$eventID'");									
 			}
 			else
 			{
 				$groupName = $this->getCurrentGroup();
-				//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
+//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
 				return $this->db->query("INSERT INTO calendar (user, date, data) 
 										VALUES ('$groupName', '$date', '$event')");
 			}

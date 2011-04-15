@@ -42,7 +42,7 @@ class Grouppage extends Controller {
       
       $data['authed'] = true;
       $data['groups'] = $this->Group->get_grouplist();
-      $data['grouplist'] = $grouplist;
+      $data['grouplist'] = $ggrouplist;
     }
 
     //Send all information to the view.

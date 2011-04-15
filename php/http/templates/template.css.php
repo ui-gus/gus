@@ -129,7 +129,7 @@ div#container{
 	padding-bottom: 40px;	
 	font-family: "Rockwell";
 	color: white;
-		margin-top: 20px;
+	margin-top: 20px;
 }
 
 #group_column img.lawl{
@@ -221,8 +221,8 @@ div#content img.side{
 div#content img.background{
 	position: absolute;
 	right: 10px;
-        bottom: 50px;
-        z-index: -1;
+    bottom: 50px;
+    z-index: -1;
 }
 
 div#content table{
@@ -230,6 +230,14 @@ div#content table{
 	padding: 0px;
 	margin: 0px;
 	width: 100%;
+}
+
+div#content table#t2{
+	font-size: 12pt;
+	padding: 0px;
+	margin: 0px;
+	width: 80%;
+	color: #404349;	
 }
 
 div#content tr:hover,td:hover {

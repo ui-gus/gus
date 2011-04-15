@@ -81,6 +81,25 @@
 
 <!-- Reply Dialog Box Display -->
 	<?php if (($this->session->userdata('group_perm') >= 6 && $curr_thread->lock_flag == 0)): ?>
+	
+	<div class="update">
+	<script type="text/javascript" src="http://localhost/gus/php/http/scripts/tiny_mce/tiny_mce.js"></script>
+
+	<script type="text/javascript">
+		tinyMCE.init(
+		{
+			mode : "exact",
+			elements : "reply_body",
+			theme : "advanced",	
+			theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,|,fontselect,fontsizeselect,formatselect",
+			theme_advanced_buttons2 : "bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink,image",  
+			theme_advanced_buttons3 : "",
+			theme_advanced_toolbar_location : "bottom",
+			theme_advanced_toolbar_align : "left",
+			theme_advanced_resizing : false
+		});
+	</script>
+	
 	<table width="400" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
 		<tr>
 			<td>
@@ -92,7 +111,7 @@
 						</tr>
 						<tr>
 							<td valign="top"><strong>Body</strong></td>
-							<td><textarea name="body" cols="70" rows="3"></textarea></td>
+							<td><textarea name="body" cols="70" rows="3" id="reply_body"></textarea></td>
 						</tr>
 						<tr>
 							<td>&nbsp;</td>

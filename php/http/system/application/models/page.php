@@ -92,6 +92,7 @@ class Page extends Model {
 				<li><a href=\"" . site_url() . "/grouppage	\">Groups</a> 
 				<li><a href=\"#\">Help</a></li>
 				<li><a href=\"#\">FAQ</a></li>			
+				<li><a href=\"#\">FeedBack</a></li>
 			</ul>
 			
 			
