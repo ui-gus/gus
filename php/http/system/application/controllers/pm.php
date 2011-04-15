@@ -71,13 +71,20 @@ class Pm extends Controller {
 	}
 
 	function compose(){
+		if( !$this->Page->authed() )
+		{
+			$this->pdata['message'] = "You must be logged in to view this page.";
+			$this->load->view('/pm/pm_error', $this->pdata);
+		}
+		else
+		{
 		$this->load->model('User');
 		$data['title'] = 'Compose Message';
 		$data['main_view'] = 'pm/compose';
 		$data['user'] = $this->Page->get_un();
 		$data['usernames'] = $this->User->get_userlist();
 		$this->load->vars($data);
-		$this->load->view('pm/compose',$this->pdata,$this->testmode);		
+		$this->load->view('pm/compose',$this->pdata,$this->testmode);	}	
 	}
 
 	function respond($id){
@@ -95,9 +102,9 @@ class Pm extends Controller {
 	
 	
 	function send_message(){
-		$this->load->model('User');
-		$this->pm_model->send_message($this->Page->get_uid());
-		redirect('pm/index','refresh');	
+				$this->load->model('User');
+				$this->pm_model->send_message($this->Page->get_uid());
+				redirect('pm/index','refresh');	
 	}
 	
 	function archive_message($id){
