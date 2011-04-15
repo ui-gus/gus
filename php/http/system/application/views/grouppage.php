@@ -2,16 +2,15 @@
 
 <?php 
 //"<img src=\"".base_url()."/templates/group_label.png\" class=\"side\">" 
-echo "<div class=\"update\">"
-  ;
+
 ?>
 
 <?php 
 if( $authed ){
  
   echo ""
-    . "<table><tr>" 
-    . "<td><u>My Groups</u><br>"
+    . "<table id=\"t2\"><tr>" 
+    . "<td><h2>My Groups</h2><br>"
     ;
  foreach( $grouplist as $key ):{
     echo "<br>"
@@ -22,7 +21,7 @@ if( $authed ){
   endforeach;
   echo "</td>";
   
-  echo "<td><u>All Groups</u><br>"
+  echo "<td><h2>All Groups</h2><br>"
     ;
  foreach( $groups as $group ):{
     //Display all groups and link to their group/view.
@@ -39,7 +38,7 @@ if( $authed ){
 ?>
 
 <?php 
-echo "</div>";
+
 ?>
  
 <?php echo $footer ?>
