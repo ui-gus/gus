@@ -150,12 +150,12 @@
 								echo "<div class='invite'>Invite Members: " . 
 									form_multiselect('userArray[]', $options) . 
 									form_submit('submitInvite', 'Invite') . "</div>";
-							echo form_close();							
+							echo form_close();		
+
+							$countIndex += 1;		//increment the index							
 						}
 					}
-					$val += 1;		//increment the even-odd counter
-					if($val%2 == 0)
-						$countIndex += 1;		//increment the index					
+					$val += 1;		//increment the even-odd counter					
 				}
 				//make the arrays javascript friendly		
 				$jsonIdArray = json_encode($idArray);					
@@ -183,7 +183,7 @@
 					{					
 						$idArray2[$countIndex]['id'] = $item2;	//save the event ID		
 						
-						$statusTmp = $this->db->query("SELECT yes, no FROM calendar_rsvp 
+						$statusTmp = $this->db->query("SELECT yes, no, maybe, unanswered FROM calendar_rsvp 
 														WHERE (eventID='$item2' AND name='$userName')")->result();
 						foreach($statusTmp as $row)
 						{		
@@ -194,7 +194,7 @@
 								//show button to drop event (handled by Ajax)
 								echo "<div class='dropJoin'>" . form_button('', 'Drop') . "</div>";					
 							}	
-							else if($row->no)	
+							else if( ($row->no)||($row->maybe)||($row->unanswered) )	
 							{
 								$idArray2[$countIndex]['answer'] = "0";
 								//show button to join event (handled by Ajax)
@@ -244,7 +244,8 @@
 				echo "  " . form_submit('submit', 'View Day') . "</center>";
 			echo form_close();	
 		}
-
+		
+		echo '<p>Page rendered in {elapsed_time} seconds</p>';
 		echo $this->pdata['footer']; 
 	?>
 	
