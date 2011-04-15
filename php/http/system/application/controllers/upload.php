@@ -15,7 +15,7 @@ class Upload extends Controller {
 		parent::__construct();
 		$this->load->helper(array('form', 'url')); //Load CI's form and url helpers
 		$this->testmode = 'false';  //Default not in testmode
-		$this->load->model('Page'); //Based off the page template
+		$this->load->model('Page'); //Based off the page model
               $this->pdata['footer'] = $this->Page->get_footer(); //Load footer
 	}
 
@@ -25,7 +25,17 @@ class Upload extends Controller {
 		if($this->testmode == 'false') { //Don't load page view if we're in testmode
                 $this->pdata['header'] = $this->Page->get_header('Upload'); //load header
                 $this->pdata['content'] = $this->Page->get_content('upload'); //load content
-		  $this->load->view('upload_form', array('error' => ' ' )); } //If there was an error last upload, load that too
+			//Get group membership list
+		  $this->load->model('User');
+		  $this->load->model('Group');
+		  $un = $this->session->userdata('un');
+		  $uid = $this->User->get_id($un);
+		  $grouplist = $this->db->get_where( 'usergroup', array('uid' => $uid) )->result_array();
+
+			//Set up data for page
+		  $data = array('error' => ' ', 'grouplist' => $grouplist);
+
+		  $this->load->view('upload_form', $data); } //Pass everything to the view
 		return(true);
 	}
 
@@ -33,7 +43,6 @@ class Upload extends Controller {
 	{
 		/*File upload settings are in config/upload.php*/
 		$this->load->library('upload'); //Load CI's upload helper
-
 		{
 			if ( ! $this->upload->do_upload()) //if the upload fails
 			{
@@ -41,7 +50,18 @@ class Upload extends Controller {
 				if($this->testmode == 'false') {  //If not in test mode, reload the page and show the error
 				  $this->pdata['header'] = $this->Page->get_header('Upload');
 				  $this->pdata['content'] = $this->Page->get_content('upload');
-				  $this->load->view('upload_form', $error); }
+
+					//Get group membership list
+				  $this->load->model('User');
+		  		  $this->load->model('Group');
+		  		  $un = $this->session->userdata('un');
+		  		  $uid = $this->User->get_id($un);
+		  		  $grouplist = $this->db->get_where( 'usergroup', array('uid' => $uid) )->result_array();
+
+		  		  	//Set up data for page
+		  		  $data = array('error' => $error, 'grouplist' => $grouplist);
+
+				  $this->load->view('upload_form', $data); }
 				return($this->upload->display_errors());  //If in testmode, check the error
 			}
 			else //Upload was successful
@@ -70,6 +90,30 @@ class Upload extends Controller {
 					    echo $this->image_lib->display_errors();
 					}*/
 				}
+				//Insert file info into database
+				$this->load->model('User');
+				$this->load->model('Group');
+
+				$this->load->database('default', TRUE);
+
+				$un = $this->session->userdata('un');
+				$uid = $this->User->get_id($un);
+				/*debugging
+				echo $data['upload_data']['file_name'];	//file name
+				echo $uid; 					//uid
+				echo $_POST["groups"]; 			//gid
+				echo $data['upload_data']['file_size']; 	//file size in KB
+				echo date("Ymd");				//date yyyymmdd
+				*/
+
+				$filedata = array( 	
+					'filename' => $data['upload_data']['file_name'],
+					'uid' => $uid, 
+					'gid' => $_POST["groups"],
+					'date' => date("Ymd"), 
+					'size' => $data['upload_data']['file_size'],
+				);
+				$this->db->insert('files', $filedata);
 				return('success');
 			}
 		}
