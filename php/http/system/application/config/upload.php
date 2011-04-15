@@ -13,7 +13,7 @@
 
 $config['upload_path'] = './uploads/'; //The directory to store uploaded files
 $config['allowed_types'] = 'gif|jpg|png|txt|png|bmp|doc|pdf'; //Allowed file types; uses MIME types to check, not just extensions
-$config['overwrite'] = 'TRUE';  //If a file with the name is already uploaded, do we overwrite?
+//$config['overwrite'] = 'TRUE';  //If a file with the name is already uploaded, do we overwrite?
 $config['max_size'] = '2048';//In kilobytes
 $config['max_width'] = '0';  //For images; 0 is infinite
 $config['max_height'] = '0'; //For images; 0 is infinite
