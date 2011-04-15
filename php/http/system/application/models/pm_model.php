@@ -1,8 +1,12 @@
 <?php
-class pm_model extends Model{
+class Pm_model extends Model{
 	
-	function pm_model(){
+	function Pm_model(){
 		parent::Model();
+		$this->load->database();
+		$this->load->model('user');
+		$this->load->library('table');
+		$this->load->helper('date');
 	}
 	
 	function list_messages_to($userid,$location='inbox'){
@@ -64,20 +68,19 @@ class pm_model extends Model{
 	
 	}
 	
-	function send_message($userid){
-		$now = date("Y-m-d h:i:s");
-		$data = array(
-			'from_id' => $userid,
-			'to_id' => $this->input->post('to_id'),
-			'subject' => xss_clean(substr(strip_tags($this->input->post('subject')),0,64)),
-			'message' => xss_clean(substr(strip_tags($this->input->post('message'), '<b><i><a>'),0,255)),
-			'created' => $now,
-			'location' => 'sent'
-		);
-		
-		$this->db->insert("messages",$data);
-	
-	}
+	function send_message($userid){	
+			$now = date("Y-m-d h:i:s");
+//			echo $usernames['to_id'];
+			$data = array(
+				'from_id' => $userid,
+				'to_id' => $this->input->post('to_id'),
+				'subject' => substr(strip_tags($this->input->post('subject')),0,64),
+				'message' => substr(strip_tags($this->input->post('message'), '<b><i><a>'),0,255),
+				'created' => $now,
+				'location' => 'sent'
+			);
+				$this->db->insert("messages" , $data);
+		}
 	
 }//end class
 
