@@ -9,6 +9,12 @@ if( $authed ){
     echo $tinyMCE;
     echo "Editing group page.<br>"
       . form_open('grouppage/edit/' . $gn )
+      . "Picture: " . form_input( array('name'=>'profile','value'=>$profile,
+					'maxlength'=>'20','size'=>'20') )
+      . " " . anchor( 'docs', "Upload") . "<br>"
+      . "Description: " . form_input( array('name'=>'description','value'=>$description,
+					    'maxlength'=>'50','size'=>'50') )
+      . "<br><br>Custom Group Content<br>"
       . form_textarea(array(
 			    'name'	=> 'content',
 			    'id'  	=> 'grouppage_edit',

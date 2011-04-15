@@ -73,6 +73,7 @@ class Grouppage extends Controller {
 	  $data['group'] = $query[0];
 	}
 	$data['admin'] = ($perm == 7);
+	
 	$data['content'] = $this->Page->get_content( 'group_' . $gn );
 	$data['permissions']['read'] = $perm & 4;
 	$data['permissions']['write'] = $perm & 2;
@@ -103,6 +104,9 @@ class Grouppage extends Controller {
 	$un = $this->session->userdata('un');
 	$gn = $this->Group->get_name( $t );
 	$perm = $this->Group->get_perm($un, $gn);
+	$temp = $this->db->get_where('ggroup', array('id'=>$t) )->result_array();
+	$data['profile'] = $temp[0]['profile'];
+	$data['description'] = $temp[0]['description'];
 	if( $perm != 7 ){
 	  $data['admin'] = false;
 	}
@@ -111,6 +115,10 @@ class Grouppage extends Controller {
 	  if( !empty($_POST) ){
 	    $editedpage['name']    = 'group_' . $gn;
 	    $editedpage['content'] = $_POST['content'];
+	    $this->db->update('ggroup', 
+			      array('profile'=>$_POST['profile'],'description'=>$_POST['description']),
+			      array('id'=>$t)
+			      );
 	    $this->Page->save( $editedpage );
 	    redirect( 'grouppage/view/' . $t );
 	  }
