@@ -30,6 +30,7 @@ class User extends Model {
                 $this->db->select('id');
                 $this->db->where('un',$name);
                 $result = $this->db->get('user')->result();
+		if(empty($result)) return("");
                 return($result[0]->id);
         }
 
@@ -37,6 +38,7 @@ class User extends Model {
                 $this->db->select('un');
                 $this->db->where('id',$id);
                 $result = $this->db->get('user')->result();
+		if(empty($result)) return("");
                 return($result[0]->un);
         }
 
