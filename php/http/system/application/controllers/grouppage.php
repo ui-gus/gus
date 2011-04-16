@@ -54,17 +54,23 @@ class Grouppage extends Controller {
     $data['header'] = $this->Page->get_header('groups');
     $data['footer'] = $this->Page->get_footer();
     
-    if( !$this->Page->authed() ){
+    if( $this->testing == true && $testgroup == "" ){
+      return false;
+    }
+    
+    if( !$this->Page->authed() && $this->testing == false ){
       $data['authed'] = false;
     }	
     else{
       $data['authed'] = true;
       $t = $this->uri->segment(3);
-      
+      if( $t == "" ){
+	$t = $testgroup;
+      }
       if( $t == "" && $this->testing == false ){
 	redirect("grouppage");
       }      
-      else {
+      else { //Main part
 	$query = $this->db->get_where( 'ggroup', array('id' => $t) )->result();
 	$userlist = $this->db->get_where( 'usergroup', array('gid' => $t) )->result_array();
 	$un = $this->session->userdata('un');
@@ -77,7 +83,6 @@ class Grouppage extends Controller {
 	  $data['group'] = $query[0];
 	}
 	$data['admin'] = ($perm == 7);
-	
 	$data['content'] = $this->Page->get_content( 'group_' . $gn );
 	$data['permissions']['read'] = $perm & 4;
 	$data['permissions']['write'] = $perm & 2;
@@ -86,25 +91,32 @@ class Grouppage extends Controller {
 	$data['member'] = !$isamember;
 	$data['members'] = $userlist;
       }
-      //Send all information to the view.
-      $this->load->view( 'grouppage_view.php', $data, $this->testing );
     }
+    //Send all information to the view.
+    $this->load->view( 'grouppage_view.php', $data, $this->testing );
     return( true );
   }
   
-  function edit( ){
+  function edit( $testgroup ){
     $data['header'] = $this->Page->get_header('groups');
     $data['footer'] = $this->Page->get_footer();
-    if( !$this->Page->authed() ){
+    if( $this->testing == true && $testgroup == "" ){
+      return false;
+    }
+    
+    if( !$this->Page->authed() && $this->testing == false ){
       $data['authed'] = false;
     }
     else{
       $data['authed'] = true;
       $t = $this->uri->segment(3);
+      if( $t == "" ){
+	$t = $testgroup;
+      }
       if( $t == "" && $this->testing == false ){
 	redirect( 'home' );
       }   
-      else{    
+      else{ //Main part. 
 	$un = $this->session->userdata('un');
 	$gn = $this->Group->get_name( $t );
 	$perm = $this->Group->get_perm($un, $gn);
@@ -134,32 +146,34 @@ class Grouppage extends Controller {
 	}
       }
       $_POST['lastpage'] = $t;
-      $this->load->view( 'grouppage_edit.php', $data, $this->testing );
     }
+    $this->load->view( 'grouppage_edit.php', $data, $this->testing );
     return( true );
   }
+
   function join( $testgroup ){
-    $t = $this->uri->segment(3);
     $data['header'] = $this->Page->get_header('groups');
     $data['footer'] = $this->Page->get_footer();
-
-    if( $testgroup != "" && $this->testing == true ){
-      $t = $testgroup;
+    if( $this->testing == true && $testgroup == "" ){
+      return false;
     }
-
-    if( $t == "" && $this->testing == false ){
-      redirect("grouppage");
+    
+    if( !$this->Page->authed() && $this->testing == false ){
+      $data['authed'] = false;
     }	
     else {
-      if( !$this->Page->authed() ){
-	$data['authed'] = false;
+      $data['authed'] = true;
+      $t = $this->uri->segment(3);
+      if( $t == "" ){
+	$t = $testgroup;
+      }
+      if( $t == "" && $this->testing == false ){
+	redirect("grouppage");
       }	
       else { //Main part.
 	$user = $this->session->userdata('un');
 	$uid = $this->User->get_id( $user );
 	$assoc = $this->db->get_where( 'usergroup', array('uid'=>$uid,'gid'=>$t) )->result();
-
-	$data['authed'] = true;
 	$data['gid'] = $t;
 	if( empty( $assoc ) ){ // User is not currently in the selected group. Add them.
 	  $data['successful'] = true;
@@ -169,45 +183,46 @@ class Grouppage extends Controller {
 	  $data['successful'] = false;
 	}
       }
-      //Send all information to the view.
-      if( $this->testing == false ){
-	$this->load->view( 'grouppage_join.php', $data, $this->testing );
-      }
     }
+    //Send all information to the view.
+    $this->load->view( 'grouppage_join.php', $data, $this->testing );
     return( true );  
   } 
-
-  function leave(){
-    $t = $this->uri->segment(3);
+  
+  function leave( $testgroup ){
     $data['header'] = $this->Page->get_header('groups');
     $data['footer'] = $this->Page->get_footer();
-
-    if( $t == "" ){
-      redirect("grouppage");
+    if( $this->testing == true && $testgroup == "" ){
+      return false;
     }
+    if( !$this->Page->authed() && $this->testing == false ){
+      $data['authed'] = false;
+    }	
     else {
-      if( !$this->Page->authed() ){
-	$data['authed'] = false;
-      }	
+      $data['authed'] = true;
+      $t = $this->uri->segment(3);
+      if( $t == "" ){
+	$t = $testgroup;
+      }
+      if( $t == "" && $this->testing == false ){
+	redirect("grouppage");
+      }
       else { //Main part.
 	$user = $this->session->userdata('un');
 	$uid = $this->User->get_id( $user );
 	$assoc = $this->db->get_where( 'usergroup', array('uid'=>$uid,'gid'=>$t) )->result();
-	
-	$data['authed'] = true;
 	$data['gid'] = $t;
 	if( empty( $assoc ) ){ // User is not currently in the selected group. Do nothing.
 	  $data['successful'] = false;
 	}
 	else { // User is already in the group. Attempt to leave it.
 	  $data['successful'] = true;
-	  
 	  $this->Group->delete_member( $this->Group->get_name( $t ) , $user );
 	}
       }
-      //Send all information to the view.
-      $this->load->view( 'grouppage_leave.php', $data, $this->testing );
     }
+    //Send all information to the view.
+    $this->load->view( 'grouppage_leave.php', $data, $this->testing );
     return( true ); 
   }
   
@@ -215,24 +230,28 @@ class Grouppage extends Controller {
     $this->load->library('unit_test');
     $this->testing = true;
 
-	//index
-	//not athed
-	echo $this->unit->run(true,$this->index(), 'index not authed');
-	//authed
-	$this->Page->login("test","test123");
-	echo $this->unit->run(true,$this->index(), 'index authed');
-	
-	//view
-	echo $this->unit->run(true,$this->view(''), 'view');
-    	echo $this->unit->run(true,$this->view('0'), 'Attempting to view Group.');
-
-	//join
-	//echo $this->unit->run(true, $this->join('0'), 'join');
-	echo $this->unit->run(true,false, 'join');
-
-	//leave
-	//echo $this->unit->run(true,$this->leave(), 'leave');
-	echo $this->unit->run(true,false, 'leave');
+    //index
+    //not athed
+    echo $this->unit->run(true,$this->index(), 'index not authed');
+    //authed
+    $this->Page->login("test","test123");
+    echo $this->unit->run(true,$this->index(), 'index authed');
+    
+    //view
+    echo $this->unit->run(false,$this->view(''), 'Incorrect view.');
+    echo $this->unit->run(true,$this->view('0'), 'Attempting to view Group.');
+    
+    //edit
+    echo $this->unit->run(false,$this->edit(''), 'Incorrect edit.');
+    echo $this->unit->run(true,$this->edit('5'), 'Attempting to edit Group.');
+    
+    //join
+    echo $this->unit->run(false, $this->join(''), 'Incorrect join.');
+    echo $this->unit->run(true, $this->join('0'), 'Attempting to join Group.');	
+    
+    //leave
+    echo $this->unit->run(false, $this->leave(''), 'Incorrect leave.');
+    echo $this->unit->run(true, $this->leave('0'), 'Attempting to leave Group.');	
   }	
   
 }

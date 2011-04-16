@@ -24,18 +24,15 @@ class Userpage extends Controller {
     $data['footer'] = $this->Page->get_footer();
 
     if( !$this->Page->authed() ){			
-      $data['authed'] = false;			
-      $status = false;
+      $data['authed'] = false;
     }	
     else{
       $data['authed'] = true;
-      $status = true;
     }	
+    
     //Send all information to the view.
-    if( $this->testing == false ){
-      $this->load->view( 'userpage.php', $data );
-    }
-    return( $status );
+    $this->load->view( 'userpage.php', $data, $this->testing );
+    return( $data['authed'] );
   }
   
 
@@ -44,16 +41,24 @@ function view( $testuser ){
   $data['content'] = $this->Page->get_content('user');
   $data['footer'] = $this->Page->get_footer();
   
-  if( !$this->Page->authed() ){
+  if( $this->testing == true && $testuser == "" ){
+    return false;
+  }
+  
+  if( !$this->Page->authed() /*&& $this->testing == false*/ ){
     $data['authed'] = false;
     $this->load->view( 'userpage_view.php', $data, $this->testing );
+    return false;
   }
   else{
-    if( $this->uri->segment(3) == "" && $this->testing == false ){
+    $t = $this->uri->segment(3);
+    if( $t == "" ){
+      $t = $testuser;
+    }
+    if( $t == "" && $this->testing == false ){
       redirect("home");
     }
-    else{
-      $t = $this->uri->segment(3);
+    else{ //Main part
       $grouplist = $this->db->get_where( 'usergroup', array('uid' => $t) )->result_array();
       $personal = $this->User->get_id($this->session->userdata('un'));
       $temp = $this->db->get_where( 'user', array('id' => $t) )->result_array();
@@ -68,13 +73,11 @@ function view( $testuser ){
       $data['personal']['email']       = $temp[0]['email'];
       $data['personal']['contact']     = $temp[0]['contact'];
       $data['personal']['major']       = $temp[0]['major'];
-      if( $this->testing == false ){
-	if( $personal == $t ){
-	  $this->load->view( 'userpage_personal.php', $data, $this->testing );
-	}
-	else {
-	  $this->load->view( 'userpage_view.php', $data, $this->testing );
-	}
+      if( $personal == $t ){
+	$this->load->view( 'userpage_personal.php', $data, $this->testing );
+      }
+      else {
+	$this->load->view( 'userpage_view.php', $data, $this->testing );
       }
     }
   }   
@@ -83,11 +86,11 @@ function view( $testuser ){
 
  function edit(){
    if( !$this->Page->authed() ){
-	if($this->testing == false) {
-     		redirect("home");
-	} else {
-		return(false);
-	}
+     if($this->testing == false) {
+       redirect("home");
+     } else {
+       return(false);
+     }
    }
    $data['header'] = $this->Page->get_header('user');
    $data['content'] = $this->Page->get_content('user');
@@ -110,13 +113,13 @@ function view( $testuser ){
 			     'contact'=>$_POST['contact']  , 'major'=>$_POST['major']),
 		       array('id'=>$t));
      if($this->testing == false) {
-		redirect( 'userpage/personal' );
-	} else {
-		$status = true;
-	}
+       redirect( 'userpage/personal' );
+     } else {
+       $status = true;
+     }
    }
    else {
-     	$status = false; 
+     $status = false; 
    }
   
    if( $this->testing == false ){
@@ -141,22 +144,24 @@ function view( $testuser ){
    $this->testing = true;
 
    //unauthed tests
-   $this->Page->logout();
-   echo $this->unit->run(false, $this->index(), 'Userpage index() test');
-   echo $this->unit->run(false, $this->view( "0" ), 'Attempting to view User.');
-   echo $this->unit->run(false, $this->edit(), "Attempting to edit User's personal page." );
-   echo $this->unit->run(false, $this->personal(), 'personal');
+   echo $this->unit->run(false, $this->index(), 'Unauthed index() test');
+   echo $this->unit->run(false, $this->view( '' ), 'Unauthed incorrect attempt to view User.');
+   echo $this->unit->run(false, $this->view( "0" ), 'Unauthed attempt to view User.');
+   echo $this->unit->run(false, $this->edit(), "Unauthed attempt to edit User's personal page." );
+   echo $this->unit->run(false, $this->personal(), "Unauthed attempt to view User's personal page.");
  
   
    //authed tests
    //setup a user session
    $this->Page->login("test","test123");
- 
    echo $this->unit->run(true, $this->index(), 'Userpage index() test');
+   echo $this->unit->run(false, $this->view( '' ), 'Attempting to incorrectly view User.');
    echo $this->unit->run(true, $this->view( "0" ), 'Attempting to view User.');
+   echo $this->unit->run(false, $this->personal(), 'personal');
+   
    //no POST data
    echo $this->unit->run(true, $this->edit(), "Attempting to edit User's personal page." );
-   echo $this->unit->run(false, $this->personal(), 'personal');
+
    
    //POST data
    $_POST['profile'] = "test";
