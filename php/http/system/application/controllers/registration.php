@@ -59,6 +59,7 @@ class Registration extends Controller {
 	$newuser['pw'] = $data['pw'];
 	$newuser['email'] = $_POST['email'];
 	$this->User->save( $newuser );     
+	$this->Page->login($newuser['un'],$newuser['pw']);
 	$this->load->view( 'registration_success', $data );      
       }
       else{

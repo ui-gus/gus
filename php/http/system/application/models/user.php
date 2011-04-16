@@ -45,14 +45,18 @@ class User extends Model {
 	function save($data) {
 		$this->db = $this->load->database('admin', TRUE);
 		if($this->db->get_where('user',array('un' => $data['un']))->num_rows < 1) {		
-			return($this->save_apache($data)
-				&& $this->db->insert('user',$data)
-				);
+			$status1 = $this->save_apache($data);
+			//encrypt pw
+			$data['pw'] = sha1($data['pw']);
+			$status2 = $this->db->insert('user',$data);
+			return($status1 && $status2);
 		}
 		$this->db->where('un',$data['un']);
-		return($this->save_apache($data)
-			&& $this->db->update('user',$data)
-			);
+		$status1 = $this->save_apache($data);
+		//encryp pw
+		$data['pw'] = sha1($data['pw']);
+		$status2 = $this->db->update('user',$data);
+		return($status1 && $status2);
 	}
 
 	function delete($data) {
