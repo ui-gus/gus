@@ -33,7 +33,7 @@ class Calendarmodel extends Model
 		   {heading_row_end}</tr>{/heading_row_end}
 
 		   {week_row_start}<tr class="weeks">{/week_row_start}
-		   {week_day_cell}<td><center>{week_day}</center></td>{/week_day_cell}
+		   {week_day_cell}<td><center><font color="white">{week_day}</font></center></td>{/week_day_cell}
 		   {week_row_end}</tr>{/week_row_end}
 
 		   {cal_row_start}<tr class="days">{/cal_row_start}
