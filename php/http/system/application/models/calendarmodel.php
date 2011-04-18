@@ -213,16 +213,47 @@ class Calendarmodel extends Model
 	}
 	
 	
-	function invite_to_event($eventID, $groupID, $userArray)
+	function invite_to_event($eventID, $groupID, $userArray, $eventDate)
 	{
-		foreach($userArray as $name)
+		if($userArray)
 		{
-			//if the user is not already invited
-			if(! $this->db->query("SELECT name FROM calendar_rsvp 
-				WHERE eventID='$eventID' AND name='$name'")->result())
+			//get the event data
+			$eventDataArr = $this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result();
+			foreach($eventDataArr as $row)
 			{
-				$this->db->query("INSERT INTO calendar_rsvp (eventID, groupID, name, unanswered)
-													VALUES ('$eventID', '$groupID', '$name', 1)");
+				$eventData = "<br>You are invited to: " . $row->data . " (on " . $eventDate . 
+								")<br>To accept the invite, go to the day in your calendar.";
+			}
+			$from_id = $this->Page->get_uid();
+			$created = date("Y-m-d h:i:s");
+			
+			foreach($userArray as $name)
+			{	
+				//update calendar_rsvp table if the user is not already invited
+				if(! $this->db->query("SELECT name FROM calendar_rsvp 
+					WHERE eventID='$eventID' AND name='$name'")->result())
+				{
+					$this->db->query("INSERT INTO calendar_rsvp (eventID, groupID, name, unanswered)
+														VALUES ('$eventID', '$groupID', '$name', 1)");
+				}		
+				
+				//set up fields to send a notification message to the invited user	
+				$to_id = $this->User->get_id($name);
+				$invite = array('from_id' => $from_id,
+								'to_id' => $to_id,
+								'subject' => "Gus Event Invite",
+								'message' => $eventData,
+								'created' => $created,
+								'location' => "inbox"
+								);										
+								
+				//add the invite notification to Abhay's messages table 
+				$check = $this->db->query("SELECT id FROM messages WHERE message='$eventData' 
+											AND to_id='$to_id' AND from_id='$from_id'")->result();
+				if(! $check)
+				{
+					$this->db->insert("messages" , $invite);	
+				}
 			}		
 		}
 		return 1;

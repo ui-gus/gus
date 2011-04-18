@@ -80,6 +80,7 @@ class Calendar extends Controller{
 			if($this->input->post('submitInvite'))
 			{
 				$eventID = $this->input->post('eventID');
+				$eventDate = $this->input->post('event_date');
 				$userArray = $this->input->post('userArray');
 				$eventOwner = $this->User->get_id($this->session->userdata('un'));
 				$groupID = null;
@@ -89,8 +90,7 @@ class Calendar extends Controller{
 				{
 					$groupID = $row->gid;
 				}
-				$this->Calendarmodel->invite_to_event($eventID, $groupID, $userArray);
-				//(database table will initially show response as "unanswered")
+				$this->Calendarmodel->invite_to_event($eventID, $groupID, $userArray, $eventDate);
 			}
 			
 			//check to see if there is a new post requesting to join an event

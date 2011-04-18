@@ -49,6 +49,7 @@
 			$event_day = sprintf("%02s", $this->pdata['day']-1);
 			$event_month = sprintf("%02s", $this->pdata['month']-1);
 			$event_year = $this->pdata['year'];
+			$event_date = $event_month . "-" . $event_day . "-" . $event_year;
 			// background class covers both if-statements
 			echo "<div class='background'>";
 			$val = 0;	
@@ -143,14 +144,16 @@
 											'event_day' => $event_day,
 											'event_month' => $event_month,
 											'event_year' => $event_year,
+											'event_date' => $event_date,
 											'submitInvite' => 1);
 											
-							//dropdown list for inviting group members to event
+							//form for inviting group members to event
 							echo form_open($form_path, '', $hidden);
 								echo "<div class='invite'>Invite Members: " . 
 									form_multiselect('userArray[]', $options) . 
 									form_submit('submitInvite', 'Invite') . "</div>";
-							echo form_close();		
+							echo form_close();	
+							echo "<center>(hold down 'Ctrl' to select multiple people)</center>";
 
 							$countIndex += 1;		//increment the index							
 						}
@@ -229,9 +232,7 @@
 					echo "<center>" . form_input('event_data') . form_submit('AddForSelf', 'Add Event') 
 						. "</center>";
 				}
-			echo form_close();
-			echo "<center><i><font color='blue'>For events that you are invited to: If they disappear after adding ";
-			echo "a new event,<br> go back to Month View and click on the date to make them re-appear.</font></i></center>"; 
+			echo form_close(); 
 			echo"<br><hr />";
 			
 			//form to view a different day
