@@ -13,17 +13,21 @@
 		.calendar .days td
 		{
 			width: 150px; height: 80px; padding: 4px;
-			border: 3px groove #F4A460;
+			border: 2px groove #F4A460;
 			vertical-align: top;
-			background-image: url("../templates/calendar_day.PNG");
+			background-color: #F2F2F2;
+		}
+		.calendar .day:hover
+		{
+			background-color: #E6E6E6;
 		}
 		.calendar .weeks td
 		{
 			font-size: 16px;
 			font-family: textile, cursive;
 			font-weight: normal;
-			border: none;
-			background-image: url("../templates/calendar_week.PNG");
+			border: 1px solid white;
+			background-color: #228B22;
 		}
 		table.calendar			
 		{
@@ -60,7 +64,6 @@
 		//if user is logged in, display a form to add an event
 		if($this->Page->authed())
 		{
-			echo "<div class='groupname'>Currently logged on to: " . $this->Calendarmodel->getCurrentGroup() . "</div>";
 			echo $this->pdata['content'];
 			//set the path that the forms going to route to 
 			$form_path = site_url() . "/calendar/index/" . $this->pdata['year']
