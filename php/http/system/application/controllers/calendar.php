@@ -91,6 +91,9 @@ class Calendar extends Controller{
 					$groupID = $row->gid;
 				}
 				$this->Calendarmodel->invite_to_event($eventID, $groupID, $userArray, $eventDate);
+				?>
+				<script type="text/javascript">alert("Selected members were invited!");</script>
+				<?php
 			}
 			
 			//check to see if there is a new post requesting to join an event
