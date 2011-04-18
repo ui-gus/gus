@@ -49,7 +49,6 @@
 			$event_day = sprintf("%02s", $this->pdata['day']-1);
 			$event_month = sprintf("%02s", $this->pdata['month']-1);
 			$event_year = $this->pdata['year'];
-			$event_date = $event_month . "-" . $event_day . "-" . $event_year;
 			// background class covers both if-statements
 			echo "<div class='background'>";
 			$val = 0;	
@@ -139,6 +138,7 @@
 							{
 								$options[$member] = $member;
 							}
+							$event_date = ($event_month+1) . "-" . ($event_day+1) . "-" . $event_year;							
 							$hidden = array('view_day_request' => 1,
 											'eventID' => $item,
 											'event_day' => $event_day,
