@@ -144,10 +144,8 @@ class Calendarmodel extends Model
 	
 	function add_event($date, $event, $eventID = null)   	
 	{
-		//ALLOW FOR ANY VARIATION OF QUOTES, AND ESCAPE HTML AND JAVASCRIPT CHARACTERS
-		$oldChars = array("'", "<", ">", "%", "@", "&", "*", "#");
-		$newChars = array("''", "'<'", "'>'", "'%'", "'@'", "'&'", "'*'", "'#'");
-		$event = str_replace($oldChars, $newChars, $event);
+		//prevent scripts and SQL-injection
+		$event = mysql_real_escape_string(strip_tags($event));
 		
 		//update the event for the user if it exists already, otherwise add it
 		if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
@@ -167,10 +165,8 @@ class Calendarmodel extends Model
 	
 	function edit_event($event, $eventID)
 	{
-		//ALLOW FOR ANY VARIATION OF QUOTES, AND ESCAPE HTML AND JAVASCRIPT CHARACTERS
-		$oldChars = array("'", "<", ">", "%", "@", "&", "*", "#");
-		$newChars = array("''", "'<'", "'>'", "'%'", "'@'", "'&'", "'*'", "'#'");
-		$event = str_replace($oldChars, $newChars, $event);
+		//prevent scripts and SQL-injection
+		$event = mysql_real_escape_string(strip_tags($event));
 		
 		if($this->Page->is_user_admin())
 		{
@@ -280,10 +276,8 @@ class Calendarmodel extends Model
 	
 	function add_group_event($date, $event, $eventID = null)  
 	{
-		//ALLOW FOR ANY VARIATION OF QUOTES, AND ESCAPE HTML AND JAVASCRIPT CHARACTERS
-		$oldChars = array("'", "<", ">", "%", "@", "&", "*", "#");
-		$newChars = array("''", "'<'", "'>'", "'%'", "'@'", "'&'", "'*'", "'#'");
-		$event = str_replace($oldChars, $newChars, $event);
+		//prevent scripts and SQL-injection
+		$event = mysql_real_escape_string(strip_tags($event));
 
 		if($this->Page->is_user_admin())
 		{
