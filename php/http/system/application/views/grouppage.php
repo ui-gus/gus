@@ -31,6 +31,10 @@ if( $authed ){
   }
   endforeach;
   echo "</td></tr></table>";
+ 
+  //display group request link
+  echo '<a href="' . site_url() . '/groups/add_group_request">'
+		. 'Request a new group</a><br />';
  }
  else{
    echo "You must be logged in to view this page.";

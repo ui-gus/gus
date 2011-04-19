@@ -33,8 +33,12 @@ class Groups extends Controller {
 
 	//used for class wide reroute to login if not authed
 	function _remap($method) {
-		if(!$this->Page->authed() && $method != "test") {
-			$this->load->view('login');
+		if(!$this->Page->is_user_admin() 
+			&& $method != "test"
+		) {
+			$this->pdata['content'] .= 
+				"You must be an admin to do that.<br />\n";
+			$this->load->view('home');
 		} else {
 			$this->$method();
 		}
@@ -91,6 +95,16 @@ class Groups extends Controller {
 		 show_error('Group could not be saved');
 		}
 		$this->load->view('groups/save',$this->pdata,$this->testmode);
+	}
+
+	function add_group_request() {
+		/*if(isset($_POST['name'])) {
+			$this->pdata['default_name'] = $_POST['name'];
+			$this->pdata['default_description'] = $this->Group->get_description($_POST['name']);
+		}*/
+		$this->load->view('groups/add',$this->pdata,$this->testmode);
+		
+		return(true);
 	}
 
 	function test() {
