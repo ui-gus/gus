@@ -145,7 +145,7 @@ class Calendarmodel extends Model
 	function add_event($date, $event, $eventID = null)   	
 	{
 		//prevent scripts and SQL-injection
-		$event = mysql_real_escape_string(strip_tags($event));
+		$event = mysql_real_escape_string(htmlspecialchars($event));
 		
 		//update the event for the user if it exists already, otherwise add it
 		if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
@@ -166,7 +166,7 @@ class Calendarmodel extends Model
 	function edit_event($event, $eventID)
 	{
 		//prevent scripts and SQL-injection
-		$event = mysql_real_escape_string(strip_tags($event));
+		$event = mysql_real_escape_string(htmlspecialchars($event));
 		
 		if($this->Page->is_user_admin())
 		{
@@ -277,7 +277,7 @@ class Calendarmodel extends Model
 	function add_group_event($date, $event, $eventID = null)  
 	{
 		//prevent scripts and SQL-injection
-		$event = mysql_real_escape_string(strip_tags($event));
+		$event = mysql_real_escape_string(htmlspecialchars($event));
 
 		if($this->Page->is_user_admin())
 		{
