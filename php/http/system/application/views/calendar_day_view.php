@@ -153,7 +153,7 @@
 									form_multiselect('userArray[]', $options) . 
 									form_submit('submitInvite', 'Invite') . "</div>";
 							echo form_close();	
-							echo "<center>(hold down 'Ctrl' to select multiple people)</center>";
+							echo "<center>(hold 'Ctrl' to select multiple people)</center>";
 
 							$countIndex += 1;		//increment the index							
 						}
@@ -233,6 +233,8 @@
 						. "</center>";
 				}
 			echo form_close(); 
+			echo "<center><font color='blue'>For events that you are invited to: If they disappear,<br> 
+					go back to month view and click on the date to make them re-appear.</font></center>";
 			echo"<br><hr />";
 			
 			//form to view a different day
