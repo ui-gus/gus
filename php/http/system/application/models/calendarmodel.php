@@ -145,7 +145,7 @@ class Calendarmodel extends Model
 	function add_event($date, $event, $eventID = null)   	
 	{
 		//ALLOW FOR ANY VARIATION OF QUOTES, AND ESCAPE HTML AND JAVASCRIPT CHARACTERS
-		$oldChars = array("'", "<", ">", "%", "@", "@", "*", "#");
+		$oldChars = array("'", "<", ">", "%", "@", "&", "*", "#");
 		$newChars = array("''", "'<'", "'>'", "'%'", "'@'", "'&'", "'*'", "'#'");
 		$event = str_replace($oldChars, $newChars, $event);
 		
@@ -168,7 +168,7 @@ class Calendarmodel extends Model
 	function edit_event($event, $eventID)
 	{
 		//ALLOW FOR ANY VARIATION OF QUOTES, AND ESCAPE HTML AND JAVASCRIPT CHARACTERS
-		$oldChars = array("'", "<", ">", "%", "@", "@", "*", "#");
+		$oldChars = array("'", "<", ">", "%", "@", "&", "*", "#");
 		$newChars = array("''", "'<'", "'>'", "'%'", "'@'", "'&'", "'*'", "'#'");
 		$event = str_replace($oldChars, $newChars, $event);
 		
@@ -281,7 +281,7 @@ class Calendarmodel extends Model
 	function add_group_event($date, $event, $eventID = null)  
 	{
 		//ALLOW FOR ANY VARIATION OF QUOTES, AND ESCAPE HTML AND JAVASCRIPT CHARACTERS
-		$oldChars = array("'", "<", ">", "%", "@", "@", "*", "#");
+		$oldChars = array("'", "<", ">", "%", "@", "&", "*", "#");
 		$newChars = array("''", "'<'", "'>'", "'%'", "'@'", "'&'", "'*'", "'#'");
 		$event = str_replace($oldChars, $newChars, $event);
 
