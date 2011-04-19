@@ -144,12 +144,14 @@ class Calendarmodel extends Model
 	
 	function add_event($date, $event, $eventID = null)   	
 	{
-		//allow for any variation of quotes in input
-		$event = str_replace("'", "''", $event);
+		//ALLOW FOR ANY VARIATION OF QUOTES, AND ESCAPE HTML AND JAVASCRIPT CHARACTERS
+		$oldChars = array("'", "<", ">", "%", ";", "@", "@", "*", "#");
+		$newChars = array("''", "'<'", "'>'", "'%'", "';'", "'@'", "'&'", "'*'", "'#'");
+		$event = str_replace($oldChars, $newChars, $event);
+		
 		//update the event for the user if it exists already, otherwise add it
 		if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
 		{
-//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
 			return $this->db->query("UPDATE calendar SET data='$event', 
 									date='$date' WHERE eventID='$eventID'");
 		}
@@ -157,7 +159,6 @@ class Calendarmodel extends Model
 		{
 			$userName = $this->session->userdata('un');
 			//add the event for the user in the calendar table 
-//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
 			return $this->db->query("INSERT INTO calendar (user, date, data) 
 									VALUES ('$userName', '$date', '$event')");
 		}
@@ -166,8 +167,11 @@ class Calendarmodel extends Model
 	
 	function edit_event($event, $eventID)
 	{
-		//allow for any variation of quotes in input
-		$event = str_replace("'", "''", $event);
+		//ALLOW FOR ANY VARIATION OF QUOTES, AND ESCAPE HTML AND JAVASCRIPT CHARACTERS
+		$oldChars = array("'", "<", ">", "%", ";", "@", "@", "*", "#");
+		$newChars = array("''", "'<'", "'>'", "'%'", "';'", "'@'", "'&'", "'*'", "'#'");
+		$event = str_replace($oldChars, $newChars, $event);
+		
 		if($this->Page->is_user_admin())
 		{
 			//if the user is an admin and the eventID matches, whether or not it is a group event
@@ -276,22 +280,22 @@ class Calendarmodel extends Model
 	
 	function add_group_event($date, $event, $eventID = null)  
 	{
-		//allow for any variation of quotes in input
-		$event = str_replace("'", "''", $event);
+		//ALLOW FOR ANY VARIATION OF QUOTES, AND ESCAPE HTML AND JAVASCRIPT CHARACTERS
+		$oldChars = array("'", "<", ">", "%", ";", "@", "@", "*", "#");
+		$newChars = array("''", "'<'", "'>'", "'%'", "';'", "'@'", "'&'", "'*'", "'#'");
+		$event = str_replace($oldChars, $newChars, $event);
 
 		if($this->Page->is_user_admin())
 		{
 			//update the group event if it exists already, otherwise add it
 			if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
 			{
-//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
 				return $this->db->query("UPDATE calendar SET data='$event', date='$date' 
 																WHERE eventID='$eventID'");									
 			}
 			else
 			{
 				$groupName = $this->getCurrentGroup();
-//STILL NEED TO SANITIZE TO PREVENT SCRIPTS
 				return $this->db->query("INSERT INTO calendar (user, date, data) 
 										VALUES ('$groupName', '$date', '$event')");
 			}
