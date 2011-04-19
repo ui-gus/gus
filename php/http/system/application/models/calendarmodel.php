@@ -145,8 +145,8 @@ class Calendarmodel extends Model
 	function add_event($date, $event, $eventID = null)   	
 	{
 		//ALLOW FOR ANY VARIATION OF QUOTES, AND ESCAPE HTML AND JAVASCRIPT CHARACTERS
-		$oldChars = array("'", "<", ">", "%", ";", "@", "@", "*", "#");
-		$newChars = array("''", "'<'", "'>'", "'%'", "';'", "'@'", "'&'", "'*'", "'#'");
+		$oldChars = array("'", "<", ">", "%", "@", "@", "*", "#");
+		$newChars = array("''", "'<'", "'>'", "'%'", "'@'", "'&'", "'*'", "'#'");
 		$event = str_replace($oldChars, $newChars, $event);
 		
 		//update the event for the user if it exists already, otherwise add it
@@ -168,8 +168,8 @@ class Calendarmodel extends Model
 	function edit_event($event, $eventID)
 	{
 		//ALLOW FOR ANY VARIATION OF QUOTES, AND ESCAPE HTML AND JAVASCRIPT CHARACTERS
-		$oldChars = array("'", "<", ">", "%", ";", "@", "@", "*", "#");
-		$newChars = array("''", "'<'", "'>'", "'%'", "';'", "'@'", "'&'", "'*'", "'#'");
+		$oldChars = array("'", "<", ">", "%", "@", "@", "*", "#");
+		$newChars = array("''", "'<'", "'>'", "'%'", "'@'", "'&'", "'*'", "'#'");
 		$event = str_replace($oldChars, $newChars, $event);
 		
 		if($this->Page->is_user_admin())
@@ -281,8 +281,8 @@ class Calendarmodel extends Model
 	function add_group_event($date, $event, $eventID = null)  
 	{
 		//ALLOW FOR ANY VARIATION OF QUOTES, AND ESCAPE HTML AND JAVASCRIPT CHARACTERS
-		$oldChars = array("'", "<", ">", "%", ";", "@", "@", "*", "#");
-		$newChars = array("''", "'<'", "'>'", "'%'", "';'", "'@'", "'&'", "'*'", "'#'");
+		$oldChars = array("'", "<", ">", "%", "@", "@", "*", "#");
+		$newChars = array("''", "'<'", "'>'", "'%'", "'@'", "'&'", "'*'", "'#'");
 		$event = str_replace($oldChars, $newChars, $event);
 
 		if($this->Page->is_user_admin())
