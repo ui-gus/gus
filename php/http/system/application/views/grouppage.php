@@ -33,7 +33,7 @@ if( $authed ){
   echo "</td></tr></table>";
  
   //display group request link
-  echo '<a href="' . site_url() . '/groups/add_group_request">'
+  echo '<a href="' . site_url() . '/groups/add_request">'
 		. 'Request a new group</a><br />';
  }
  else{
