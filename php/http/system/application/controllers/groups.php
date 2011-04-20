@@ -34,7 +34,7 @@ class Groups extends Controller {
 	//used for class wide reroute to login if not authed
 	function _remap($method) {
 		if(!$this->Page->is_user_admin()
-			&& $method != "add_group_request" 
+			&& $method != "add_request" 
 			&& $method != "test"
 		) {
 			$this->pdata['content'] .= 
