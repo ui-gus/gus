@@ -10,9 +10,8 @@ if( $authed ){
     . "<img src=\"" . base_url() . "/uploads/"
     . $personal['profile']
     . "\" class=\"profile_pic\">"
-    . "<h1> User Profile:" . $name . "</h1>"
-    . "User #" . $id . "<br>"
-    . "Full name: " . $personal['fullname']
+    . "<h1>" . $name . "</h1>"
+    . "Full name: " . $personal['fullname'] . "<br>"
     . "<img src=\"" . base_url() ."templates/quote_left.png\"> "
     . $personal['description']
     . "<img src=\"" . base_url() ."templates/quote_right.png\">" . "<br>"
