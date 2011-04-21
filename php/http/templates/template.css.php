@@ -328,12 +328,12 @@ a.user{
         border: 0 none;
 }
 
-div.update_user h1{
-	font-size: 13px;
-	font-family: "Times New Roman";
+div.update h1{
 	margin-left: 10px;
-	font-weight: normal;
-	color: #5b3c33;
+
+	margin-top: 0px;
+	padding-top: 0px;
+	
 }
 
 /*Footer Style*/
