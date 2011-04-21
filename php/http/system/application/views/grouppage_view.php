@@ -65,11 +65,15 @@ if( $authed ){
 	echo "<tr>";
       }
       else {
-	echo ""
-	  . "<td>" 
-	  . "<img src=\"".base_url()."uploads/thumbs/tn_".$this->User->get_profile($member['uid'])."\">" 
-	  . "</td>" 
-	  ;	
+	echo "<td>";
+	$pic = $this->User->get_profile($member['uid']);
+	if ($pic != ''){ //Picture exists. Show the thumbnail.
+	  echo "<img src=\"".base_url()."uploads/thumbs/tn_".$pic."\">"; 
+	}
+	else{
+	  echo "<img src=\"".base_url()."templates/tn_null_profile".$pic."\">"; 
+	}
+	echo "</td>";	
       }
       if( $i == 13 ){ 
 	echo "</tr><tr>";
