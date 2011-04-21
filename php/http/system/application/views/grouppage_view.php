@@ -71,7 +71,7 @@ if( $authed ){
 	  echo "<img src=\"".base_url()."uploads/thumbs/tn_".$pic."\">"; 
 	}
 	else{
-	  echo "<img src=\"".base_url()."templates/tn_null_profile".$pic."\">"; 
+	  echo "<img src=\"".base_url()."templates/tn_null_profile.png\">"; 
 	}
 	echo "</td>";	
       }
