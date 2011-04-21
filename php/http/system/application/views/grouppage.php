@@ -9,6 +9,8 @@
 if( $authed ){
  
   echo ""
+    . anchor( "/groups/add_request" , "Create a new Group" )
+    . "<br>"
     . "<table id=\"t2\"><tr>" 
     . "<td><h2>My Groups</h2><br>"
     ;
@@ -31,6 +33,10 @@ if( $authed ){
   }
   endforeach;
   echo "</td></tr></table>";
+ 
+  //display group request link
+  echo '<a href="' . site_url() . '/groups/add_request">'
+		. 'Request a new group</a><br />';
  }
  else{
    echo "You must be logged in to view this page.";

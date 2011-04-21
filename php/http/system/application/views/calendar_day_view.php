@@ -138,19 +138,22 @@
 							{
 								$options[$member] = $member;
 							}
+							$event_date = ($event_month+1) . "-" . ($event_day+1) . "-" . $event_year;							
 							$hidden = array('view_day_request' => 1,
 											'eventID' => $item,
 											'event_day' => $event_day,
 											'event_month' => $event_month,
 											'event_year' => $event_year,
+											'event_date' => $event_date,
 											'submitInvite' => 1);
 											
-							//dropdown list for inviting group members to event
+							//form for inviting group members to event
 							echo form_open($form_path, '', $hidden);
 								echo "<div class='invite'>Invite Members: " . 
 									form_multiselect('userArray[]', $options) . 
 									form_submit('submitInvite', 'Invite') . "</div>";
-							echo form_close();		
+							echo form_close();	
+							echo "<center>(hold 'Ctrl' to select multiple people)</center>";
 
 							$countIndex += 1;		//increment the index							
 						}
@@ -229,9 +232,9 @@
 					echo "<center>" . form_input('event_data') . form_submit('AddForSelf', 'Add Event') 
 						. "</center>";
 				}
-			echo form_close();
-			echo "<center><i><font color='blue'>For events that you are invited to: If they disappear after adding ";
-			echo "a new event,<br> go back to Month View and click on the date to make them re-appear.</font></i></center>"; 
+			echo form_close(); 
+			echo "<center><font color='blue'>For events that you are invited to: If they disappear,<br> 
+					go back to month view and click on the date to make them re-appear.</font></center>";
 			echo"<br><hr />";
 			
 			//form to view a different day

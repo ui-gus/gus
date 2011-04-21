@@ -30,6 +30,7 @@ class User extends Model {
                 $this->db->select('id');
                 $this->db->where('un',$name);
                 $result = $this->db->get('user')->result();
+		if(empty($result)) return("");
                 return($result[0]->id);
         }
 
@@ -37,20 +38,25 @@ class User extends Model {
                 $this->db->select('un');
                 $this->db->where('id',$id);
                 $result = $this->db->get('user')->result();
+		if(empty($result)) return("");
                 return($result[0]->un);
         }
 
 	function save($data) {
 		$this->db = $this->load->database('admin', TRUE);
 		if($this->db->get_where('user',array('un' => $data['un']))->num_rows < 1) {		
-			return($this->save_apache($data)
-				&& $this->db->insert('user',$data)
-				);
+			$status1 = $this->save_apache($data);
+			//encrypt pw
+			$data['pw'] = sha1($data['pw']);
+			$status2 = $this->db->insert('user',$data);
+			return($status1 && $status2);
 		}
 		$this->db->where('un',$data['un']);
-		return($this->save_apache($data)
-			&& $this->db->update('user',$data)
-			);
+		$status1 = $this->save_apache($data);
+		//encryp pw
+		$data['pw'] = sha1($data['pw']);
+		$status2 = $this->db->update('user',$data);
+		return($status1 && $status2);
 	}
 
 	function delete($data) {

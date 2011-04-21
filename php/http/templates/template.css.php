@@ -198,8 +198,8 @@ li#group_column_current {
 
 /*right content window, where all the dynamic stuff usually will go*/
 div#content{	
- 	margin-left: 150px;
-	width:	850px;  
+ 	margin-left: 170px;
+	width:	830px;  
 	padding: 10px;
 	padding-bottom: 40px;
 	background-image: url('../templates/admin_small_edited.png');

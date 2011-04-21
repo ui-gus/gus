@@ -33,8 +33,13 @@ class Groups extends Controller {
 
 	//used for class wide reroute to login if not authed
 	function _remap($method) {
-		if(!$this->Page->authed() && $method != "test") {
-			$this->load->view('login');
+		if(!$this->Page->is_user_admin()
+			&& $method != "add_request" 
+			&& $method != "test"
+		) {
+			$this->pdata['content'] .= 
+				"You must be an admin to do that.<br />\n";
+			$this->load->view('home');
 		} else {
 			$this->$method();
 		}
@@ -47,7 +52,7 @@ class Groups extends Controller {
 
 	function add() {
 		$this->pdata['default_name'] = $this->pdata['default_description'] = "";
-		if(!empty($_POST)) {
+		if(isset($_POST['name'])) {
 			$this->pdata['default_name'] = $_POST['name'];
 			$this->pdata['default_description'] = $this->Group->get_description($_POST['name']);
 		}
@@ -91,6 +96,47 @@ class Groups extends Controller {
 		 show_error('Group could not be saved');
 		}
 		$this->load->view('groups/save',$this->pdata,$this->testmode);
+	}
+
+	function add_request() {
+		$this->pdata['default_name'] = $this->pdata['default_description'] = "";
+		//save mode
+		if(isset($_POST['name'])) {
+			$data = array('name' => $_POST['name'],
+					'description' => $_POST['description']
+				);
+			//if group exists, fail
+			if($this->Group->get_id($data['name'])) {
+				$this->pdata['content'] .= "Group '" . $data['name'] 
+					. "' already exists!<br />";
+				$this->load->view('home',$this->pdata,$this->testmode);
+				return(false);
+			} 
+			//if save successful
+			if($this->Group->save($data)) {
+				//just creates group for now
+				$this->pdata['content'] .= "Group request successful.<br />\n";
+				//add current user as admin
+				$gn = $data['name'];
+				$un = $this->Page->get_un();
+				$perm = array('read' => true, 'write' => true, 'execute' => true);
+				if($this->Group->add_member($gn,$un,$perm)) {
+					$this->pdata['content'] .= "You are the group admin.<br />\n";
+				} else {
+					$this->pdata['content'] .= "Adding you as admin failed..<br />\n";
+				}
+				//end add current user as admin
+				$this->load->view('home',$this->pdata,$this->testmode);
+				return(true);
+			}
+			//save failed
+			$this->pdata['content'] .= "Group request failed.<br />";
+			$this->load->view('home',$this->pdata,$this->testmode);
+			return(false);
+		}
+		//form mode
+		$this->load->view('groups/request',$this->pdata,$this->testmode);
+		return(true);
 	}
 
 	function test() {

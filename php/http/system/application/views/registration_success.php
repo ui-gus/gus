@@ -6,7 +6,6 @@
   echo "<div class=\"update\">"
   . "You have successfully been added to Gus.<br><br>"
   . "Username : " . $un . "<br><br>"
-  . anchor( 'auth', 'Login' )
   . "</div>"
   ;
   

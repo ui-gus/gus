@@ -90,9 +90,8 @@ class Page extends Model {
 				<li><a href=\"" . site_url() . "/pm/compose\">Compose</a></li>
 				<li><a href=\"" . site_url() . "/search\">Search</a></li>
 				<li><a href=\"" . site_url() . "/grouppage	\">Groups</a> 
-				<li><a href=\"#\">Help</a></li>
-				<li><a href=\"#\">FAQ</a></li>			
-				<li><a href=\"#\">FeedBack</a></li>
+				<li><a href=\"#\">Help/FAQ</a></li>			
+				<li><a href=\"" . site_url() . "/feedback	\">FeedBack</a></li>
 			</ul>
 			
 			
@@ -143,7 +142,10 @@ class Page extends Model {
 		// reported bug to standardize / fix
 		$ci =& get_instance();
 		$ci->load->model('Group');
-		$result = $this->db->query("SELECT un FROM user WHERE un='$un' AND pw='$pw'")->result();
+		$this->db->select('un');
+		$this->db->where('pw',sha1($pw));
+                $result = $this->db->get('user')->result();
+		//$result = $this->db->query("SELECT un FROM user WHERE un='$un' AND pw='$pw'")->result();
 		if(empty($result)) return(false);
 		//else
 		$this->session->set_userdata('un', $un);
