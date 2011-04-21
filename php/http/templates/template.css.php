@@ -248,7 +248,6 @@ div#content table#user td{
 	padding-left: 10px;
 	padding-right: 10px;
 	padding: 5px;
-
 }
 
 div#content table.login td {
@@ -264,6 +263,7 @@ div#content table.login td {
 div#content a:link {
 		color: #a69d81;
 		text-decoration: none;
+		border: 0px;
 }
 
 div#content a:visited{
