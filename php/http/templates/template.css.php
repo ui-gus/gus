@@ -260,8 +260,9 @@ div#content table.login td {
 	border-top-width: 0px;
 }
 
-#content a image {
+#content a#user {
 	border: 0 none;
+	text-decoration: none;
 }
 
 div#content a:link {
