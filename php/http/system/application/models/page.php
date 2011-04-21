@@ -90,9 +90,8 @@ class Page extends Model {
 				<li><a href=\"" . site_url() . "/pm/compose\">Compose</a></li>
 				<li><a href=\"" . site_url() . "/search\">Search</a></li>
 				<li><a href=\"" . site_url() . "/grouppage	\">Groups</a> 
-				<li><a href=\"#\">Help</a></li>
-				<li><a href=\"#\">FAQ</a></li>			
-				<li><a href=\"#\">FeedBack</a></li>
+				<li><a href=\"#\">Help/FAQ</a></li>			
+				<li><a href=\"" . site_url() . "/feedback	\">FeedBack</a></li>
 			</ul>
 			
 			
