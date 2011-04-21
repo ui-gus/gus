@@ -26,7 +26,7 @@ if( $authed ){
       ;
   }
   if( $member ){
-    echo "You are a member of this group.<br>";
+    echo "You are a member of this group. ";
     echo anchor('grouppage/leave/'.$gid , "Leave this group<br>");
   }
   else {
