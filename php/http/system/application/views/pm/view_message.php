@@ -18,7 +18,9 @@ echo "<br /><br />";
 echo "Subject: <b>". $msg->subject ."</b>";
 echo "<br /><br />";
 
-echo "From: ". $this->user->get_name($msg->from_id);
+//echo "From: ". $this->user->get_name($msg->from_id);
+echo "From: ". $usernames[$msg->from_id];
+
 echo "<br /><br />";
 
 echo "To: ". $usernames[$msg->to_id];
