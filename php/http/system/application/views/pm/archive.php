@@ -26,7 +26,7 @@ if (count($messages)){
 		$stamp = mysql_to_unix($msg->created);
 		$TABLE[] = $usernames[$msg->from_id];
 		$TABLE[] =	$usernames[$msg->to_id];
-		$TABLE[] = anchor("messages/view_message/".$msg->id, $msg->subject);
+		$TABLE[] = anchor("pm/view_message/".$msg->id, $msg->subject);
 		$TABLE[] =  mdate($format,$stamp);
 	}
 
