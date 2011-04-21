@@ -260,6 +260,10 @@ div#content table.login td {
 	border-top-width: 0px;
 }
 
+img a:link {
+	border: 0px;
+}
+
 div#content a:link {
 		color: #a69d81;
 		text-decoration: none;
