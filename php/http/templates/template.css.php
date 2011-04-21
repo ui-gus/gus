@@ -198,8 +198,8 @@ li#group_column_current {
 
 /*right content window, where all the dynamic stuff usually will go*/
 div#content{	
- 	margin-left: 150px;
-	width:	850px;  
+ 	margin-left: 170px;
+	width:	830px;  
 	padding: 10px;
 	padding-bottom: 40px;
 	background-image: url('../templates/admin_small_edited.png');
@@ -209,6 +209,8 @@ div#content{
 }
 
 div#content img.profile_pic{
+        width: 150px;
+        height: 150px;
 	margin-right: 10px;
 	float: left;
 }
@@ -244,12 +246,10 @@ div#content tr:hover,td:hover {
 	backround-color: #a69d815;
 }
 
-div#content td{
+div#content table#user td{
 	padding-left: 10px;
 	padding-right: 10px;
 	padding: 5px;
-	border-left: 1px solid #f2ebd5;
-	border-top: 1px solid #f2ebd5;
 }
 
 div#content table.login td {
@@ -262,9 +262,15 @@ div#content table.login td {
 	border-top-width: 0px;
 }
 
+#content a#user {
+	border: 0 none;
+	text-decoration: none;
+}
+
 div#content a:link {
 		color: #a69d81;
 		text-decoration: none;
+		border: 0px;
 }
 
 div#content a:visited{
@@ -281,7 +287,7 @@ div.update{
 	padding: 10px;	
 	padding-left: 7px;
 	float: center;
-	width: 790px;	
+	width: 770px;	
 	font-size: 10pt;
 	color: #434750;
 	margin-bottom: 15px;
@@ -291,7 +297,7 @@ div.update{
 	text-align: justify;
 	min-height: 175px;
 }
-
+	
 div.update_user{
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -317,12 +323,17 @@ img.user_pic{
 	clear: right;
 }
 
-div.update_user h1{
-	font-size: 13px;
-	font-family: "Times New Roman";
+a.user{
+        text-decoration: none;
+        border: 0 none;
+}
+
+div.update h1{
 	margin-left: 10px;
-	font-weight: normal;
-	color: #5b3c33;
+
+	margin-top: 0px;
+	padding-top: 0px;
+	
 }
 
 /*Footer Style*/

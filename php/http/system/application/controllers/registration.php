@@ -29,13 +29,18 @@ class Registration extends Controller {
       
       
       $at = strpos($_POST['email'],"@");
-      $rest = substr($_POST['email'], $at+1);
+      $host = substr($_POST['email'], strlen($_POST['email'])-10);
       
       $data['status'] = true;
-      $data['un'] = substr($_POST['email'], 0, $at);
+      $data['un'] = $_POST['un'];
       $data['pw'] = $_POST['pw'];
-      //         If there is no @              If there is no name        If the ending is wrong
-      if( ! strpbrk( $_POST['email'], "@" ) || $data['un'] == NULL || $rest != "uidaho.edu" ){
+      
+      //dup user, deny
+      if($this->User->get_id($data['un']) !== "") {
+	$data['error'] .= "ERROR: User already exists.<br>";
+      }
+      //       If there is no @               If there is no name    If the ending is wrong
+      if( !strpbrk( $_POST['email'], "@" ) || $data['un'] == NULL || $host != "uidaho.edu" ){
 	$data['error'] .= "ERROR: Invalid email address.<br>";
       }
       if( $_POST['email'] != $_POST['email2'] ){
@@ -47,11 +52,6 @@ class Registration extends Controller {
       if( $_POST['pw'] != $_POST['pw2'] ){
 	$data['error'] .= "ERROR: Passwords do not match.<br>";
       }
-      
-      //dup user, deny
-	if($this->User->get_id($data['un']) !== "") {
-		$data['error'] .= "ERROR: User already exists.<br>";
-	}
 
       //No errors found. Add the user.
       if( $data['error'] == "" ){
@@ -66,15 +66,15 @@ class Registration extends Controller {
 	$this->load->view( 'registration_success', $data );      
       }
       else{
-
 	$this->load->view( 'registration', $data );
       }
     }
     else {
       $data['status'] = false;
-      $_POST['email'] = "@uidaho.edu";
-      $_POST['email2'] = "@uidaho.edu";
-	$this->load->view( 'registration', $data );
+      $_POST['un'] = "";
+      $_POST['email'] = "";
+      $_POST['email2'] = "";
+      $this->load->view( 'registration', $data );
     }
     
   }

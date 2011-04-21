@@ -73,6 +73,9 @@ function view( $testuser ){
       $data['personal']['email']       = $temp[0]['email'];
       $data['personal']['contact']     = $temp[0]['contact'];
       $data['personal']['major']       = $temp[0]['major'];
+      if( $data['personal']['profile'] == '' ){
+	$data['personal']['profile'] = "../templates/null_profile.png";
+      }
       if( $personal == $t ){
 	$this->load->view( 'userpage_personal.php', $data, $this->testing );
       }

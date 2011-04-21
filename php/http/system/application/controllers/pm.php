@@ -39,7 +39,7 @@ class Pm extends Controller {
 		$data['title'] = 'Your Inbox';
 		$data['main_view'] = 'pm/inbox';
 		$data['user'] = $this->Page->get_un();
-		$data['messages'] = $this->pm_model->list_messages_to($this->Page->get_uid());
+		$data['messages'] = $this->pm_model->list_messages_to($this->Page->get_uid(),'inbox');
 		$data['usernames'] = $this->User->get_userlist();
 		$this->load->vars($data);
 		$this->load->view('pm/inbox',$this->pdata,$this->testmode);		
@@ -51,7 +51,7 @@ class Pm extends Controller {
 		$data['title'] = 'Sent Messages';
 		$data['main_view'] = 'pm/sent';
 		$data['user'] = $this->Page->get_un();
-		$data['messages'] = $this->pm_model->list_messages_from($this->Page->get_uid());
+		$data['messages'] = $this->pm_model->list_messages_from($this->Page->get_uid(),'sent' );
 		$data['usernames'] = $this->User->get_userlist();
 		$this->load->vars($data);
 		$this->load->view('pm/sent',$this->pdata,$this->testmode);		
@@ -109,7 +109,7 @@ class Pm extends Controller {
 	
 	function archive_message($id){
 		$this->load->model('User');
-		$this->pm_model->move_message($id);
+		$this->pm_model->move_message($id, 'archived');
 		redirect('pm/index','refresh');
 	
 	}	
