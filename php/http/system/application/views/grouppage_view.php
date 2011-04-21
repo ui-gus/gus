@@ -69,14 +69,10 @@ if( $authed ){
 	echo "<td>";
 	$pic = $this->User->get_profile($member['uid']);
 	if ($pic != ''){ //Picture exists. Show the thumbnail.
-	  //echo "<img src=\"".base_url()."uploads/thumbs/tn_".$pic."\">"; 
-	  $img = "<img src=\"".base_url()."uploads/thumbs/tn_".$pic."\" width=\"50\" height=\"50\">";
-	  //echo "<img src=\"".base_url()."uploads/thumbs/tn_".$pic."\" width=\"50\" height=\"50\">"; 
-	  //echo "<img src=\"".base_url()."uploads/thumbs/tn_".$pic."\" width=\"50\" height=\"50\">"; 
+	  $img = "<img src=\"".base_url()."uploads/thumbs/tn_".$pic."\" width=\"50\" height=\"50\" class=\"user\" style=\"border:0px none\">";
 	}
 	else{
-	  //echo "<img src=\"".base_url()."templates/tn_null_profile.png\">"; 
-	  $img = "<img src=\"".base_url()."templates/tn_null_profile.png\">"; 
+	  $img = "<img src=\"".base_url()."templates/tn_null_profile.png\" style=\"border:0px none\">";
 	}
 	echo anchor('userpage/view/'.$member['uid'] , $img );
 	echo "</td>";	

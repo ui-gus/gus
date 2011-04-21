@@ -209,6 +209,8 @@ div#content{
 }
 
 div#content img.profile_pic{
+        width: 150px;
+        height: 150px;
 	margin-right: 10px;
 	float: left;
 }
@@ -319,6 +321,11 @@ div.read_more{
 img.user_pic{
 	border: 1px solid #3f3f3f;
 	clear: right;
+}
+
+a.user{
+        text-decoration: none;
+        border: 0 none;
 }
 
 div.update_user h1{
