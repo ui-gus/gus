@@ -81,6 +81,9 @@ class Grouppage extends Controller {
 	
 	if( sizeof($query) > 0 ){
 	  $data['group'] = $query[0];
+	  if( $data['group']->profile == '' ){
+	    $data['group']->profile = "../templates/null_profile.png";
+	  }
 	}
 	$data['admin'] = ($perm == 7);
 	$data['content'] = $this->Page->get_content( 'group_' . $gn );

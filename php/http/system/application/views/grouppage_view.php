@@ -8,16 +8,16 @@ if( $authed ){
     . "<img src=\"" . base_url() 
     . "/uploads/" . $group->profile .  "\" class=\"profile_pic\">"
     . "<h1>Group Title: " . $group->name . "</h1>"
-    . "Group id" . $group->id 
-    . "<br><img src=\"" . base_url() ."templates/quote_left.png\">"
+    //. "Group id" . $group->id . "<br>"
+    . "<img src=\"" . base_url() ."templates/quote_left.png\">"
     . $group->description
     . "<img src=\"" . base_url() ."templates/quote_right.png\">"
     . "<br>"
-    . "You have the current permissions with this group: " 
-    . $permissions['read'] . " "
-    . $permissions['write'] . " "
-    . $permissions['execute'] . " "
-    . "<br>" 
+    //. "You have the current permissions with this group: " 
+    //. $permissions['read'] . " "
+    //. $permissions['write'] . " "
+    //. $permissions['execute'] . " "
+    //. "<br>" 
     ;
   if( $permissions['read'] && $permissions['write'] && $permissions['execute'] ){
     echo "You are an admin of this group. " 
@@ -54,7 +54,7 @@ if( $authed ){
       ;*/
     //Display unique page content.
     echo "<div class=\"update\">"
-      . "<center><u>Custom Group Content</u></center>"
+      //. "<center><u>Custom Group Content</u></center>"
       . $content
       . "</div>"
       ;
