@@ -72,7 +72,6 @@ class Pm_model extends Model{
 		return $data;		
 	}
 
-
 	function get_message($id){
 		$data = array();
 		$this->db->where('id',$id);
@@ -124,9 +123,20 @@ class Pm_model extends Model{
 				'subject' => substr(strip_tags($this->input->post('subject')),0,64),
 				'message' => substr(strip_tags($this->input->post('message'), '<b><i><a>'),0,255),
 				'created' => $now,
-				'location' => 'sent'
+				'location' => 'sent',
 			);
 				$this->db->insert("messages" , $data);
+				
+	     	$data = array(
+					'to_id' => $temp,
+					'from_id' => $this->input->post('to_id'),
+					'subject' => substr(strip_tags($this->input->post('subject')),0,64),
+					'message' => substr(strip_tags($this->input->post('message'), '<b><i><a>'),0,255),
+					'created' => $now,
+					'location' => 'inbox',
+				);
+					$this->db->insert("messages" , $data);
+							
 		}
 	
 }//end class
