@@ -58,7 +58,10 @@ class Registration extends Controller {
 	$newuser['un'] = $data['un'];
 	$newuser['pw'] = $data['pw'];
 	$newuser['email'] = $_POST['email'];
-	$this->User->save( $newuser );     
+	$this->User->save( $newuser );
+	//Zalgo!!!
+	$perm = array('read' => false, 'write' => false, 'execute' => false);
+	$this->Group->add_member("main",$data['un'], $perm);
 	$this->Page->login($newuser['un'],$newuser['pw']);
 	$this->load->view( 'registration_success', $data );      
       }
