@@ -55,12 +55,13 @@ if( $authed ){
       . $content
       . "</div>"
       . "<div class=\"update\">"
-      . "<u>Users in this Group</u>"
+      . "<u>" . count( $members ) . " Users in this Group</u>"
       ;
     
     echo "<table id=\"user\"><tr>";
     $i = 1;
     $img = '';
+    
   foreach( $members as $member ):{
       if( $i == 1 ){
 	echo "<tr>";
