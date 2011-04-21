@@ -263,7 +263,7 @@ if (! function_exists('form_multiselect'))
 	{
 		if ( ! strpos($extra, 'multiple'))
 		{
-			$extra .= ' multiple="multiple"';
+			$extra .= ' multiple="multiple" size=3';
 		}
 		
 		return form_dropdown($name, $options, $selected, $extra);
