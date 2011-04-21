@@ -9,6 +9,8 @@
 if( $authed ){
  
   echo ""
+    . anchor( "/groups/add_request" , "Create a new Group" )
+    . "<br>"
     . "<table id=\"t2\"><tr>" 
     . "<td><h2>My Groups</h2><br>"
     ;

@@ -29,13 +29,13 @@ class Registration extends Controller {
       
       
       $at = strpos($_POST['email'],"@");
-      $rest = substr($_POST['email'], $at+1);
+      $host = substr($_POST['email'], strlen($_POST['email'])-10);
       
       $data['status'] = true;
       $data['un'] = substr($_POST['email'], 0, $at);
       $data['pw'] = $_POST['pw'];
-      //         If there is no @              If there is no name        If the ending is wrong
-      if( ! strpbrk( $_POST['email'], "@" ) || $data['un'] == NULL || $rest != "uidaho.edu" ){
+      //       If there is no @               If there is no name    If the ending is wrong
+      if( !strpbrk( $_POST['email'], "@" ) || $data['un'] == NULL || $host != "uidaho.edu" ){
 	$data['error'] .= "ERROR: Invalid email address.<br>";
       }
       if( $_POST['email'] != $_POST['email2'] ){
