@@ -22,21 +22,21 @@ if( $authed ){
     . anchor( 'userpage/edit' , "Edit my Profile" )
     . "</div>"
     . "<div class=\"update\">"
-    . "<h3><u> &nbsp &nbsp List of Groups &nbsp &nbsp </u></h3>"
+    . "<h3><u> &nbsp &nbsp Member of: &nbsp &nbsp </u></h3>"
     ;
     
  foreach( $grouplist as $key ):{
-    echo "<h4>"
-      . anchor('grouppage/view/'.$key['gid'] ,
+    echo 
+       anchor('grouppage/view/'.$key['gid'] ,
 	       $this->Group->get_name($key['gid'])
 	       )
-      . "</h4>"
+		. 
+		"<br>" 
       ;
   }
   endforeach;
 
-  echo "<u>_____________________</u>"
-    . "</div>"
+  echo "</div>" 
     ;
   
  }
