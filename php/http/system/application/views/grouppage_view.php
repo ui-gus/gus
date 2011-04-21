@@ -38,26 +38,48 @@ if( $authed ){
     // Display all users in the group.
     /* echo "<div class=\"update\">"
       . "<h3><u>__List of Users__</u></h3>"
-      ;
+      ;*/
   foreach( $members as $member ):{
-      echo "<h4>"
-	. anchor('userpage/view/'.$member['uid'] , 
+	echo ""
+	  . anchor('userpage/view/'.$member['uid'] , 
 		 $this->User->get_name($member['uid']) 
 		 )
 	. "</h4>"
 	;
 	}
     endforeach;
-    echo "<u>__________________</u>"
-      . " "
-      . "</div>"
-      ;*/
+
     //Display unique page content.
     echo "<div class=\"update\">"
       //. "<center><u>Custom Group Content</u></center>"
       . $content
       . "</div>"
+      . "<div class=\"update\">"
+      . "<u>Users in this Group</u>"
       ;
+    
+    echo "<table><tr>";
+    $i = 1;
+  foreach( $members as $member ):{
+      if( $i == 1 ){
+	echo "<tr>";
+      }
+      else {
+	echo ""
+	  . "<td>" 
+	  . "<img src=\"".base_url()."uploads/thumbs/tn_".$this->User->get_profile($member['uid'])."\">" 
+	  . "</td>" 
+	  ;	
+      }
+      if( $i == 13 ){ 
+	echo "</tr><tr>";
+	$i = 1;
+      }
+      $i++;
+    }
+    endforeach;
+    echo "</tr></table></div>" ;
+  
   }//End unique page content.
   else {
     echo "<div class=\"update\">"

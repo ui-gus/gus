@@ -41,6 +41,14 @@ class User extends Model {
 		if(empty($result)) return("");
                 return($result[0]->un);
         }
+	
+	function get_profile($id) {
+	  $this->db->select('profile');
+	  $this->db->where('id',$id);
+	  $result = $this->db->get('user')->result();
+	  if(empty($result)) return("");
+	  return($result[0]->profile);
+        }
 
 	function save($data) {
 		$this->db = $this->load->database('admin', TRUE);

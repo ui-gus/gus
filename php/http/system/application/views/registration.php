@@ -3,12 +3,16 @@
 <?php echo "<img src=\"" . base_url() . "/templates/registration_label.png\" class=\"side\">" ?>
 
 <?php
+  
   echo "<div class=\"update\">"
   . $error
   . "<br>"
-  . "Registration Form <br>" 
+  . "<h4>Registration Form</h4> <br>" 
   . form_open('registration')
-  . "<br>"
+  . "Enter a username.<br>"
+  . form_input( array('name'=>'un','value'=>$_POST['un'],
+		      'maxlength'=>'14','size'=>'25') )
+  . "<br><br>"
   . "Enter a valid University of Idaho email address.<br>"
   . " Ex: user1234@vandals.uidaho.edu<br>"
   . form_input( array('name'=>'email','value'=>$_POST['email'],

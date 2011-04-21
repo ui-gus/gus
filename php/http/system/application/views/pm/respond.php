@@ -14,7 +14,7 @@ echo "<br />";
 
 
 echo form_label('To: ', 'to_id');
-echo $usernames[9];
+echo $usernames[$message->from_id];
 echo form_hidden('to_id',$message->from_id);
 
 echo "<br /><br />";

@@ -23,6 +23,7 @@ class Grouppage extends Controller {
     $this->load->model('User');
     $this->load->model('Group');
     $this->load->model('tinyMCE');
+    $this->load->model('Images');
     $this->load->helper('url');
     $this->load->database();
     
@@ -93,6 +94,7 @@ class Grouppage extends Controller {
 	$data['gid'] = $t;
 	$data['member'] = !$isamember;
 	$data['members'] = $userlist;
+	$data['filelist'] = $this->Images->get_groups_pics($t);
       }
     }
     //Send all information to the view.

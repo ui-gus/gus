@@ -5,7 +5,9 @@
 <?php
   echo "<div class=\"update\">"
   . "You have successfully been added to Gus.<br><br>"
-  . "Username : " . $un . "<br><br>"
+  . "You can now create and join Groups, read and post on the<br>"
+  . "forums, and experience everything else Gus has to offer!<br><br>"
+  . "You should start by editing your personal profile ".anchor('userpage/personal','here').".<br>"
   . "</div>"
   ;
   

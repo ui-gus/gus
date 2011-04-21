@@ -18,6 +18,10 @@
 		while (false !== ($filename = readdir($handle))) {
 			if ( $filename == "." || $filename == ".." || $filename == "thumbs")
 				continue;
+			$query="";
+			$fgid=-1;
+			$groupname="";
+			$fperm=8;
 			//get file group membership and permissions
 			$this->db->where('filename',$filename);
 			$query=$this->db->get('files')->result_array();
