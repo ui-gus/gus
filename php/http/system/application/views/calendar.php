@@ -77,6 +77,9 @@
 			echo "<br>&#8226 To EDIT/INVITE/JOIN/DROP/DELETE events, click on a calendar day";
 			echo "<br>&#8226<font color='blue'>Group events are in blue</font><p></p></i></center>";
 
+			//get array of groups that the user owns
+			$ownedGroupsArr = $this->Calendarmodel->get_owned_groups();	
+			
 			//form to add an event to the calendar
 			echo form_open($form_path);
 				echo "<b>Add New Event:</b>" . form_input('event_data') . "<br>";
@@ -84,14 +87,21 @@
 				echo "Day:" . form_dropdown('event_day', range(1, cal_days_in_month(CAL_GREGORIAN, 
 										$this->pdata['month'], $this->pdata['year'])), date('j')-1);
 				echo "Year:" . form_dropdown('event_year', $form_years);				
-				//if user has admin privileges, he or she can add events for the group
-				if($this->Page->is_user_admin())
+				//check if user is admin of at least one group
+				if($ownedGroupsArr)
 				{
-					echo "  " . form_submit('AddForSelf', 'Add For You') 
-								. form_submit('AddForGroup', 'Add For Group');
+					foreach($ownedGroupsArr as $owned)
+					{
+						$ownedGroups[$owned] = $owned;
+					}
+					echo form_submit('AddForSelf', 'Add For You') . form_dropdown('groupName', $ownedGroups) . 
+						form_submit('AddForGroup', 'Add For Group');
 				}
 				else
-					echo " " . form_submit('AddForSelf', 'Add Event');
+				{
+					echo "<center>" . form_input('event_data') . 
+						form_submit('AddForSelf', 'Add Event') . "</center>";
+				}
 			echo form_close();	
 			
 			//form to view a specific day
