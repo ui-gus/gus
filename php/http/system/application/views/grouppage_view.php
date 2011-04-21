@@ -39,7 +39,7 @@ if( $authed ){
     /* echo "<div class=\"update\">"
       . "<h3><u>__List of Users__</u></h3>"
       ;*/
-  foreach( $members as $member ):{
+    /* foreach( $members as $member ):{
 	echo ""
 	  . anchor('userpage/view/'.$member['uid'] , 
 		 $this->User->get_name($member['uid']) 
@@ -47,7 +47,7 @@ if( $authed ){
 	. "</h4>"
 	;
 	}
-    endforeach;
+	endforeach;*/
 
     //Display unique page content.
     echo "<div class=\"update\">"
@@ -60,6 +60,7 @@ if( $authed ){
     
     echo "<table><tr>";
     $i = 1;
+    $img = '';
   foreach( $members as $member ):{
       if( $i == 1 ){
 	echo "<tr>";
@@ -68,11 +69,14 @@ if( $authed ){
 	echo "<td>";
 	$pic = $this->User->get_profile($member['uid']);
 	if ($pic != ''){ //Picture exists. Show the thumbnail.
-	  echo "<img src=\"".base_url()."uploads/thumbs/tn_".$pic."\">"; 
+	  //echo "<img src=\"".base_url()."uploads/thumbs/tn_".$pic."\">"; 
+	  $img = "<img src=\"".base_url()."uploads/thumbs/tn_".$pic."\">"; 
 	}
 	else{
-	  echo "<img src=\"".base_url()."templates/tn_null_profile.png\">"; 
+	  //echo "<img src=\"".base_url()."templates/tn_null_profile.png\">"; 
+	  $img = "<img src=\"".base_url()."templates/tn_null_profile.png\">"; 
 	}
+	echo anchor('userpage/view/'.$member['uid'] , $img );
 	echo "</td>";	
       }
       if( $i == 13 ){ 
