@@ -281,7 +281,7 @@ div.update{
 	padding: 10px;	
 	padding-left: 7px;
 	float: center;
-	width: 790px;	
+	width: 770px;	
 	font-size: 10pt;
 	color: #434750;
 	margin-bottom: 15px;
@@ -291,7 +291,7 @@ div.update{
 	text-align: justify;
 	min-height: 175px;
 }
-
+	
 div.update_user{
 	margin-top: 5px;
 	margin-bottom: 5px;
