@@ -7,7 +7,7 @@ if( $authed ){
   echo "<div class=\"update\">"
     . "<img src=\"" . base_url() 
     . "/uploads/" . $group->profile .  "\" class=\"profile_pic\">"
-    . "<h1>Group Title: " . $group->name . "</h1>"
+    . "<h1>" . $group->name . "</h1>"
     //. "Group id" . $group->id . "<br>"
     . "<img src=\"" . base_url() ."templates/quote_left.png\">"
     . $group->description
