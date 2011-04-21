@@ -58,7 +58,7 @@ if( $authed ){
       . "<u>Users in this Group</u>"
       ;
     
-    echo "<table><tr>";
+    echo "<table id=\"user\"><tr>";
     $i = 1;
   foreach( $members as $member ):{
       if( $i == 1 ){
@@ -68,7 +68,7 @@ if( $authed ){
 	echo "<td>";
 	$pic = $this->User->get_profile($member['uid']);
 	if ($pic != ''){ //Picture exists. Show the thumbnail.
-	  echo "<img src=\"".base_url()."uploads/thumbs/tn_".$pic."\">"; 
+	  echo "<img src=\"".base_url()."uploads/thumbs/tn_".$pic."\" width=\"50\" height=\"50\">"; 
 	}
 	else{
 	  echo "<img src=\"".base_url()."templates/tn_null_profile".$pic."\">"; 

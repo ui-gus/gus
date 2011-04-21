@@ -244,12 +244,11 @@ div#content tr:hover,td:hover {
 	backround-color: #a69d815;
 }
 
-div#content td{
+div#content table#user td{
 	padding-left: 10px;
 	padding-right: 10px;
 	padding: 5px;
-	border-left: 1px solid #f2ebd5;
-	border-top: 1px solid #f2ebd5;
+
 }
 
 div#content table.login td {
