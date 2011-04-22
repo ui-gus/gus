@@ -90,7 +90,6 @@ class Page extends Model {
 				<li><a href=\"" . site_url() . "/pm/compose\">Compose</a></li>
 				<li><a href=\"" . site_url() . "/search\">Search</a></li>
 				<li><a href=\"" . site_url() . "/grouppage	\">Groups</a> 
-				<li><a href=\"http://nwerp.org/trac/gus\">Help/FAQ</a></li>			
 				<li><a href=\"" . site_url() . "/feedback	\">FeedBack</a></li>
 			</ul>
 			
@@ -98,7 +97,7 @@ class Page extends Model {
 		</div>
 		<!-- This will hold all the updates and other stuff-->
 		<div id=\"content\">"	);
-	}
+	}//<li><a href=\"http://nwerp.org/trac/gus\">Help/FAQ</a></li>
 
 	function get_content($page_name) {
 		$result = $this->db->query("SELECT content FROM page WHERE name='$page_name'")->result();
