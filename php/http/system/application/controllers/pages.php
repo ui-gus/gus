@@ -27,7 +27,7 @@ class Pages extends Controller {
 
 	//used for class wide reroute to login if not authed
 	function _remap($method) {
-		if(!$this->Page->authed() && $method != "test") {
+		if(!$this->Page->is_un_admin() && $method != "test") {
 			$this->load->view('login');
 		} else {
 			$this->$method();

@@ -48,11 +48,13 @@ class Images extends Model {
 		$query=$this->db->get('files')->result_array();
 		foreach ( $query as $key)
 		{
+		 if(isset($key['image'])) {
 			if ($key['image'])
 			{
 			//echo $key['filename'] . "<br>";
 			array_push($images, $key['filename']);
 			}
+		 }//end if isset key image
 		}
 		return ($images);
 	}
