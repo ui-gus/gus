@@ -71,7 +71,7 @@ if( $authed ){
 	$pic = $this->User->get_profile($member['uid']);
 	$un = $this->User->get_name($member['uid']);
 	if ($pic != ''){ //Picture exists. Show the thumbnail.  
-	  $img = "<img src=\"".base_url()."uploads/thumbs/tn_".$pic."\" width=\"50\" height=\"50\" style=\"border:0px none\" title=\"" . $un . "\">";
+	  $img = "<img src=\"".base_url()."uploads/".$pic."\" width=\"50\" height=\"50\" style=\"border:0px none\" title=\"" . $un . "\">";
 	}
 	else{
 	  $img = "<img src=\"".base_url()."templates/tn_null_profile.png\" style=\"border:0px none\" title=\"" . $un . "\">";
