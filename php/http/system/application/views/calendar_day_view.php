@@ -20,6 +20,7 @@
 	}
 	.background{ background-color: #F2F2F2; }
 	.edit{ text-align: right; }
+	.editNull{ text-align: right; }
 	.delete{ text-align: right; }
 	.invite{ text-align: center; }
 	.attending{ text-align: right; }
@@ -75,7 +76,9 @@
 
 						//if it's a group event and the user isn't an admin
 						if( strcmp($item, "notAdm") == 0 )
-							echo "<div class='edit'>(Group Event)</div><br><br>";
+						{
+							echo "<div class='editNull'>(Group Event)</div><br><br>";
+						}
 						//if the user is the owner of the event
 						else
 						{						
@@ -149,11 +152,12 @@
 										form_submit('submitInvite', 'Invite Selected') . "</div>";
 								echo form_close();					
 								echo "<center>(hold 'CTRL' to select multiple people)</center>";
-								
-								//get info needed for inviting group members (used by Ajax)
-								//$groupMemberSelectList = implode("\\n", $inviteArray);							
-								//button to invite group members to the event (handled by Ajax script)
-								//echo "<div class='invite'>" . form_button('', 'Invite Group Members') . "</div>";	
+
+//THIS WILL REPLACE THE FORM ABOVE ONCE I FIGURE OUT HOW TO IMPLEMENT A POPUP SELECTION LIST								
+//get info needed for inviting group members (used by Ajax)
+//$groupMemberSelectList = implode("\\n", $inviteArray);							
+//button to invite group members to the event (handled by Ajax script)
+//echo "<div class='invite'>" . form_button('', 'Invite Group Members') . "</div>";	
 							}
 							else
 							{

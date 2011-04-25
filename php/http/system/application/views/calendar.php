@@ -13,7 +13,7 @@
 		.calendar .days td
 		{
 			width: 150px; height: 80px; padding: 4px;
-			border: 2px groove #F4A460;
+			border: 1px solid #F4A460;
 			vertical-align: top;
 			background-color: #F2F2F2;
 		}
