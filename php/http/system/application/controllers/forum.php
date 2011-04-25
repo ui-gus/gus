@@ -95,37 +95,58 @@ class Forum extends Controller
 		$this->pdata['content'] = $this->Page->get_content('forum');
 		$this->load->view('/forum/search_forum_view', $this->pdata, $this->fdata);
 	}
-	function search_by_user()
-	{
-		$this->search_criteria = $_POST['search_criteria'];
-		$this->fdata['query'] = $this->db->get_where('threads', array('thread_author' => $this->search_criteria, 'group_id' => $this->session->userdata('group_id')));
-		
-		$this->pdata['header'] = $this->Page->get_header('forum');	
-		$this->pdata['content'] = $this->Page->get_content('forum');
-		$this->load->view('/forum/forum_search_results_view', $this->fdata, $this->pdata);			
-	}
 	function search_by_topic()
 	{
 		$this->search_criteria = $_POST['search_criteria'];
 		
 		$this->db->like('thread_topic', $this->search_criteria);
-	    $this->fdata['query'] = $this->db->get_where('threads', array('group_id' => $this->session->userdata('group_id')));
+	    $thread_query = $this->db->get_where('threads', array('group_id' => $this->session->userdata('group_id')));
+		
+		foreach($thread_query->result() as $curr_result) {$temp_array[]=$curr_result->thread_id;}
+
+		$this->fdata['results'] = $temp_array;
 	
 		$this->pdata['header'] = $this->Page->get_header('forum');	
 		$this->pdata['content'] = $this->Page->get_content('forum');
 		$this->load->view('/forum/forum_search_results_view', $this->fdata, $this->pdata);			
 	}	
+	
+	
+	function search_by_user()
+	{
+		$this->search_criteria = $_POST['search_criteria'];
+
+		$thread_query = $this->db->get_where('threads', array('thread_author' => $this->search_criteria, 'group_id' => $this->session->userdata('group_id')));
+		$reply_query = $this->db->get_where('replies', array('author' => $this->search_criteria, 'group_id' => $this->session->userdata('group_id')));
+
+		foreach($thread_query->result() as $curr_result) {$temp_array[]=$curr_result->thread_id;}
+		foreach($reply_query->result() as $curr_result) {$temp_array[]=$curr_result->thread_id;}
+		$this->fdata['results'] = array_unique($temp_array);
+		
+		$this->pdata['header'] = $this->Page->get_header('forum');	
+		$this->pdata['content'] = $this->Page->get_content('forum');
+		$this->load->view('/forum/forum_search_results_view', $this->fdata, $this->pdata);			
+	}
+	
 	function search_by_content()
 	{
 		$this->search_criteria = $_POST['search_criteria'];
 		
 		$this->db->like('thread_body', $this->search_criteria);
-	    $this->fdata['query'] = $this->db->get_where('threads', array('group_id' => $this->session->userdata('group_id')));
-	
+	    $thread_query = $this->db->get_where('threads', array('group_id' => $this->session->userdata('group_id')));
+		$this->db->like('body', $this->search_criteria);
+	    $reply_query = $this->db->get_where('replies', array('group_id' => $this->session->userdata('group_id')));
+		
+		foreach($thread_query->result() as $curr_result) {$temp_array[]=$curr_result->thread_id;}
+		foreach($reply_query->result() as $curr_result) {$temp_array[]=$curr_result->thread_id;}
+		$this->fdata['results'] = array_unique($temp_array);
+		
 		$this->pdata['header'] = $this->Page->get_header('forum');	
 		$this->pdata['content'] = $this->Page->get_content('forum');
 		$this->load->view('/forum/forum_search_results_view', $this->fdata, $this->pdata);			
 	}	
+  
+  
   
   
     //takes thread id and pulls the topic and the body data from the database and puts it in fdata
@@ -207,6 +228,7 @@ class Forum extends Controller
 		$this->db->update('threads', $this->fdata); 
 	
 		//inserts reply in to database
+		$_POST['group_id']=$this->session->userdata('group_id');
 		$_POST['datetime']=date("d/M/Y h:i:s");
 		$_POST['author'] = $this->session->userdata['un'];
 		$this->db->insert('replies', $_POST);
