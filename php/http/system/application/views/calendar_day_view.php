@@ -143,13 +143,18 @@
 												'event_month' => $event_month,
 												'event_year' => $event_year,
 												'event_date' => $event_date,
-												'submitInvite' => 1);		
+												'submitInvite' => 1);
+								//get array of groups that the user is in
+								$enrolledGroupsArr = $this->Calendarmodel->get_enrolled_groups();
+								$groupInviteArray = $this->Calendarmodel->generate_invite_array($enrolledGroupsArr);
 					
 								//form for inviting group members to event
 								echo form_open($form_path, '', $hidden);
-									echo "<div class='invite'>Invite Members: " . 
+									echo "<div class='invite'>Members: " . 
 										form_multiselect('userArray[]', $inviteArray) . 
-										form_submit('submitInvite', 'Invite Selected') . "</div>";
+										form_submit('submitInvite', 'Invite Selected');
+									echo " Group(s): " . form_dropdown('groupName', $groupInviteArray) . 
+										form_submit('submitInvite', 'Invite Group') . "</div>";
 								echo form_close();					
 								echo "<center>(hold 'CTRL' to select multiple people)</center>";
 

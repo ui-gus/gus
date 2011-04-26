@@ -196,20 +196,31 @@ class Calendarmodel extends Model
 	}
 	
 	
-	function generate_invite_array()
+	function generate_invite_array($groupName = null)
 	{
 		$options = array();
-		//get array of groups that the user is part of
-		$enrolledGroupsArr = $this->get_enrolled_groups();
-		//get array of members in each of these groups
-		if($enrolledGroupsArr)
+		
+		if($groupName)
 		{
-			foreach($enrolledGroupsArr as $groupName)
+			foreach($groupName as $group)
 			{
-				$members = $this->get_group_members($groupName);
-				foreach($members as $member)
+				$options[$group] = $group;
+			}
+		}
+		else
+		{
+			//get array of groups that the user is part of
+			$enrolledGroupsArr = $this->get_enrolled_groups();
+			//get array of members in each of these groups
+			if($enrolledGroupsArr)
+			{
+				foreach($enrolledGroupsArr as $groupName)
 				{
-					$options[$member] = $member;
+					$members = $this->get_group_members($groupName);
+					foreach($members as $member)
+					{
+						$options[$member] = $member;
+					}
 				}
 			}
 		}
@@ -376,6 +387,7 @@ class Calendarmodel extends Model
 		}
 		return $groupArray;
 	}
+
 	
 	function get_group_members($groupName)	//returns an array of members in the specified group
 	{
