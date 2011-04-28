@@ -6,7 +6,7 @@
 if( $authed ){
   echo "<div class=\"update\">"
     . "<img src=\"" . base_url() 
-    . "/uploads/" . $group->profile .  "\" class=\"profile_pic\">"
+    . "/uploads/" . $group->profile .  "\" class=\"profile_pic\"onerror=\"this.src='".base_url()."/templates/null_profile.png'\">"
     . "<h1>" . $group->name . "</h1>"
     //. "Group id" . $group->id . "<br>"
     . "<img src=\"" . base_url() ."templates/quote_left.png\">"
@@ -57,29 +57,29 @@ if( $authed ){
       . "<div class=\"update\">"
       . "<u>" . count( $members ) . " Users in this Group</u>"
       ;
-    
-    echo "<table id=\"user\"><tr>";
+  
+    echo "<table id=\"user\">";
     $i = 1;
     $img = '';
-    
   foreach( $members as $member ):{
       if( $i == 1 ){
 	echo "<tr>";
+      }    
+      echo "<td>";
+      $pic = $this->User->get_profile($member['uid']);
+      $un = $this->User->get_name($member['uid']);
+      if ($pic != ''){ //Picture exists. Show the thumbnail.  
+	$pic = base_url()."/uploads/".$pic;
+	$img = "<img src=\" ".$pic." \" width=\"50\" height=\"50\" style=\"border:0px none\""
+	  ."title=\"".$un."\"onerror=\"this.src='".base_url()."/templates/tn_null_profile.png'\">";
       }
-      else {
-	echo "<td>";
-	$pic = $this->User->get_profile($member['uid']);
-	$un = $this->User->get_name($member['uid']);
-	if ($pic != ''){ //Picture exists. Show the thumbnail.  
-	  $img = "<img src=\"".base_url()."uploads/".$pic."\" width=\"50\" height=\"50\" style=\"border:0px none\" title=\"" . $un . "\">";
-	}
-	else{
-	  $img = "<img src=\"".base_url()."templates/tn_null_profile.png\" style=\"border:0px none\" title=\"" . $un . "\">";
-	}
-	echo anchor('userpage/view/'.$member['uid'] , $img );
-	echo "</td>";	
+      else{
+	$img = "<img src=\"".base_url()."templates/tn_null_profile.png\" style=\"border:0px none\" title=\"" . $un . "\">";
       }
-      if( $i == 13 ){ 
+      echo anchor('userpage/view/'.$member['uid'] , $img );
+      echo "</td>";	
+      
+      if( $i == 12 ){ 
 	echo "</tr><tr>";
 	$i = 1;
       }
