@@ -20,6 +20,7 @@
 	}
 	.background{ background-color: #F2F2F2; }
 	.edit{ text-align: right; }
+	.editNull{ text-align: right; }
 	.delete{ text-align: right; }
 	.invite{ text-align: center; }
 	.attending{ text-align: right; }
@@ -75,7 +76,9 @@
 
 						//if it's a group event and the user isn't an admin
 						if( strcmp($item, "notAdm") == 0 )
-							echo "<div class='edit'>(Group Event)</div><br><br>";
+						{
+							echo "<div class='editNull'>(Group Event)</div><br><br>";
+						}
 						//if the user is the owner of the event
 						else
 						{						
@@ -101,10 +104,10 @@
 							echo "<div class='delete'>" . form_open($form_path, '', $hidden);	
 								echo form_submit('submitDelete', 'Delete') . "</div>";
 							echo form_close();
-														
-							//check for confirmed attendees
-							$attendees = $this->db->query("SELECT name, yes FROM calendar_rsvp 
-															WHERE eventID='$item'")->result();
+																									
+								//get info needed to display confirmed attendees (used by Ajax)							
+								$attendees = $this->db->query("SELECT name, yes FROM calendar_rsvp 
+																WHERE eventID='$item'")->result();
 							if($attendees)
 							{
 								$countIndex2D = 0;
@@ -125,36 +128,48 @@
 									}
 								}
 							}
-	
-							//button to see who is attending the event (handled by Ajax script)
-							echo "<div class='attending'>" . form_button('attending', 'See who\'s Attending') . "</div>";
 							
-							//get group name
-							$groupName = $this->Calendarmodel->getCurrentGroup();
-							$options = null;
-							//get array of members in the group
-							$members = $this->User->get_userlist($groupName);
-							foreach($members as $member)
-							{
-								$options[$member] = $member;
-							}
-							$event_date = ($event_month+1) . "-" . ($event_day+1) . "-" . $event_year;							
-							$hidden = array('view_day_request' => 1,
-											'eventID' => $item,
-											'event_day' => $event_day,
-											'event_month' => $event_month,
-											'event_year' => $event_year,
-											'event_date' => $event_date,
-											'submitInvite' => 1);
-											
-							//form for inviting group members to event
-							echo form_open($form_path, '', $hidden);
-								echo "<div class='invite'>Invite Members: " . 
-									form_multiselect('userArray[]', $options) . 
-									form_submit('submitInvite', 'Invite') . "</div>";
-							echo form_close();	
-							echo "<center>(hold 'Ctrl' to select multiple people)</center>";
+							if(! $this->Calendarmodel->check_if_group_event($item))
+							{												
+								//button to see who is attending the event (handled by Ajax script)
+								echo "<div class='attending'>" . form_button('attending', 'See who\'s Attending') . "</div>";
+							
+								//get list of members in the same group(s) as the user
+								$inviteArray = $this->Calendarmodel->generate_invite_array();
+								$event_date = ($event_month+1) . "-" . ($event_day+1) . "-" . $event_year;							
+								$hidden = array('view_day_request' => 1,
+												'eventID' => $item,
+												'event_day' => $event_day,
+												'event_month' => $event_month,
+												'event_year' => $event_year,
+												'event_date' => $event_date,
+												'submitInvite' => 1);
+								//get array of groups that the user is in
+								$enrolledGroupsArr = $this->Calendarmodel->get_enrolled_groups();
+								$groupInviteArray = $this->Calendarmodel->generate_invite_array($enrolledGroupsArr);
+					
+								//form for inviting group members to event
+								echo form_open($form_path, '', $hidden);
+									echo "<div class='invite'>Members: " . 
+										form_multiselect('userArray[]', $inviteArray) . 
+										form_submit('submitInvite', 'Invite Selected');
+									echo " Group(s): " . form_dropdown('groupName', $groupInviteArray) . 
+										form_submit('submitInvite', 'Invite Group') . "</div>";
+								echo form_close();					
+								echo "<center>(hold 'CTRL' to select multiple people)</center>";
 
+//THIS WILL REPLACE THE FORM ABOVE ONCE I FIGURE OUT HOW TO IMPLEMENT A POPUP SELECTION LIST								
+//get info needed for inviting group members (used by Ajax)
+//$groupMemberSelectList = implode("\\n", $inviteArray);							
+//button to invite group members to the event (handled by Ajax script)
+//echo "<div class='invite'>" . form_button('', 'Invite Group Members') . "</div>";	
+							}
+							else
+							{
+								//so jQuery's .each() function works correctly with the 'attending' class
+								echo "<div class='attending'></div>";
+							}
+							
 							$countIndex += 1;		//increment the index							
 						}
 					}
@@ -216,16 +231,25 @@
 			$hidden = array('event_month' => $event_month, 
 							'event_day' => $event_day, 
 							'event_year' => $event_year,
-							'view_day_request' => 1);
-							
+							'view_day_request' => 1);		
+			//get array of groups that the user owns
+			$ownedGroupsArr = $this->Calendarmodel->get_owned_groups();			
+			
 			//form to add an event on the current day
 			echo form_open($form_path, '', $hidden);	
-				//check if user is admin
-				if($this->Page->is_user_admin())
+				//check if user is admin of at least one group
+				if($ownedGroupsArr)
 				{
+					foreach($ownedGroupsArr as $owned)
+					{
+						if(strlen($owned) > 25)
+							$ownedGroups[$owned] = substr($owned, 0, 22) . " ...";
+						else
+							$ownedGroups[$owned] = $owned;
+					}	
 					echo "<center><b>Add New Event:</b> " . form_input('event_data') .
-						form_submit('AddForSelf', 'Add For You') . form_submit('AddForGroup', 
-						'Add For Group') . "</center>";
+						form_submit('AddForSelf', 'Add For You') . form_dropdown('groupName', $ownedGroups) . 
+						form_submit('AddForGroup', 'Add For Group') . "</center>";
 				}
 				else
 				{
@@ -233,6 +257,7 @@
 						. "</center>";
 				}
 			echo form_close(); 
+			
 			echo "<center><font color='blue'>For events that you are invited to: If they disappear,<br> 
 					go back to month view and click on the date to make them re-appear.</font></center>";
 			echo"<br><hr />";
@@ -362,10 +387,10 @@
 		peopleArr = $.parseJSON(<?php echo $jsonNames; ?>);			
 		//2D array of event info
 		eventArr = $.parseJSON(<?php echo $jsonEventInfo; ?>);	
-		listAttendees = "";
 		
 		$(this).click(function()
 		{
+			listAttendees = "";
 			for(j in peopleArr[i])
 			{
 				//add newlines
@@ -378,6 +403,53 @@
 				alert("Event:  " + eventArr[i].event + "\n\nConfirmed attendees:\n" + listAttendees);			
 			else
 				alert("Event:  " + eventArr[i].event + "\n\nNo confirmed attendees yet");					
+		});
+	});
+	</script>
+
+	
+	<!-- jQuery Ajax script for inviting group members to an event -->
+	<script type="text/javascript">
+	$('.invite').each(function(i)
+	{	
+		submitInvite = 1;
+		view_day_request = 1;
+		event_day = <?php echo $event_day; ?>;
+		event_month = <?php echo $event_month; ?>;
+		event_year = <?php echo $event_year; ?>;
+		event_date = <?php echo $event_date; ?>;		
+		eventIdArr = <?php echo $jsonIdArray; ?>;
+		path = '<?php  echo site_url() . "/calendar/index/" . $event_year . "/" . $event_month; ?>';
+		selectList = "<?php echo $groupMemberSelectList; ?>";	
+		
+		$(this).click(function()
+		{	
+			//selectedArray is the array of people who were invited to the specific event
+			selectedArray = alert("Select people to invite:\n" + selectList);
+							
+			if(selectedArray != null)
+			{ 	
+				$.ajax(
+				{
+					url: path,
+					type: "POST",
+					data: 
+					{
+						submitInvite: submitInvite, 
+						eventID: eventIdArr[i],
+						event_day: event_day,
+						event_month: event_month,
+						event_year: event_year,
+						event_date: event_date,
+						userArray: selectedArray,
+						view_day_request: view_day_request
+					},
+					success: function(msg)
+					{
+						location.reload();
+					}
+				});
+			}		
 		});
 	});
 	</script>

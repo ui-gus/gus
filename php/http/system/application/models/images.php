@@ -48,13 +48,37 @@ class Images extends Model {
 		$query=$this->db->get('files')->result_array();
 		foreach ( $query as $key)
 		{
+		 if(isset($key['image'])) {
 			if ($key['image'])
 			{
 			//echo $key['filename'] . "<br>";
 			array_push($images, $key['filename']);
 			}
+		 }//end if isset key image
 		}
 		return ($images);
+	}
+
+	function get_groups_files($gid) 
+	{
+	  $ci = get_instance();
+	  $ci->load->model('User');
+	  $images = array();
+	  $image = array();
+	  
+	  $this->db->where('gid',$gid);
+	  $query=$this->db->get('files')->result_array();
+	  foreach ( $query as $key)
+	    {
+	      if(isset($key['image'])) {
+		$image = array();
+		$image['filename'] = $key['filename'];
+		$image['image'] = $key['image'];
+		array_push( $images, $image );
+		
+	      }//end if isset key image
+	    }
+	  return ($images);
 	}
 }
 

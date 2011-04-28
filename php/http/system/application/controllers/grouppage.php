@@ -155,7 +155,36 @@ class Grouppage extends Controller {
     $this->load->view( 'grouppage_edit.php', $data, $this->testing );
     return( true );
   }
+  
+  function files( $testgroup ){
+    $data['header'] = $this->Page->get_header('groups');
+    $data['footer'] = $this->Page->get_footer();
+    if( $this->testing == true && $testgroup == "" ){
+      return false;
+    }
+    
+    if( !$this->Page->authed() && $this->testing == false ){
+      $data['authed'] = false;
+    }
+    else{
+      $data['authed'] = true;
+      $t = $this->uri->segment(3);
+      if( $t == "" ){
+	$t = $testgroup;
+      }
+      if( $t == "" && $this->testing == false ){
+	redirect( 'home' );
+      }   
+      else{ //Main part. 
 
+	$data['filelist'] = $this->Images->get_groups_files($t);
+
+
+      }
+    }
+    $this->load->view( 'grouppage_files.php', $data, $this->testing );
+  }
+  
   function join( $testgroup ){
     $data['header'] = $this->Page->get_header('groups');
     $data['footer'] = $this->Page->get_footer();
