@@ -279,7 +279,7 @@ div#content a:hover{
 
 #content img#newgroup{
 	opacity: 0.8;
-
+	border: 0px none;
 }
 
 #content img#newgroup:hover{
