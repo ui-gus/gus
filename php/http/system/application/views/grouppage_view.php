@@ -33,6 +33,8 @@ if( $authed ){
     echo anchor('grouppage/join/'.$gid , "Join this group<br>");     
   }
   if( $permissions['read'] ){
+    echo anchor('forum/view_forum' , "View Group Forum");
+    echo "<br>";
     echo anchor('grouppage/files/'.$gid , "View Group files");
   }
   echo "</div>";
