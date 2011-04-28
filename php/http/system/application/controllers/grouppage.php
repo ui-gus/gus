@@ -27,6 +27,8 @@ class Grouppage extends Controller {
     $this->load->helper('url');
     $this->load->database();
     
+    $this->session->userdata('group_name');
+
     $this->testing = false;
   }
   
