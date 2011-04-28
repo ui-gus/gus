@@ -11,7 +11,6 @@ Headers and Otherwise: Trebuchet MS
 
 
 html {
-	/*Fall Back Option*/
 	background: white;
 	background-image: url('../templates/html_background.png');
 	background-position: left top;
@@ -173,7 +172,7 @@ div#container{
 
 #group_column a:visited{
 	padding: 4px;
-		padding-left: 20px;
+	padding-left: 20px;
 	display: block;	
 	padding-right: 6px;
 	text-decoration: none;
@@ -184,7 +183,7 @@ div#container{
 	background-color: #404349;
 	display: block;
 	padding: 4px;
-		padding-left: 20px;
+	padding-left: 20px;
 	padding-right: 6px;
 	text-decoration: none;
 	color: white;
@@ -209,8 +208,8 @@ div#content{
 }
 
 div#content img.profile_pic{
-        width: 150px;
-        height: 150px;
+    width: 150px;
+    height: 150px;
 	margin-right: 10px;
 	float: left;
 }
@@ -238,8 +237,10 @@ div#content table#t2{
 	font-size: 12pt;
 	padding: 0px;
 	margin: 0px;
-	width: 80%;
+	width: 70%;
 	color: #404349;	
+	vertical-align: text-top;
+
 }
 
 div#content tr:hover,td:hover {
