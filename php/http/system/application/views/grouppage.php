@@ -8,7 +8,8 @@
 <?php 
 if( $authed ){
   
-  echo anchor( "/groups/add_request" , "Create a new Group" );
+  $newgroup = "<img src=\"" . base_url() . "/templates/new_group_button.png\" id=\"newgroup\">";
+  echo anchor( "/groups/add_request" , $newgroup );
 	$arrow = "<img src=\"" . base_url() . "/templates/arrow.png\">";
   
   echo "<div id=\"table_container\""
@@ -26,7 +27,7 @@ if( $authed ){
   endforeach;
   echo "</table>";
   
-  echo "<table class=\"group_display\"><tr>"
+  echo "<table class=\"group_display2\"><tr>"
 	. "<tr><td><h2>All Groups</h2></td></tr>"
     ;
  foreach( $groups as $group ):{

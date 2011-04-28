@@ -277,12 +277,24 @@ div#content a:hover{
 	margin: 0 auto;
 }
 
+#content img#newgroup{
+	opacity: 0.8;
+
+}
+
+#content img#newgroup:hover{
+	opacity: 1.0;
+}
+
 #content table.group_display{
 	font-size: 12pt;
 	color: #404349;	
 	float: left;
 	width: 300px;
 	opacity:0.9;
+	background-position: right bottom;
+	background-repeat: no-repeat; 
+
 }
 
 #content table.group_display:hover{
@@ -297,7 +309,36 @@ div#content a:hover{
 
 #content table.group_display td.group:hover{
 	vertical-align:top;
+	padding-left: 40px;
+	opacity: 1.0;
+}
+
+/*terrible hack incoming */
+
+#content table.group_display2{
+	font-size: 12pt;
+	color: #404349;	
+	float: left;
+	width: 300px;
+	opacity:0.9;
+	background-position: bottom right;
+	background-repeat: no-repeat; 
+	background-image: url('../templates/info-group.png');
+}
+
+#content table.group_display2:hover{
+	opacity: 1.0;
+}
+
+#content table.group_display2 td.group{
+	vertical-align:top;
 	padding-left: 20px;
+	opacity: 0.7;
+}
+
+#content table.group_display2 td.group:hover{
+	vertical-align:top;
+	padding-left: 40px;
 	opacity: 1.0;
 }
 
