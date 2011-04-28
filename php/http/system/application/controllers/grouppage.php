@@ -176,7 +176,7 @@ class Grouppage extends Controller {
 	redirect( 'home' );
       }   
       else{ //Main part. 
-
+	$data['gid'] = $t;
 	$data['filelist'] = $this->Images->get_groups_files($t);
 
 

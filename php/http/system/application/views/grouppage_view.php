@@ -32,6 +32,9 @@ if( $authed ){
   else {
     echo anchor('grouppage/join/'.$gid , "Join this group<br>");     
   }
+  if( $permissions['read'] ){
+    echo anchor('grouppage/files/'.$gid , "View Group files");
+  }
   echo "</div>";
   
   if( $permissions['read'] ){
