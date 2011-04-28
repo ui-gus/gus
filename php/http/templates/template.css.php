@@ -233,16 +233,6 @@ div#content table{
 	width: 100%;
 }
 
-div#content table#t2{
-	font-size: 12pt;
-	padding: 0px;
-	margin: 0px;
-	width: 70%;
-	color: #404349;	
-	vertical-align: text-top;
-
-}
-
 div#content tr:hover,td:hover {
 	backround-color: #a69d815;
 }
@@ -269,18 +259,49 @@ div#content table.login td {
 }
 
 div#content a:link {
-		color: #a69d81;
-		text-decoration: none;
-		border: 0px;
+	color: #a69d81;
+	text-decoration: none;
+	border: 0px;
 }
 
 div#content a:visited{
-	color: #c7c3c3; 
+	color: #44433f; 
 }
 
 div#content a:hover{
 	text-decoration: underline;
 }
+
+#content table_container {
+	width:100%;
+	margin: 0 auto;
+}
+
+#content table.group_display{
+	font-size: 12pt;
+	color: #404349;	
+	float: left;
+	width: 300px;
+	opacity:0.9;
+}
+
+#content table.group_display:hover{
+	opacity: 1.0;
+}
+
+#content table.group_display td.group{
+	vertical-align:top;
+	padding-left: 20px;
+	opacity: 0.7;
+}
+
+#content table.group_display td.group:hover{
+	vertical-align:top;
+	padding-left: 20px;
+	opacity: 1.0;
+}
+
+
 
 
 /*small divs that will fall inside content*/
