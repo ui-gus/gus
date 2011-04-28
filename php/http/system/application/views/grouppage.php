@@ -7,36 +7,38 @@
 
 <?php 
 if( $authed ){
- 
-  echo ""
-    . anchor( "/groups/add_request" , "Create a new Group" )
+  
+  $newgroup = "<img src=\"" . base_url() . "/templates/new_group_button.png\" id=\"newgroup\">";
+  echo anchor( "/groups/add_request" , $newgroup );
+	$arrow = "<img src=\"" . base_url() . "/templates/arrow.png\">";
+  
+  echo "<div id=\"table_container\""
     . "<br>"
-    . "<table id=\"t2\"><tr>" 
-    . "<td><h2>My Groups</h2><br>"
+    . "<table class=\"group_display\"><tr>" 
+    . "<td><h2>My Groups</h2></td></tr>"
     ;
  foreach( $grouplist as $key ):{
-    echo "<br>"
+    echo "<tr><td class=\"group\">" . $arrow . " " 
       . anchor('grouppage/view/'.$key['gid'] , 
 	       $this->Group->get_name($key['gid']))
+		. "</td></tr>"
       ;
   }
   endforeach;
-  echo "</td>";
+  echo "</table>";
   
-  echo "<td><h2>All Groups</h2><br>"
+  echo "<table class=\"group_display2\"><tr>"
+	. "<tr><td><h2>All Groups</h2></td></tr>"
     ;
  foreach( $groups as $group ):{
     //Display all groups and link to their group/view.
-    echo "<br>"
+    echo "<tr><td class=\"group\">"  . $arrow . " " 
       . anchor('grouppage/view/'.$this->Group->get_id($group) , $group)
-      ;
+      . "</td></tr>";
   }
   endforeach;
-  echo "</td></tr></table>";
- 
-  //display group request link
-  echo '<a href="' . site_url() . '/groups/add_request">'
-		. 'Request a new group</a><br />';
+  echo "</table>"; 
+  echo "</div>";
  }
  else{
    echo "You must be logged in to view this page.";

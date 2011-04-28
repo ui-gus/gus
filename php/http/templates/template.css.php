@@ -11,7 +11,6 @@ Headers and Otherwise: Trebuchet MS
 
 
 html {
-	/*Fall Back Option*/
 	background: white;
 	background-image: url('../templates/html_background.png');
 	background-position: left top;
@@ -173,7 +172,7 @@ div#container{
 
 #group_column a:visited{
 	padding: 4px;
-		padding-left: 20px;
+	padding-left: 20px;
 	display: block;	
 	padding-right: 6px;
 	text-decoration: none;
@@ -184,7 +183,7 @@ div#container{
 	background-color: #404349;
 	display: block;
 	padding: 4px;
-		padding-left: 20px;
+	padding-left: 20px;
 	padding-right: 6px;
 	text-decoration: none;
 	color: white;
@@ -209,6 +208,8 @@ div#content{
 }
 
 div#content img.profile_pic{
+    width: 150px;
+    height: 150px;
 	margin-right: 10px;
 	float: left;
 }
@@ -232,24 +233,14 @@ div#content table{
 	width: 100%;
 }
 
-div#content table#t2{
-	font-size: 12pt;
-	padding: 0px;
-	margin: 0px;
-	width: 80%;
-	color: #404349;	
-}
-
 div#content tr:hover,td:hover {
 	backround-color: #a69d815;
 }
 
-div#content td{
+div#content table#user td{
 	padding-left: 10px;
 	padding-right: 10px;
 	padding: 5px;
-	border-left: 1px solid #f2ebd5;
-	border-top: 1px solid #f2ebd5;
 }
 
 div#content table.login td {
@@ -262,18 +253,96 @@ div#content table.login td {
 	border-top-width: 0px;
 }
 
+#content a#user {
+	border: 0 none;
+	text-decoration: none;
+}
+
 div#content a:link {
-		color: #a69d81;
-		text-decoration: none;
+	color: #a69d81;
+	text-decoration: none;
+	border: 0px;
 }
 
 div#content a:visited{
-	color: #c7c3c3; 
+	color: #44433f; 
 }
 
 div#content a:hover{
 	text-decoration: underline;
 }
+
+#content table_container {
+	width:100%;
+	margin: 0 auto;
+}
+
+#content img#newgroup{
+	opacity: 0.8;
+	border: 0px none;
+}
+
+#content img#newgroup:hover{
+	opacity: 1.0;
+}
+
+#content table.group_display{
+	font-size: 12pt;
+	color: #404349;	
+	float: left;
+	width: 300px;
+	opacity:0.9;
+	background-position: right bottom;
+	background-repeat: no-repeat; 
+
+}
+
+#content table.group_display:hover{
+	opacity: 1.0;
+}
+
+#content table.group_display td.group{
+	vertical-align:top;
+	padding-left: 20px;
+	opacity: 0.7;
+}
+
+#content table.group_display td.group:hover{
+	vertical-align:top;
+	padding-left: 40px;
+	opacity: 1.0;
+}
+
+/*terrible hack incoming */
+
+#content table.group_display2{
+	font-size: 12pt;
+	color: #404349;	
+	float: left;
+	width: 300px;
+	opacity:0.9;
+	background-position: bottom right;
+	background-repeat: no-repeat; 
+	background-image: url('../templates/info-group.png');
+}
+
+#content table.group_display2:hover{
+	opacity: 1.0;
+}
+
+#content table.group_display2 td.group{
+	vertical-align:top;
+	padding-left: 20px;
+	opacity: 0.7;
+}
+
+#content table.group_display2 td.group:hover{
+	vertical-align:top;
+	padding-left: 40px;
+	opacity: 1.0;
+}
+
+
 
 
 /*small divs that will fall inside content*/
@@ -281,7 +350,7 @@ div.update{
 	padding: 10px;	
 	padding-left: 7px;
 	float: center;
-	width: 790px;	
+	width: 770px;	
 	font-size: 10pt;
 	color: #434750;
 	margin-bottom: 15px;
@@ -291,7 +360,7 @@ div.update{
 	text-align: justify;
 	min-height: 175px;
 }
-
+	
 div.update_user{
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -317,12 +386,17 @@ img.user_pic{
 	clear: right;
 }
 
-div.update_user h1{
-	font-size: 13px;
-	font-family: "Times New Roman";
+a.user{
+        text-decoration: none;
+        border: 0 none;
+}
+
+div.update h1{
 	margin-left: 10px;
-	font-weight: normal;
-	color: #5b3c33;
+
+	margin-top: 0px;
+	padding-top: 0px;
+	
 }
 
 /*Footer Style*/

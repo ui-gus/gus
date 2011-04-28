@@ -9,9 +9,9 @@ if( $authed ){
   echo "<div class=\"update\">"
     . "<img src=\"" . base_url() . "/uploads/" 
     . $personal['profile'] 
-    . "\" class=\"profile_pic\">"
-    . "<h1> Personal Profile : " . $name . "</h1>"
-    . "User # " . $id . "<br>"
+    . "\" class=\"profile_pic\"onerror=\"this.src='".base_url()
+    ."/templates/null_profile.png'\">"
+    . "<h1>" . $name . "</h1>"
     . "Full name: " . $personal['fullname'] . "<br>"
     . "<img src=\"" . base_url() ."templates/quote_left.png\"> "
     . $personal['description']
@@ -23,21 +23,18 @@ if( $authed ){
     . anchor( 'userpage/edit' , "Edit my Profile" )
     . "</div>"
     . "<div class=\"update\">"
-    . "<h3><u> &nbsp &nbsp List of Groups &nbsp &nbsp </u></h3>"
+    . "<h3> &nbsp &nbsp Member of: &nbsp &nbsp </h3>"
     ;
     
  foreach( $grouplist as $key ):{
-    echo "<h4>"
-      . anchor('grouppage/view/'.$key['gid'] ,
-	       $this->Group->get_name($key['gid'])
-	       )
-      . "</h4>"
+    echo anchor('grouppage/view/'.$key['gid'] ,
+		$this->Group->get_name($key['gid']))
+      . "<br>" 
       ;
   }
   endforeach;
 
-  echo "<u>_____________________</u>"
-    . "</div>"
+  echo "</div>" 
     ;
   
  }

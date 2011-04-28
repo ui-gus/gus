@@ -9,10 +9,10 @@ if( $authed ){
   echo "<div class=\"update\">"
     . "<img src=\"" . base_url() . "/uploads/"
     . $personal['profile']
-    . "\" class=\"profile_pic\">"
-    . "<h1> User Profile:" . $name . "</h1>"
-    . "User #" . $id . "<br>"
-    . "Full name: " . $personal['fullname']
+    . "\" class=\"profile_pic\"onerror=\"this.src='".base_url()
+    ."/templates/null_profile.png'\">"
+    . "<h1>" . $name . "</h1>"
+    . "Full name: " . $personal['fullname'] . "<br>"
     . "<img src=\"" . base_url() ."templates/quote_left.png\"> "
     . $personal['description']
     . "<img src=\"" . base_url() ."templates/quote_right.png\">" . "<br>"
@@ -23,7 +23,7 @@ if( $authed ){
     
     // Display all groups the user is in.
     . "<div class=\"update\">"
-    . "<h3><u>__List of Groups__</u></h3>"
+    . "<h3> &nbsp &nbsp Member of: &nbsp &nbsp </h3>"
     ;
     
  foreach( $grouplist as $key ):{
@@ -35,10 +35,7 @@ if( $authed ){
       ;
   }
   endforeach;
-
-  echo "<u>___________________</u>"
-    . "</div>"
-    ;
+  echo "</div>";
   
  }
  else {

@@ -23,9 +23,12 @@ class Grouppage extends Controller {
     $this->load->model('User');
     $this->load->model('Group');
     $this->load->model('tinyMCE');
+    $this->load->model('Images');
     $this->load->helper('url');
     $this->load->database();
     
+    $this->session->userdata('group_name');
+
     $this->testing = false;
   }
   
@@ -93,6 +96,7 @@ class Grouppage extends Controller {
 	$data['gid'] = $t;
 	$data['member'] = !$isamember;
 	$data['members'] = $userlist;
+	$data['filelist'] = $this->Images->get_groups_pics($t);
       }
     }
     //Send all information to the view.
@@ -153,7 +157,36 @@ class Grouppage extends Controller {
     $this->load->view( 'grouppage_edit.php', $data, $this->testing );
     return( true );
   }
+  
+  function files( $testgroup ){
+    $data['header'] = $this->Page->get_header('groups');
+    $data['footer'] = $this->Page->get_footer();
+    if( $this->testing == true && $testgroup == "" ){
+      return false;
+    }
+    
+    if( !$this->Page->authed() && $this->testing == false ){
+      $data['authed'] = false;
+    }
+    else{
+      $data['authed'] = true;
+      $t = $this->uri->segment(3);
+      if( $t == "" ){
+	$t = $testgroup;
+      }
+      if( $t == "" && $this->testing == false ){
+	redirect( 'home' );
+      }   
+      else{ //Main part. 
+	$data['gid'] = $t;
+	$data['filelist'] = $this->Images->get_groups_files($t);
 
+
+      }
+    }
+    $this->load->view( 'grouppage_files.php', $data, $this->testing );
+  }
+  
   function join( $testgroup ){
     $data['header'] = $this->Page->get_header('groups');
     $data['footer'] = $this->Page->get_footer();

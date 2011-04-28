@@ -16,7 +16,7 @@
   . "<br>"
   . "Picture: &nbsp &nbsp &nbsp&nbsp" . form_input( array('name'=>'profile','value'=>$personal['profile'],
 				    'maxlength'=>'20','size'=>'20') ) 
-  . " " . anchor( 'docs' , "Upload") . " | " 
+  . " " . anchor( 'upload' , "Upload") . " | " 
   . anchor( 'docs' , "Select") . "<br>"
   . "Email: &nbsp &nbsp &nbsp &nbsp " . form_input( array('name'=>'email','value'=>$personal['email'],
 				  'maxlength'=>'20','size'=>'20') ) 

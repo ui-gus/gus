@@ -13,21 +13,24 @@
 			<td width="13%" align="center" bgcolor="#E6E6E6"><strong>Replies</strong></td>
 			<td width="13%" align="center" bgcolor="#E6E6E6"><strong>Date/Time</strong></td>
 		</tr>
-		<?php foreach($this->fdata['query']->result() as $row): ?>
-		<tr>
-			<td bgcolor="#FFFFFF"><?php echo anchor('forum/view_thread/' .$row->thread_id, $row->thread_topic); ?></td>
-			<td align="center" bgcolor="#FFFFFF"><?php echo $row->num_replies; ?></td>
-			<td align="center" bgcolor="#FFFFFF"><?php echo $row->datetime; ?></td>
-		</tr>
-		<?php endforeach; ?>
+		<?php foreach($this->fdata['results'] as $curr_result): ?>
 		
+		<?php $thread = $this->db->get_where('threads', array('thread_id' => $curr_result)); ?>
+		
+			<?php foreach($thread->result() as $row): ?>
+			<tr>
+				<td bgcolor="#FFFFFF"><?php echo anchor('forum/view_thread/' .$row->thread_id, $row->thread_topic); ?></td>
+				<td align="center" bgcolor="#FFFFFF"><?php echo $row->num_replies; ?></td>
+				<td align="center" bgcolor="#FFFFFF"><?php echo $row->datetime; ?></td>
+			</tr>
+			<?php endforeach; ?>
+		<?php endforeach; ?>
 		<tr>
 			<td bgcolor="#E6E6E6"></td>
 			<td bgcolor="#E6E6E6"></td>	
 			<?php echo form_open('forum/search_forum');?>
 				<td width="50%" align="right" bgcolor="#E6E6E6"><input type="submit" value="Search Forum" /td>
 			</form>
-			
 		</tr>
 		
 	</table>
