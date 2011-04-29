@@ -7,13 +7,16 @@
 		$this->load->model('User');
 		$this->load->model('Group');
 
-		//Show a list of files
+		$un = $this->session->userdata('un');
+		$uid = $this->User->get_id($un);
+		$list_of_files = array();
+
 		$path = './uploads';
 
 		$handle = opendir($path);
 		if ($handle == false)
 			return(false);
-                echo "<ul>";
+              //echo "<ul>";
 
 		while (false !== ($filename = readdir($handle))) {
 			if ( $filename == "." || $filename == ".." || $filename == "thumbs")
@@ -38,69 +41,68 @@
 
 			$grouplist = $this->pdata['grouplist'];
 
-//print_r (array_values($grouplist));
-
 			foreach($grouplist as $key)
 			{
-			if(in_array($fgid, $key) && $fperm <= $key['perm']){ 
-//echo "test<br>";
-			//Only display files if you're a member of that group and have sufficient permissions
-			$system=explode('.', $filename); //Get the extension
-			echo "<li>" . $filename . " owned by " . $groupname . " with permissions " . $fperm . "<br>";
-			echo "Size: " . $fsize . "<br>" . "Upload date: " . $fdate['4'] . $fdate['5'] . "/";
-			echo $fdate['6'] . $fdate['7'] . "/" . $fdate['0'] . $fdate['1'] . $fdate['2'] . $fdate['3'] . "<br>";
-			echo "Uploader: " . $fuploader . "<br>";
-
-			//Download button
-			echo form_open('docs/downloadFile');
-			echo form_hidden('file', $filename);
-			echo form_submit('submit', 'Download');//"<input type=\"submit\" value=\"Download\" />";
-			echo form_close();
-
-			//Delete button
-			if($key['perm'] == 7) //You need to be a group officer/admin to delete files
-			{
-			echo form_open('docs/deleteFile');
-			echo form_hidden('file', $filename);
-			echo form_submit('submit', 'Delete');//"<input type=\"submit\" value=\"Delete\" />";
-			echo form_close();
-			}
-
-			//Edit button
-			if($key['perm'] == 7) //You need to be a group officer/admin to modify files
-			{
-			echo form_open('docs/modifyFile');
-			echo form_hidden('file', $filename);
-			echo form_submit('submit', 'Modify');//"<input type=\"submit\" value=\"Modify\" />";
-			echo form_close();
-			}
-
-			//View button
-			if (preg_match('/jpg|jpeg|png|bmp|pdf|gif|txt/', $system[1])){  //Viewable extentsions
-				echo form_open('docs/viewFile');
-				echo form_hidden('file', $filename);
-				echo form_submit('submit', 'View');
-				echo form_close();
-			}
-			
-			//Display thumbnail
-			$name= "uploads/thumbs/tn_" . $filename;
-			if (preg_match('/jpg|jpeg|png|gif/', $system[1])){
-				echo "<img src=../" . $name . ">";
-			}
-			}
+				//if(in_array($fgid, $key) && $fperm <= $key['perm']){  //Display all files from groups you are a member and have sufficient permissions in
+				if(in_array($fgid, $key) && $fuploader == $uid) { //Display all files you've uploaded to groups you're a member of
+				//Get list of files
+				array_push($list_of_files, $filename);
+				}
 			}
 		}
-                echo "</ul>";
-                closedir($handle);
+              //echo "</ul>";
+              closedir($handle);
+	echo "<h3><u> User Files </u></h3>"
+	  . anchor( 'upload', "Upload a File") . "<br>";
+	if( empty($list_of_files))
+	{
+		echo "You haven't uploaded any files.<br>";
+	}
+	else
+	{
+		//Table
+		echo "<table id=\"user\"><tr>";
+		$i = 1;
+		$file = '';
+		$img = '';
+
+		foreach($list_of_files as $key)
+		{
+			if ($i == 1)
+			{
+				echo "<tr>";
+			}
+			echo "<td>";
+			
+			$img = "<img src=\"" . base_url() . "uploads/" . $key . "\" width=\"100\" height=\"100\" "
+			   . "style = \"border:0px none\" onerror=\"this.src='".base_url()
+      			   ."/templates/generic-file.png'\">";
+
+			if(strlen ($key) > 12 )
+			{
+				$name = substr($key, 0, 12);
+				$name .= "...";
+			}
+			else
+			{
+				$name = $key;
+			}
+			echo anchor('docs/view/' . $key, $img) . "<br>"
+			  . $name . "<br>";
+			echo "</td>";
+			if ( $i == 6)
+			{
+				echo "</tr><tr>";
+				$i = 1;
+			}
+			$i++;
+		}
+			
+		//echo $key . "<br>";
+		
+	}
 ?>
 
-<?php // $link = "<a href=\"" . site_url() . "/upload\">Upload</a>";
-//echo "<p>";
-//echo $link;
-echo "<p><a href=" . site_url() . "/upload>Upload</a> a new file.</p>"
-//echo " a new file.</p>"; ?>
 
-<p>Page rendered in {elapsed_time} seconds</p>
 
 <?php echo $this->pdata['footer'] ?>
