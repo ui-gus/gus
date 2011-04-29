@@ -33,9 +33,7 @@ echo "Message: ". $msg->message;
 echo "<br /><br />";
 
 echo anchor("pm/respond/".$msg->id, "respond   |");
-echo anchor("pm/archive_message/".$msg->id, "archive this   |");
-echo anchor("pm/inbox_message/".$msg->id, "move to inbox   |");
-echo anchor("pm/delete/".$msg->id, "delete"); 
+echo anchor("pm/delete/".$msg->id, "delete");
 
 echo $this->pdata['footer'];
 

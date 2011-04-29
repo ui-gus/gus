@@ -5,6 +5,7 @@ class Pm_model extends Model{
 		parent::Model();
 		$this->load->database();
 		$this->load->model('user');
+		$this->load->model('Group');
 		$this->load->library('table');
 		$this->load->library('session');
 		$this->load->helper('date');
@@ -14,20 +15,9 @@ class Pm_model extends Model{
 		$temp = 0;
 		$flag = 0;
 		$query = $this->db->get('user');
-		foreach ($query->result() as $row)
-		{
-			if($row->id == $userid)
-			{
-				$flag = 1;
-			}
-			
-		    if($row->id != $userid && $flag !=1)
-			{
-				$temp = $temp + 1;					
-			}
-		}
+		
 		$data = array();
-		$this->db->where('from_id',$temp);
+		$this->db->where('from_id',$userid);
 		$this->db->where('location', $location);
 		$this->db->order_by('created','desc');
 		$Q = $this->db->get("messages");
@@ -46,20 +36,9 @@ class Pm_model extends Model{
 		$temp = 0;
 		$flag = 0;
 		$query = $this->db->get('user');
-		foreach ($query->result() as $row)
-		{
-			if($row->id == $userid)
-			{
-				$flag = 1;
-			}
-			
-		    if($row->id != $userid && $flag !=1)
-			{
-				$temp = $temp + 1;					
-			}
-		}
+
 		$data = array();
-		$this->db->where('from_id',$temp);
+		$this->db->where('from_id',$userid);
 		$this->db->where('location', $location);
 		$this->db->order_by('created','desc');
 		$Q = $this->db->get("messages");
@@ -85,6 +64,7 @@ class Pm_model extends Model{
 		return $data;			
 	}
 	
+	
 	function delete_message($id){
 		$this->db->limit(1);
 		$this->db->where('id', $id);
@@ -104,32 +84,33 @@ class Pm_model extends Model{
 			$query = $this->db->get('user');
 			$temp = 0;
 			$flag = 0;
-
-			foreach ($query->result() as $row)
-			{
-				if($row->id == $userid)
-				{
-					$flag = 1;
-				}
-				
-			    if($row->id != $userid && $flag !=1)
-				{
-					$temp = $temp + 1;					
-				}
-			}
+	
+			$dat =  $this->pm_model->get_useridlist();
+			
 			$data = array(
-				'from_id' => $temp,
-				'to_id' => $this->input->post('to_id'),
+				'from_id' => $userid,
+				'to_id' => $dat[$this->input->post('to_id')],
 				'subject' => substr(strip_tags($this->input->post('subject')),0,64),
 				'message' => substr(strip_tags($this->input->post('message'), '<b><i><a>'),0,255),
 				'created' => $now,
 				'location' => 'sent',
 			);
-				$this->db->insert("messages" , $data);
+				$this->db->insert("messages" , $data);	
+				
+				$email = $this->pm_model->get_email($data['to_id']);			
+																				
+				$this->load->library('email');  
+				$this->email->from('GUSPHP@gusphp.com','GUSPHP TEAM');  
+				$this->email->to($email);  
+				$this->email->subject($this->User->get_name($userid)." sent you a message");  
+				$this->email->message($this->User->get_name($userid)." messaged you.\n\r\n\r".$this->User->get_name($userid).
+				" ".$data['created']."\n\n\r\r"."Subject: " .$data['subject']."\n\n\r\r".$data['message']. "\n\n\r\r".
+				"To view and reply to messages go to http://www.nwerp.org/gus/");              		  		
+				$this->email->send();				
 				
 	     	$data = array(
-					'to_id' => $temp,
-					'from_id' => $this->input->post('to_id'),
+					'to_id' => $userid,
+					'from_id' => $dat[$this->input->post('to_id')],
 					'subject' => substr(strip_tags($this->input->post('subject')),0,64),
 					'message' => substr(strip_tags($this->input->post('message'), '<b><i><a>'),0,255),
 					'created' => $now,
@@ -138,6 +119,34 @@ class Pm_model extends Model{
 					$this->db->insert("messages" , $data);
 							
 		}
+		
+		function get_useridlist() {
+			$this->db->select('id');
+	                $data = array();
+	                foreach($this->db->get('user')->result() as $key) {
+	                        array_push($data,$key->id);
+	                }
+			return($data);
+		}
+		
+		function get_email($id) {
+	                $this->db->select('email');
+	                $this->db->where('id',$id);
+	                $result = $this->db->get('user')->result();
+	                return($result[0]->email);
+	        }
+	
+		function get_groupuserlist($check) {
+				$this->db->select('uid');
+				$this->db->select('gid');
+				
+		                $data = array();
+		                foreach($this->db->get('usergroup')->result() as $key) {
+								if($check == $key->gid){
+		                        array_push($data,$key->uid);}
+		                }
+				return($data);
+			}
 	
 }//end class
 
