@@ -193,7 +193,6 @@ class Calendar extends Controller{
 		//test index
 		$this->Page->login("test","test123");
 		$this->unit->run($this->index(), true, "index function");	
-
 	
 		//test myGenerate() function
 		$test = $this->Calendarmodel->myGenerate($year, $month);
@@ -212,7 +211,7 @@ class Calendar extends Controller{
 		//test add_group_event() function (uses eventID 1 also)
 		$test = $this->Calendarmodel->add_group_event($date, 'something', 'testgroup', 1);
 		$expected_result = 'is_true';
-		$test_name = 'test to see if event is added to calendar table in database';
+		$test_name = 'test to see if group event is added to calendar table in database';
 		$this->unit->run($test, $expected_result, $test_name);
 		
 		//test remove_event() function by removing the group event added above
