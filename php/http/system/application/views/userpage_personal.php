@@ -20,6 +20,7 @@ if( $authed ){
     . "email : " . $personal['email'] . "<br>"
     . "phone : " . $personal['contact'] . "<br>"
     . "major : " . $personal['major'] . "<br>"
+    . anchor( 'docs' , "View my Files" ) . "<br>"
     . anchor( 'userpage/edit' , "Edit my Profile" )
     . "</div>"
     . "<div class=\"update\">"
