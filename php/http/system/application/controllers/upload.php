@@ -123,6 +123,8 @@ class Upload extends Controller {
 					'gid' => $_POST["groups"],
 					'date' => date("Ymd"), 
 					'size' => $data['upload_data']['file_size'],
+					'perm' => 0,
+					'image'=> $data['upload_data']['is_image']
 				);
 				$this->db->insert('files', $filedata);
 				return('success');
