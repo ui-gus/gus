@@ -156,11 +156,22 @@ class Calendarmodel extends Model
 		//prevent scripts and SQL-injection
 		$event = mysql_real_escape_string(htmlspecialchars($event));
 		
-		//update the event for the user if it exists already, otherwise add it
-		if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
+		if($eventID)
 		{
-			return $this->db->query("UPDATE calendar SET data='$event', 
-									date='$date' WHERE eventID='$eventID'");
+			//if it's an event for testing
+			if($eventID == 1)
+			{
+				$this->remove_event(1);		//clean up previous test events if they are there
+				return $this->db->query("INSERT INTO calendar (user, date, data, eventID) 
+										VALUES ('$userName', '$date', '$event', 1)");
+			}
+			//if it's a user's event being updated
+			elseif($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
+			{
+				//update the event
+				return $this->db->query("UPDATE calendar SET data='$event', 
+										date='$date' WHERE eventID='$eventID'");
+			}
 		}
 		else
 		{
@@ -168,6 +179,36 @@ class Calendarmodel extends Model
 			//add the event for the user in the calendar table 
 			return $this->db->query("INSERT INTO calendar (user, date, data) 
 									VALUES ('$userName', '$date', '$event')");
+		}
+	}
+
+	
+	function add_group_event($date, $event, $groupName, $eventID = null)  
+	{
+		//prevent scripts and SQL-injection
+		$event = mysql_real_escape_string(htmlspecialchars($event));
+
+		if($this->is_an_owner($groupName))
+		{
+			if($eventID)
+			{
+				if($eventID == 1)		//if it's for testing
+				{
+					return $this->db->query("INSERT INTO calendar (user, date, data, eventID) 
+											VALUES ('$groupName', '$date', '$event', 1)");
+				}
+				//update the group event if it exists already, otherwise add it
+				elseif($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
+				{
+					return $this->db->query("UPDATE calendar SET data='$event', date='$date' 
+																	WHERE eventID='$eventID'");									
+				}
+			}
+			else
+			{
+				return $this->db->query("INSERT INTO calendar (user, date, data) 
+										VALUES ('$groupName', '$date', '$event')");
+			}
 		}
 	}
 
@@ -182,17 +223,7 @@ class Calendarmodel extends Model
 	
 	function remove_event($eventID)
 	{
-		//only let an admin remove a group event
-		if($this->Page->is_user_admin())
-		{
-			return $this->db->query("DELETE FROM calendar WHERE eventID='$eventID'");
-		}
-		else
-		{
-			$userName = $this->session->userdata('un');
-			return $this->db->query("DELETE FROM calendar WHERE 
-									eventID='$eventID' AND user='$userName'");
-		}
+		return $this->db->query("DELETE FROM calendar WHERE eventID='$eventID'");
 	}
 	
 	
@@ -286,28 +317,6 @@ class Calendarmodel extends Model
 	{
 		return $this->db->query("UPDATE calendar_rsvp SET yes=0, no=1, maybe=0,
 								unanswered=0 WHERE eventID='$eventID' AND name='$userName'");
-	}
-	
-	
-	function add_group_event($date, $event, $groupName, $eventID = null)  
-	{
-		//prevent scripts and SQL-injection
-		$event = mysql_real_escape_string(htmlspecialchars($event));
-
-		if($this->Page->is_user_admin())
-		{
-			//update the group event if it exists already, otherwise add it
-			if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
-			{
-				return $this->db->query("UPDATE calendar SET data='$event', date='$date' 
-																WHERE eventID='$eventID'");									
-			}
-			else
-			{
-				return $this->db->query("INSERT INTO calendar (user, date, data) 
-										VALUES ('$groupName', '$date', '$event')");
-			}
-		}
 	}
 	
 	
