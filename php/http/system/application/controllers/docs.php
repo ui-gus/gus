@@ -17,6 +17,7 @@ class Docs extends Controller {
 		$this->load->model('Page');  //Use page model as base
 		$this->load->model('User');
 		$this->load->model('Group');
+		$this->load->model('Images');
 		$this->load->helper('form'); //CI's built in form helper
               $this->pdata['footer'] = $this->Page->get_footer(); //Set the footer
 		$this->testmode = 'false';
@@ -38,25 +39,25 @@ class Docs extends Controller {
 			header( 'Location: home' ); //Reload the page
 		}
 		else {
-		if ($this->testmode == 'false') 
-		{ //Don't load the page views if we're testing
-                $this->pdata['header'] = $this->Page->get_header('Docs'); //Set the header
-                $this->pdata['content'] = $this->Page->get_content('docs'); //Pull the content from the database
-		  $un = $this->session->userdata('un');
-		  $uid = $this->User->get_id($un);
-		  $this->pdata['grouplist'] = $this->db->get_where( 'usergroup', array('uid' => $uid) )->result_array();
-		  $this->load->view('docs', $this->pdata); //Load the docs view
-		//Get user infos
-/*
+			if ($this->testmode == 'false') 
+			{ //Don't load the page views if we're testing
+       	         $this->pdata['header'] = $this->Page->get_header('Docs'); //Set the header
+              	  $this->pdata['content'] = $this->Page->get_content('docs'); //Pull the content from the database
+			  $un = $this->session->userdata('un');
+			  $uid = $this->User->get_id($un);
+			  $this->pdata['grouplist'] = $this->db->get_where( 'usergroup', array('uid' => $uid) )->result_array();
+			  $this->load->view('docs', $this->pdata); //Load the docs view
+			//Get user infos
+		/*
 		  $un = $this->session->userdata('un');
 		  $uid = $this->User->get_id($un);
 		  $grouplist = $this->db->get_where( 'usergroup', array('uid' => $uid) )->result_array();
-		foreach ( $grouplist as $key )
-		{
+		  foreach ( $grouplist as $key )
+		  {
 			//echo $key['gid']; //gid
 			$this->Group->get_name($key['gid']) //name
-		}*/
-		}
+		  }*/
+			}
 		}
 		return('true');
 	}
@@ -137,7 +138,7 @@ class Docs extends Controller {
 
 
 	/*
-	viewFile
+	view (File)
 	This Function is called when a user wants to view a file online, without downloading it directly.
 	Steps
 	1. Check user permissions.
@@ -146,13 +147,78 @@ class Docs extends Controller {
 	4. Display file in window.
 	*/
 
-	function viewFile() 
+	function view($item)
 	{
-	$file = "uploads/" . $_POST['file'];
-	$display = "<iframe src=../../" . $file . " width=100% height=100% frameborder=0></iframe>";
-	if ($this->testmode == 'false')
+
+		//Get uid
+		$un = $this->session->userdata('un');
+		$uid = $this->User->get_id($un);
+
+		//Get gids and perms for those groups
+		$grouplist = $this->db->get_where( 'usergroup', array('uid' => $uid) )->result_array();
+		$filedata  = $this->db->get_where( 'files', array('filename' =>$item))->result_array();
+		$groupmember=0;
+
+		foreach ($filedata as $key)
 		{
-              	$this->pdata['content'] = $display;//$this->Page->get_content('docs');
+			$fgid=$key['gid'];	//file group membership
+			$groupname=$this->Group->get_name($key['gid']);
+			$fperm=$key['perm']; //file permissions
+			$fsize=$key['size']; //file size
+			$fdate=str_split($key['date']); //file upload date
+			$fuid=$key['uid'];
+		}
+
+		foreach ($grouplist as $key)
+		{
+			if ( $fgid == $key['gid'])
+			{
+				$groupmember=1;
+				break;
+			}
+			else
+			{
+				continue;
+			}
+		}
+		if($groupmember && ($fperm <= $key['perm'] || $fuid == $uid))
+		{
+			$file = "uploads/" . $item;
+			$display = $item . " owned by " . $groupname . "<br>"
+				. "Size: " . $fsize . " KB<br>" . "Upload date: " . $fdate['4'] . $fdate['5'] . "/"
+				. $fdate['6'] . $fdate['7'] . "/" . $fdate['0'] . $fdate['1'] . $fdate['2'] . $fdate['3'] . "<br>"
+				. "Uploader: " . $this->User->get_name($fuid) . "<br>";
+			//Download button
+			$download= form_open('docs/downloadFile') . form_hidden('file', $item) . form_submit('submit', 'Download') . form_close();
+			$display .="<br>" . $download;
+	
+			//Delete button
+			$delete='';
+			if($key['perm'] == 7 || $fuid == $uid) //You need to be a group officer/admin to delete files
+			{
+				$delete = form_open('docs/deleteFile') . form_hidden('file', $item) . form_submit('submit', 'Delete') . form_close();
+			}
+			$display .=$delete;
+	
+			//Edit button
+			$edit='';
+			if($key['perm'] == 7 || $fuid == $uid) //You need to be a group officer/admin to modify files
+			{
+				$edit = form_open('docs/modifyFile') . form_hidden('file', $item) . form_submit('submit', 'Modify') . form_close();
+			}
+			$display .=$edit;
+
+			$display .= "<iframe src=" . base_url() . $file . " width=100% height=100% frameborder=0></iframe>";
+		}
+		else
+		{
+			$display = "You don't have permission to view this file.<br>"
+				. "<a href=\"" . base_url() . "index.php/docs\">Go Back</a>";
+		}
+
+		if ($this->testmode == 'false')
+		{
+       	      	$this->pdata['content'] = $display;//$this->Page->get_content('docs');
 			$this->load->view('view_doc', $this->pdata);
 		}
 	}
