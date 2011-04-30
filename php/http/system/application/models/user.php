@@ -10,14 +10,17 @@
 
 class User extends Model {
 	
-	function User() {
+	function User($mode="default") {
 		parent::Model();	
-		$this->load->database();		
+		if($this->mode === "test") {
+			$this->db = $this->load->database('test',TRUE);
+		} else {
+			$this->load->database();		
+		}
 		$this->config->load('auth');
 	}
 
 	function get_userlist() {
-		//if($this->mode === "test") {$this->db = $this->load->database('test',TRUE);
 		$this->db->select('un');
                 $data = array();
                 foreach($this->db->get('user')->result() as $key) {

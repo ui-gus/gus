@@ -63,20 +63,20 @@ $db['admin']['cachedir'] = "";
 $db['admin']['char_set'] = "utf8";
 $db['admin']['dbcollat'] = "utf8_general_ci";
 
-/*
-$db['admin']['hostname'] = "localhost";
-$db['admin']['username'] = "gus_admin";
-$db['admin']['password'] = "SHI/hel7";
-$db['admin']['database'] = "gusphp_test";
-$db['admin']['dbdriver'] = "mysql";
-$db['admin']['dbprefix'] = "";
-$db['admin']['pconnect'] = TRUE;
-$db['admin']['db_debug'] = TRUE;
-$db['admin']['cache_on'] = FALSE;
-$db['admin']['cachedir'] = "";
-$db['admin']['char_set'] = "utf8";
-$db['admin']['dbcollat'] = "utf8_general_ci";
-*/
+
+$db['test']['hostname'] = "localhost";
+$db['test']['username'] = "gus_admin";
+$db['test']['password'] = "SHI/hel7";
+$db['test']['database'] = "gusphp_test";
+$db['test']['dbdriver'] = "mysql";
+$db['test']['dbprefix'] = "";
+$db['test']['pconnect'] = TRUE;
+$db['test']['db_debug'] = TRUE;
+$db['test']['cache_on'] = FALSE;
+$db['test']['cachedir'] = "";
+$db['test']['char_set'] = "utf8";
+$db['test']['dbcollat'] = "utf8_general_ci";
+
 
 /* End of file database.php */
 /* Location: ./system/application/config/database.php */
