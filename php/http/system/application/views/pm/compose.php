@@ -6,6 +6,7 @@ needs: form validation, upload of photo
 
 echo $this->pdata['header'];
 echo $this->pdata['content'];
+echo $this->pdata['tinyMCE'];
 
 echo "<font size =6 color = '#474747'>Compose a Message!</font>";
 

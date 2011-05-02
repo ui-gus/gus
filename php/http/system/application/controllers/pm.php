@@ -10,9 +10,11 @@ class Pm extends Controller {
 		parent::Controller();	
 		$this->load->model('Page');
 		$this->load->model('pm_model');
+		$this->load->model('tinyMCE');
 		$page_name = 'pm';
                	$this->pdata['header'] = $this->Page->get_header($page_name);
                 $this->pdata['content'] = $this->Page->get_content($page_name);
+				$this->pdata['tinyMCE'] = $this->tinyMCE->outputJScript(array('message'),1);
 		$this->pdata['footer'] = $this->Page->get_footer();
 	}
 
