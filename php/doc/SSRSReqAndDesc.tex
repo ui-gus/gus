@@ -1,0 +1,146 @@
+\chapter{Requirements Traceability}
+\part{Systems and Software Requirements Specification (SSRS) \\ for \\ Groups in a University Setting}
+\chapter{Overall Description}
+	\section{Product Perspective}
+		Gus is an independent software system, as it does not directly
+		integrate with a larger system. However, GUS does draw data from
+		external sources, such as personal information databases, and
+		needs to be integrated with a web server in order to be readily
+		accessible.
+	\section{Product Functions}
+		\begin{enumerate}
+		\item Simplifying tasks to leaders of groups, such as:
+			\begin{enumerate}
+				\item Sending notifications to group members, prospective
+					members, former members, and interested community
+					members (email)
+				\item Sending information (files) to group members via
+					email or download link
+				\item Managing a group-wide calendar of events
+				\begin{enumerate}
+					\item track volunteers, attendees, and contributors
+					\item suggest potentially beneficial services other
+						groups could provide related to the event
+					\item provide a calendar of events that includes events
+						from other groups that members would want to attend
+						(like marching band if half of LCM are in the
+						marching	band.)
+					\item keeping track of who is responsible for bringing
+						/ doing what at an event
+				\end{enumerate}
+				\item Automatically generating:
+				\begin{enumerate}
+					\item Contact information (contact sheets, phone
+						directories)
+					\item Website with updated contact, group, event, and
+						customized information
+					\item Organization charts
+					\item Graphical relationships between groups
+					\item Fees, dues, and expenses notifications
+					\item Event reminders
+				\end{enumerate}
+			\end{enumerate}
+			\item Consolidating information for members, former members,
+				potential members (and parents) of groups:
+			\begin{enumerate}
+				\item Common location of group information
+				\item Searching existing groups
+				\item Tying together existing groups (even suggesting
+					similar groups)
+				\item Personalized emails regarding changes/updates
+				\item Outstanding expenses or reimbursements
+				\item Reliable (i.e., automatically updated):
+				\begin{enumerate}
+					\item Group contact information
+					\item Group event information
+				\end{enumerate}
+				\item Transcript of verified group activity (for use with
+					service-learning classes, and proof of volunteerism
+					for potential employers)
+				\item Supplementing Vandal Friday with emails to
+					prospective high school Seniors
+			\end{enumerate}
+			\item Getting member input though: forums, project managers,
+				surveys, and polls
+			\item Payment processing and sponsorship collection
+			\item 4. Recruitment and advertising for groups, volunteer
+				/ paid opportunities, services provided, possibly a
+				bartering tool
+		\end{enumerate}
+	\section{User Characteristics}
+		Gus should be easy for any user to understand with a brief
+		explanation and intuitive enough for an uninitiated user to
+		figure out by looking through the options. Basic computer use
+		skills and a simple conceptual explanation should be enough for
+		every day usage.
+	\section{Constraints}
+		GUS must meet privacy policies as they apply to both the
+		University of Idaho and social networking sites.  GUS must be
+		able to interface with outside database servers (such as the
+		Center for Volunteerism's database, UI's career seeker site,
+		common social networks, and parent groups of university groups).
+		Member's activities and group's activities must be audited for
+		accuracy and safety.  The languages used to program GUS will be
+		primarily, HTML, CSS, and PHP for the user interface, C++ for
+		the interface between the user interface (which will implement
+		security and complex business rules), and the database, and
+		SQL for the database.  The networking protocols will be TCP/IP
+		and Open MP / MPI will be used to enhance parallel operation.
+		The system will have personal information for over 5,000
+		students, so confidentiality is of the utmost importance.
+	\section{Assumptions and Dependencies}
+		The software system should run like a web-app and need not be
+		downloaded by users.  It is assumed that users will be running
+		Internet Explorer, Fire Fox, or another popular web browser.
+		The server for the system is expected to run a UNIX operating
+		system.
+	\section{System Level (Non-Functional) Requirements}
+		\subsection{Site dependencies}
+			GUS will require a server that can support 1,000 concurrent
+			users.  The database must store the information, interests,
+			and activities of approximately 5,000 external users, 5,000
+			students and 200 groups.
+		\subsection{Safety, security and privacy requirements}
+			GUS contains the personal information of over 5,000 users
+			security should be integrated into every facet of this
+			program.  The privacy criteria for this system must reflect
+			privacy policies that apply to the University of Idaho, and
+			the security criteria for this system must reflect the need
+			to secure over 5,000 users from identity theft and potential
+			defamation of character.
+		\subsection{Performance requirements}
+		\begin{enumerate}
+			\item The number of simultaneous users to be supported are: 1,000.
+			\item Supported information ranges from text to files to streaming video.
+			\item 95\% of the transactions shall be processed in less than half a second.
+		\end{enumerate}
+		\subsection{System and software quality}
+			Gus must perform all required functions, behave consistently
+			and correctly, be easily corrected, running between 5:30 am
+			all day to 1:30 am be easily adaptable, test-driven, and easy
+			to use.
+		\subsection{Packaging and delivery requirements}
+			The executable system and all associated documentation (i.e.,
+			SSRS, SDD, code listing, test plan (data and results), and
+			user manual) will be delivered to the customer via Internet
+			download. The final, edited version of the above documents
+			will accompany the final, accepted version of the executable system.
+		\subsection{Personnel-related requirements}
+			The system under development will require a graduate student
+			system-level administrator to maintain the system.
+		\subsection{Training-related requirements}
+			No training materials or expectations are tied to this
+			project other than the limited help screens built into the
+			software and the accompanying user manual.
+		\subsection{Logistics-related requirements}
+			A server will be required to maintain the software system.
+			The user will be required to have an Internet connection.
+		\subsection{Precedence and criticality of requirements}
+			\begin{enumerate}
+				\item Maintaining confidentiality and privacy of PII
+				\item This system must be reliable enough for users to not
+					give up on it
+				\item All other features are less important than the first
+					two and equally important
+			\end{enumerate}
+

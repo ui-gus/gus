@@ -167,6 +167,8 @@ function view( $testuser ){
 
    
    //POST data
+   $this->Page->login("test","test123");
+print_r($this->Page);
    $_POST['profile'] = "test";
    $_POST['email'] = "test@gus.org";
    $_POST['contact'] = "800 555-TEST";

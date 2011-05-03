@@ -83,14 +83,16 @@ class Test extends Controller {
 		$this->load->model('User');
 		$this->User->mode = "test";
 		//get_userlist
-		echo $this->unit->run(true,$this->User->get_userlist(), 'get_userlist.1');
+		$this->unit->run(true,$this->User->get_userlist(), 'get_userlist.1');
 
 		//save
-		echo $this->unit->run("test_desc",$this->User->save(
+		$this->unit->run("test_desc",$this->User->save(
 					array("un" => "test_user",
 						"pw" => "ALT!shf6"
 					)
 				), 'save.1');
+	
+		echo $this->unit->report();
 	}
 
 	function allModels() {
