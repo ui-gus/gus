@@ -169,14 +169,50 @@ class Test extends Controller {
 		echo $this->unit->report();
 	}
 
-	function find() {
+	function images() {
+		$this->load->model('Images');	
+		$this->load->model('User');
+		$this->load->model('Group');
 
+		//get_users_pics
+		// full array
+		$this->unit->run(true,
+		 $this->Images->get_users_pics($this->User->get_id('test_user')),
+		 'get_users_pics - test_user');
+		// empty array
+		$this->unit->run(false,
+		 $this->Images->get_users_pics($this->User->get_id('fake')),
+		 'get_users_pics - fake');
+
+		//get_groups_pics
+		// full array
+		$this->unit->run(true,
+		 $this->Images->get_groups_pics($this->Group->get_id('test_group')),
+		 'get_groups_pics - test_group');
+		// empty array
+		$this->unit->run(false,
+		 $this->Images->get_groups_pics($this->Group->get_id('fake')),
+		 'get_groups_pics - fake');
+	
+		//get_groups_files
+		// full array
+		$this->unit->run(true,
+		 $this->Images->get_groups_files($this->Group->get_id('test_group')),
+		 'get_groups_pics - test_group');
+		// empty array
+		$this->unit->run(false,
+		 $this->Images->get_groups_files($this->Group->get_id('fake')),
+		 'get_groups_files - fake');
+
+
+		echo $this->unit->report();
+	//function get_groups_files($gid)
 	}
 
 	function allModels() {
 		$this->page();
 		$this->group();
 		$this->user();
-		$this->find()
+		$this->images();
 	}
 }
