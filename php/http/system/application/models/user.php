@@ -12,12 +12,16 @@ class User extends Model {
 	
 	function User($mode="default") {
 		parent::Model();	
+		$this->config->load('auth');
+	}
+
+	function _remap() {
 		if($this->mode === "test") {
 			$this->db = $this->load->database('test',TRUE);
 		} else {
 			$this->load->database();		
 		}
-		$this->config->load('auth');
+		echo "TS24<br />\n";
 	}
 
 	function get_userlist() {
@@ -33,11 +37,12 @@ class User extends Model {
                 $this->db->select('id');
                 $this->db->where('un',$name);
                 $result = $this->db->get('user')->result();
-		if(empty($result)) return("");
-                return($result[0]->id);
+		if(empty($result)) return(false);
+		return($result[0]->id);
         }
 
 	function get_name($id) {
+		if(!$id) return(false);
                 $this->db->select('un');
                 $this->db->where('id',$id);
                 $result = $this->db->get('user')->result();
@@ -46,10 +51,11 @@ class User extends Model {
         }
 	
 	function get_profile($id) {
+	  if(!$id) return(false);
 	  $this->db->select('profile');
 	  $this->db->where('id',$id);
 	  $result = $this->db->get('user')->result();
-	  if(empty($result)) return("");
+	  if(empty($result)) return(false);
 	  return($result[0]->profile);
         }
 
