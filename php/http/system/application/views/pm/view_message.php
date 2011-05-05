@@ -19,11 +19,11 @@ echo "Subject: <b>". $msg->subject ."</b>";
 echo "<br /><br />";
 
 //echo "From: ". $this->user->get_name($msg->from_id);
-echo "From: ". $usernames[$msg->from_id];
+echo "From: ". $this->User->get_name($msg->from_id);
 
 echo "<br /><br />";
 
-echo "To: ". $usernames[$msg->to_id];
+echo "To: ". $this->User->get_name($msg->to_id);
 echo "<br /><br />";
 
 echo "Sent: ". $msg->created;
@@ -33,8 +33,10 @@ echo "Message: ". $msg->message;
 echo "<br /><br />";
 
 echo anchor("pm/respond/".$msg->id, "respond   |");
-echo anchor("pm/inbox_message/".$msg->id, "move to inbox   |"); 
-echo anchor("pm/archive_message/".$msg->id, "archive this"); 
+echo anchor("pm/archive_message/".$msg->id, "archive this   |");
+echo anchor("pm/inbox_message/".$msg->id, "move to inbox   |");
+echo anchor("pm/delete/".$msg->id, "delete"); 
+
 echo $this->pdata['footer'];
 
 ?>

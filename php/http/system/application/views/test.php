@@ -35,6 +35,12 @@
   <td></td>
   <td>02.11.11</td>
  </tr>
+ <tr>
+  <td><a href="' . site_url() . '/test/images">Images</a></td>
+  <td>Alex Nilson</td>
+  <td></td>
+  <td>not recorded</td>
+ </tr>
 </table>
 
 <p>Tests for controllers:</p>

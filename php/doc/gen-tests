@@ -21,9 +21,13 @@ done
 
 rm $OUTDIR/all.html
 for cont in $CONTROLLERS; do
-	echo " Processing controller $cont..."
-	php index.php $cont test > $OUTDIR/$cont.html
-	cat $OUTDIR/$cont.html >> $OUTDIR/all.html
+	if [[ "$cont" == "userpage" ]]; then
+		echo " Processing controller $cont..."
+	else
+		echo " Processing controller $cont..."
+		php index.php $cont test > $OUTDIR/$cont.html
+		cat $OUTDIR/$cont.html >> $OUTDIR/all.html
+	fi
 done
 
 PASSED=`grep Passed $OUTDIR/all.html | wc -l`
@@ -38,7 +42,9 @@ mkdir -p $REPORTS
 cd $REPORTS
 for cont in $CONTROLLERS; do
 	rm $cont-report -rf
-	if [[ "$cont" == "test" ]]; then
+	if [[ "$cont" == "userpage" ]]; then
+		echo " Processing controller $cont..."
+	elif [[ "$cont" == "test" ]]; then
 		#test controller, which can't have a test() func. Has 'allModels' instead
 		php ../../bin/all.php $cont allModels
 	else

@@ -60,7 +60,6 @@ class Calendar extends Controller{
 				if($addForGroup = $this->input->post('AddForGroup'))
 				{
 					$groupName = $this->input->post('groupName');
-echo $groupName;
 					$this->Calendarmodel->add_group_event($event_date, $event_data, $groupName);
 				}
 				else
@@ -162,6 +161,7 @@ echo $groupName;
 				//display the month view
 				$this->load->view('calendar', $this->pdata);
 			}
+			return 1;
 		}
 		else
 		{
@@ -169,6 +169,7 @@ echo $groupName;
 				<p><a href="' . site_url() . '/auth">LOGIN</a> to view your calendar';
 			//display the error message instead of month view
 			$this->load->view('calendar', $this->pdata);
+			return 0;
 		}
 	}
 	
@@ -190,12 +191,8 @@ echo $groupName;
 
 	
 		//test index
-		//not logged in
-		$this->unit->run($this->index(), true, "index function");	
-		//logged in
 		$this->Page->login("test","test123");
 		$this->unit->run($this->index(), true, "index function");	
-
 	
 		//test myGenerate() function
 		$test = $this->Calendarmodel->myGenerate($year, $month);
@@ -204,22 +201,21 @@ echo $groupName;
 		$this->unit->run($test, $expected_result, $test_name);
 
 		//test add_event() function
-		//uses eventID 0, which is reserved for testing purposes
-		$test = $this->Calendarmodel->add_event($date, 'something', 0);
+		//uses eventID 1, which is reserved for testing purposes
+		$test = $this->Calendarmodel->add_event($date, 'something', 1);
 		$expected_result = 'is_true';
 		$test_name = 'test to see if event is added to calendar table in database';
 		$this->unit->run($test, $expected_result, $test_name);
-		$this->Calendarmodel->remove_event(0);
+		$this->Calendarmodel->remove_event(1);
 
-		//test add_group_event() function (uses eventID 0 also)
-		$test = $this->Calendarmodel->add_group_event($date, 'something', 0);
+		//test add_group_event() function (uses eventID 1 also)
+		$test = $this->Calendarmodel->add_group_event($date, 'something', 'testgroup', 1);
 		$expected_result = 'is_true';
-		$test_name = 'test to see if event is added to calendar table in database';
+		$test_name = 'test to see if group event is added to calendar table in database';
 		$this->unit->run($test, $expected_result, $test_name);
-		$this->Calendarmodel->remove_event(0);
 		
-		//test remove_event() function
-		$test = $this->Calendarmodel->remove_event(0);
+		//test remove_event() function by removing the group event added above
+		$test = $this->Calendarmodel->remove_event(1);
 		$expected_result = 'is_true';
 		$test_name = 'test to see if event is removed from calendar table in database';
 		$this->unit->run($test, $expected_result, $test_name);

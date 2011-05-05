@@ -28,8 +28,10 @@ class Group extends Model {
         function get_membershiplist($un) {
                 $ci = get_instance();
 		$ci->load->model('User');
-		$this->db->where('uid', $this->User->get_id($un));
+		$uid = $this->User->get_id($un);
+		if($uid == "") return(false);
                 $data = array();
+		$this->db->where('uid', $uid);
 		$query = $this->db->get('usergroup')->result(); 
                 foreach($query as $key) {
 		  $perm = array('read' => ($key->perm & 4) == 4,

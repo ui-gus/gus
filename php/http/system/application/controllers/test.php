@@ -65,8 +65,28 @@ class Test extends Controller {
 	function group() {
 		$this->load->model('Group');
 
+		//add_member
+		$perm = array('read' => true, 'write' => true, 'execute' => true);
+		echo $this->unit->run(true,
+		 $this->Group->add_member('test_group', 'test_user',$perm),
+		 'add_member - test_user');
+
 		//get_grouplist
 		echo $this->unit->run(true,$this->Group->get_grouplist(), 'get_grouplist.1');
+		
+		//get_membershiplist
+		// empty list
+		echo $this->unit->run(false,$this->Group->get_membershiplist('fake'), 				'empty get_membershiplist');
+		// test user in test_group
+		echo $this->unit->run(true,
+		 array_key_exists('test_group',
+			$this->Group->get_membershiplist('test_user')),
+ 		 'get_membershiplist test user');
+		$perm = array('read' => true, 'write' => true, 'execute' => true);
+		$groups = $this->Group->get_membershiplist('test_user');
+		echo $this->unit->run(true,$groups['test_group'] == $perm,
+ 		 'get_membershiplist test user 2');
+
 
 		//save
 		echo $this->unit->run("test_desc",$this->Group->save(
@@ -77,25 +97,122 @@ class Test extends Controller {
 
 		//get_description
 		echo $this->unit->run("test_desc",$this->Group->get_description("test_group"), 'get_description.1');
+
+		//get_id
+		//false group		
+		echo $this->unit->run("",
+			$this->Group->get_id("fake"), 
+			'get_id failure');
+		// true group
+		echo $this->unit->run(5,
+			$this->Group->get_id("test_group"), 
+			'get_id');
+
+		//get_perm
+		// true admin
+		echo $this->unit->run(7,
+			$this->Group->get_perm("test_user","test_group"), 
+			'get_perm');
+		// no perm
+		echo $this->unit->run(0,
+			$this->Group->get_perm("test_user","main"), 
+			'get_perm');
+		
+		//delete_member
+		echo $this->unit->run(true,
+		 $this->Group->delete_member('test_group', 'test_user'),
+		 'delete_member - test_user');
+
 	}
 
 	function user() {
 		$this->load->model('User');
 		$this->User->mode = "test";
-		//get_userlist
-		echo $this->unit->run(true,$this->User->get_userlist(), 'get_userlist.1');
 
 		//save
-		echo $this->unit->run("test_desc",$this->User->save(
+		$this->unit->run("test_desc",$this->User->save(
 					array("un" => "test_user",
 						"pw" => "ALT!shf6"
 					)
 				), 'save.1');
+
+		//get_profile
+		// bad id
+		$this->unit->run(false,
+		 $this->User->get_profile($this->User->get_id('fake')),
+		 'get_profile - fake');
+		// good id
+		$this->unit->run(true,
+		 false !== $this->User->get_profile($this->User->get_id('test_user')),
+		 'get_profile - test_user');
+
+		//get_userlist
+		$this->unit->run(true,$this->User->get_userlist(), 'get_userlist.1');
+
+		//get_id
+		// true id
+		$this->unit->run(false,"" === $this->User->get_id('test_user'), 'get_id - test_user1');
+		// bad id
+		$this->unit->run(false,$this->User->get_id('fake'), 'get_id - fake');
+
+		//get_name
+		$this->unit->run(true,
+		 "test_user" === $this->User->get_name($this->User->get_id('test_user')), 'get_name - test_user');
+		$this->unit->run(false,
+		 $this->User->get_name($this->User->get_id('fake')), 'get_name - fake');
+
+		//delete
+		$this->unit->run(true,
+		 $this->User->delete(array('un' => 'test_user')), 
+		 'delete - test_user');
+	
+		echo $this->unit->report();
+	}
+
+	function images() {
+		$this->load->model('Images');	
+		$this->load->model('User');
+		$this->load->model('Group');
+
+		//get_users_pics
+		// full array
+		$this->unit->run(true,
+		 $this->Images->get_users_pics($this->User->get_id('test_user')),
+		 'get_users_pics - test_user');
+		// empty array
+		$this->unit->run(false,
+		 $this->Images->get_users_pics($this->User->get_id('fake')),
+		 'get_users_pics - fake');
+
+		//get_groups_pics
+		// full array
+		$this->unit->run(true,
+		 $this->Images->get_groups_pics($this->Group->get_id('test_group')),
+		 'get_groups_pics - test_group');
+		// empty array
+		$this->unit->run(false,
+		 $this->Images->get_groups_pics($this->Group->get_id('fake')),
+		 'get_groups_pics - fake');
+	
+		//get_groups_files
+		// full array
+		$this->unit->run(true,
+		 $this->Images->get_groups_files($this->Group->get_id('test_group')),
+		 'get_groups_pics - test_group');
+		// empty array
+		$this->unit->run(false,
+		 $this->Images->get_groups_files($this->Group->get_id('fake')),
+		 'get_groups_files - fake');
+
+
+		echo $this->unit->report();
+	//function get_groups_files($gid)
 	}
 
 	function allModels() {
 		$this->page();
 		$this->group();
 		$this->user();
+		$this->images();
 	}
 }

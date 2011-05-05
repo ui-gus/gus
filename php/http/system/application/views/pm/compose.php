@@ -6,6 +6,7 @@ needs: form validation, upload of photo
 
 echo $this->pdata['header'];
 echo $this->pdata['content'];
+echo $this->pdata['tinyMCE'];
 
 echo "<font size =6 color = '#474747'>Compose a Message!</font>";
 
@@ -16,8 +17,9 @@ echo form_open('pm/send_message');
 echo form_label('To', 'to_id');
 unset($usernames[$this->Page->get_uid()]);
 echo "<br />";
-
-echo form_dropdown('to_id', $usernames);
+echo form_dropdown('group_id', $groupnames);
+//echo form_dropdown('to_id', $this->pm_model->get_groupuserlist(5));
+echo form_dropdown('to_id', $this->User->get_userlist());
 
 echo "<br /><br />";
 
@@ -37,6 +39,8 @@ echo "<br />";
 echo form_submit('send','send');
 echo form_close();
 
+echo "<br />";
+echo anchor("pm/inbox" , "go back");
 
 echo $this->pdata['footer'];
 

@@ -12,11 +12,29 @@ echo form_open('pm/send_message');
 
 echo "<br />";
 
-
 echo form_label('To: ', 'to_id');
-echo $usernames[$message->from_id];
-echo form_hidden('to_id',$message->from_id);
+echo $this->User->get_name($message->to_id);
 
+$query = $this->db->get('user');
+$temp = 0;
+$flag = 0;
+
+foreach ($query->result() as $row)
+{
+	if($row->id == $message->to_id)
+		{
+			$flag = 1;
+		}
+			
+	if($row->id != $message->to_id && $flag !=1)
+		{
+				$temp = $temp + 1;					
+		}
+}
+
+$message->to_id = $temp;
+
+echo form_hidden('to_id',$message->to_id);
 echo "<br /><br />";
 
 

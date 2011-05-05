@@ -8,7 +8,7 @@ echo "<font size =6 color = '#474747'>Your Sent Messages</font>";
 
 echo "<br /><br />";
 
-
+echo anchor("pm/compose", "new   |");
 echo anchor("pm/index", "inbox   |");
 echo "sent   |";
 echo anchor("pm/archive", "archives");
@@ -23,9 +23,9 @@ if (count($messages)){
 	
 	foreach ($messages as $key => $msg){
 		$stamp = mysql_to_unix($msg->created);
-		$TABLE[] = $usernames[$msg->from_id];		
-		$TABLE[] =	$usernames[$msg->to_id];
-		$TABLE[] = anchor("pm/view_message/" .$msg->id, $msg->subject);
+		$TABLE[] = $this->User->get_name($msg->from_id);	
+		$TABLE[] = $this->User->get_name($msg->to_id);
+		$TABLE[] = anchor("pm/view_message1/" .$msg->id, $msg->subject);
 		$TABLE[] =  mdate($format,$stamp);
 }
 

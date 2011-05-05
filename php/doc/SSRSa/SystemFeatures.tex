@@ -1,0 +1,454 @@
+		\subsection{Use Case Diagrams}
+		insert 1+ use case diagrams here
+		\subsection{System feature 1: Officer Management (Administration
+			Module)}
+			\subsubsection{Add Officer}
+			\begin{itemize}
+				\item{\textbf{Actors:} Group Administrator}
+				\item{\textbf{Goals:} Administrator will add an officer
+					to the group}
+				\item{\textbf{Preconditions:} Administrator is logged onto
+					to the group's administration page}
+				\item{\textbf{Summary:} Related use cases: modify officer
+					access}
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{Administrator clicks add officer button}
+					\item{Administrator types in officer's username}
+					\item{Administrator selects the officer's title/role}
+					\item{Administrator modifies officer's access}
+					\item{Administrator selects save and exit}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} Administrator cancels out of
+					use case}
+				\item{\textbf{Postconditions:} the selected user is given
+					officer status in the group}
+			\end{itemize}
+			\subsubsection{Modify Officer Access}
+			\begin{itemize}
+				\item{\textbf{Actors:} Group Administrator}
+				\item{\textbf{Goals:} Administrator will change the access given to an officer}
+				\item{\textbf{Preconditions:} Administrator is logged onto to the group's administration page}
+				\item{\textbf{Summary:} Related use cases:}
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{Administrator clicks modify officer access
+						button}
+					\item{Administrator selects officer / role to be
+						modified}
+					\item{Administrator selects type of access to be
+						modified}
+					\item{Administrator selects save and exit}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} Administrator cancels out of
+					use case}
+				\item{\textbf{Postconditions:} The selected officer(s)
+					access is modified}
+			\end{itemize}
+
+			\subsubsection{Remove Officer}
+			\begin{itemize}
+				\item{\textbf{Actors:} Group Administrator}
+				\item{\textbf{Goals:} Administrator will remove an officer
+					from the group}
+				\item{\textbf{Preconditions:} Administrator is logged onto
+					to the group's administration page}
+				\item{\textbf{Summary:} Related use cases:}
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{Administrator clicks remove officer button}
+					\item{Administrator selects officer}
+					\item{Administrator selects save and exit}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} Administrator cancels out of
+					use case}
+				\item{\textbf{Postconditions:} the selected user is
+					removed as a group officer}
+			\end{itemize}
+			\subsubsection{Change Group Password}
+			\begin{itemize}
+				\item{\textbf{Actors:} Group Administrator}
+				\item{\textbf{Goals:} Administrator will change the password to access the group page}
+				\item{\textbf{Preconditions:} Administrator is logged onto to the group's administration page}
+				\item{\textbf{Summary:} Related use cases:}
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{Administrator clicks change group password button}
+					\item{Administrator types in the new password twice}
+					\item{Administrator selects save and exit}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} Administrator cancels out of use case}
+				\item{\textbf{Postconditions:} the group password is changed}
+			\end{itemize}
+			\subsubsection{Edit Forum Priveleges}
+			\begin{itemize}
+				\item{\textbf{Actors:} Group Administrator}
+				\item{\textbf{Goals:} Administrator will select who can make changes to forums}
+				\item{\textbf{Preconditions:} Administrator is logged onto to the group's administration page}
+				\item{\textbf{Summary:} Related use cases:}
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{Administrator clicks forum priveleges button}
+					\item{Administrator selects who's priveleges will be changed}
+					\item{Administrator selects the the priveleges}
+					\item{Administrator saves and exits}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} Administrator cancels out of use case}
+				\item{\textbf{Postconditions:} the user's priveledges are changed}
+			\end{itemize}
+		\subsection{System feature 2: Group Management (Officer Module)}
+			\subsubsection{Add Member}
+			\begin{itemize}
+				\item{\textbf{Actors:} Officer}
+				\item{\textbf{Goals:} Officer will add a member to the group}
+				\item{\textbf{Preconditions:} Officer is logged onto to the group's officer page}
+				\item{\textbf{Summary:} Related use cases:}
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{Officer clicks add member button}
+					\item{Officer types in the member's username}
+					\item{Officer selects save and exit}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} Officer cancels out of use case}
+				\item{\textbf{Postconditions:} the selected user is given membership status in the group}
+			\end{itemize}
+			\subsubsection{Remove Member}
+			\begin{itemize}
+				\item{\textbf{Actors:} Officer}
+				\item{\textbf{Goals:} Officer will remove member from the group}
+				\item{\textbf{Preconditions:} Officer is logged onto to the group's officer page}
+				\item{\textbf{Summary:} Related use cases:}
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{Officer clicks remove member button}
+					\item{Officer selects member}
+					\item{Officer selects save and exit}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} Officer cancels out of use case}
+				\item{\textbf{Postconditions:} the selected user is removed from the group}
+			\end{itemize}
+		\subsubsection{Add Event}
+			\begin{itemize}
+				\item{\textbf{Actors:} Officer}
+				\item{\textbf{Goals:} Add an event to fit officer specifications}
+				\item{\textbf{Preconditions:} Officer is logged onto to the group's officer page}
+				\item{\textbf{Summary:} Related use cases: Modify Event}
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{Officer clicks Events button}
+					\item{Officer clicks Add New Event}
+					\item{Officer adds a title}
+					\item{Officer chooses a date, time, and recurrence}
+					\item{Officer checks the post to site option}
+					\item{Officer checks the email notifications to members option}
+					\item{Officer modifies the message to be sent}
+					\item{Officer selects save and exit}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} Officer cancels out of use case by clicking on a different navigational area or clicking Cancel}
+				\item{\textbf{Postconditions:} Event has been added to fit the officer's specifications}
+			\end{itemize}
+		\subsubsection{Modify Event}
+			\begin{itemize}
+				\item{\textbf{Actors:} Officer}
+				\item{\textbf{Goals:} modify (add, edit, remove) an event on the calendar}
+				\item{\textbf{Preconditions:} Officer is logged onto to the group's officer page}
+				\item{\textbf{Summary:} Related use cases: Add Event, Remove Event}
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{Officer clicks Events button}
+					\item{Officer clicks Modify Event button}
+					\item{Officer modifies event information}
+					\item{Officer sends notfications and has the site updated as needed}
+					\item{Officer selects save and exit}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} Officer cancels out of use case by clicking on a different navigational area or clicking Cancel}
+				\item{\textbf{Postconditions:} Event has been modified to fit the officer's specifications}
+			\end{itemize}
+			\subsubsection{Remove Event}
+			\begin{itemize}
+				\item{\textbf{Actors:} Officer}
+				\item{\textbf{Goals:} remove an event on the calendar}
+				\item{\textbf{Preconditions:} Officer is logged onto to the group's officer page}
+				\item{\textbf{Summary:} Related use cases: Add Event, modify}
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{Officer clicks Events button}
+					\item{Officer clicks Remove Event button}
+					\item{Officer sends notfications and has the site updated as needed}
+					\item{Officer selects save and exit}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} Officer cancels out of use case by clicking on a different navigational area or clicking Cancel}
+				\item{\textbf{Postconditions:} Event has been removed from calendar and site}
+			\end{itemize}
+			\subsubsection{Send Group Email}
+			\begin{itemize}
+				\item{\textbf{Actors:} Officer}
+				\item{\textbf{Goals:} the officer will be able to send email to the group}
+				\item{\textbf{Preconditions:} Officer is logged onto to the group's email page}
+				\item{\textbf{Summary:} Related use cases: Add Event, modify event}
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{Officer clicks the compose email button}
+					\item{Officer composes an email}
+					\item{Officer selects which subgroup the email goes to}
+					\item{Officer clicks the send button}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} Officer cancels out of use case by clicking on a different navigational area or clicking Cancel}
+				\item{\textbf{Postconditions:} email has been spellchecked, and sent.  Officer is returned to the group's email page}
+			\end{itemize}
+			\subsubsection{Modify Website}
+			\begin{itemize}
+				\item{\textbf{Actors:} Officer}
+				\item{\textbf{Goals:}  to generate a web site of information about a group}
+				\item{\textbf{Preconditions:} Officer is logged onto to the group's officer page, website is already posted and linked to GUS}
+				\item{\textbf{Summary:} Related use cases: }
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{Click Web Site button}
+					\item{Click Web site options}
+					\item{Modify information on website}
+					\item{Click Preview button}
+					\item{Select save and exit}
+
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} Officer cancels out of use case by clicking on a different navigational area or clicking Cancel}
+				\item{\textbf{Postconditions:} the website is published on the website, and automatically linked to from its supergroup
+}
+			\end{itemize}
+		\subsection{System feature 3: User Menu}
+         \subsubsection{Edit Email}
+			\begin{itemize}
+				\item{\textbf{Actors:} User}
+				\item{\textbf{Goals:} user will be able to send emails to other GUS users}
+				\item{\textbf{Preconditions:} user is logged onto GUS}
+				\item{\textbf{Summary:} Related use cases: }
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{User clicks Email button}
+					\item{User clicks on the Drafts folder}
+					\item{User clicks on the email to be edited}
+					\item{User edits email}
+					\item{User sends email, and is returned to the drafts page}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} User cancels out of use case by clicking on a different navigational area or clicking Cancel}
+				\item{\textbf{Postconditions:} Email is sent and user is returned to drafts page}
+			\end{itemize}
+         \subsubsection{Edit Major}
+			\begin{itemize}
+				\item{\textbf{Actors:} User}
+				\item{\textbf{Goals:} user will be able to change personal attributes}
+				\item{\textbf{Preconditions:} user is logged onto GUS}
+				\item{\textbf{Summary:} Related use cases: }
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{User clicks MyProfile button}
+					\item{User makes changes to personal fields}
+					\item{User selects save and exit}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} User cancels out of use case by clicking on a different navigational area or clicking Cancel}
+				\item{\textbf{Postconditions:} User's profile and personal page is updated, and user is returned to their home page}
+			\end{itemize}
+         \subsubsection{Edit Personal Page}
+			\begin{itemize}
+				\item{\textbf{Actors:} User}
+				\item{\textbf{Goals:} user will be able to change appearance and content of personal page}
+				\item{\textbf{Preconditions:} user is logged onto GUS}
+				\item{\textbf{Summary:} Related use cases: Change Major}
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{User clicks MyPage button}
+					\item{User edits personal information}
+					\item{User selects privacy settings; to include which user's and groups they want seeing their information}
+					\item{User selects what color theme / appearance they want for their page}
+					\item{User selects what items and information they want on their page}
+					\item{User previews their page and clicks save}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} User can move through page changes non-sequenctially or cancel out}
+				\item{\textbf{Postconditions:} User's personal page is updated}
+			\end{itemize}
+         \subsubsection{Join Group}
+			\begin{itemize}
+				\item{\textbf{Actors:} User}
+				\item{\textbf{Goals:} user will be able to request to join group}
+				\item{\textbf{Preconditions:} user is logged onto GUS}
+				\item{\textbf{Summary:} Related use cases: }
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{User enters group name}
+					\item{User clicks on the join button}
+					\item{User identifies which subgroups they want to join}
+					\item{User selects save and exit}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} User cancels out of use case by clicking on a different navigational area or clicking Cancel}
+				\item{\textbf{Postconditions:} user's request is auto approved, or request sent to group, user is added to group (if approved), and user is returned to the group's page}
+			\end{itemize}
+         \subsubsection{Leave Group}
+			\begin{itemize}
+				\item{\textbf{Actors:} User}
+				\item{\textbf{Goals:} user will be able to leave group}
+				\item{\textbf{Preconditions:} user is logged onto GUS}
+				\item{\textbf{Summary:} Related use cases: }
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{User clicks MyGroups button}
+					\item{User selects the group to drop}
+					\item{User clicks the drop button}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} User cancels out of use case by clicking on a different navigational area or clicking Cancel}
+				\item{\textbf{Postconditions:} User is dropped from the group, the group is removed from the user page and the user is returned to the MyGroups page}
+			\end{itemize}
+         \subsubsection{Send Email}
+			\begin{itemize}
+				\item{\textbf{Actors:} User}
+				\item{\textbf{Goals:} user will be able to send emails to other GUS users}
+				\item{\textbf{Preconditions:} user is logged onto GUS}
+				\item{\textbf{Summary:} Related use cases: }
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{User clicks Email button}
+					\item{User clicks on the Drafts folder}
+					\item{User clicks on the email to be edited}
+					\item{User edits email}
+					\item{User sends email, and is returned to the drafts page}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} User cancels out of use case by clicking on a different navigational area or clicking Cancel}
+				\item{\textbf{Postconditions:} Email is sent and user is returned to drafts page}
+			\end{itemize}
+         \subsubsection{Send Text}
+			\begin{itemize}
+				\item{\textbf{Actors:} User}
+				\item{\textbf{Goals:} user will be able to send texts to other GUS users}
+				\item{\textbf{Preconditions:} user is logged onto GUS}
+				\item{\textbf{Summary:} Related use cases: }
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{User clicks text button}
+					\item{User types in the recipient}
+					\item{User types the message}
+					\item{User clicks send}
+					\item{User makes any required changes, recipient, spelling (if required) go to step 4}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} User cancels out of use case by clicking on a different navigational area or clicking Cancel}
+				\item{\textbf{Postconditions:} text is sent and user is returned to previous page}
+			\end{itemize}
+	      \subsubsection{Join Event}
+			\begin{itemize}
+				\item{\textbf{Actors:} User}
+				\item{\textbf{Goals:} user will be able to sign up for event}
+				\item{\textbf{Preconditions:} user is logged onto GUS, and at the group's site}
+				\item{\textbf{Summary:} Related use cases: }
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{User hovers over the calendar, the system displays the user's calendar next to the group calendar}
+					\item{User hovers over the event to join, the system displays event details}
+					\item{User right-clicks on the event, and selects will-be-there, or may-be-there}
+					\item{User may enter a message}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} User cancels out of use case by clicking on a different navigational area or clicking Cancel}
+				\item{\textbf{Postconditions:} User is added to the event's guest list, the event is added to the user's calendar, and the user is returned to the group page}
+			\end{itemize}
+         \subsubsection{Leave Event}
+			\begin{itemize}
+				\item{\textbf{Actors:} User}
+				\item{\textbf{Goals:} user will be able to drop an event}
+				\item{\textbf{Preconditions:} user is logged onto GUS}
+				\item{\textbf{Summary:} Related use cases: }
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{User clicks on MyCalendar}
+					\item{User right-clicks on the event}
+					\item{User selects drop}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} User cancels out of use case by clicking on a different navigational area or clicking Cancel}
+				\item{\textbf{Postconditions:} User is removed from the event's guest list, the event is removed from the user's calendar, and the user is returned to the calendar page}
+			\end{itemize}
+			\subsubsection{Sign Up}
+			\begin{itemize}
+				\item{\textbf{Actors:} User}
+				\item{\textbf{Goals:} user will be able to sign up for GUS}
+				\item{\textbf{Preconditions:} user is at GUS page}
+				\item{\textbf{Summary:} Related use cases: Modify personal information, modify personal page}
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{User clicks on Sign Up}
+					\item{User completes steps for modifying their page}
+					\item{User selects groups to join}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} User cancels out of use case by clicking on a different navigational area or clicking Cancel}
+				\item{\textbf{Postconditions:} User is added to GUS, and relevant users/groups are notified}
+			\end{itemize}
+
+			\subsection{System feature 4: Forum Module)}
+			\subsubsection{Add / Post Topic}
+			\begin{itemize}
+				\item{\textbf{Actors:} User}
+				\item{\textbf{Goals:} User will add a post or start a topic}
+				\item{\textbf{Preconditions:} User is logged in, and at the group's forum page}
+				\item{\textbf{Summary:} Related use cases: }
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{User clicks on topic to post to, or clicks AddTopic button}
+					\item{User completes a post (the default title is the first line of the post)}
+					\item{User clicks post button The system spell-checks the post, and truncates it if it's too long, it also validates the post, and returns an error message (if needed)}
+					\item{If needed user makes corrections and repeats step 3}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} user cancels out of use case}
+				\item{\textbf{Postconditions:} the post is sent to the group for validation, and the user is returned to the topic page}
+			\end{itemize}
+			\subsubsection{Remove / Post Topic}
+			\begin{itemize}
+				\item{\textbf{Actors:} User}
+				\item{\textbf{Goals:} User will remove a post or topic}
+				\item{\textbf{Preconditions:} User is logged in, and at the group's forum page}
+				\item{\textbf{Summary:} Related use cases:}
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{User clicks on topic or the post to remove}
+					\item{User clicks remove button}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} User cancels out of use case}
+				\item{\textbf{Postconditions:} If user has the correct permissions, the post or topic is removed, otherwise it is not}
+			\end{itemize}
+
+			\subsubsection{Edit / Post Topic}
+			\begin{itemize}
+				\item{\textbf{Actors:} User}
+				\item{\textbf{Goals:} User will edit a post or a topic}
+				\item{\textbf{Preconditions:} User is logged in, and at the group's forum page}
+				\item{\textbf{Summary:} Related use cases: add post/topic}
+				\item{\textbf{Steps:}
+				\begin{enumerate}
+					\item{User right-clicks on topic or post to be edited}
+					\item{User selects edit}
+					\item{User modifies the post (the default title is the first line of the post)}
+					\item{User clicks post button, the system spell-checks the post, and truncates it if it's too long, it also validates the post, and returns an error message (if needed)}
+					\item{If needed user makes corrections and repeats step 3}
+				\end{enumerate}
+				}
+				\item{\textbf{Alternatives:} user cancels out of use case}
+				\item{\textbf{Postconditions:} the post is sent to the group for validation, and the user is returned to the topic page}
+			\end{itemize}
