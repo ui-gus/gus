@@ -155,6 +155,7 @@ class Calendarmodel extends Model
 	{
 		//prevent scripts and SQL-injection
 		$event = mysql_real_escape_string(htmlspecialchars($event));
+		$userName = $this->session->userdata('un');
 		
 		if($eventID)
 		{
@@ -192,13 +193,8 @@ class Calendarmodel extends Model
 		{
 			if($eventID)
 			{
-				if($eventID == 1)		//if it's for testing
-				{
-					return $this->db->query("INSERT INTO calendar (user, date, data, eventID) 
-											VALUES ('$groupName', '$date', '$event', 1)");
-				}
 				//update the group event if it exists already, otherwise add it
-				elseif($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
+				if($this->db->query("SELECT data FROM calendar WHERE eventID='$eventID'")->result())
 				{
 					return $this->db->query("UPDATE calendar SET data='$event', date='$date' 
 																	WHERE eventID='$eventID'");									
@@ -209,6 +205,11 @@ class Calendarmodel extends Model
 				return $this->db->query("INSERT INTO calendar (user, date, data) 
 										VALUES ('$groupName', '$date', '$event')");
 			}
+		}
+		elseif($eventID == 1)		//if it's for testing
+		{
+			return $this->db->query("INSERT INTO calendar (user, date, data, eventID) 
+									VALUES ('$groupName', '$date', '$event', 1)");
 		}
 	}
 

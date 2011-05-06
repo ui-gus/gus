@@ -124,7 +124,7 @@ class Calendar extends Controller{
 					//add a leading zero if month or day are only one digit
 					$event_month = sprintf("%02s",$event_month);
 				}
-				else 		//if it's the jQuery post
+				else 		//if it's the Ajax post
 				{
 					parse_str($_SERVER['QUERY_STRING'], $_GET);		//enable $_GET
 					$event_day = $_GET['event_day'];
@@ -181,19 +181,22 @@ class Calendar extends Controller{
 		$month = date('m');
 		$day = date('j');
 		$date = $year . "-" . $month . "-" . $day;
+		$userName = $this->session->userdata('un');
 		$this->load->library('unit_test');
+
+		for($i=0; $i<7; $i++)
+			echo "<br>";
+			
+		//test index
+		$this->Page->login("test","test123");
+		$this->unit->run($this->index(), true, "testing index function");
 		
 		//test get_cal_data() function
 		$test = $this->Calendarmodel->get_cal_data($year, $month);
 		$expected_result = 'is_array';
 		$test_name = 'test to see if month data array is retrieved from database';
 		$this->unit->run($test, $expected_result, $test_name);
-
-	
-		//test index
-		$this->Page->login("test","test123");
-		$this->unit->run($this->index(), true, "index function");	
-	
+		
 		//test myGenerate() function
 		$test = $this->Calendarmodel->myGenerate($year, $month);
 		$expected_result = 'is_string';
@@ -206,18 +209,31 @@ class Calendar extends Controller{
 		$expected_result = 'is_true';
 		$test_name = 'test to see if event is added to calendar table in database';
 		$this->unit->run($test, $expected_result, $test_name);
-		$this->Calendarmodel->remove_event(1);
-
+		//$this->Calendarmodel->remove_event(1);   
+		
+		//test join_event() function
+		$test = $this->Calendarmodel->join_event(1, $userName);
+		$expected_result = 'is_true';
+		$test_name = "test to see if user is added as 'attending' in calendar_rsvp table";
+		$this->unit->run($test, $expected_result, $test_name);
+		
+		//test drop_event() function
+		$test = $this->Calendarmodel->drop_event(1, $userName);
+		$expected_result = 'is_true';
+		$test_name = "test to see if user is updated as 'not attending' in calendar_rsvp table";
+		$this->unit->run($test, $expected_result, $test_name);
+		$this->Calendarmodel->remove_event(1);		//clean up the calendar and calendar_rsvp tables
+		
 		//test add_group_event() function (uses eventID 1 also)
 		$test = $this->Calendarmodel->add_group_event($date, 'something', 'testgroup', 1);
 		$expected_result = 'is_true';
-		$test_name = 'test to see if group event is added to calendar table in database';
+		$test_name = 'test to see if group event is added to calendar table';
 		$this->unit->run($test, $expected_result, $test_name);
 		
 		//test remove_event() function by removing the group event added above
 		$test = $this->Calendarmodel->remove_event(1);
 		$expected_result = 'is_true';
-		$test_name = 'test to see if event is removed from calendar table in database';
+		$test_name = 'test to see if event is removed from calendar table';
 		$this->unit->run($test, $expected_result, $test_name);
 		
 		//test view_day() function
@@ -226,9 +242,21 @@ class Calendar extends Controller{
 		$test_name = 'test to see if event data for the requested day is returned';
 		$this->unit->run($test, $expected_result, $test_name);
 		
+		//test generate_invite_array() function
+		$test = $this->Calendarmodel->generate_invite_array();
+		$expected_result = 'is_array';
+		$test_name = 'test to see if an array of group members is retrieved from database';
+		$this->unit->run($test, $expected_result, $test_name);
+		
+		//test view_day_invites() function
+		$test = $this->Calendarmodel->view_day_invites($date);
+		$expected_result = 'is_array';
+		$test_name = 'test to see if an array of invites is retrieved from database';
+		$this->unit->run($test, $expected_result, $test_name);
+				
 		//run full report of tests
 		echo $this->unit->report();     
 	}
 }
-?>
+?>		
 
