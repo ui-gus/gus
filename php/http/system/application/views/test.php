@@ -41,6 +41,13 @@
   <td></td>
   <td>not recorded</td>
  </tr>
+ <tr>
+  <td><a href="' . site_url() . '/test/tinymce">tinymce</a></td>
+  <td>Scott Beddall</td>
+  <td></td>
+  <td>not recorded</td>
+ </tr>
+
 </table>
 
 <p>Tests for controllers:</p>

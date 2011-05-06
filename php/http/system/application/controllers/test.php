@@ -204,9 +204,30 @@ class Test extends Controller {
 		 $this->Images->get_groups_files($this->Group->get_id('fake')),
 		 'get_groups_files - fake');
 
+		echo $this->unit->report();
+	}
+
+	function tinymce() {
+		$this->load->model('tinyMCE');	
+
+		$tiny = $this->tinyMCE->outputJScript(array("newpagecontent"),1);	
+		$this->unit->run(false,true,'test button1');
+		$this->unit->run(false,true,'test button2');
+		$this->unit->run(false,true,'test remaining buttons');
 
 		echo $this->unit->report();
-	//function get_groups_files($gid)
+	}
+
+	function usergroup() {
+		$this->load->model('UserGroup');
+
+		
+		$this->unit->run(false,$this->UserGroup->save(array('un' => 'test_user')),'save valid');
+		$this->unit->run(false,$this->UserGroup->save(array('un' => 'test_user')),'save invalid');
+		$this->unit->run(false,$this->UserGroup->delete(array()),'delete valid');
+		$this->unit->run(false,$this->UserGroup->delete(array()),'delete invalid');
+
+		echo $this->unit->report();
 	}
 
 	function allModels() {
@@ -214,5 +235,7 @@ class Test extends Controller {
 		$this->group();
 		$this->user();
 		$this->images();
+		$this->tinymce();
+		$this->usergroup();
 	}
 }
