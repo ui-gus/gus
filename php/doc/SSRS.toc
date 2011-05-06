@@ -57,13 +57,14 @@
 \contentsline {subsection}{\numberline {6.1.4}Other Communication Interfaces}{19}{subsection.6.1.4}
 \contentsline {section}{\numberline {6.2}System Features}{21}{section.6.2}
 \contentsline {subsection}{\numberline {6.2.1}Use Case Diagrams}{21}{subsection.6.2.1}
-\contentsline {subsection}{\numberline {6.2.2}System feature 1: Officer Management (Administration Module)}{21}{subsection.6.2.2}
+\contentsline {subsection}{\numberline {6.2.2}Use Case Diagrams}{21}{subsection.6.2.2}
+\contentsline {subsection}{\numberline {6.2.3}System feature 1: Officer Management (Administration Module)}{21}{subsection.6.2.3}
 \contentsline {subsubsection}{Add Officer}{21}{section*.10}
 \contentsline {subsubsection}{Modify Officer Access}{21}{section*.11}
 \contentsline {subsubsection}{Remove Officer}{22}{section*.12}
 \contentsline {subsubsection}{Change Group Password}{22}{section*.13}
 \contentsline {subsubsection}{Edit Forum Priveleges}{23}{section*.14}
-\contentsline {subsection}{\numberline {6.2.3}System feature 2: Group Management (Officer Module)}{23}{subsection.6.2.3}
+\contentsline {subsection}{\numberline {6.2.4}System feature 2: Group Management (Officer Module)}{23}{subsection.6.2.4}
 \contentsline {subsubsection}{Add Member}{23}{section*.15}
 \contentsline {subsubsection}{Remove Member}{24}{section*.16}
 \contentsline {subsubsection}{Add Event}{24}{section*.17}
@@ -71,7 +72,7 @@
 \contentsline {subsubsection}{Remove Event}{26}{section*.19}
 \contentsline {subsubsection}{Send Group Email}{26}{section*.20}
 \contentsline {subsubsection}{Modify Website}{27}{section*.21}
-\contentsline {subsection}{\numberline {6.2.4}System feature 3: User Menu}{27}{subsection.6.2.4}
+\contentsline {subsection}{\numberline {6.2.5}System feature 3: User Menu}{27}{subsection.6.2.5}
 \contentsline {subsubsection}{Edit Email}{27}{section*.22}
 \contentsline {subsubsection}{Edit Major}{28}{section*.23}
 \contentsline {subsubsection}{Edit Personal Page}{28}{section*.24}
@@ -82,7 +83,7 @@
 \contentsline {subsubsection}{Join Event}{31}{section*.29}
 \contentsline {subsubsection}{Leave Event}{32}{section*.30}
 \contentsline {subsubsection}{Sign Up}{32}{section*.31}
-\contentsline {subsection}{\numberline {6.2.5}System feature 4: Forum Module)}{33}{subsection.6.2.5}
+\contentsline {subsection}{\numberline {6.2.6}System feature 4: Forum Module)}{33}{subsection.6.2.6}
 \contentsline {subsubsection}{Add / Post Topic}{33}{section*.32}
 \contentsline {subsubsection}{Remove / Post Topic}{34}{section*.33}
 \contentsline {subsubsection}{Edit / Post Topic}{34}{section*.34}
