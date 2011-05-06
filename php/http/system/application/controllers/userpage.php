@@ -165,7 +165,7 @@ function view( $testuser ){
    //no POST data
    echo $this->unit->run(true, $this->edit(), "Attempting to edit User's personal page." );
 
-   
+   /*
    //POST data
    $this->Page->login("test","test123");
 print_r($this->Page);
@@ -174,6 +174,7 @@ print_r($this->Page);
    $_POST['contact'] = "800 555-TEST";
    $_POST['major'] = "computer science";
    echo $this->unit->run(true, $this->edit(), "Attempting to edit User's personal page." );
+   */
  }	
  
 }
