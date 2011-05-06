@@ -135,26 +135,21 @@ class Upload extends Controller {
 
 	function test()
 	{
-		if( !$this->Page->authed() )
-		{
-			header( 'Location: ../home' ); //Reload the page
-		}
-		else {
-		//Test the functions
-		$page_name = 'upload';
-		$this->load->library('unit_test');
-		$this->testmode = 'true';
+	//Test the functions
+	$page_name = 'upload';
+	$this->load->library('unit_test');
+	$this->testmode = 'true';
 
-		//index
-		echo $this->unit->run($this->index(), true, 'index');
+	//index
+	echo $this->unit->run($this->index(), true, 'index');
 
-		//do_upload
-		echo $this->unit->run($this->do_upload(), '<p>You did not select a file to upload.</p>', 'do_upload - no file');
+	//do_upload
+	echo $this->unit->run($this->do_upload(), '<p>You did not select a file to upload.</p>', 'do_upload - no file');
 /*Last three tests don't work because I can't automate the uploading process.  The uploader does throw errors, though.
-		echo $this->unit->run($this->do_upload(), '<p>The uploaded file exceeds the maximum allowed size in your PHP configuration file.</p>', 'do_upload - file too large');
-		echo $this->unit->run($this->do_upload(), '<p>The filetype you are attempting to upload is not allowed.</p>', 'do_upload - bad file type');
-		echo $this->unit->run($this->do_upload(), 'success', 'do_upload - success');
+	echo $this->unit->run($this->do_upload(), '<p>The uploaded file exceeds the maximum allowed size in your PHP configuration file.</p>', 'do_upload - file too large');
+	echo $this->unit->run($this->do_upload(), '<p>The filetype you are attempting to upload is not allowed.</p>', 'do_upload - bad file type');
+	echo $this->unit->run($this->do_upload(), 'success', 'do_upload - success');
 */
-	}}
+	}
 }
 ?>
