@@ -6,8 +6,10 @@
                  from their computer}
           \item{\textbf{Preconditions:} User is a member of the 
                  group they want to upload a file to}
-          \item{\textbf{Summary:} }
-	  \item{\textbf{Related use cases}: }
+          \item{\textbf{Summary:} The file uploading functionality allows users 
+		   to share files with groups they are a member of.  Uploaded files are stored 
+		   on the server and can be viewed and downloaded by other users with sufficient
+		   permission levels.}
 	  \item{\textbf{Steps:}
 	  \begin{enumerate}
 	       \item{User navigates to the Upload page}
@@ -32,4 +34,132 @@
 	  \end{itemize}
 	  \item{\textbf{Postconditions:} The file chosen by the user 
 	        is uploaded to the server, and inserted into the database}
+	  \item{\textbf{Related use cases}: Download File, Delete File, 
+		  Change File Permissions}
+     \end{itemize}
+
+     \subsection{Download File}
+     \begin{itemize}
+          \item{\textbf{Actors:} Logged in Users}
+          \item{\textbf{Goals:} User will download a file from a group to  
+                 their computer}
+          \item{\textbf{Preconditions:} User is a member of the 
+                 group they want to download a file from or user is the 
+		   file's original uploader}
+          \item{\textbf{Summary:} The downloading functionality allows users to 
+		   download a copy of an uploaded file from the server.  Users are 
+		   only able to download files they have permission to view.}
+	  \item{\textbf{Steps:}
+	  \begin{enumerate}
+	       \item{User navigates to the Docs page}
+	       \item{User clicks the thumbnail of the file they want to download}
+	       \item{User clicks the download button}
+	       \item{User's browser downloads the file}
+	  \end{enumerate}
+	  \item{\textbf{Alternatives:}
+	  \begin{itemize}
+	       \item{User can cancel out of process by hitting their 
+		     browser's back button at any step before 3}
+	       \item{If the user tries to download a file they don't have
+		      permission to view, they will receive an error}
+	  \end{itemize}
+	  \item{\textbf{Postconditions:} The file is downloaded from the server 
+		  via the user's browser}
+	  \item{\textbf{Related use cases}: Upload File, View File Online, 
+		  Delete File, Change File Permissions}
+     \end{itemize}
+
+     \subsection{View File Online}
+     \begin{itemize}
+          \item{\textbf{Actors:} Logged in Users}
+          \item{\textbf{Goals:} User will view a file inside their browser 
+		   rather than download it to their computer to view}
+          \item{\textbf{Preconditions:} User is a member of the 
+                 group that the file was uploaded to or user is the 
+		   file's original uploader}
+          \item{\textbf{Summary:} Users are able to view some file types online. 
+		   Images and pdfs can be viewed within the user's browser rather 
+		   than downloading them to the user's local machine first. A user 
+		   needs the same permission to view files as they do to download files.}
+	  \item{\textbf{Steps:}
+	  \begin{enumerate}
+	       \item{User navigates to the Docs page}
+	       \item{User clicks the thumbnail of the file they want to view online}
+	       \item{User clicks the view button}
+	       \item{User's browser displays the file}
+	  \end{enumerate}
+	  \item{\textbf{Alternatives:}
+	  \begin{itemize}
+	       \item{User can cancel out of process by hitting their 
+		     browser's back button at any step before 3}
+	       \item{If the user tries to view a file they don't have
+		      permission to view, they will receive an error}
+	  \end{itemize}
+	  \item{\textbf{Postconditions:} The file is displayed within the user's browser}
+	  \item{\textbf{Related use cases}: Upload File, Download File, 
+		  Delete File, Change File Permissions}
+     \end{itemize}
+
+     \subsection{Delete File}
+     \begin{itemize}
+          \item{\textbf{Actors:} Group administrators, Users that have uploaded files, 
+		   group officers}
+          \item{\textbf{Goals:} User will delete an uploaded file from the database and server}
+          \item{\textbf{Preconditions:} User has permission to manage files of the 
+                 group that the file was uploaded to or user is the 
+		   file's original uploader}
+          \item{\textbf{Summary:} Users are able to delete files they have uploaded from the server. 
+		   Group officers and administrators are able to delete any file uploaded to their group.}
+	  \item{\textbf{Steps:}
+	  \begin{enumerate}
+	       \item{User navigates to the Docs page}
+	       \item{User clicks the thumbnail of the file they want to view online}
+	       \item{User clicks the delete button}
+	       \item{Server deletes the file and the user is redirected to the Docs page}
+	  \end{enumerate}
+	  \item{\textbf{Alternatives:}
+	  \begin{itemize}
+	       \item{User can cancel out of process by hitting their 
+		     browser's back button at any step before 3}
+	       \item{If the user tries to delete a file and they don't have
+		      sufficient permissions within the group or as the file uploader, 
+		      they will receive an error}
+	  \end{itemize}
+	  \item{\textbf{Postconditions:} The file is deleted from the server}
+	  \item{\textbf{Related use cases}: Upload File, Download File, 
+		 View File Online, Change File Permissions}
+     \end{itemize}
+
+     \subsection{Change File Permissions}
+     \begin{itemize}
+          \item{\textbf{Actors:} Group administrators, Users that have uploaded files, 
+		   group officers}
+          \item{\textbf{Goals:} User will change permissions for an uploaded file}
+          \item{\textbf{Preconditions:} User has permission to manage files of the 
+                 group that the file was uploaded to or user is the 
+		   file's original uploader}
+          \item{\textbf{Summary:} Each file has a permission level required to view the file. 
+		   If a user has insufficient permissions, they won't be able to view the file. 
+		   By changing a file's permission level, you can control who is able to view the file. 
+		   Users can change the permissions for any file they've uploaded, and administators and 
+		   group officers can change the permissions for any file uploaded to their group.}
+	  \item{\textbf{Steps:}
+	  \begin{enumerate}
+	       \item{User navigates to the Docs page}
+	       \item{User clicks the thumbnail of the file they want to view online}
+	       \item{User clicks the modify button}
+	       \item{User chooses a new permission level for the file}
+		\item{User clicks the submit button}
+	  \end{enumerate}
+	  \item{\textbf{Alternatives:}
+	  \begin{itemize}
+	       \item{User can cancel out of process by hitting their 
+		     browser's back button at any step before 5}
+	       \item{If the user tries to change permissions for a file and they don't have
+		      sufficient permissions within the group or as the file uploader, 
+		      they will receive an error}
+	  \end{itemize}
+	  \item{\textbf{Postconditions:} The file's permissions are changed in the database}
+	  \item{\textbf{Related use cases}: Upload File, Download File, 
+		 View File Online, View File Online}
      \end{itemize}
