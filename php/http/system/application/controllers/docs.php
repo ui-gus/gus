@@ -98,17 +98,22 @@ class Docs extends Controller {
 
 	function downloadFile()
 	{
-	if( !$this->Page->authed() )
+		if( !$this->Page->authed() )
 		{
 			header( 'Location: ../home' ); //Reload the page
 		}
-	else {
-		$this->load->helper('download');  //Load CI's download helper
-		$location = "uploads/" . $_POST['file']; //Set the location for file on the server
-		$data = file_get_contents($location); // Read the file's contents
-		$name = $_POST['file'];  //Name file will be downloaded as will be the same as the one on ther server
-		force_download($name, $data); //Force the user to download the file rather than displaying it
-	     }
+		else
+		{
+			if ($this->testmode == 'false') 
+			{
+				$this->load->helper('download');  //Load CI's download helper
+				$location = "uploads/" . $_POST['file']; //Set the location for file on the server
+				$data = file_get_contents($location); // Read the file's contents
+				$name = $_POST['file'];  //Name file will be downloaded as will be the same as the one on ther server
+				force_download($name, $data); //Force the user to download the file rather than displaying it
+			}
+		}
+		return(isset($_POST['file']));
 	}
 
 
@@ -124,16 +129,20 @@ class Docs extends Controller {
 
 	function deleteFile()
 	{
-		$file = "uploads/" . $_POST['file'];  //Location of the file on the server; $_POST['file'] given from a form
-		unlink($file);   //Delete the file from the server
-		//Get thumbnail too
-		$file = "uploads/thumbs/tn_" . $_POST['file'];
-		unlink($file);
-		//And let's not forget the database
-		$this->load->database('default', TRUE);
-		$this->db->where('filename',$_POST['file']);
-		$this->db->delete('files');
-		header( 'Location: ../docs' ); //Reload the page
+		if ($this->testmode == 'false')
+		{
+			$file = "uploads/" . $_POST['file'];  //Location of the file on the server; $_POST['file'] given from a form
+			unlink($file);   //Delete the file from the server
+			//Get thumbnail too
+			$file = "uploads/thumbs/tn_" . $_POST['file'];
+			unlink($file);
+			//And let's not forget the database
+			$this->load->database('default', TRUE);
+			$this->db->where('filename',$_POST['file']);
+			$this->db->delete('files');
+			header( 'Location: ../docs' ); //Reload the page
+		}
+		return (isset($_POST['file']));
 	}
 
 
@@ -149,80 +158,81 @@ class Docs extends Controller {
 
 	function view($item)
 	{
-
-		//Get uid
-		$un = $this->session->userdata('un');
-		$uid = $this->User->get_id($un);
-
-		//Get gids and perms for those groups
-		$grouplist = $this->db->get_where( 'usergroup', array('uid' => $uid) )->result_array();
-		$filedata  = $this->db->get_where( 'files', array('filename' =>$item))->result_array();
-		$groupmember=0;
-
-		foreach ($filedata as $key)
+		$display = "";
+		if ($this->testmode == 'false')
 		{
-			$fgid=$key['gid'];	//file group membership
-			$groupname=$this->Group->get_name($key['gid']);
-			$fperm=$key['perm']; //file permissions
-			$fsize=$key['size']; //file size
-			$fdate=str_split($key['date']); //file upload date
-			$fuid=$key['uid'];
-		}
+			//Get uid
+			$un = $this->session->userdata('un');
+			$uid = $this->User->get_id($un);
 
-		foreach ($grouplist as $key)
-		{
-			if ( $fgid == $key['gid'])
+			//Get gids and perms for those groups
+			$grouplist = $this->db->get_where( 'usergroup', array('uid' => $uid) )->result_array();
+			$filedata  = $this->db->get_where( 'files', array('filename' =>$item))->result_array();
+			$groupmember=0;
+			foreach ($filedata as $key)
 			{
-				$groupmember=1;
-				break;
+				$fgid=$key['gid'];	//file group membership
+				$groupname=$this->Group->get_name($key['gid']);
+				$fperm=$key['perm']; //file permissions
+				$fsize=$key['size']; //file size
+				$fdate=str_split($key['date']); //file upload date
+				$fuid=$key['uid'];
+			}
+
+			foreach ($grouplist as $key)
+			{
+				if ( $fgid == $key['gid'])
+				{
+					$groupmember=1;
+					break;
+				}
+				else
+				{
+					continue;
+				}
+			}
+			if($groupmember && ($fperm <= $key['perm'] || $fuid == $uid))
+			{
+				$file = "uploads/" . $item;
+				$display = $item . " owned by " . $groupname . "<br>"
+					. "Size: " . $fsize . " KB<br>" . "Upload date: " . $fdate['4'] . $fdate['5'] . "/"
+					. $fdate['6'] . $fdate['7'] . "/" . $fdate['0'] . $fdate['1'] . $fdate['2'] . $fdate['3'] . "<br>"
+					. "Uploader: " . $this->User->get_name($fuid) . "<br>";
+				//Download button
+				$download= form_open('docs/downloadFile') . form_hidden('file', $item) . form_submit('submit', 'Download') . form_close();
+				$display .="<br>" . $download;
+
+				//Delete button
+				$delete='';
+				if($key['perm'] == 7 || $fuid == $uid) //You need to be a group officer/admin to delete files
+				{
+					$delete = form_open('docs/deleteFile') . form_hidden('file', $item) . form_submit('submit', 'Delete') . form_close();
+				}
+				$display .=$delete;
+	
+				//Edit button
+				$edit='';
+				if($key['perm'] == 7 || $fuid == $uid) //You need to be a group officer/admin to modify files
+				{
+					$edit = form_open('docs/modifyFile') . form_hidden('file', $item) . form_submit('submit', 'Modify') . form_close();
+				}
+				$display .=$edit;
+
+				$display .= "<iframe src=" . base_url() . $file . " width=100% height=100% frameborder=0></iframe>";
 			}
 			else
 			{
-				continue;
+				$display = "You don't have permission to view this file.<br>"
+					. "<a href=\"" . base_url() . "index.php/docs\">Go Back</a>";
 			}
 		}
-		if($groupmember && ($fperm <= $key['perm'] || $fuid == $uid))
-		{
-			$file = "uploads/" . $item;
-			$display = $item . " owned by " . $groupname . "<br>"
-				. "Size: " . $fsize . " KB<br>" . "Upload date: " . $fdate['4'] . $fdate['5'] . "/"
-				. $fdate['6'] . $fdate['7'] . "/" . $fdate['0'] . $fdate['1'] . $fdate['2'] . $fdate['3'] . "<br>"
-				. "Uploader: " . $this->User->get_name($fuid) . "<br>";
-			//Download button
-			$download= form_open('docs/downloadFile') . form_hidden('file', $item) . form_submit('submit', 'Download') . form_close();
-			$display .="<br>" . $download;
-	
-			//Delete button
-			$delete='';
-			if($key['perm'] == 7 || $fuid == $uid) //You need to be a group officer/admin to delete files
-			{
-				$delete = form_open('docs/deleteFile') . form_hidden('file', $item) . form_submit('submit', 'Delete') . form_close();
-			}
-			$display .=$delete;
-	
-			//Edit button
-			$edit='';
-			if($key['perm'] == 7 || $fuid == $uid) //You need to be a group officer/admin to modify files
-			{
-				$edit = form_open('docs/modifyFile') . form_hidden('file', $item) . form_submit('submit', 'Modify') . form_close();
-			}
-			$display .=$edit;
-
-			$display .= "<iframe src=" . base_url() . $file . " width=100% height=100% frameborder=0></iframe>";
-		}
-		else
-		{
-			$display = "You don't have permission to view this file.<br>"
-				. "<a href=\"" . base_url() . "index.php/docs\">Go Back</a>";
-		}
-
+		$this->pdata['content'] = $display;//$this->Page->get_content('docs');
 		if ($this->testmode == 'false')
 		{
-       	      	$this->pdata['content'] = $display;//$this->Page->get_content('docs');
 			$this->load->view('view_doc', $this->pdata);
 		}
+		return($this->pdata['content']);
 	}
-
 
 	/*
 	modifyFile and do_modify()
@@ -237,23 +247,33 @@ class Docs extends Controller {
 	//Load view to get infos from user
 	function modifyFile() 
 	{
-	if ($this->testmode == 'false')
+		$this->pdata['header'] = $this->Page->get_header('Docs'); //Set the header
+              $this->pdata['content'] = $this->Page->get_content('docs');//Set content
+		if ($this->testmode == 'false')
 		{
-			$this->pdata['header'] = $this->Page->get_header('Docs'); //Set the header
-                	$this->pdata['content'] = $this->Page->get_content('docs'); //Pull the content from the database
 			$this->load->view('modify_doc', $this->pdata);
 		}
+		return(true);
 	}
 	//Do the actual modifying
 	function do_modify()
 	{
-	if ($this->testmode == 'false')
-		{
+	
 		//Set up view
 		$this->pdata['header'] = $this->Page->get_header('Docs'); //Set the header
               $this->pdata['content'] = $this->Page->get_content('docs'); //Pull the content from the database
-		$this->load->view('modify_doc', $this->pdata);
-
+		if ($this->testmode == 'false')
+		{
+			$this->load->view('modify_doc', $this->pdata);
+		}
+		if (isset($_POST['perm']) && isset($_POST['file']))
+		{
+		}
+		else 
+		{
+			$_POST['perm']=9;
+			$_POST['file']="testfile";
+		}
 		//echo $_POST['new_name']; //new name
 		//echo $_POST['file']; //old name
 		//echo $_POST['perm']; //permission level for file
@@ -262,10 +282,13 @@ class Docs extends Controller {
 		//$data = array('filename'=>$_POST['new_name'], 'perm'=> $_POST['perm']);
 		$data = array('perm'=> $_POST['perm']);
 		
-		//update database
-		$this->load->database('default', TRUE);
-		$this->db->where('filename',$_POST['file']);
-		$this->db->update('files',$data);
+		if($this->testmode== 'false')
+		{
+			//update database
+			$this->load->database('default', TRUE);
+			$this->db->where('filename',$_POST['file']);
+			$this->db->update('files',$data);
+		}
 		
 		//rename file
 		//$oldpath = "../../uploads/" . $_POST['file'];
@@ -275,8 +298,11 @@ class Docs extends Controller {
 		//move_uploaded_file($oldpath , $newpath);
 
 		//Return to docs
-		header( 'Location: ../docs' ); 
+		if ($this->testmode == 'false')
+		{
+			header( 'Location: ../docs' ); 
 		}
+		return($_POST['perm']);
 	}
 
 	function test() 
@@ -285,16 +311,21 @@ class Docs extends Controller {
 		$page_name = 'docs';
 		$this->load->library('unit_test');
 		$this->testmode = 'true';
+
+		$item =0;
 		
 		//index
 		echo $this->unit->run($this->index(), true, 'index');
 		
 		//Download
-              	echo $this->unit->run($this->downloadFile(), true, 'downloadFile');
+              	echo $this->unit->run($this->downloadFile(), false, 'downloadFile');
 		//Delete
-              	echo $this->unit->run($this->deleteFile(), true, 'deleteFile docs');
+              	echo $this->unit->run($this->deleteFile(), false, 'deleteFile docs');
+		//View
+			echo $this->unit->run($this->view($item), "", 'view docs');
 		//Organize files
-              	echo $this->unit->run($this->modifyFiles(), true, 'organizeFiles docs');
+              	echo $this->unit->run($this->modifyFile(), true, 'modifyFile docs');
+			echo $this->unit->run($this->do_modify(), 9, 'do_modify docs');
 	}
 }
 ?>
