@@ -152,11 +152,10 @@
 								echo form_open($form_path, '', $hidden);
 									echo "<div class='invite'>Members: " . 
 										form_multiselect('userArray[]', $inviteArray) . 
-										form_submit('submitInvite', 'Invite Selected');
-									echo " Group(s): " . form_dropdown('groupName', $groupInviteArray) . 
+										form_submit('submitInvite', 'Invite Member(s)');
+									echo " Group: " . form_dropdown('groupName', $groupInviteArray) . 
 										form_submit('submitInvite', 'Invite Group') . "</div>";
 								echo form_close();					
-								echo "<center>(hold 'CTRL' to select multiple people)</center>";
 
 //THIS WILL REPLACE THE FORM ABOVE ONCE I FIGURE OUT HOW TO IMPLEMENT A POPUP SELECTION LIST								
 //get info needed for inviting group members (used by Ajax)
@@ -226,7 +225,7 @@
 				//make the 2D array javascript friendly
 				$jsonIdArray2 = json_encode(json_encode($idArray2));
 			}
-			echo "<hr /></div>";			//end of background class
+			echo "<hr /><hr /></div>";			//end of background class
 			
 			$hidden = array('event_month' => $event_month, 
 							'event_day' => $event_day, 
@@ -258,8 +257,6 @@
 				}
 			echo form_close(); 
 			
-			echo "<center><font color='blue'>For events that you are invited to: If they disappear,<br> 
-					go back to month view and click on the date to make them re-appear.</font></center>";
 			echo"<br><hr />";
 			
 			//form to view a different day
@@ -272,7 +269,10 @@
 														$event_month, $event_year)), date('j')-1);
 				echo "Y:" . form_dropdown('event_year', $form_years);
 				echo "  " . form_submit('submit', 'View Day') . "</center>";
-			echo form_close();	
+			echo form_close();
+			echo "<hr />";	
+			
+			echo "<font color='blue'>NOTE: To invite multiple people to an event, hold 'CTRL' while selecting</font>";
 		}
 		
 		echo '<p>Page rendered in {elapsed_time} seconds</p>';

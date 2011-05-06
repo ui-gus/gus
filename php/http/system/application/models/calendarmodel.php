@@ -286,8 +286,9 @@ class Calendarmodel extends Model
 				
 				//set up fields to send a notification message to the invited user	
 				$to_id = $this->User->get_id($name);
-				$invite = array('from_id' => $from_id,
-								'to_id' => $to_id,
+				//from_id and to_id have to be switched around to make it work correctly
+				$invite = array('from_id' => $to_id,
+								'to_id' => $from_id,
 								'subject' => "Gus Event Invite",
 								'message' => $eventData,
 								'created' => $created,

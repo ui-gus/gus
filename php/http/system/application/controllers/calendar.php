@@ -81,7 +81,14 @@ class Calendar extends Controller{
 			{
 				$eventID = $this->input->post('eventID');
 				$eventDate = $this->input->post('event_date');
-				$userArray = $this->input->post('userArray');
+				if($groupName = $this->input->post('groupName'))
+				{
+					$userArray = $this->Calendarmodel->get_group_members($groupName);
+				}
+				else
+				{
+					$userArray = $this->input->post('userArray');
+				}
 				$eventOwner = $this->User->get_id($this->session->userdata('un'));
 				$groupID = null;
 				//get the groupID
@@ -222,7 +229,6 @@ class Calendar extends Controller{
 		$expected_result = 'is_true';
 		$test_name = "test to see if user is updated as 'not attending' in calendar_rsvp table";
 		$this->unit->run($test, $expected_result, $test_name);
-		$this->Calendarmodel->remove_event(1);		//clean up the calendar and calendar_rsvp tables
 		
 		//test add_group_event() function (uses eventID 1 also)
 		$test = $this->Calendarmodel->add_group_event($date, 'something', 'testgroup', 1);
