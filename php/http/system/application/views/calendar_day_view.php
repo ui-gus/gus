@@ -235,6 +235,7 @@
 			$ownedGroupsArr = $this->Calendarmodel->get_owned_groups();			
 			
 			//form to add an event on the current day
+echo "<br>";
 			echo form_open($form_path, '', $hidden);	
 				//check if user is admin of at least one group
 				if($ownedGroupsArr)
