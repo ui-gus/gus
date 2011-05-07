@@ -34,29 +34,19 @@ class Docs extends Controller {
 	*/
 	function index() 
 	{		
-		if( !$this->Page->authed() )
+		if( !$this->Page->authed() && !$this->testmode)
 		{
 			header( 'Location: home' ); //Reload the page
 		}
 		else {
-			if ($this->testmode == 'false') 
-			{ //Don't load the page views if we're testing
-       	         $this->pdata['header'] = $this->Page->get_header('Docs'); //Set the header
+			  $this->pdata['header'] = $this->Page->get_header('Docs'); //Set the header
               	  $this->pdata['content'] = $this->Page->get_content('docs'); //Pull the content from the database
 			  $un = $this->session->userdata('un');
 			  $uid = $this->User->get_id($un);
 			  $this->pdata['grouplist'] = $this->db->get_where( 'usergroup', array('uid' => $uid) )->result_array();
+			if ($this->testmode == 'false')
+			{ //Don't load the page views if we're testing
 			  $this->load->view('docs', $this->pdata); //Load the docs view
-			//Get user infos
-		/*
-		  $un = $this->session->userdata('un');
-		  $uid = $this->User->get_id($un);
-		  $grouplist = $this->db->get_where( 'usergroup', array('uid' => $uid) )->result_array();
-		  foreach ( $grouplist as $key )
-		  {
-			//echo $key['gid']; //gid
-			$this->Group->get_name($key['gid']) //name
-		  }*/
 			}
 		}
 		return('true');
@@ -98,22 +88,26 @@ class Docs extends Controller {
 
 	function downloadFile()
 	{
-		if( !$this->Page->authed() )
+		if( !$this->Page->authed() && !$this->testmode)
 		{
 			header( 'Location: ../home' ); //Reload the page
 		}
 		else
 		{
-			if ($this->testmode == 'false') 
+			$this->load->helper('download');  //Load CI's download helper
+			if($this->testmode)
 			{
-				$this->load->helper('download');  //Load CI's download helper
-				$location = "uploads/" . $_POST['file']; //Set the location for file on the server
+				$_POST['file'] = "";
+			}
+			$location = "uploads/" . $_POST['file']; //Set the location for file on the server
+			$name = $_POST['file'];  //Name file will be downloaded as will be the same as the one on ther server
+			if ($this->testmode == 'false') //Don't download if testing
+			{
 				$data = file_get_contents($location); // Read the file's contents
-				$name = $_POST['file'];  //Name file will be downloaded as will be the same as the one on ther server
 				force_download($name, $data); //Force the user to download the file rather than displaying it
 			}
 		}
-		return(isset($_POST['file']));
+		return($_POST['file'] != "");
 	}
 
 
@@ -129,9 +123,9 @@ class Docs extends Controller {
 
 	function deleteFile()
 	{
+		$file = "uploads/" . $_POST['file'];  //Location of the file on the server; $_POST['file'] given from a form
 		if ($this->testmode == 'false')
 		{
-			$file = "uploads/" . $_POST['file'];  //Location of the file on the server; $_POST['file'] given from a form
 			unlink($file);   //Delete the file from the server
 			//Get thumbnail too
 			$file = "uploads/thumbs/tn_" . $_POST['file'];
@@ -142,7 +136,7 @@ class Docs extends Controller {
 			$this->db->delete('files');
 			header( 'Location: ../docs' ); //Reload the page
 		}
-		return (isset($_POST['file']));
+		return ($_POST['file'] != "");
 	}
 
 
@@ -159,38 +153,39 @@ class Docs extends Controller {
 	function view($item)
 	{
 		$display = "";
+
+		//Get uid
+		$un = $this->session->userdata('un');
+		$uid = $this->User->get_id($un);
+
+		//Get gids and perms for those groups
+		$grouplist = $this->db->get_where( 'usergroup', array('uid' => $uid) )->result_array();
+		$filedata  = $this->db->get_where( 'files', array('filename' =>$item))->result_array();
+		$groupmember=0;
+		foreach ($filedata as $key)
+		{
+			$fgid=$key['gid'];	//file group membership
+			$groupname=$this->Group->get_name($key['gid']);
+			$fperm=$key['perm']; //file permissions
+			$fsize=$key['size']; //file size
+			$fdate=str_split($key['date']); //file upload date
+			$fuid=$key['uid'];
+		}
+
+		foreach ($grouplist as $key)
+		{
+			if ( $fgid == $key['gid'])
+			{
+				$groupmember=1;
+				break;
+			}
+			else
+			{
+				continue;
+			}
+		}
 		if ($this->testmode == 'false')
 		{
-			//Get uid
-			$un = $this->session->userdata('un');
-			$uid = $this->User->get_id($un);
-
-			//Get gids and perms for those groups
-			$grouplist = $this->db->get_where( 'usergroup', array('uid' => $uid) )->result_array();
-			$filedata  = $this->db->get_where( 'files', array('filename' =>$item))->result_array();
-			$groupmember=0;
-			foreach ($filedata as $key)
-			{
-				$fgid=$key['gid'];	//file group membership
-				$groupname=$this->Group->get_name($key['gid']);
-				$fperm=$key['perm']; //file permissions
-				$fsize=$key['size']; //file size
-				$fdate=str_split($key['date']); //file upload date
-				$fuid=$key['uid'];
-			}
-
-			foreach ($grouplist as $key)
-			{
-				if ( $fgid == $key['gid'])
-				{
-					$groupmember=1;
-					break;
-				}
-				else
-				{
-					continue;
-				}
-			}
 			if($groupmember && ($fperm <= $key['perm'] || $fuid == $uid))
 			{
 				$file = "uploads/" . $item;
@@ -290,13 +285,6 @@ class Docs extends Controller {
 			$this->db->update('files',$data);
 		}
 		
-		//rename file
-		//$oldpath = "../../uploads/" . $_POST['file'];
-		//$newpath = "../../uploads/" . $_POST['new_name'];
-		//echo $oldpath;
-		//echo $newpath;
-		//move_uploaded_file($oldpath , $newpath);
-
 		//Return to docs
 		if ($this->testmode == 'false')
 		{
@@ -315,7 +303,7 @@ class Docs extends Controller {
 		$item =0;
 		
 		//index
-		echo $this->unit->run($this->index(), true, 'index');
+			echo $this->unit->run($this->index(), true, 'index');
 		
 		//Download
               	echo $this->unit->run($this->downloadFile(), false, 'downloadFile');
