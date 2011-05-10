@@ -1,0 +1,1 @@
+wc -l models/page.php models/user.php models/group.php controllers/admin.php controllers/auth.php controllers/groups.php controllers/home.php controllers/pages.php controllers/users.php views/home.php views/groups/* views/pages/* views/users/*
