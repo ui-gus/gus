@@ -53,6 +53,7 @@
 \BOOKMARK [2][]{subsection.6.1.4}{Other Communication Interfaces}{section.6.1}
 \BOOKMARK [1][]{section.6.2}{System Features}{chapter.6}
 \BOOKMARK [2][]{subsection.6.2.1}{Use Case Diagrams}{section.6.2}
+<<<<<<< HEAD
 \BOOKMARK [2][]{subsection.6.2.2}{System feature: Group Files}{section.6.2}
 \BOOKMARK [2][]{subsection.6.2.3}{Upload File}{section.6.2}
 \BOOKMARK [2][]{subsection.6.2.4}{Download File}{section.6.2}
@@ -60,6 +61,19 @@
 \BOOKMARK [2][]{subsection.6.2.6}{Delete File}{section.6.2}
 \BOOKMARK [2][]{subsection.6.2.7}{Change File Permissions}{section.6.2}
 \BOOKMARK [2][]{subsection.6.2.8}{Admin}{section.6.2}
+=======
+\BOOKMARK [2][]{subsection.6.2.2}{Use Case Diagrams}{section.6.2}
+\BOOKMARK [2][]{subsection.6.2.3}{System feature 1: Officer Management \(Administration Module\)}{section.6.2}
+\BOOKMARK [2][]{subsection.6.2.4}{System feature 2: Group Management \(Officer Module\)}{section.6.2}
+\BOOKMARK [2][]{subsection.6.2.5}{System feature 3: User Menu}{section.6.2}
+\BOOKMARK [2][]{subsection.6.2.6}{System feature 4: Forum Module\)}{section.6.2}
+\BOOKMARK [2][]{subsection.6.2.7}{System feature: Group Files}{section.6.2}
+\BOOKMARK [2][]{subsection.6.2.8}{Upload File}{section.6.2}
+\BOOKMARK [2][]{subsection.6.2.9}{Download File}{section.6.2}
+\BOOKMARK [2][]{subsection.6.2.10}{View File Online}{section.6.2}
+\BOOKMARK [2][]{subsection.6.2.11}{Delete File}{section.6.2}
+\BOOKMARK [2][]{subsection.6.2.12}{Change File Permissions}{section.6.2}
+>>>>>>> c424035d6bc4abc1b02ea498f60864a7f13bbc93
 \BOOKMARK [0][]{chapter.7}{Requirements Traceability}{part.2}
 \BOOKMARK [1][]{section.7.1}{...}{chapter.7}
 \BOOKMARK [2][]{subsection.7.1.1}{...}{section.7.1}

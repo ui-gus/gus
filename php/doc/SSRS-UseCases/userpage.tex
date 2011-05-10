@@ -1,0 +1,35 @@
+\subsection{System feature: User Page}
+\subsection{View Profile}
+  \begin{itemize}
+          \item{\textbf{Actors:} Logged in Users}
+          \item{\textbf{Goals:} User will view information about a Gus User.}
+          \item{\textbf{Preconditions:} User is a member of Gus and logged in.}
+          \item{\textbf{Summary:} The userpage contains all relevant information about a specific user, including full name, description, email, contact info, and major. It also contains links to other parts of the site, such as groups that the user is in, the user's files, or a link to edit the profile. }
+	  \item{\textbf{Steps:}
+	  \begin{enumerate}
+	       \item{User logs into Gus with a valid account.}
+	       \item{User clicks their name in the top-right bar on the website. This links them to their personal page.}
+	       \item{User can also use the Search controller to view any other user's page.}
+	  \end{enumerate}
+	  \item{\textbf{Postconditions:} The User is viewing a user's personal page.}
+	  \item{\textbf{Related use cases:} Edit Profile, Search User, View Forum}
+     \end{itemize}
+\subsection{Edit Profile}
+  \begin{itemize}
+          \item{\textbf{Actors:} Logged in Users }
+          \item{\textbf{Goals:} User will edit their personal information. }
+          \item{\textbf{Preconditions:} User is a member of Gus, logged in, and at their personal profile page.}
+          \item{\textbf{Summary:} User is able to modify their personal information, such as contact info and email. This information is modified on the server. }
+	  \item{\textbf{Steps:}
+	  \begin{enumerate}
+	       \item{User logs onto Gus and navigates to their personal page.}
+	       \item{When on the page, the user clicks on ``Edit my Profile''.}
+	       \item{User modifies any relevant information and clicks the ``Submit'' button.}
+	  \end{enumerate}
+	  \item{\textbf{Alternatives:}
+	  \begin{itemize}
+	       \item{User can click the ``Cancel'' button at any time to be taken back to their User page.}
+	  \end{itemize}
+	  \item{\textbf{Postconditions:} The information (if submitted) is saved on the server and the User is returned to their userpage.}
+	  \item{\textbf{Related use cases:} View Profile }
+     \end{itemize}
