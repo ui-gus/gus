@@ -11,90 +11,52 @@
 \BOOKMARK [2][]{subsection.2.1.1}{Environmental Constraints}{section.2.1}
 \BOOKMARK [2][]{subsection.2.1.2}{System Requirement Constraints}{section.2.1}
 \BOOKMARK [2][]{subsection.2.1.3}{User Characteristic Constraints}{section.2.1}
-\BOOKMARK [1][]{section.2.2}{Stakeholder Concerns}{chapter.2}
-\BOOKMARK [2][]{subsection.2.2.1}{StakeHolder Concerns}{section.2.2}
-\BOOKMARK [0][]{chapter.3}{System and Software Architechture}{part.1}
-\BOOKMARK [1][]{section.3.1}{Users Architectural View}{chapter.3}
-\BOOKMARK [2][]{subsection.3.1.1}{User's View Identification}{section.3.1}
-\BOOKMARK [2][]{subsection.3.1.2}{User's View Representation and Description}{section.3.1}
-\BOOKMARK [1][]{section.3.2}{Developer's Architectural View}{chapter.3}
-\BOOKMARK [2][]{subsection.3.2.1}{Developer's View Identification}{section.3.2}
-\BOOKMARK [2][]{subsection.3.2.2}{Developer's View Representation and Description}{section.3.2}
-\BOOKMARK [2][]{subsection.3.2.3}{Developer's Architectural Rationale}{section.3.2}
-\BOOKMARK [1][]{section.3.3}{Consistency of Architecutural Views}{chapter.3}
-\BOOKMARK [2][]{subsection.3.3.1}{Developer's Viewpoint Detailed Software Design}{section.3.3}
-\BOOKMARK [2][]{subsection.3.3.2}{Component Dictionary}{section.3.3}
-\BOOKMARK [2][]{subsection.3.3.3}{Component Detailed Design}{section.3.3}
-\BOOKMARK [1][]{section.3.4}{Data Dictionary}{chapter.3}
-\BOOKMARK [0][]{chapter.4}{Requirements Traceability}{part.1}
-\BOOKMARK [1][]{subsection.4.0.1}{Requirements Traceability}{chapter.4}
+\BOOKMARK [0][]{chapter.3}{Requirements Traceability}{part.1}
+\BOOKMARK [1][]{subsection.3.0.4}{Requirements Traceability}{chapter.3}
 \BOOKMARK [-1][]{part.2}{II Systems and Software Requirements Specification \(SSRS\) \040for \040Groups in a University Setting}{}
-\BOOKMARK [0][]{chapter.5}{Overall Description}{part.2}
-\BOOKMARK [1][]{section.5.1}{Product Perspective}{chapter.5}
-\BOOKMARK [1][]{section.5.2}{Product Functions}{chapter.5}
-\BOOKMARK [1][]{section.5.3}{User Characteristics}{chapter.5}
-\BOOKMARK [1][]{section.5.4}{Constraints}{chapter.5}
-\BOOKMARK [1][]{section.5.5}{Assumptions and Dependencies}{chapter.5}
-\BOOKMARK [1][]{section.5.6}{System Level \(Non-Functional\) Requirements}{chapter.5}
-\BOOKMARK [2][]{subsection.5.6.1}{Site dependencies}{section.5.6}
-\BOOKMARK [2][]{subsection.5.6.2}{Safety, security and privacy requirements}{section.5.6}
-\BOOKMARK [2][]{subsection.5.6.3}{Performance requirements}{section.5.6}
-\BOOKMARK [2][]{subsection.5.6.4}{System and software quality}{section.5.6}
-\BOOKMARK [2][]{subsection.5.6.5}{Packaging and delivery requirements}{section.5.6}
-\BOOKMARK [2][]{subsection.5.6.6}{Personnel-related requirements}{section.5.6}
-\BOOKMARK [2][]{subsection.5.6.7}{Training-related requirements}{section.5.6}
-\BOOKMARK [2][]{subsection.5.6.8}{Logistics-related requirements}{section.5.6}
-\BOOKMARK [2][]{subsection.5.6.9}{Precedence and criticality of requirements}{section.5.6}
-\BOOKMARK [0][]{chapter.6}{Specific Requirements}{part.2}
-\BOOKMARK [1][]{section.6.1}{External Interface Requirements}{chapter.6}
-\BOOKMARK [2][]{subsection.6.1.1}{Hardware Interfaces}{section.6.1}
-\BOOKMARK [2][]{subsection.6.1.2}{Software Interfaces}{section.6.1}
-\BOOKMARK [2][]{subsection.6.1.3}{User Interfaces}{section.6.1}
-\BOOKMARK [2][]{subsection.6.1.4}{Other Communication Interfaces}{section.6.1}
-\BOOKMARK [1][]{section.6.2}{System Features}{chapter.6}
-\BOOKMARK [2][]{subsection.6.2.1}{Use Case Diagrams}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.2}{System feature: Group Files}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.3}{Upload File}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.4}{Download File}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.5}{View File Online}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.6}{Delete File}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.7}{Change File Permissions}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.8}{Admin}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.9}{System feature: Group Files}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.10}{Upload File}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.11}{Download File}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.12}{View File Online}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.13}{Delete File}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.14}{Change File Permissions}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.15}{System feature: User Page}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.16}{View Profile}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.17}{Edit Profile}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.18}{System feature: Group Page}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.19}{View Grouppage}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.20}{Edit Grouppage}{section.6.2}
-\BOOKMARK [2][]{subsection.6.2.21}{View Group File Page}{section.6.2}
-\BOOKMARK [0][]{chapter.7}{Requirements Traceability}{part.2}
-\BOOKMARK [1][]{section.7.1}{...}{chapter.7}
-\BOOKMARK [2][]{subsection.7.1.1}{...}{section.7.1}
-\BOOKMARK [2][]{subsection.7.1.2}{...}{section.7.1}
-\BOOKMARK [2][]{subsection.7.1.3}{...}{section.7.1}
-\BOOKMARK [2][]{subsection.7.1.4}{...}{section.7.1}
-\BOOKMARK [2][]{subsection.7.1.5}{...}{section.7.1}
-\BOOKMARK [2][]{subsection.7.1.6}{...}{section.7.1}
-\BOOKMARK [1][]{section.7.2}{...}{chapter.7}
-\BOOKMARK [2][]{subsection.7.2.1}{...}{section.7.2}
-\BOOKMARK [2][]{subsection.7.2.2}{...}{section.7.2}
-\BOOKMARK [2][]{subsection.7.2.3}{...}{section.7.2}
-\BOOKMARK [2][]{subsection.7.2.4}{...}{section.7.2}
-\BOOKMARK [2][]{subsection.7.2.5}{...}{section.7.2}
-\BOOKMARK [2][]{subsection.7.2.6}{...}{section.7.2}
-\BOOKMARK [1][]{section.7.3}{...}{chapter.7}
-\BOOKMARK [2][]{subsection.7.3.1}{...}{section.7.3}
-\BOOKMARK [2][]{subsection.7.3.2}{...}{section.7.3}
-\BOOKMARK [2][]{subsection.7.3.3}{...}{section.7.3}
-\BOOKMARK [2][]{subsection.7.3.4}{...}{section.7.3}
-\BOOKMARK [2][]{subsection.7.3.5}{...}{section.7.3}
-\BOOKMARK [2][]{subsection.7.3.6}{...}{section.7.3}
-\BOOKMARK [-1][]{part.3}{III ...}{}
-\BOOKMARK [0][]{appendix.A}{...}{part.3}
-\BOOKMARK [0][]{appendix.B}{...}{part.3}
+\BOOKMARK [0][]{chapter.4}{Overall Description}{part.2}
+\BOOKMARK [1][]{section.4.1}{Product Perspective}{chapter.4}
+\BOOKMARK [1][]{section.4.2}{Product Functions}{chapter.4}
+\BOOKMARK [1][]{section.4.3}{User Characteristics}{chapter.4}
+\BOOKMARK [1][]{section.4.4}{Constraints}{chapter.4}
+\BOOKMARK [1][]{section.4.5}{Assumptions and Dependencies}{chapter.4}
+\BOOKMARK [1][]{section.4.6}{System Level \(Non-Functional\) Requirements}{chapter.4}
+\BOOKMARK [2][]{subsection.4.6.1}{Site dependencies}{section.4.6}
+\BOOKMARK [2][]{subsection.4.6.2}{Safety, security and privacy requirements}{section.4.6}
+\BOOKMARK [2][]{subsection.4.6.3}{Performance requirements}{section.4.6}
+\BOOKMARK [2][]{subsection.4.6.4}{System and software quality}{section.4.6}
+\BOOKMARK [2][]{subsection.4.6.5}{Packaging and delivery requirements}{section.4.6}
+\BOOKMARK [2][]{subsection.4.6.6}{Personnel-related requirements}{section.4.6}
+\BOOKMARK [2][]{subsection.4.6.7}{Training-related requirements}{section.4.6}
+\BOOKMARK [2][]{subsection.4.6.8}{Logistics-related requirements}{section.4.6}
+\BOOKMARK [2][]{subsection.4.6.9}{Precedence and criticality of requirements}{section.4.6}
+\BOOKMARK [0][]{chapter.5}{Specific Requirements}{part.2}
+\BOOKMARK [1][]{section.5.1}{External Interface Requirements}{chapter.5}
+\BOOKMARK [2][]{subsection.5.1.1}{Hardware Interfaces}{section.5.1}
+\BOOKMARK [2][]{subsection.5.1.2}{Software Interfaces}{section.5.1}
+\BOOKMARK [2][]{subsection.5.1.3}{User Interfaces}{section.5.1}
+\BOOKMARK [2][]{subsection.5.1.4}{Other Communication Interfaces}{section.5.1}
+\BOOKMARK [1][]{section.5.2}{System Features}{chapter.5}
+\BOOKMARK [2][]{subsection.5.2.1}{Use Case Diagrams}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.2}{System feature: Group Files}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.3}{Upload File}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.4}{Download File}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.5}{View File Online}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.6}{Delete File}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.7}{Change File Permissions}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.8}{Admin}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.9}{System feature: Group Files}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.10}{Upload File}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.11}{Download File}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.12}{View File Online}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.13}{Delete File}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.14}{Change File Permissions}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.15}{System feature: User Page}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.16}{View Profile}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.17}{Edit Profile}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.18}{System feature: Group Page}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.19}{View Grouppage}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.20}{Edit Grouppage}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.21}{View Group File Page}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.22}{System Feature: Search}{section.5.2}
+\BOOKMARK [2][]{subsection.5.2.23}{System Feature: Feedback}{section.5.2}

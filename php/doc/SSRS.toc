@@ -1,112 +1,70 @@
 \contentsline {part}{I\hspace {1em}System and Software Design Description (SSDD): Incorporating Architectural Views and Detailed Design Criteria \\ for \\ Groups in a Univeristy Setting}{1}{part.1}
-\contentsline {chapter}{\numberline {1}Introduction}{8}{chapter.1}
-\contentsline {section}{\numberline {1.1}Identification}{8}{section.1.1}
-\contentsline {section}{\numberline {1.2}Purpose}{8}{section.1.2}
-\contentsline {section}{\numberline {1.3}Scope}{8}{section.1.3}
-\contentsline {section}{\numberline {1.4}Definitions, Acronyms, and Abbreviations}{9}{section.1.4}
-\contentsline {section}{\numberline {1.5}References}{9}{section.1.5}
-\contentsline {section}{\numberline {1.6}Overview and Restrictions}{9}{section.1.6}
-\contentsline {chapter}{\numberline {2}Constraints and Stakeholder Concerns}{11}{chapter.2}
-\contentsline {section}{\numberline {2.1}Constraints}{11}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Environmental Constraints}{11}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}System Requirement Constraints}{11}{subsection.2.1.2}
-\contentsline {subsection}{\numberline {2.1.3}User Characteristic Constraints}{12}{subsection.2.1.3}
-\contentsline {section}{\numberline {2.2}Stakeholder Concerns}{12}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}StakeHolder Concerns}{12}{subsection.2.2.1}
-\contentsline {chapter}{\numberline {3}System and Software Architechture}{13}{chapter.3}
-\contentsline {section}{\numberline {3.1}Users Architectural View}{14}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}User's View Identification}{14}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}User's View Representation and Description}{14}{subsection.3.1.2}
-\contentsline {section}{\numberline {3.2}Developer's Architectural View}{14}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Developer's View Identification}{14}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Developer's View Representation and Description}{14}{subsection.3.2.2}
-\contentsline {subsubsection}{Object Model}{14}{section*.4}
-\contentsline {subsubsection}{Dynamic Model}{14}{section*.5}
-\contentsline {subsection}{\numberline {3.2.3}Developer's Architectural Rationale}{14}{subsection.3.2.3}
-\contentsline {section}{\numberline {3.3}Consistency of Architecutural Views}{14}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Developer's Viewpoint Detailed Software Design}{14}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Component Dictionary}{14}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Component Detailed Design}{14}{subsection.3.3.3}
-\contentsline {subsubsection}{Detailed Design for Component/Entity: Name of Component}{14}{section*.6}
-\contentsline {subsubsection}{Detailed Design for Component/Entity: Name of Component}{14}{section*.7}
-\contentsline {subsubsection}{Detailed Design for Component/Entity: Name of Component}{14}{section*.8}
-\contentsline {subsubsection}{Detailed Design for Component/Entity: Name of Component}{14}{section*.9}
-\contentsline {section}{\numberline {3.4}Data Dictionary}{14}{section.3.4}
-\contentsline {chapter}{\numberline {4}Requirements Traceability}{15}{chapter.4}
-\contentsline {subsection}{\numberline {4.0.1}Requirements Traceability}{15}{subsection.4.0.1}
-\contentsline {part}{II\hspace {1em}Systems and Software Requirements Specification (SSRS) \\ for \\ Groups in a University Setting}{16}{part.2}
-\contentsline {chapter}{\numberline {5}Overall Description}{17}{chapter.5}
-\contentsline {section}{\numberline {5.1}Product Perspective}{17}{section.5.1}
-\contentsline {section}{\numberline {5.2}Product Functions}{17}{section.5.2}
-\contentsline {section}{\numberline {5.3}User Characteristics}{18}{section.5.3}
-\contentsline {section}{\numberline {5.4}Constraints}{19}{section.5.4}
-\contentsline {section}{\numberline {5.5}Assumptions and Dependencies}{19}{section.5.5}
-\contentsline {section}{\numberline {5.6}System Level (Non-Functional) Requirements}{19}{section.5.6}
-\contentsline {subsection}{\numberline {5.6.1}Site dependencies}{19}{subsection.5.6.1}
-\contentsline {subsection}{\numberline {5.6.2}Safety, security and privacy requirements}{19}{subsection.5.6.2}
-\contentsline {subsection}{\numberline {5.6.3}Performance requirements}{19}{subsection.5.6.3}
-\contentsline {subsection}{\numberline {5.6.4}System and software quality}{20}{subsection.5.6.4}
-\contentsline {subsection}{\numberline {5.6.5}Packaging and delivery requirements}{20}{subsection.5.6.5}
-\contentsline {subsection}{\numberline {5.6.6}Personnel-related requirements}{20}{subsection.5.6.6}
-\contentsline {subsection}{\numberline {5.6.7}Training-related requirements}{20}{subsection.5.6.7}
-\contentsline {subsection}{\numberline {5.6.8}Logistics-related requirements}{20}{subsection.5.6.8}
-\contentsline {subsection}{\numberline {5.6.9}Precedence and criticality of requirements}{20}{subsection.5.6.9}
-\contentsline {chapter}{\numberline {6}Specific Requirements}{21}{chapter.6}
-\contentsline {section}{\numberline {6.1}External Interface Requirements}{21}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Hardware Interfaces}{21}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Software Interfaces}{21}{subsection.6.1.2}
-\contentsline {subsection}{\numberline {6.1.3}User Interfaces}{21}{subsection.6.1.3}
-\contentsline {subsection}{\numberline {6.1.4}Other Communication Interfaces}{21}{subsection.6.1.4}
-\contentsline {section}{\numberline {6.2}System Features}{23}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Use Case Diagrams}{23}{subsection.6.2.1}
-\contentsline {subsection}{\numberline {6.2.2}System feature: Group Files}{24}{subsection.6.2.2}
-\contentsline {subsection}{\numberline {6.2.3}Upload File}{24}{subsection.6.2.3}
-\contentsline {subsection}{\numberline {6.2.4}Download File}{25}{subsection.6.2.4}
-\contentsline {subsection}{\numberline {6.2.5}View File Online}{25}{subsection.6.2.5}
-\contentsline {subsection}{\numberline {6.2.6}Delete File}{26}{subsection.6.2.6}
-\contentsline {subsection}{\numberline {6.2.7}Change File Permissions}{27}{subsection.6.2.7}
-\contentsline {subsection}{\numberline {6.2.8}Admin}{29}{subsection.6.2.8}
-\contentsline {subsubsection}{Add/Edit Group in Admin Panel}{29}{section*.10}
-\contentsline {subsubsection}{Delete Group in Admin Panel}{29}{section*.11}
-\contentsline {subsubsection}{Add/Edit Page in Admin Panel}{30}{section*.12}
-\contentsline {subsubsection}{Delete Page in Admin Panel}{31}{section*.13}
-\contentsline {subsubsection}{Add/Edit User in Admin Panel}{31}{section*.14}
-\contentsline {subsubsection}{Delete User in Admin Panel}{32}{section*.15}
-\contentsline {subsection}{\numberline {6.2.9}System feature: Group Files}{33}{subsection.6.2.9}
-\contentsline {subsection}{\numberline {6.2.10}Upload File}{33}{subsection.6.2.10}
-\contentsline {subsection}{\numberline {6.2.11}Download File}{34}{subsection.6.2.11}
-\contentsline {subsection}{\numberline {6.2.12}View File Online}{34}{subsection.6.2.12}
-\contentsline {subsection}{\numberline {6.2.13}Delete File}{35}{subsection.6.2.13}
-\contentsline {subsection}{\numberline {6.2.14}Change File Permissions}{36}{subsection.6.2.14}
-\contentsline {subsection}{\numberline {6.2.15}System feature: User Page}{37}{subsection.6.2.15}
-\contentsline {subsection}{\numberline {6.2.16}View Profile}{37}{subsection.6.2.16}
-\contentsline {subsection}{\numberline {6.2.17}Edit Profile}{37}{subsection.6.2.17}
-\contentsline {subsection}{\numberline {6.2.18}System feature: Group Page}{38}{subsection.6.2.18}
-\contentsline {subsection}{\numberline {6.2.19}View Grouppage}{38}{subsection.6.2.19}
-\contentsline {subsection}{\numberline {6.2.20}Edit Grouppage}{39}{subsection.6.2.20}
-\contentsline {subsection}{\numberline {6.2.21}View Group File Page}{39}{subsection.6.2.21}
-\contentsline {chapter}{\numberline {7}Requirements Traceability}{41}{chapter.7}
-\contentsline {section}{\numberline {7.1}...}{42}{section.7.1}
-\contentsline {subsection}{\numberline {7.1.1}...}{42}{subsection.7.1.1}
-\contentsline {subsection}{\numberline {7.1.2}...}{42}{subsection.7.1.2}
-\contentsline {subsection}{\numberline {7.1.3}...}{42}{subsection.7.1.3}
-\contentsline {subsection}{\numberline {7.1.4}...}{42}{subsection.7.1.4}
-\contentsline {subsection}{\numberline {7.1.5}...}{42}{subsection.7.1.5}
-\contentsline {subsection}{\numberline {7.1.6}...}{42}{subsection.7.1.6}
-\contentsline {section}{\numberline {7.2}...}{42}{section.7.2}
-\contentsline {subsection}{\numberline {7.2.1}...}{42}{subsection.7.2.1}
-\contentsline {subsection}{\numberline {7.2.2}...}{42}{subsection.7.2.2}
-\contentsline {subsection}{\numberline {7.2.3}...}{42}{subsection.7.2.3}
-\contentsline {subsection}{\numberline {7.2.4}...}{42}{subsection.7.2.4}
-\contentsline {subsection}{\numberline {7.2.5}...}{42}{subsection.7.2.5}
-\contentsline {subsection}{\numberline {7.2.6}...}{42}{subsection.7.2.6}
-\contentsline {section}{\numberline {7.3}...}{42}{section.7.3}
-\contentsline {subsection}{\numberline {7.3.1}...}{42}{subsection.7.3.1}
-\contentsline {subsection}{\numberline {7.3.2}...}{42}{subsection.7.3.2}
-\contentsline {subsection}{\numberline {7.3.3}...}{42}{subsection.7.3.3}
-\contentsline {subsection}{\numberline {7.3.4}...}{42}{subsection.7.3.4}
-\contentsline {subsection}{\numberline {7.3.5}...}{42}{subsection.7.3.5}
-\contentsline {subsection}{\numberline {7.3.6}...}{42}{subsection.7.3.6}
-\contentsline {part}{III\hspace {1em}...}{43}{part.3}
-\contentsline {chapter}{\numberline {A}...}{44}{appendix.A}
-\contentsline {chapter}{\numberline {B}...}{45}{appendix.B}
+\contentsline {chapter}{\numberline {1}Introduction}{7}{chapter.1}
+\contentsline {section}{\numberline {1.1}Identification}{7}{section.1.1}
+\contentsline {section}{\numberline {1.2}Purpose}{7}{section.1.2}
+\contentsline {section}{\numberline {1.3}Scope}{7}{section.1.3}
+\contentsline {section}{\numberline {1.4}Definitions, Acronyms, and Abbreviations}{8}{section.1.4}
+\contentsline {section}{\numberline {1.5}References}{8}{section.1.5}
+\contentsline {section}{\numberline {1.6}Overview and Restrictions}{8}{section.1.6}
+\contentsline {chapter}{\numberline {2}Constraints and Stakeholder Concerns}{10}{chapter.2}
+\contentsline {section}{\numberline {2.1}Constraints}{10}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Environmental Constraints}{10}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}System Requirement Constraints}{10}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}User Characteristic Constraints}{11}{subsection.2.1.3}
+\contentsline {chapter}{\numberline {3}Requirements Traceability}{12}{chapter.3}
+\contentsline {subsection}{\numberline {3.0.4}Requirements Traceability}{12}{subsection.3.0.4}
+\contentsline {part}{II\hspace {1em}Systems and Software Requirements Specification (SSRS) \\ for \\ Groups in a University Setting}{13}{part.2}
+\contentsline {chapter}{\numberline {4}Overall Description}{14}{chapter.4}
+\contentsline {section}{\numberline {4.1}Product Perspective}{14}{section.4.1}
+\contentsline {section}{\numberline {4.2}Product Functions}{14}{section.4.2}
+\contentsline {section}{\numberline {4.3}User Characteristics}{15}{section.4.3}
+\contentsline {section}{\numberline {4.4}Constraints}{16}{section.4.4}
+\contentsline {section}{\numberline {4.5}Assumptions and Dependencies}{16}{section.4.5}
+\contentsline {section}{\numberline {4.6}System Level (Non-Functional) Requirements}{16}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}Site dependencies}{16}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}Safety, security and privacy requirements}{16}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.3}Performance requirements}{16}{subsection.4.6.3}
+\contentsline {subsection}{\numberline {4.6.4}System and software quality}{17}{subsection.4.6.4}
+\contentsline {subsection}{\numberline {4.6.5}Packaging and delivery requirements}{17}{subsection.4.6.5}
+\contentsline {subsection}{\numberline {4.6.6}Personnel-related requirements}{17}{subsection.4.6.6}
+\contentsline {subsection}{\numberline {4.6.7}Training-related requirements}{17}{subsection.4.6.7}
+\contentsline {subsection}{\numberline {4.6.8}Logistics-related requirements}{17}{subsection.4.6.8}
+\contentsline {subsection}{\numberline {4.6.9}Precedence and criticality of requirements}{17}{subsection.4.6.9}
+\contentsline {chapter}{\numberline {5}Specific Requirements}{18}{chapter.5}
+\contentsline {section}{\numberline {5.1}External Interface Requirements}{18}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Hardware Interfaces}{18}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Software Interfaces}{18}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}User Interfaces}{18}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}Other Communication Interfaces}{18}{subsection.5.1.4}
+\contentsline {section}{\numberline {5.2}System Features}{20}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Use Case Diagrams}{20}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}System feature: Group Files}{21}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Upload File}{21}{subsection.5.2.3}
+\contentsline {subsection}{\numberline {5.2.4}Download File}{22}{subsection.5.2.4}
+\contentsline {subsection}{\numberline {5.2.5}View File Online}{22}{subsection.5.2.5}
+\contentsline {subsection}{\numberline {5.2.6}Delete File}{23}{subsection.5.2.6}
+\contentsline {subsection}{\numberline {5.2.7}Change File Permissions}{24}{subsection.5.2.7}
+\contentsline {subsection}{\numberline {5.2.8}Admin}{26}{subsection.5.2.8}
+\contentsline {subsubsection}{Add/Edit Group in Admin Panel}{26}{section*.4}
+\contentsline {subsubsection}{Delete Group in Admin Panel}{26}{section*.5}
+\contentsline {subsubsection}{Add/Edit Page in Admin Panel}{27}{section*.6}
+\contentsline {subsubsection}{Delete Page in Admin Panel}{28}{section*.7}
+\contentsline {subsubsection}{Add/Edit User in Admin Panel}{28}{section*.8}
+\contentsline {subsubsection}{Delete User in Admin Panel}{29}{section*.9}
+\contentsline {subsection}{\numberline {5.2.9}System feature: Group Files}{30}{subsection.5.2.9}
+\contentsline {subsection}{\numberline {5.2.10}Upload File}{30}{subsection.5.2.10}
+\contentsline {subsection}{\numberline {5.2.11}Download File}{31}{subsection.5.2.11}
+\contentsline {subsection}{\numberline {5.2.12}View File Online}{31}{subsection.5.2.12}
+\contentsline {subsection}{\numberline {5.2.13}Delete File}{32}{subsection.5.2.13}
+\contentsline {subsection}{\numberline {5.2.14}Change File Permissions}{33}{subsection.5.2.14}
+\contentsline {subsection}{\numberline {5.2.15}System feature: User Page}{34}{subsection.5.2.15}
+\contentsline {subsection}{\numberline {5.2.16}View Profile}{34}{subsection.5.2.16}
+\contentsline {subsection}{\numberline {5.2.17}Edit Profile}{34}{subsection.5.2.17}
+\contentsline {subsection}{\numberline {5.2.18}System feature: Group Page}{35}{subsection.5.2.18}
+\contentsline {subsection}{\numberline {5.2.19}View Grouppage}{35}{subsection.5.2.19}
+\contentsline {subsection}{\numberline {5.2.20}Edit Grouppage}{36}{subsection.5.2.20}
+\contentsline {subsection}{\numberline {5.2.21}View Group File Page}{36}{subsection.5.2.21}
+\contentsline {subsection}{\numberline {5.2.22}System Feature: Search}{37}{subsection.5.2.22}
+\contentsline {subsubsection}{User/Group Search}{37}{section*.10}
+\contentsline {subsection}{\numberline {5.2.23}System Feature: Feedback}{38}{subsection.5.2.23}
+\contentsline {subsubsection}{Submit Feedback}{38}{section*.11}
