@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.29)  5 MAY 2011 17:40
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.29)  9 MAY 2011 20:19
 entering extended mode
  %&-line parsing enabled.
 **SSRS.tex
@@ -193,7 +193,8 @@ Package graphics Info: Driver file: pdftex.def on input line 91.
 (/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
 \Gread@gobject=\count126
-))) (./SSRS.aux)
+))) (./SSRS.aux
+(./SSRS-UseCases/docs.aux) (./SSRS-UseCases/admin.aux))
 \openout1 = `SSRS.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
@@ -295,40 +296,58 @@ Chapter 1.
 (./SSRS/Definitions.tex) (./SSRS/References.tex) (./SSRS/Overview.tex [8])
 [9]
 Chapter 2.
-(./SSRS/Constraints.tex) (./SSRS/StakeholderConcerns.tex) [10
+(./SSRS/Constraints.tex
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 6.
+ (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 6.
 
-]
+[10
+
+]) (./SSRS/StakeholderConcerns.tex) [11]
 Chapter 3.
-(./SSRS/SystemsSoftwareArchitecture.tex) [11
+(./SSRS/SystemsSoftwareArchitecture.tex) [12
 
 ]
 Overfull \vbox (111.89337pt too high) has occurred while \output is active []
 
 
-[12]
+[13]
 Chapter 4.
-(./SSRS/RequirementsTraceability.tex) [13
+(./SSRS/RequirementsTraceability.tex
 
-]
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 1.
 
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 45.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 2--44
 
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 45.
+ []
 
 [14
 
 ]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\\' on input line 45.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\\' on input line 45.
+
+[15
+
+]
 Chapter 5.
-(./SSRS/ProductPerspective.tex) (./SSRS/ProductFunctions.tex [15
+(./SSRS/ProductPerspective.tex) (./SSRS/ProductFunctions.tex [16
 
 ])
-(./SSRS/UserCharacteristics.tex) (./SSRS/Constraints_Overall.tex) [16]
-(./SSRS/AssumptionsDependencies.tex) (./SSRS/SystemLevelReq.tex [17]) [18]
+(./SSRS/UserCharacteristics.tex) (./SSRS/Constraints_Overall.tex) [17]
+(./SSRS/AssumptionsDependencies.tex) (./SSRS/SystemLevelReq.tex [18]) [19]
 Chapter 6.
-(./SSRS/ExternalInterfaceReq.tex [19
+(./SSRS/ExternalInterfaceReq.tex [20
 
 ]
 Overfull \hbox (0.50705pt too wide) in paragraph at lines 20--21
@@ -485,55 +504,56 @@ Overfull \hbox (42.76276pt too wide) in paragraph at lines 106--125
 [][] 
  []
 
-[20]) (./SSRS/UC-old.tex
-Overfull \hbox (2.71281pt too wide) in paragraph at lines 4--4
-[]\OT1/cmr/bx/n/14.4 System fea-ture 1: Of-fi-cer Man-age-ment (Ad-min-is-tra-t
-ion Mod-
- []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 7.
-(/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 7.
- [21
+[21]) [22
 
 
-] [22] [23] [24]
-[25] [26] [27] [28] [29] [30] [31] [32] [33]) [34]
+]
+\openout2 = `SSRS-UseCases/docs.aux'.
+
+ (./SSRS-UseCases/docs.tex [23
+
+] [24] [25] [26]) [27]
+\openout2 = `SSRS-UseCases/admin.aux'.
+
+
+(./SSRS-UseCases/admin.tex [28
+
+
+] [29] [30]) [31]
 Chapter 7.
-[35
+[32
+
 
 ]
 Overfull \vbox (198.65004pt too high) has occurred while \output is active []
 
 
-[36] [37
+[33] [34
 
 ]
 Appendix A.
-[38
+[35
 
 ]
 Appendix B.
-[39
+[36
 
-] (./SSRS.aux) ) 
+] (./SSRS.aux (./SSRS-UseCases/docs.aux) (./SSRS-UseCases/admin.aux)) ) 
 Here is how much of TeX's memory you used:
- 4695 strings out of 495061
- 67030 string characters out of 1182621
+ 4649 strings out of 495061
+ 66895 string characters out of 1182621
  143216 words of memory out of 3000000
- 7467 multiletter control sequences out of 15000+50000
+ 7474 multiletter control sequences out of 15000+50000
  8500 words of font info for 30 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 38i,10n,36p,311b,531s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12
-.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/s
-hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on SSRS.pdf (39 pages, 169390 bytes).
+ 38i,10n,38p,559b,531s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/sh
+are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-t
+exlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on SSRS.pdf (36 pages, 163421 bytes).
 PDF statistics:
- 848 PDF objects out of 1000 (max. 8388607)
- 304 named destinations out of 1000 (max. 500000)
- 657 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 790 PDF objects out of 1000 (max. 8388607)
+ 239 named destinations out of 1000 (max. 500000)
+ 697 words of extra memory for PDF output out of 10000 (max. 10000000)
 

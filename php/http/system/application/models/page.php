@@ -90,7 +90,8 @@ class Page extends Model {
 				<li><a href=\"" . site_url() . "/pm/compose\">Compose</a></li>
 				<li><a href=\"" . site_url() . "/search\">Search</a></li>
 				<li><a href=\"" . site_url() . "/grouppage	\">Groups</a> 
-				<li><a href=\"http://nwerp.org/trac/gus\">Help/FAQ</a></li>			
+				<li><a href=\"http://nwerp.org/gus/SSRS/node27.html\">Help</a></li>			
+				<li><a href=\"http://nwerp.org/trac/gus\">Bugs</a></li>			
 				<li><a href=\"" . site_url() . "/feedback	\">FeedBack</a></li>
 			</ul>
 			

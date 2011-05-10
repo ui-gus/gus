@@ -1,0 +1,167 @@
+%		\subsubsection{Title}
+%			\begin{itemize}
+%				\item{\textbf{Actors:} }
+%				\item{\textbf{Goals:} }
+%				\item{\textbf{Preconditions:} (Requirements)}
+%				\item{\textbf{Summary:} 
+%				\item{Related Use Cases: }
+%				\item{\textbf{Steps:}
+%				\begin{enumerate}
+%					\item 1
+%				\end{enumerate}
+%				}
+%				\item{\textbf{Alternatives:} }
+%				\item{\textbf{Postconditions:} }
+%			\end{itemize}
+
+	\subsection{Admin}
+		\subsubsection{Add/Edit Group in Admin Panel}
+			\begin{itemize}
+				\item{\textbf{Actors:} Gus Admin}
+				\item{\textbf{Goals:} Edit basic settings of group}
+				\item{\textbf{Preconditions:} User is gus admin status}
+				\item{\textbf{Summary:} Admin edits name and description of group}
+				\item{\textbf{Implementation:} 	\href{http://nwerp.org/gus/index.php/groups/add}{web},
+								\href{http://nwerp.org/gus/index.php/groups/test}{test}
+				}
+				\item{\textbf{Related Use Cases:} Delete Group in Admin Panel}
+				\item{\textbf{Steps:}}
+				\begin{enumerate}
+					\item Go to Admin Panel
+					\item Click on 'Groups'
+					\item Click on 'Add' or 'Edit'
+					\begin{itemize}
+						\item if 'Edit', select group to edit and click 'Edit' again
+					\end{itemize}
+					\item Enter a name (required) if not 'Edit' mode
+					\item Enter a description
+					\item Press 'Submit'
+				\end{enumerate}
+				\item{\textbf{Alternatives:} Add/Edit Group for GroupPages}
+				\item{\textbf{Postconditions:} Save succeeded, save failed}
+			\end{itemize}
+
+		\subsubsection{Delete Group in Admin Panel}
+			\begin{itemize}
+				\item{\textbf{Actors:} Gus Admin}
+				\item{\textbf{Goals:} Deletion of group}
+				\item{\textbf{Preconditions:} User is gus admin status}
+				\item{\textbf{Summary:} Admin deletes group} 
+				\item{\textbf{Implementation:} 	\href{http://nwerp.org/gus/index.php/groups/delete}{web},
+								\href{http://nwerp.org/gus/index.php/groups/test}{test}
+				}
+				\item{\textbf{Related Use Cases:} Add/Edit Group in Admin Panel}
+				\item{\textbf{Steps:}}
+				\begin{enumerate}
+					\item Go to Admin Panel
+					\item Click on 'Groups'
+					\item Click on 'Delete'
+					\item Click checkbox(es) of group(s) to delete
+					\item Press 'Delete'
+				\end{enumerate}
+				\item{\textbf{Alternatives:} (none)}
+				\item{\textbf{Postconditions:} Deletion succeeded, failed}
+			\end{itemize}
+
+		\subsubsection{Add/Edit Page in Admin Panel}
+			\begin{itemize}
+				\item{\textbf{Actors:} Gus Admin}
+				\item{\textbf{Goals:} Addition/edit of page content}
+				\item{\textbf{Preconditions:} User is gus admin status}
+				\item{\textbf{Summary:} Admin adds a page to gus, or edit existing page content} 
+				\item{\textbf{Implementation:} 	\href{http://nwerp.org/gus/index.php/pages/add}{web},
+								\href{http://nwerp.org/gus/index.php/pages/test}{test}
+				}
+				\item{Related Use Cases: Delete Page in Admin Panel}
+				\item{\textbf{Steps:}}
+				\begin{enumerate}
+					\item Go to Admin Panel
+					\item Click on 'Pages'
+					\item Click on 'Add' or 'Edit'
+					\begin{itemize}
+						\item if 'Edit', select page name to edit, and click 'Edit' again
+					\end{itemize}
+					\item If not in 'Edit' mode, enter a page name
+					\item Change the content in the content box
+					\item Press 'Submit'
+				\end{enumerate}
+				\item{\textbf{Alternatives:} (none)}
+				\item{\textbf{Postconditions:} Addition/edit succeeded, failed}
+			\end{itemize}
+
+		\subsubsection{Delete Page in Admin Panel}
+			\begin{itemize}
+				\item{\textbf{Actors:} Gus Admin}
+				\item{\textbf{Goals:} Deletion of page}
+				\item{\textbf{Preconditions:} User is gus admin status}
+				\item{\textbf{Summary:} Admin delete page} 
+				\item{\textbf{Implementation:} 	\href{http://nwerp.org/gus/index.php/pages/delete}{web},
+								\href{http://nwerp.org/gus/index.php/pages/test}{test}
+				}
+				\item{Related Use Cases: Add/Edit Page in Admin Panel}
+				\item{\textbf{Steps:}}
+				\begin{enumerate}
+					\item Go to Admin Panel
+					\item Click on 'Pages'
+					\item Click on 'Delete'
+					\item Click checkbox(es) of group(s) to delete
+					\item Press 'Delete'
+				\end{enumerate}
+				\item{\textbf{Alternatives:} (none)}
+				\item{\textbf{Postconditions:} Deletion succeeded, deletion failed}
+			\end{itemize}
+
+		%users
+		\subsubsection{Add/Edit User in Admin Panel}
+			\begin{itemize}
+				\item{\textbf{Actors:} Gus Admin}
+				\item{\textbf{Goals:} Addition/edit of user content}
+				\item{\textbf{Preconditions:} User is gus admin status}
+				\item{\textbf{Summary:} Admin adds a user to gus, or edit existing user name, password, and
+							group membership} 
+				\item{\textbf{Implementation:} 	\href{http://nwerp.org/gus/index.php/users/add}{web},
+								\href{http://nwerp.org/gus/index.php/users/test}{test}
+				}
+				\item{Related Use Cases: Delete User in Admin Panel}
+				\item{\textbf{Steps:}}
+				\begin{enumerate}
+					\item Go to Admin Panel
+					\item Click on 'Users'
+					\item Click on 'Add' or 'Edit'
+					\begin{itemize}
+						\item if 'Edit', select user name to edit, and click 'Edit' again
+					\end{itemize}
+					\item If not in 'Edit' mode, enter a user name
+					\item Change/enter the user's password
+					\item (Un)check the groups the user should belong to.
+					\begin{itemize}
+						\item Set user's permission level for each group (optional)
+					\end{itemize}
+					\item Press 'Submit'
+				\end{enumerate}
+				\item{\textbf{Alternatives:} (none)}
+				\item{\textbf{Postconditions:} Addition/edit succeeded, failed}
+			\end{itemize}
+
+		\subsubsection{Delete User in Admin Panel}
+			\begin{itemize}
+				\item{\textbf{Actors:} Gus Admin}
+				\item{\textbf{Goals:} Deletion of user}
+				\item{\textbf{Preconditions:} User is gus admin status}
+				\item{\textbf{Summary:} Admin deletes user} 
+				\item{\textbf{Implementation:} 	\href{http://nwerp.org/gus/index.php/users/delete}{web},
+								\href{http://nwerp.org/gus/index.php/users/test}{test}
+				}
+				\item{Related Use Cases: Add/Edit User in Admin Panel}
+				\item{\textbf{Steps:}}
+				\begin{enumerate}
+					\item Go to Admin Panel
+					\item Click on 'Users'
+					\item Click on 'Delete'
+					\item Click checkbox(es) of user(s) to delete
+					\item Press 'Delete'
+				\end{enumerate}
+				\item{\textbf{Alternatives:} (none)}
+				\item{\textbf{Postconditions:} Deletion succeeded, deletion failed}
+			\end{itemize}
+
