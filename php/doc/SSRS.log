@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.29)  5 MAY 2011 17:40
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.4)  9 MAY 2011 18:32
 entering extended mode
  %&-line parsing enabled.
 **SSRS.tex
@@ -191,7 +191,7 @@ File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
 (/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
+File: pdftex.def 2009/08/25 v0.04m Graphics/color for pdfTeX
 \Gread@gobject=\count126
 ))) (./SSRS.aux)
 \openout1 = `SSRS.aux'.
@@ -295,19 +295,73 @@ Chapter 1.
 (./SSRS/Definitions.tex) (./SSRS/References.tex) (./SSRS/Overview.tex [8])
 [9]
 Chapter 2.
-(./SSRS/Constraints.tex) (./SSRS/StakeholderConcerns.tex) [10
+(./SSRS/Constraints.tex
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 6.
+ (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 6.
 
-]
+! Argument of \end has an extra }.
+<inserted text> 
+                \par 
+l.10 \end}
+          itemize}
+? q
+OK, entering \batchmode...
+Runaway argument?
+! Paragraph ended before \end was complete.
+<to be read again> 
+                   \par 
+l.10 \end}
+          itemize}
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+! Extra }, or forgotten \endgroup.
+<recently read> }
+                 
+l.10 \end}
+          itemize}
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Extra }, or forgotten \endgroup.
+l.10 \end}itemize}
+                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+ [10
+
+]) (./SSRS/StakeholderConcerns.tex) [11]
 Chapter 3.
-(./SSRS/SystemsSoftwareArchitecture.tex) [11
+ (./SSRS/SystemsSoftwareArchitecture.tex) [12
 
 ]
-Overfull \vbox (111.89337pt too high) has occurred while \output is active []
+Overfull \vbox (191.89337pt too high) has occurred while \output is active []
 
-
-[12]
+ [13]
 Chapter 4.
-(./SSRS/RequirementsTraceability.tex) [13
+ (./SSRS/RequirementsTraceability.tex
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 1.
+
+)
+Underfull \hbox (badness 10000) in paragraph at lines 2--44
+
+ []
+
+ [14
 
 ]
 
@@ -318,17 +372,16 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\\' on input line 45.
 
-[14
+ [15
 
 ]
 Chapter 5.
-(./SSRS/ProductPerspective.tex) (./SSRS/ProductFunctions.tex [15
+ (./SSRS/ProductPerspective.tex) (./SSRS/ProductFunctions.tex [16
 
-])
-(./SSRS/UserCharacteristics.tex) (./SSRS/Constraints_Overall.tex) [16]
-(./SSRS/AssumptionsDependencies.tex) (./SSRS/SystemLevelReq.tex [17]) [18]
+]) (./SSRS/UserCharacteristics.tex) (./SSRS/Constraints_Overall.tex) [17] (./SS
+RS/AssumptionsDependencies.tex) (./SSRS/SystemLevelReq.tex [18] [19]) [20]
 Chapter 6.
-(./SSRS/ExternalInterfaceReq.tex [19
+ (./SSRS/ExternalInterfaceReq.tex [21
 
 ]
 Overfull \hbox (0.50705pt too wide) in paragraph at lines 20--21
@@ -485,55 +538,174 @@ Overfull \hbox (42.76276pt too wide) in paragraph at lines 106--125
 [][] 
  []
 
-[20]) (./SSRS/UC-old.tex
-Overfull \hbox (2.71281pt too wide) in paragraph at lines 4--4
-[]\OT1/cmr/bx/n/14.4 System fea-ture 1: Of-fi-cer Man-age-ment (Ad-min-is-tra-t
-ion Mod-
- []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 7.
-(/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 7.
- [21
+ [22]) (./SSRS/UC-old.tex [23
 
 
-] [22] [23] [24]
-[25] [26] [27] [28] [29] [30] [31] [32] [33]) [34]
+] [24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34]) (./SSRS-UseCases/docs
+.tex [35]
+! Missing } inserted.
+<inserted text> 
+                }
+l.39      \end{itemize}
+                       
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.39      \end{itemize}
+                       
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.70      \end{itemize}
+                       
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.70      \end{itemize}
+                       
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+ [36]
+! Missing } inserted.
+<inserted text> 
+                }
+l.101      \end{itemize}
+                        
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.101      \end{itemize}
+                        
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+ [37]
+! Missing } inserted.
+<inserted text> 
+                }
+l.131      \end{itemize}
+                        
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.131      \end{itemize}
+                        
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+ [38]
+! Missing } inserted.
+<inserted text> 
+                }
+l.165      \end{itemize}
+                        
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.165      \end{itemize}
+                        
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+) [39]
 Chapter 7.
-[35
+ [40
 
 ]
-Overfull \vbox (198.65004pt too high) has occurred while \output is active []
+Overfull \vbox (290.65004pt too high) has occurred while \output is active []
 
-
-[36] [37
+ [41] [42
 
 ]
 Appendix A.
-[38
+ [43
 
 ]
 Appendix B.
-[39
+ [44
 
-] (./SSRS.aux) ) 
+]
+
+! LaTeX Error: \begin{itemize} on input line 5 ended by \end{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.101 \end{document}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+ (./SSRS.aux) )
+(\end occurred inside a group at level 1)
+
+### semi simple group (level 1) entered at line 5 (\begingroup)
+### bottom level 
 Here is how much of TeX's memory you used:
- 4695 strings out of 495061
- 67030 string characters out of 1182621
- 143216 words of memory out of 3000000
- 7467 multiletter control sequences out of 15000+50000
+ 4733 strings out of 495061
+ 67425 string characters out of 1182622
+ 142989 words of memory out of 3000000
+ 7466 multiletter control sequences out of 15000+50000
  8500 words of font info for 30 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 38i,10n,36p,311b,531s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,10n,36p,559b,608s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12
 .pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/s
 hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on SSRS.pdf (39 pages, 169390 bytes).
+Output written on SSRS.pdf (44 pages, 183371 bytes).
 PDF statistics:
- 848 PDF objects out of 1000 (max. 8388607)
- 304 named destinations out of 1000 (max. 500000)
- 657 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 910 PDF objects out of 1000 (max. 8388607)
+ 339 named destinations out of 1000 (max. 500000)
+ 665 words of extra memory for PDF output out of 10000 (max. 10000000)
 
