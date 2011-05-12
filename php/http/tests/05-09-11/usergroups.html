@@ -1,0 +1,78 @@
+<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+
+<h4>A PHP Error was encountered</h4>
+
+<p>Severity: Notice</p>
+<p>Message:  Undefined index: HTTP_HOST</p>
+<p>Filename: config/config.php</p>
+<p>Line Number: 17</p>
+
+</div>
+		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+		 <head>
+		 <link href="http:///gus-dev/templates/template.css.php" type="text/css" rel="stylesheet" />
+         <title>Gus - usergroups</title>
+		 
+		 
+        </head>
+<body>
+
+	<!-- Banner and Nav -->
+	<div id="spreader_top">
+		<div id="links">
+		
+			<!-- Username that links to profile + new mail icon -->
+			<div id="links_left"></div>
+			
+			<!-- At some point these need to be finalized -->
+			<div id="links_right"><a href="http:///gus-dev/index.php/registration">Register</a> or <a href="http:///gus-dev/index.php/auth">Login</a></div>
+		</div>
+	</div>
+
+	<!-- Overarching container for everything under the banner and nav -->
+	<div id="container">
+		
+		<div id="group_column">
+			<ul>
+				<li><a href="http:///gus-dev/index.php/home">Home</a></li>
+				<li><a href="http:///gus-dev/index.php/pm/compose">Compose</a></li>
+				<li><a href="http:///gus-dev/index.php/search">Search</a></li>
+				<li><a href="http:///gus-dev/index.php/grouppage	">Groups</a> 
+				<li><a href="http://nwerp.org/gus/SSRS/node27.html">Help</a></li>			
+				<li><a href="http://nwerp.org/trac/gus">Bugs</a></li>			
+				<li><a href="http:///gus-dev/index.php/feedback	">FeedBack</a></li>
+			</ul>
+			
+			
+		</div>
+		<!-- This will hold all the updates and other stuff-->
+		<div id="content">
+<table class="login">
+ <tr>
+  <td>login:</td>
+  <td>
+
+<br /><form action="http:///gus-dev/index.php/auth" method="post" class="login" id="login">
+<br /><input type="text" name="un" value="" id="un" maxlength="20" size="20"  />  </td>
+ </tr>
+ <tr>
+  <td>password:</td>
+  <td>
+
+<br /><input type="password" name="pw" value="" id="pw" maxlength="20" size="20"  />
+<br /><input type="submit" name="login" value="Login"  />  </td>
+ </tr>
+</table>
+
+<p>Page rendered in 0.0975 seconds</p>
+
+
+			<div id="footer">
+				<br>
+				University of Idaho  GUS was implemented by a software engineering team from CS38-384.
+			</div>
+		</div>
+	</div>		
+</body>
+</html>
